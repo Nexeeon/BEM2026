@@ -6,7 +6,6 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  CircleCheck,
   Compass,
   Instagram,
   Lightbulb,
@@ -83,7 +82,8 @@ const events = [
 
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
+  const [openDropdown, setOpenDropdown] =
+    useState<DropdownName>(null);
   const [selectedMonth, setSelectedMonth] = useState("Maret 2026");
   const [scrolled, setScrolled] = useState(false);
 
@@ -146,7 +146,9 @@ export default function Home() {
 
             <nav
               className={`${
-                mobileOpen ? "absolute left-0 right-0 top-full flex" : "hidden"
+                mobileOpen
+                  ? "absolute left-0 right-0 top-full flex"
+                  : "hidden"
               } flex-col gap-1 border-b border-amber-100 bg-white/95 px-5 py-4 shadow-md lg:static lg:flex lg:flex-row lg:items-center lg:gap-6 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}
             >
               <Link
@@ -156,6 +158,7 @@ export default function Home() {
               >
                 Home
               </Link>
+
               <a
                 href="#visi"
                 className="font-medium text-slate-600 hover:text-amber-600 text-sm"
@@ -164,6 +167,7 @@ export default function Home() {
                 About
               </a>
 
+              {/* ACADEMIC INFORMATION */}
               <div className="relative">
                 <button
                   className="font-medium text-slate-600 hover:text-amber-600 text-sm flex w-full items-center justify-between gap-1 py-1 lg:py-0"
@@ -179,6 +183,7 @@ export default function Home() {
                     }
                   />
                 </button>
+
                 {openDropdown === "academic" && (
                   <Dropdown
                     items={[
@@ -191,6 +196,7 @@ export default function Home() {
                 )}
               </div>
 
+              {/* CAMPUS ECHO */}
               <div className="relative">
                 <button
                   className="font-medium text-slate-600 hover:text-amber-600 text-sm flex w-full items-center justify-between gap-1 py-1 lg:py-0"
@@ -206,8 +212,39 @@ export default function Home() {
                     }
                   />
                 </button>
+
                 {openDropdown === "echo" && (
-                  <Dropdown items={["Kajian", "Bisik Kampus", "Polsrifess"]} />
+                  <div className="static mt-1 w-full rounded-xl border border-amber-100 bg-white p-2 shadow-xl lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:w-56">
+                    {/* KAJIAN */}
+                    <Link
+                      to="/kajian"
+                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
+                      onClick={() => {
+                        setMobileOpen(false);
+                        setOpenDropdown(null);
+                      }}
+                    >
+                      Kajian
+                    </Link>
+
+                    {/* BISIK KAMPUS */}
+                    <a
+                      href="#"
+                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Bisik Kampus
+                    </a>
+
+                    {/* POLSRIFESS */}
+                    <a
+                      href="#"
+                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Polsrifess
+                    </a>
+                  </div>
                 )}
               </div>
 
@@ -228,7 +265,6 @@ export default function Home() {
           className="relative mx-auto flex min-h-[calc(100vh-85px)] w-full max-w-7xl items-center justify-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(1.5rem,3.5vh,4rem)]"
         >
           <div className="grid w-full items-center gap-[clamp(1.5rem,3.5vw,4rem)] lg:grid-cols-12">
-            {/* Teks Kiri - Judul Ringkas BEM Politeknik */}
             <div className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-6">
               <h1
                 className="font-serif font-black uppercase tracking-wide text-amber-500 leading-[1.12]"
@@ -251,7 +287,6 @@ export default function Home() {
               <div className="mt-[clamp(1.25rem,2.2vw,2.25rem)]"></div>
             </div>
 
-            {/* Gambar Kanan */}
             <div className="relative flex w-full items-center justify-center lg:col-span-6 lg:justify-end">
               <div className="relative flex w-full items-center justify-center">
                 <div
@@ -287,21 +322,26 @@ export default function Home() {
               title="Visi & Misi BEM Polsri — Kabinet Lentera Sriwijaya"
               text="Menjadi penerang bagi seluruh mahasiswa untuk bertumbuh, berkolaborasi, dan menciptakan perubahan yang berarti."
             />
+
             <div className="mt-14 grid gap-5 lg:grid-cols-[.8fr_1.2fr]">
               <div className="relative overflow-hidden rounded-3xl border border-amber-300/40 bg-gradient-to-br from-amber-50 via-white to-amber-50 p-8 shadow-xl backdrop-blur-md lg:p-10">
                 <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full border-[25px] border-amber-500/20" />
+
                 <div className="relative">
                   <div className="mb-8 flex items-center justify-between">
                     <span className="rounded-full bg-amber-400 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-900">
                       Visi
                     </span>
+
                     <Target className="text-amber-500" size={30} />
                   </div>
+
                   <h3 className="text-2xl font-bold leading-snug text-slate-900">
                     Menjadikan BEM Polsri sebagai lembaga{" "}
                     <span className="text-amber-600">berdampak positif</span>{" "}
                     bagi mahasiswa dan institusi.
                   </h3>
+
                   <p className="mt-7 text-sm leading-7 text-slate-600">
                     Menjadikan Badan Eksekutif Mahasiswa Politeknik Negeri
                     Sriwijaya sebagai lembaga yang berdampak positif bagi
@@ -309,6 +349,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
+
               <div className="grid gap-4 sm:grid-cols-2">
                 {missions.map((mission) => (
                   <article
@@ -319,10 +360,12 @@ export default function Home() {
                       <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition group-hover:bg-amber-500 group-hover:text-white">
                         <mission.icon size={21} />
                       </div>
+
                       <span className="text-3xl font-black text-slate-200">
                         {mission.number}
                       </span>
                     </div>
+
                     <p className="mt-5 text-xs leading-6 text-slate-600">
                       {mission.text}
                     </p>
@@ -343,6 +386,7 @@ export default function Home() {
             title="Kalender Kegiatan & Akademik"
             text="Ikuti berbagai agenda penting dan kegiatan seru yang hadir untuk seluruh keluarga besar Politeknik Negeri Sriwijaya."
           />
+
           <div className="mt-12 grid gap-6 lg:grid-cols-[.78fr_1.22fr]">
             <div className="rounded-3xl bg-white/90 p-6 shadow-lg shadow-slate-900/5 backdrop-blur-md sm:p-8">
               <div className="flex items-center justify-between">
@@ -353,6 +397,7 @@ export default function Home() {
                 >
                   <ChevronLeft size={19} />
                 </button>
+
                 <div className="text-center">
                   <p className="text-xs font-bold uppercase tracking-widest text-amber-600">
                     Kalender Akademik
@@ -361,6 +406,7 @@ export default function Home() {
                     {selectedMonth}
                   </h3>
                 </div>
+
                 <button
                   aria-label="Bulan berikutnya"
                   onClick={() => setSelectedMonth("April 2026")}
@@ -369,12 +415,14 @@ export default function Home() {
                   <ChevronRight size={19} />
                 </button>
               </div>
+
               <div className="mt-8 grid grid-cols-7 gap-2 text-center text-[11px] font-bold text-slate-400">
                 {["MIN", "SEN", "SEL", "RAB", "KAM", "JUM", "SAB"].map(
                   (day) => (
                     <span key={day}>{day}</span>
                   ),
                 )}
+
                 {Array.from({ length: 31 }, (_, index) => (
                   <span
                     key={index}
@@ -390,17 +438,20 @@ export default function Home() {
                   </span>
                 ))}
               </div>
+
               <div className="mt-7 flex flex-wrap gap-4 border-t border-slate-100 pt-5 text-[11px] font-semibold text-slate-500">
                 <span className="flex items-center gap-2">
-                  <i className="h-2.5 w-2.5 rounded-full bg-amber-500" /> Agenda
-                  BEM
+                  <i className="h-2.5 w-2.5 rounded-full bg-amber-500" />
+                  Agenda BEM
                 </span>
+
                 <span className="flex items-center gap-2">
-                  <i className="h-2.5 w-2.5 rounded-full bg-amber-100" />{" "}
+                  <i className="h-2.5 w-2.5 rounded-full bg-amber-100" />
                   Akademik
                 </span>
               </div>
             </div>
+
             <div className="rounded-3xl bg-slate-900/95 p-6 text-white shadow-lg shadow-slate-900/10 backdrop-blur-md sm:p-8">
               <div className="flex items-center justify-between">
                 <div>
@@ -411,8 +462,10 @@ export default function Home() {
                     Jangan sampai terlewat.
                   </h3>
                 </div>
+
                 <CalendarDays className="text-amber-400" size={30} />
               </div>
+
               <div className="mt-7 space-y-3">
                 {events.map((event) => (
                   <div
@@ -425,19 +478,24 @@ export default function Home() {
                       <strong className="text-xl leading-none">
                         {event.day}
                       </strong>
+
                       <span className="mt-1 text-[9px] font-black tracking-widest">
                         {event.month}
                       </span>
                     </div>
+
                     <div className="min-w-0 flex-1">
                       <h4 className="truncate text-sm font-bold text-white">
                         {event.title}
                       </h4>
+
                       <p className="mt-1 text-xs text-slate-400">
-                        {event.type}{" "}
-                        <span className="mx-1 text-slate-600">•</span> Polsri
+                        {event.type}
+                        <span className="mx-1 text-slate-600">•</span>
+                        Polsri
                       </p>
                     </div>
+
                     <ArrowRight
                       size={16}
                       className="mr-2 text-slate-500 transition group-hover:translate-x-1 group-hover:text-amber-400"
@@ -445,6 +503,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+
               <button className="mt-6 flex items-center gap-2 text-xs font-bold text-amber-400 transition hover:text-amber-300">
                 Lihat seluruh agenda <ArrowRight size={14} />
               </button>
@@ -466,50 +525,66 @@ export default function Home() {
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />
+
                   <div>
-                    <h2 className="font-bold">Kabinet Lentera Sriwijaya</h2>
+                    <h2 className="font-bold">
+                      Kabinet Lentera Sriwijaya
+                    </h2>
+
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
                     </p>
                   </div>
                 </div>
+
                 <p className="mt-6 max-w-xs text-sm leading-7 text-slate-400">
                   Menjadi wadah yang aktif, responsif, dan konstruktif untuk
                   Politeknik Negeri Sriwijaya yang lebih berdampak.
                 </p>
               </div>
+
               <div>
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Navigasi
                 </h3>
+
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
                   <a href="#visi" className="transition hover:text-white">
                     Tentang Kami
                   </a>
+
                   <a href="#agenda" className="transition hover:text-white">
                     Agenda Kegiatan
                   </a>
-                  <Link to="/contact" className="transition hover:text-white">
+
+                  <Link
+                    to="/contact"
+                    className="transition hover:text-white"
+                  >
                     Contact Us
                   </Link>
                 </div>
               </div>
+
               <div>
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Mari Terhubung
                 </h3>
+
                 <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
-                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />{" "}
+                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />
                   bem@polsri.ac.id
                 </p>
+
                 <p className="mt-3 text-sm leading-6 text-slate-400">
                   Jl. Srijaya Negara, Bukit Besar,
                   <br />
                   Palembang, Sumatera Selatan
                 </p>
+
                 <div className="mt-5 flex gap-2">
                   <a
-                    href="https://www.instagram.com/bempolsri_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                    href="https://www.instagram.com/bempolsri_/"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
@@ -517,6 +592,7 @@ export default function Home() {
                   >
                     <Instagram size={16} />
                   </a>
+
                   <a
                     href="https://x.com/polsrimenfess"
                     target="_blank"
@@ -526,6 +602,7 @@ export default function Home() {
                   >
                     𝕏
                   </a>
+
                   <a
                     href="https://www.youtube.com/@bemkmpolsri3259"
                     target="_blank"
@@ -538,8 +615,11 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
             <div className="mt-14 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
-              <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
+              <p>
+                © BEM Politeknik Negeri Sriwijaya. All rights reserved.
+              </p>
             </div>
           </div>
         </footer>
@@ -578,10 +658,14 @@ function SectionIntro({
       <p className="text-xs font-black uppercase tracking-[0.2em] text-amber-600">
         {eyebrow}
       </p>
+
       <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
         {title}
       </h2>
-      <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">{text}</p>
+
+      <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
+        {text}
+      </p>
     </div>
   );
 }
