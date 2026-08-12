@@ -46,7 +46,7 @@ export default function Contact() {
         <header
           className={`sticky top-0 z-50 transition-all duration-300 ${
             scrolled || mobileOpen
-              ? "border-b border-amber-100 bg-white/90 shadow-md backdrop-blur-md py-3.5"
+              ? "border-b border-amber-100 bg-white/90 shadow-sm backdrop-blur-md py-3.5"
               : "bg-transparent py-5"
           }`}
         >
@@ -58,13 +58,13 @@ export default function Contact() {
             >
               <img
                 src="/images/logo.png"
-                alt="Logo Kabinet Kilau Gemilang"
-                className="h-12 w-12 object-contain"
+                alt="Logo Kabinet Lentera Sriwijaya"
+                className="h-10 w-10 object-contain"
               />
 
               <div className="leading-tight">
                 <p className="font-bold tracking-tight text-slate-800">
-                  Kabinet Kilau Gemilang
+                  Kabinet Lentera Sriwijaya
                 </p>
 
                 <p className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">
@@ -86,11 +86,11 @@ export default function Contact() {
                 mobileOpen
                   ? "absolute left-0 right-0 top-full flex"
                   : "hidden"
-              } flex-col gap-1 border-b border-amber-100 bg-white/95 px-5 py-4 shadow-md lg:static lg:flex lg:flex-row lg:items-center lg:gap-1 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}
+              } flex-col gap-1 border-b border-amber-100 bg-white/95 px-5 py-4 shadow-md lg:static lg:flex lg:flex-row lg:items-center lg:gap-6 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}
             >
               <Link
                 to="/"
-                className="nav-link"
+                className="font-medium text-slate-600 hover:text-amber-600 text-sm"
                 onClick={() => setMobileOpen(false)}
               >
                 Home
@@ -98,7 +98,7 @@ export default function Contact() {
 
               <Link
                 to="/#visi"
-                className="nav-link"
+                className="font-medium text-slate-600 hover:text-amber-600 text-sm"
                 onClick={() => setMobileOpen(false)}
               >
                 About
@@ -107,7 +107,7 @@ export default function Contact() {
               {/* ACADEMIC INFORMATION */}
               <div className="relative">
                 <button
-                  className="nav-link flex w-full items-center justify-between gap-1"
+                  className="font-medium text-slate-600 hover:text-amber-600 text-sm flex w-full items-center justify-between gap-1 py-1 lg:py-0"
                   onClick={() => toggleDropdown("academic")}
                 >
                   Academic Information{" "}
@@ -136,7 +136,7 @@ export default function Contact() {
               {/* CAMPUS ECHO */}
               <div className="relative">
                 <button
-                  className="nav-link flex w-full items-center justify-between gap-1"
+                  className="font-medium text-slate-600 hover:text-amber-600 text-sm flex w-full items-center justify-between gap-1 py-1 lg:py-0"
                   onClick={() => toggleDropdown("echo")}
                 >
                   Campus Echo{" "}
@@ -152,7 +152,6 @@ export default function Contact() {
 
                 {openDropdown === "echo" && (
                   <div className="static mt-1 w-full rounded-xl border border-amber-100 bg-white p-2 shadow-xl lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:w-56">
-                    {/* KAJIAN */}
                     <Link
                       to="/kajian"
                       className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
@@ -164,7 +163,6 @@ export default function Contact() {
                       Kajian
                     </Link>
 
-                    {/* BISIK KAMPUS */}
                     <a
                       href="#"
                       className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
@@ -173,7 +171,6 @@ export default function Contact() {
                       Bisik Kampus
                     </a>
 
-                    {/* POLSRIFESS */}
                     <a
                       href="#"
                       className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
@@ -187,7 +184,7 @@ export default function Contact() {
 
               <Link
                 to="/contact"
-                className="nav-link font-bold text-amber-600"
+                className="font-medium text-amber-600 hover:text-amber-700 text-sm"
                 onClick={() => setMobileOpen(false)}
               >
                 Contact Us
@@ -231,7 +228,6 @@ export default function Contact() {
               {/* INFORMASI KONTAK */}
               <div className="lg:col-span-5 flex flex-col justify-center space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-                  {/* Alamat */}
                   <div className="flex items-start gap-3.5">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-100 text-amber-600 shadow-sm">
                       <HomeIcon
@@ -251,7 +247,6 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  {/* Kontak Humas */}
                   <div className="flex items-start gap-3.5">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-100 text-amber-600 shadow-sm">
                       <Phone
@@ -271,7 +266,6 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  {/* Email */}
                   <div className="flex items-start gap-3.5">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-100 text-amber-600 shadow-sm">
                       <Mail
@@ -294,7 +288,6 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  {/* More Information */}
                   <div className="flex items-start gap-3.5">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-100 text-amber-600 shadow-sm">
                       <Globe size={20} className="text-amber-600" />
@@ -385,12 +378,12 @@ export default function Contact() {
                   <img
                     src="/images/logo.png"
                     alt="Logo BEM Polsri"
-                    className="h-14 w-14 object-contain"
+                    className="h-12 w-12 object-contain"
                   />
 
                   <div>
                     <h2 className="font-bold">
-                      Kabinet Kilau Gemilang
+                      Kabinet Lentera Sriwijaya
                     </h2>
 
                     <p className="mt-1 text-xs text-slate-400">
@@ -400,8 +393,8 @@ export default function Contact() {
                 </div>
 
                 <p className="mt-6 max-w-xs text-sm leading-7 text-slate-400">
-                  Kilaukan Karsa, Gemilangkan Karya — untuk Politeknik Negeri
-                  Sriwijaya yang lebih harmonis dan berdampak.
+                  Menjadi wadah yang aktif, responsif, dan konstruktif untuk
+                  Politeknik Negeri Sriwijaya yang lebih berdampak.
                 </p>
               </div>
 
