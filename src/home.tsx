@@ -222,21 +222,19 @@ export default function Home() {
           </div>
         </header>
 
-        {/* HERO SECTION (FLUID RESPONSIVE VISUAL COMPOSITION) */}
+        {/* HERO SECTION */}
         <section
           id="home"
           className="relative mx-auto flex min-h-[calc(100vh-85px)] w-full max-w-7xl items-center justify-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(1.5rem,3.5vh,4rem)]"
         >
           <div className="grid w-full items-center gap-[clamp(1.5rem,3.5vw,4rem)] lg:grid-cols-12">
-            {/* Teks Kiri - Scaling Proporsional */}
+            {/* Teks Kiri - Judul Ringkas BEM Politeknik */}
             <div className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-6">
               <h1
                 className="font-serif font-black uppercase tracking-wide text-amber-500 leading-[1.12]"
-                style={{ fontSize: "clamp(2rem, 4.3vw, 3.8rem)" }}
+                style={{ fontSize: "clamp(2.2rem, 4.5vw, 4rem)" }}
               >
-                BEM POLITEKNIK
-                <br />
-                NEGERI SRIWIJAYA
+                BEM POLITEKNIK NEGERI SRIWIJAYA
               </h1>
 
               <p
@@ -253,10 +251,9 @@ export default function Home() {
               <div className="mt-[clamp(1.25rem,2.2vw,2.25rem)]"></div>
             </div>
 
-            {/* Gambar Kanan - Visual Focal Point Natural & Tanpa Frame Potong */}
+            {/* Gambar Kanan */}
             <div className="relative flex w-full items-center justify-center lg:col-span-6 lg:justify-end">
               <div className="relative flex w-full items-center justify-center">
-                {/* Visual Glow & Element Background (Hanya Aksesoris Belakang, Tidak Menutupi Foto) */}
                 <div
                   className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-amber-200/30 blur-2xl pointer-events-none"
                   style={{
@@ -265,7 +262,6 @@ export default function Home() {
                   }}
                 />
 
-                {/* Foto Gedung Utama: Natural, Utuh, & Scaling Fluid */}
                 <img
                   src="/images/logo.png"
                   alt="Gedung Politeknik Negeri Sriwijaya"
