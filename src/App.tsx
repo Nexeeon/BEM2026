@@ -1,20 +1,22 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./home";
 import Contact from "./Contact";
-import Kajian from "./Kajian"; // ✅ TAMBAHKAN IMPORT INI
+import Kajian from "./Kajian";
+import BisikKampus from "./BisikKampus";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Halaman Utama (Landing Page) */}
+        {/* Halaman Utama */}
         <Route path="/" element={<Home />} />
 
-        {/* Halaman Contact Us Terpisah */}
+        {/* Halaman Contact Us */}
         <Route path="/contact" element={<Contact />} />
 
-        {/* ✅ TAMBAHKAN ROUTE UNTUK KAJIAN */}
+        {/* Campus Echo */}
         <Route path="/kajian" element={<Kajian />} />
+        <Route path="/bisik-kampus" element={<BisikKampus />} />
       </Routes>
     </Router>
   );

@@ -126,10 +126,12 @@ export default function Home() {
                 alt="Logo Kabinet Lentera Sriwijaya"
                 className="h-10 w-10 object-contain"
               />
+
               <div className="leading-tight">
                 <p className="font-bold tracking-tight text-slate-800">
                   Kabinet Lentera Sriwijaya
                 </p>
+
                 <p className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">
                   BEM Politeknik Negeri Sriwijaya
                 </p>
@@ -228,13 +230,16 @@ export default function Home() {
                     </Link>
 
                     {/* BISIK KAMPUS */}
-                    <a
-                      href="#"
+                    <Link
+                      to="/bisik-kampus"
                       className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={() => {
+                        setMobileOpen(false);
+                        setOpenDropdown(null);
+                      }}
                     >
                       Bisik Kampus
-                    </a>
+                    </Link>
 
                     {/* POLSRIFESS */}
                     <a
@@ -402,6 +407,7 @@ export default function Home() {
                   <p className="text-xs font-bold uppercase tracking-widest text-amber-600">
                     Kalender Akademik
                   </p>
+
                   <h3 className="mt-1 text-xl font-black text-slate-900">
                     {selectedMonth}
                   </h3>
@@ -458,6 +464,7 @@ export default function Home() {
                   <p className="text-xs font-bold uppercase tracking-widest text-amber-400">
                     Agenda Terdekat
                   </p>
+
                   <h3 className="mt-1 text-2xl font-bold">
                     Jangan sampai terlewat.
                   </h3>
@@ -549,11 +556,17 @@ export default function Home() {
                 </h3>
 
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
-                  <a href="#visi" className="transition hover:text-white">
+                  <a
+                    href="#visi"
+                    className="transition hover:text-white"
+                  >
                     Tentang Kami
                   </a>
 
-                  <a href="#agenda" className="transition hover:text-white">
+                  <a
+                    href="#agenda"
+                    className="transition hover:text-white"
+                  >
                     Agenda Kegiatan
                   </a>
 
@@ -572,7 +585,10 @@ export default function Home() {
                 </h3>
 
                 <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
-                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />
+                  <Mail
+                    size={16}
+                    className="mt-1 shrink-0 text-amber-400"
+                  />
                   bem@polsri.ac.id
                 </p>
 

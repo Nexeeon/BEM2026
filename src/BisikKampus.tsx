@@ -4,13 +4,15 @@ import {
   ArrowRight,
   BookOpen,
   ChevronDown,
-  Compass,
+  Clock,
+  FileText,
   Instagram,
-  Lightbulb,
+  Lock,
   Mail,
   Menu,
   MessageCircle,
   Scale,
+  Shield,
   Users,
   X,
   Youtube,
@@ -18,29 +20,61 @@ import {
 
 type DropdownName = "academic" | "echo" | null;
 
-// Data untuk card "MENGAPA KAJIAN?"
-const whyKajianData = [
+// Data untuk card "MENGAPA BISIK KAMPUS?"
+const whyBisikData = [
   {
-    icon: Compass,
-    title: "ANALISIS MENDALAM",
+    icon: Shield,
+    title: "AMAN & TERPERCAYA",
     description:
-      "Mengkaji isu-isu terkini melalui pendekatan akademis dan objektif, menghasilkan kajian tertulis yang memberikan pemahaman komprehensif.",
+      "Privasi Anda terjamin. Semua aspirasi dikelola dengan standar keamanan tinggi dan kerahasiaan identitas terjaga.",
   },
   {
     icon: MessageCircle,
-    title: "PENYEBARAN GAGASAN",
+    title: "KOMUNIKASI EFEKTIF",
     description:
-      "Menyediakan media untuk menyampaikan gagasan dan kajian yang dapat memicu diskusi sehat dan konstruktif antar mahasiswa.",
+      "Jembatan komunikasi langsung antara mahasiswa dengan pihak kampus untuk solusi yang tepat sasaran.",
   },
   {
-    icon: Lightbulb,
-    title: "WAWASAN BARU",
+    icon: Scale,
+    title: "TINDAK LANJUT CEPAT",
     description:
-      "Membuka perspektif baru tentang fenomena sosial, politik, dan akademik melalui publikasi kajian yang relevan.",
+      "Setiap aspirasi akan ditindaklanjuti dengan proses yang jelas dan transparan untuk perubahan nyata.",
   },
 ];
 
-export default function Kajian() {
+// Data untuk statistik
+const statsData = [
+  {
+    number: "50+",
+    label: "Aspirasi Terkumpul",
+    icon: FileText,
+    color: "bg-amber-500",
+  },
+  {
+    number: "99%",
+    label: "Tingkat Respons",
+    icon: Users,
+    color: "bg-green-500",
+  },
+  {
+    number: "24/7",
+    label: "Selalu Terbuka",
+    icon: Clock,
+    color: "bg-blue-500",
+  },
+  {
+    number: "100%",
+    label: "Terjaga Privasi",
+    icon: Lock,
+    color: "bg-purple-500",
+  },
+];
+
+// LINK GOOGLE FORM BISIK KAMPUS
+const FORM_BISIK_KAMPUS =
+  "https://docs.google.com/forms/d/e/1FAIpQLSeO0k_4l3ogFWdW6se2G-pEillmx1y70fTA5pn1Q3gkR6rtOQ/viewform";
+
+export default function BisikKampus() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -62,11 +96,6 @@ export default function Kajian() {
     setOpenDropdown(openDropdown === name ? null : name);
   };
 
-  const closeMenus = () => {
-    setMobileOpen(false);
-    setOpenDropdown(null);
-  };
-
   return (
     <main className="min-h-screen bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat text-slate-900 scroll-smooth overflow-x-hidden">
       <div className="min-h-screen bg-white/65">
@@ -84,19 +113,17 @@ export default function Kajian() {
             <Link
               to="/"
               className="flex items-center gap-3"
-              onClick={closeMenus}
+              onClick={() => setMobileOpen(false)}
             >
               <img
                 src="/images/logo.png"
                 alt="Logo Kabinet Lentera Sriwijaya"
                 className="h-10 w-10 object-contain"
               />
-
               <div className="leading-tight">
                 <p className="font-bold tracking-tight text-slate-800">
                   Kabinet Lentera Sriwijaya
                 </p>
-
                 <p className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">
                   BEM Politeknik Negeri Sriwijaya
                 </p>
@@ -113,28 +140,24 @@ export default function Kajian() {
 
             <nav
               className={`${
-                mobileOpen
-                  ? "absolute left-0 right-0 top-full flex"
-                  : "hidden"
+                mobileOpen ? "absolute left-0 right-0 top-full flex" : "hidden"
               } flex-col gap-1 border-b border-amber-100 bg-white/95 px-5 py-4 shadow-md lg:static lg:flex lg:flex-row lg:items-center lg:gap-6 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}
             >
               <Link
                 to="/"
                 className="font-medium text-slate-600 hover:text-amber-600 text-sm"
-                onClick={closeMenus}
+                onClick={() => setMobileOpen(false)}
               >
                 Home
               </Link>
-
-              <Link
-                to="/#visi"
+              <a
+                href="#visi"
                 className="font-medium text-slate-600 hover:text-amber-600 text-sm"
-                onClick={closeMenus}
+                onClick={() => setMobileOpen(false)}
               >
                 About
-              </Link>
+              </a>
 
-              {/* ACADEMIC INFORMATION */}
               <div className="relative">
                 <button
                   className="font-medium text-slate-600 hover:text-amber-600 text-sm flex w-full items-center justify-between gap-1 py-1 lg:py-0"
@@ -150,7 +173,6 @@ export default function Kajian() {
                     }
                   />
                 </button>
-
                 {openDropdown === "academic" && (
                   <Dropdown
                     items={[
@@ -163,7 +185,6 @@ export default function Kajian() {
                 )}
               </div>
 
-              {/* CAMPUS ECHO */}
               <div className="relative">
                 <button
                   className="font-medium text-amber-600 hover:text-amber-700 text-sm flex w-full items-center justify-between gap-1 py-1 lg:py-0"
@@ -179,28 +200,28 @@ export default function Kajian() {
                     }
                   />
                 </button>
-
                 {openDropdown === "echo" && (
                   <div className="static mt-1 w-full rounded-xl border border-amber-100 bg-white p-2 shadow-xl lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:w-56">
-                    {/* KAJIAN */}
                     <Link
                       to="/kajian"
-                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-amber-600 transition hover:bg-amber-50"
-                      onClick={closeMenus}
+                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
+                      onClick={() => {
+                        setMobileOpen(false);
+                        setOpenDropdown(null);
+                      }}
                     >
                       Kajian
                     </Link>
-
-                    {/* BISIK KAMPUS */}
                     <Link
                       to="/bisik-kampus"
-                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
-                      onClick={closeMenus}
+                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-amber-600 transition hover:bg-amber-50"
+                      onClick={() => {
+                        setMobileOpen(false);
+                        setOpenDropdown(null);
+                      }}
                     >
                       Bisik Kampus
                     </Link>
-
-                    {/* POLSRIFESS */}
                     <a
                       href="#"
                       className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
@@ -215,7 +236,7 @@ export default function Kajian() {
               <Link
                 to="/contact"
                 className="font-medium text-slate-600 hover:text-amber-600 text-sm"
-                onClick={closeMenus}
+                onClick={() => setMobileOpen(false)}
               >
                 Contact Us
               </Link>
@@ -224,45 +245,43 @@ export default function Kajian() {
         </header>
 
         {/* ============================================================ */}
-        {/* 1. HERO SECTION - KAJIAN */}
+        {/* 1. HERO SECTION - BISIK KAMPUS */}
         {/* ============================================================ */}
         <section className="relative mx-auto flex min-h-[60vh] w-full max-w-7xl items-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(2rem,5vh,5rem)]">
           <div className="grid w-full items-center gap-[clamp(2rem,4vw,5rem)] lg:grid-cols-12">
             {/* Teks Kiri */}
             <div className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-6">
               <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
-                <BookOpen size={14} className="text-amber-600" />
+                <MessageCircle size={14} className="text-amber-600" />
                 Campus Echo
               </span>
-
               <h1
                 className="font-serif font-black uppercase tracking-wide text-amber-500 leading-[1.12]"
                 style={{ fontSize: "clamp(2.8rem, 5.5vw, 5rem)" }}
               >
-                KAJIAN
+                BISIK KAMPUS
               </h1>
-
               <p
                 className="mt-[clamp(1rem,1.8vw,1.75rem)] max-w-2xl font-medium leading-relaxed text-slate-700"
                 style={{ fontSize: "clamp(0.95rem, 1.15vw, 1.1rem)" }}
               >
-                Proses analisis isu-isu terkini baik internal kampus maupun
-                eksternal, dilakukan secara berkala oleh Departemen KASTRAT.
-                Platform ini menjadi wadah diskusi mendalam tentang fenomena
-                sosial, politik, dan akademik yang relevan dengan kehidupan
-                mahasiswa.
+                Form Bisik Kampus sebagai wadah untuk menampung, menyalurkan dan
+                menindaklanjuti setiap aspirasi Mahasiswa Politeknik Negeri
+                Sriwijaya. Sebuah platform yang menghubungkan suara mahasiswa
+                dengan pihak yang berwenang untuk menciptakan perubahan positif
+                di lingkungan kampus.
               </p>
 
-              {/* TOMBOL KE ZAAP */}
+              {/* HANYA 1 TOMBOL - "Isi Form Bisik Kampus" ke Google Form */}
               <div className="mt-6">
                 <a
-                  href="https://zaap.bio/kajianbempolsri25"
+                  href={FORM_BISIK_KAMPUS}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-600 hover:shadow-amber-500/40 hover:-translate-y-0.5"
                 >
-                  <BookOpen size={18} />
-                  Lihat Kajian Sekarang
+                  <MessageCircle size={18} />
+                  Isi Form Bisik Kampus
                   <ArrowRight size={18} />
                 </a>
               </div>
@@ -285,18 +304,13 @@ export default function Kajian() {
                     style={{ aspectRatio: "4/3" }}
                   >
                     <div className="text-center p-8">
-                      <div className="text-amber-300/60 text-6xl mb-3">
-                        🖼️
-                      </div>
-
+                      <div className="text-amber-300/60 text-6xl mb-3">🖼️</div>
                       <p className="text-sm font-medium text-slate-400">
                         Foto Kampus
                       </p>
-
                       <p className="text-xs text-slate-300 mt-1">
                         (Segera hadir)
                       </p>
-
                       <div className="mt-4 flex justify-center gap-2">
                         <span className="w-12 h-0.5 bg-amber-200/50 rounded-full"></span>
                         <span className="w-6 h-0.5 bg-amber-300/70 rounded-full"></span>
@@ -311,72 +325,93 @@ export default function Kajian() {
         </section>
 
         {/* ============================================================ */}
-        {/* 2. MENGAPA KAJIAN? SECTION */}
+        {/* 2. STATS SECTION */}
         {/* ============================================================ */}
-        <section className="bg-white/85 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28">
+        <section className="bg-white/85 px-5 py-16 backdrop-blur-md lg:px-8 lg:py-20">
           <div className="mx-auto max-w-7xl">
-            <div className="max-w-2xl">
-              <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
-                MENGAPA KAJIAN?
-              </h2>
-
-              <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
-                Kajian menjadi sarana untuk berpikir kritis, menelaah isu-isu
-                aktual, dan memperluas wawasan mahasiswa maupun masyarakat.
-              </p>
-            </div>
-
-            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {whyKajianData.map((item, index) => (
-                <article
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+              {statsData.map((stat, index) => (
+                <div
                   key={index}
-                  className="group rounded-3xl border border-slate-200 bg-white/90 p-8 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
+                  className="group rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5 text-center"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition group-hover:bg-amber-500 group-hover:text-white">
-                    <item.icon size={28} />
+                  <div
+                    className={`mx-auto flex h-14 w-14 items-center justify-center rounded-2xl ${stat.color} text-white transition group-hover:scale-110 duration-300`}
+                  >
+                    <stat.icon size={28} />
                   </div>
-
-                  <h3 className="mt-6 text-lg font-black tracking-tight text-slate-900">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {item.description}
+                  <p
+                    className="mt-4 font-black text-slate-900"
+                    style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)" }}
+                  >
+                    {stat.number}
                   </p>
-                </article>
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    {stat.label}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* ============================================================ */}
-        {/* 3. CTA SECTION - BERGABUNG DENGAN KAJIAN */}
+        {/* 3. MENGAPA BISIK KAMPUS? SECTION */}
+        {/* ============================================================ */}
+        <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+              MENGAPA BISIK KAMPUS?
+            </h2>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
+              Platform terpercaya untuk menyampaikan aspirasi, keluhan, dan
+              saran demi kemajuan kampus bersama.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {whyBisikData.map((item, index) => (
+              <article
+                key={index}
+                className="group rounded-3xl border border-slate-200 bg-white/90 p-8 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
+              >
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition group-hover:bg-amber-500 group-hover:text-white">
+                  <item.icon size={28} />
+                </div>
+                <h3 className="mt-6 text-lg font-black tracking-tight text-slate-900">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600">
+                  {item.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 4. CTA SECTION */}
         {/* ============================================================ */}
         <section className="bg-gradient-to-br from-amber-50 via-white to-amber-50/50 px-5 py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-4xl text-center">
             <div className="rounded-3xl border border-amber-300/40 bg-white/80 p-8 backdrop-blur-md shadow-xl transition hover:shadow-2xl duration-300 sm:p-12">
-              <BookOpen size={48} className="text-amber-500 mx-auto mb-4" />
-
+              <MessageCircle size={48} className="text-amber-500 mx-auto mb-4" />
               <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
-                BERGABUNG DENGAN KAJIAN
+                SUARAKAN ASPIRASIMU SEKARANG!
               </h2>
-
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">
-                Akses kajian-kajian terbaru dari Departemen KASTRAT BEM POLSRI
-                dan temukan wawasan baru dari isu-isu yang sedang hangat.
-                Setiap kajian tersedia dalam format PDF untuk dibaca kapan
-                saja.
+                Bergabunglah dengan mahasiswa lainnya yang telah mempercayai
+                Bisik Kampus sebagai wadah aspirasi. Setiap suara penting untuk
+                kemajuan kampus kita bersama.
               </p>
-
-              {/* TOMBOL KE ZAAP */}
               <a
-                href="https://zaap.bio/kajianbempolsri25"
+                href={FORM_BISIK_KAMPUS}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-8 inline-flex items-center gap-3 rounded-full bg-amber-500 px-10 py-4 text-sm font-bold text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-600 hover:shadow-amber-500/40 hover:-translate-y-0.5"
               >
-                <BookOpen size={18} />
-                LIHAT KAJIAN SEKARANG
+                <MessageCircle size={18} />
+                MULAI SAMPAIKAN ASPIRASI
                 <ArrowRight size={18} />
               </a>
             </div>
@@ -396,72 +431,47 @@ export default function Kajian() {
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />
-
                   <div>
-                    <h2 className="font-bold">
-                      Kabinet Lentera Sriwijaya
-                    </h2>
-
+                    <h2 className="font-bold">Kabinet Lentera Sriwijaya</h2>
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
                     </p>
                   </div>
                 </div>
-
                 <p className="mt-6 max-w-xs text-sm leading-7 text-slate-400">
                   Menjadi wadah yang aktif, responsif, dan konstruktif untuk
                   Politeknik Negeri Sriwijaya yang lebih berdampak.
                 </p>
               </div>
-
               <div>
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Navigasi
                 </h3>
-
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
-                  <Link
-                    to="/#visi"
-                    className="transition hover:text-white"
-                  >
+                  <a href="/#visi" className="transition hover:text-white">
                     Tentang Kami
-                  </Link>
-
-                  <Link
-                    to="/#agenda"
-                    className="transition hover:text-white"
-                  >
+                  </a>
+                  <a href="/#agenda" className="transition hover:text-white">
                     Agenda Kegiatan
-                  </Link>
-
-                  <Link
-                    to="/contact"
-                    className="transition hover:text-white"
-                  >
+                  </a>
+                  <Link to="/contact" className="transition hover:text-white">
                     Contact Us
                   </Link>
                 </div>
               </div>
-
               <div>
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Mari Terhubung
                 </h3>
-
                 <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
-                  <Mail
-                    size={16}
-                    className="mt-1 shrink-0 text-amber-400"
-                  />
+                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />{" "}
                   bem@polsri.ac.id
                 </p>
-
                 <p className="mt-3 text-sm leading-6 text-slate-400">
                   Jl. Srijaya Negara, Bukit Besar,
                   <br />
                   Palembang, Sumatera Selatan
                 </p>
-
                 <div className="mt-5 flex gap-2">
                   <a
                     href="https://www.instagram.com/bempolsri_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
@@ -472,7 +482,6 @@ export default function Kajian() {
                   >
                     <Instagram size={16} />
                   </a>
-
                   <a
                     href="https://x.com/polsrimenfess"
                     target="_blank"
@@ -482,7 +491,6 @@ export default function Kajian() {
                   >
                     𝕏
                   </a>
-
                   <a
                     href="https://www.youtube.com/@bemkmpolsri3259"
                     target="_blank"
@@ -495,11 +503,8 @@ export default function Kajian() {
                 </div>
               </div>
             </div>
-
             <div className="mt-14 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
-              <p>
-                © BEM Politeknik Negeri Sriwijaya. All rights reserved.
-              </p>
+              <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
             </div>
           </div>
         </footer>

@@ -39,6 +39,11 @@ export default function Contact() {
     setOpenDropdown(openDropdown === name ? null : name);
   };
 
+  const closeMenus = () => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  };
+
   return (
     <main className="min-h-screen bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat text-slate-900 flex flex-col justify-between">
       <div className="min-h-screen bg-white/75 backdrop-blur-[2px] flex flex-col justify-between">
@@ -54,7 +59,7 @@ export default function Contact() {
             <Link
               to="/"
               className="flex items-center gap-3"
-              onClick={() => setMobileOpen(false)}
+              onClick={closeMenus}
             >
               <img
                 src="/images/logo.png"
@@ -91,7 +96,7 @@ export default function Contact() {
               <Link
                 to="/"
                 className="font-medium text-slate-600 hover:text-amber-600 text-sm"
-                onClick={() => setMobileOpen(false)}
+                onClick={closeMenus}
               >
                 Home
               </Link>
@@ -99,7 +104,7 @@ export default function Contact() {
               <Link
                 to="/#visi"
                 className="font-medium text-slate-600 hover:text-amber-600 text-sm"
-                onClick={() => setMobileOpen(false)}
+                onClick={closeMenus}
               >
                 About
               </Link>
@@ -152,25 +157,25 @@ export default function Contact() {
 
                 {openDropdown === "echo" && (
                   <div className="static mt-1 w-full rounded-xl border border-amber-100 bg-white p-2 shadow-xl lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:w-56">
+                    {/* KAJIAN */}
                     <Link
                       to="/kajian"
                       className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
-                      onClick={() => {
-                        setMobileOpen(false);
-                        setOpenDropdown(null);
-                      }}
+                      onClick={closeMenus}
                     >
                       Kajian
                     </Link>
 
-                    <a
-                      href="#"
+                    {/* BISIK KAMPUS */}
+                    <Link
+                      to="/bisik-kampus"
                       className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={closeMenus}
                     >
                       Bisik Kampus
-                    </a>
+                    </Link>
 
+                    {/* POLSRIFESS */}
                     <a
                       href="#"
                       className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
@@ -185,7 +190,7 @@ export default function Contact() {
               <Link
                 to="/contact"
                 className="font-medium text-amber-600 hover:text-amber-700 text-sm"
-                onClick={() => setMobileOpen(false)}
+                onClick={closeMenus}
               >
                 Contact Us
               </Link>
@@ -495,19 +500,15 @@ export default function Contact() {
 function Dropdown({ items }: { items: string[] }) {
   return (
     <div className="static mt-1 w-full rounded-xl border border-amber-100 bg-white p-2 shadow-xl lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:w-56">
-      {items.map((item) => {
-        const isKajian = item === "Kajian";
-
-        return (
-          <Link
-            to={isKajian ? "/kajian" : "/#agenda"}
-            key={item}
-            className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
-          >
-            {item}
-          </Link>
-        );
-      })}
+      {items.map((item) => (
+        <Link
+          to="/#agenda"
+          key={item}
+          className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
+        >
+          {item}
+        </Link>
+      ))}
     </div>
   );
 }
