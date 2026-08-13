@@ -343,7 +343,7 @@ export default function Home() {
               <div className="flex shrink-0 items-center gap-3">
                 <img
                   src="/images/logo.png"
-                  alt="Logo Kabinet Lentera Sriwijaya"
+                  alt="Logo Kabinet Kilau Gemilang"
                   className="h-10 w-10 object-contain"
                 />
 
