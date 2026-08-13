@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight,
   CalendarDays,
   ChevronDown,
   ChevronLeft,
@@ -49,12 +48,11 @@ const missions = [
   },
 ];
 
-// Data Kalender Akademik Polsri TA 2026/2027 berdasarkan dokumen resmi
 interface CalendarMonthData {
   year: number;
-  monthIndex: number; // 0 = Jan, 8 = Sep, 11 = Des
+  monthIndex: number;
   monthName: string;
-  firstDayOffset: number; // Offset hari pertama (0 = Min, 1 = Sen, 2 = Sel, dst)
+  firstDayOffset: number;
   daysInMonth: number;
   events: {
     day: string;
@@ -70,7 +68,7 @@ const academicCalendarData: CalendarMonthData[] = [
     year: 2026,
     monthIndex: 8,
     monthName: "September 2026",
-    firstDayOffset: 2, // Selasa
+    firstDayOffset: 2,
     daysInMonth: 30,
     events: [
       {
@@ -93,7 +91,7 @@ const academicCalendarData: CalendarMonthData[] = [
     year: 2026,
     monthIndex: 9,
     monthName: "Oktober 2026",
-    firstDayOffset: 4, // Kamis
+    firstDayOffset: 4,
     daysInMonth: 31,
     events: [
       {
@@ -123,7 +121,7 @@ const academicCalendarData: CalendarMonthData[] = [
     year: 2026,
     monthIndex: 10,
     monthName: "November 2026",
-    firstDayOffset: 0, // Minggu
+    firstDayOffset: 0,
     daysInMonth: 30,
     events: [
       {
@@ -146,7 +144,7 @@ const academicCalendarData: CalendarMonthData[] = [
     year: 2026,
     monthIndex: 11,
     monthName: "Desember 2026",
-    firstDayOffset: 2, // Selasa
+    firstDayOffset: 2,
     daysInMonth: 31,
     events: [
       {
@@ -162,7 +160,7 @@ const academicCalendarData: CalendarMonthData[] = [
     year: 2027,
     monthIndex: 0,
     monthName: "Januari 2027",
-    firstDayOffset: 5, // Jumat
+    firstDayOffset: 5,
     daysInMonth: 31,
     events: [
       {
@@ -213,7 +211,7 @@ const academicCalendarData: CalendarMonthData[] = [
     year: 2027,
     monthIndex: 1,
     monthName: "Februari 2027",
-    firstDayOffset: 1, // Senin
+    firstDayOffset: 1,
     daysInMonth: 28,
     events: [
       {
@@ -243,7 +241,7 @@ const academicCalendarData: CalendarMonthData[] = [
     year: 2027,
     monthIndex: 2,
     monthName: "Maret 2027",
-    firstDayOffset: 1, // Senin
+    firstDayOffset: 1,
     daysInMonth: 31,
     events: [
       {
@@ -259,7 +257,7 @@ const academicCalendarData: CalendarMonthData[] = [
     year: 2027,
     monthIndex: 3,
     monthName: "April 2027",
-    firstDayOffset: 4, // Kamis
+    firstDayOffset: 4,
     daysInMonth: 30,
     events: [
       {
@@ -282,25 +280,30 @@ const academicCalendarData: CalendarMonthData[] = [
 
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
-  const [currentMonthIdx, setCurrentMonthIdx] = useState(0); // Default Sep 2026
+  const [openDropdown, setOpenDropdown] =
+    useState<DropdownName>(null);
+  const [currentMonthIdx, setCurrentMonthIdx] = useState(0);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const toggleDropdown = (name: Exclude<DropdownName, null>) => {
     setOpenDropdown(openDropdown === name ? null : name);
+  };
+
+  const closeMenus = () => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
   };
 
   const activeMonth = academicCalendarData[currentMonthIdx];
@@ -318,164 +321,314 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat text-slate-900 scroll-smooth overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       <div className="min-h-screen bg-white/65">
-        {/* HEADER / NAVBAR */}
+
+        {/* ============================================================ */}
+        {/* NAVBAR */}
+        {/* ============================================================ */}
         <header
-          className={`sticky top-0 z-50 transition-all duration-300 ${
-            scrolled || mobileOpen
-              ? "border-b border-amber-100 bg-white/90 shadow-sm backdrop-blur-md py-3.5"
-              : "bg-transparent py-5"
+          className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
+            scrolled
+              ? "border-b border-slate-200/70 bg-white/80 shadow-sm backdrop-blur-xl"
+              : "border-b border-white/20 bg-white/20 backdrop-blur-md"
           }`}
         >
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-5 lg:px-8">
-            <Link
-              to="/"
-              className="flex items-center gap-3"
-              onClick={() => setMobileOpen(false)}
-            >
-              <img
-                src="/images/logo.png"
-                alt="Logo Kabinet Lentera Sriwijaya"
-                className="h-10 w-10 object-contain"
-              />
+          <div className="w-full">
+            <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
 
-              <div className="leading-tight">
-                <p className="font-bold tracking-tight text-slate-800">
-                  Kabinet Lentera Sriwijaya
-                </p>
+              {/* ====================================================== */}
+              {/* BRANDING - HANYA IDENTITAS, TIDAK BISA DIKLIK */}
+              {/* ====================================================== */}
+              <div className="flex shrink-0 items-center gap-3">
+                <img
+                  src="/images/logo.png"
+                  alt="Logo Kabinet Lentera Sriwijaya"
+                  className="h-10 w-10 object-contain"
+                />
 
-                <p className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">
-                  BEM Politeknik Negeri Sriwijaya
-                </p>
+                <div className="leading-tight">
+                  <p className="text-sm font-bold tracking-tight text-slate-800 sm:text-[15px]">
+                    Kabinet Lentera Sriwijaya
+                  </p>
+
+                  <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500 sm:text-[10px]">
+                    BEM Politeknik Negeri Sriwijaya
+                  </p>
+                </div>
               </div>
-            </Link>
 
-            <button
-              aria-label="Buka menu"
-              className="rounded-lg p-2 text-slate-700 lg:hidden"
-              onClick={() => setMobileOpen(!mobileOpen)}
-            >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+              {/* ====================================================== */}
+              {/* DESKTOP NAVIGATION */}
+              {/* ====================================================== */}
+              <nav className="hidden items-center gap-1 lg:flex">
 
-            <nav
-              className={`${
-                mobileOpen ? "absolute left-0 right-0 top-full flex" : "hidden"
-              } flex-col gap-1 border-b border-amber-100 bg-white/95 px-5 py-4 shadow-md lg:static lg:flex lg:flex-row lg:items-center lg:gap-6 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}
-            >
-              <Link
-                to="/"
-                className="font-medium text-amber-600 hover:text-amber-700 text-sm"
-                onClick={() => setMobileOpen(false)}
+                {/* HOME */}
+                <Link
+                  to="/"
+                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-amber-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50/80 hover:text-amber-700 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  onClick={closeMenus}
+                >
+                  Home
+                </Link>
+
+                {/* ABOUT */}
+                <a
+                  href="#visi"
+                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  onClick={closeMenus}
+                >
+                  About
+                </a>
+
+                {/* ACADEMIC INFORMATION */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => toggleDropdown("academic")}
+                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
+                      openDropdown === "academic"
+                        ? "bg-white/60 text-amber-700"
+                        : "text-slate-600 hover:bg-white/55 hover:text-amber-600"
+                    }`}
+                  >
+                    Academic Information
+
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ease-out ${
+                        openDropdown === "academic"
+                          ? "rotate-180"
+                          : ""
+                      }`}
+                    />
+                  </button>
+
+                  {openDropdown === "academic" && (
+                    <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+                      {[
+                        "Academic Calendar",
+                        "Scholarship Info",
+                        "Organisasi Mahasiswa",
+                        "Mahasiswa Berdampak",
+                      ].map((item) => (
+                        <a
+                          key={item}
+                          href="#agenda"
+                          className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                          onClick={closeMenus}
+                        >
+                          {item}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* CAMPUS ECHO */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => toggleDropdown("echo")}
+                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
+                      openDropdown === "echo"
+                        ? "bg-white/60 text-amber-700"
+                        : "text-slate-600 hover:bg-white/55 hover:text-amber-600"
+                    }`}
+                  >
+                    Campus Echo
+
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ease-out ${
+                        openDropdown === "echo"
+                          ? "rotate-180"
+                          : ""
+                      }`}
+                    />
+                  </button>
+
+                  {openDropdown === "echo" && (
+                    <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+                      <Link
+                        to="/kajian"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Kajian
+                      </Link>
+
+                      <Link
+                        to="/bisik-kampus"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Bisik Kampus
+                      </Link>
+
+                      <a
+                        href="#"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        Polsrifess
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                {/* CONTACT US */}
+                <Link
+                  to="/contact"
+                  className="ml-1 rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/50 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  onClick={closeMenus}
+                >
+                  Contact Us
+                </Link>
+              </nav>
+
+              {/* MOBILE BUTTON */}
+              <button
+                type="button"
+                aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
+                aria-expanded={mobileOpen}
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/40 bg-white/40 text-slate-700 outline-none backdrop-blur-md transition-all duration-200 ease-out hover:border-amber-300 hover:bg-white/60 hover:text-amber-600 active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-amber-400/70 lg:hidden"
+                onClick={() => setMobileOpen(!mobileOpen)}
               >
-                Home
-              </Link>
+                {mobileOpen ? <X size={21} /> : <Menu size={21} />}
+              </button>
+            </div>
 
-              <a
-                href="#visi"
-                className="font-medium text-slate-600 hover:text-amber-600 text-sm"
-                onClick={() => setMobileOpen(false)}
-              >
-                About
-              </a>
+            {/* ======================================================== */}
+            {/* MOBILE MENU */}
+            {/* ======================================================== */}
+            {mobileOpen && (
+              <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
 
-              {/* ACADEMIC INFORMATION */}
-              <div className="relative">
+                <Link
+                  to="/"
+                  className="block rounded-lg px-3 py-3 text-sm font-semibold text-amber-600 outline-none transition-all duration-200 hover:bg-amber-50 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  Home
+                </Link>
+
+                <a
+                  href="#visi"
+                  className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  About
+                </a>
+
                 <button
-                  className="font-medium text-slate-600 hover:text-amber-600 text-sm flex w-full items-center justify-between gap-1 py-1 lg:py-0"
+                  type="button"
+                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
+                    openDropdown === "academic"
+                      ? "bg-amber-50 text-amber-700"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
+                  }`}
                   onClick={() => toggleDropdown("academic")}
                 >
-                  Academic Information{" "}
+                  Academic Information
+
                   <ChevronDown
                     size={14}
-                    className={
+                    className={`transition-transform duration-200 ease-out ${
                       openDropdown === "academic"
-                        ? "rotate-180 transition-transform"
-                        : "transition-transform"
-                    }
+                        ? "rotate-180"
+                        : ""
+                    }`}
                   />
                 </button>
 
                 {openDropdown === "academic" && (
-                  <Dropdown
-                    items={[
+                  <div className="mt-1 rounded-lg bg-slate-50 p-1">
+                    {[
                       "Academic Calendar",
                       "Scholarship Info",
                       "Organisasi Mahasiswa",
                       "Mahasiswa Berdampak",
-                    ]}
-                  />
+                    ].map((item) => (
+                      <a
+                        key={item}
+                        href="#agenda"
+                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        {item}
+                      </a>
+                    ))}
+                  </div>
                 )}
-              </div>
 
-              {/* CAMPUS ECHO */}
-              <div className="relative">
                 <button
-                  className="font-medium text-slate-600 hover:text-amber-600 text-sm flex w-full items-center justify-between gap-1 py-1 lg:py-0"
+                  type="button"
+                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
+                    openDropdown === "echo"
+                      ? "bg-amber-50 text-amber-700"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
+                  }`}
                   onClick={() => toggleDropdown("echo")}
                 >
-                  Campus Echo{" "}
+                  Campus Echo
+
                   <ChevronDown
                     size={14}
-                    className={
+                    className={`transition-transform duration-200 ease-out ${
                       openDropdown === "echo"
-                        ? "rotate-180 transition-transform"
-                        : "transition-transform"
-                    }
+                        ? "rotate-180"
+                        : ""
+                    }`}
                   />
                 </button>
 
                 {openDropdown === "echo" && (
-                  <div className="static mt-1 w-full rounded-xl border border-amber-100 bg-white p-2 shadow-xl lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:w-56">
+                  <div className="mt-1 rounded-lg bg-slate-50 p-1">
                     <Link
                       to="/kajian"
-                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
-                      onClick={() => {
-                        setMobileOpen(false);
-                        setOpenDropdown(null);
-                      }}
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Kajian
                     </Link>
 
                     <Link
                       to="/bisik-kampus"
-                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
-                      onClick={() => {
-                        setMobileOpen(false);
-                        setOpenDropdown(null);
-                      }}
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Bisik Kampus
                     </Link>
 
                     <a
                       href="#"
-                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={(e) => e.preventDefault()}
                     >
                       Polsrifess
                     </a>
                   </div>
                 )}
-              </div>
 
-              <Link
-                to="/contact"
-                className="font-medium text-slate-600 hover:text-amber-600 text-sm"
-                onClick={() => setMobileOpen(false)}
-              >
-                Contact Us
-              </Link>
-            </nav>
+                <Link
+                  to="/contact"
+                  className="mt-1 block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  Contact Us
+                </Link>
+              </div>
+            )}
           </div>
         </header>
 
-        {/* HERO SECTION */}
+        {/* ============================================================ */}
+        {/* HERO */}
+        {/* ============================================================ */}
         <section
           id="home"
-          className="relative mx-auto flex min-h-[calc(100vh-85px)] w-full max-w-7xl items-center justify-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(1.5rem,3.5vh,4rem)]"
+          className="relative mx-auto flex min-h-[calc(100vh-72px)] w-full max-w-7xl items-center justify-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(1.5rem,3.5vh,4rem)]"
         >
           <div className="grid w-full items-center gap-[clamp(1.5rem,3.5vw,4rem)] lg:grid-cols-12">
             <div className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-6">
@@ -497,13 +650,13 @@ export default function Home() {
                 pelayanan yang berdampak bagi mahasiswa dan masyarakat.
               </p>
 
-              <div className="mt-[clamp(1.25rem,2.2vw,2.25rem)]"></div>
+              <div className="mt-[clamp(1.25rem,2.2vw,2.25rem)]" />
             </div>
 
             <div className="relative flex w-full items-center justify-center lg:col-span-6 lg:justify-end">
               <div className="relative flex w-full items-center justify-center">
                 <div
-                  className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-amber-200/30 blur-2xl pointer-events-none"
+                  className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-amber-200/30 blur-2xl"
                   style={{
                     width: "clamp(260px, 38vw, 540px)",
                     height: "clamp(260px, 38vw, 540px)",
@@ -524,7 +677,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* VISI & MISI SECTION */}
+        {/* ============================================================ */}
+        {/* VISI & MISI */}
+        {/* ============================================================ */}
         <section
           id="visi"
           className="bg-white/85 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28"
@@ -551,7 +706,9 @@ export default function Home() {
 
                   <h3 className="text-2xl font-bold leading-snug text-slate-900">
                     Menjadikan BEM Polsri sebagai lembaga{" "}
-                    <span className="text-amber-600">berdampak positif</span>{" "}
+                    <span className="text-amber-600">
+                      berdampak positif
+                    </span>{" "}
                     bagi mahasiswa dan institusi.
                   </h3>
 
@@ -567,10 +724,10 @@ export default function Home() {
                 {missions.map((mission) => (
                   <article
                     key={mission.number}
-                    className="group rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
+                    className="group rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
                   >
                     <div className="flex items-start justify-between">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition group-hover:bg-amber-500 group-hover:text-white">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition-all duration-200 group-hover:bg-amber-500 group-hover:text-white">
                         <mission.icon size={21} />
                       </div>
 
@@ -589,7 +746,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* AGENDA & KALENDER AKADEMIK SECTION */}
+        {/* ============================================================ */}
+        {/* AGENDA & KALENDER */}
+        {/* ============================================================ */}
         <section
           id="agenda"
           className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-28"
@@ -601,14 +760,16 @@ export default function Home() {
           />
 
           <div className="mt-10 grid gap-6 lg:grid-cols-[.85fr_1.15fr]">
-            {/* TAMPILAN KALENDER */}
+
+            {/* KALENDER */}
             <div className="rounded-3xl bg-white/90 p-5 shadow-lg shadow-slate-900/5 backdrop-blur-md sm:p-8">
               <div className="flex items-center justify-between">
                 <button
+                  type="button"
                   aria-label="Bulan sebelumnya"
                   onClick={handlePrevMonth}
                   disabled={currentMonthIdx === 0}
-                  className="rounded-full p-2 text-slate-500 transition hover:bg-amber-50 hover:text-amber-600 disabled:opacity-30 disabled:hover:bg-transparent"
+                  className="rounded-full p-2 text-slate-500 outline-none transition-all duration-200 hover:bg-amber-50 hover:text-amber-600 active:scale-[0.96] disabled:opacity-30"
                 >
                   <ChevronLeft size={20} />
                 </button>
@@ -624,16 +785,18 @@ export default function Home() {
                 </div>
 
                 <button
+                  type="button"
                   aria-label="Bulan berikutnya"
                   onClick={handleNextMonth}
-                  disabled={currentMonthIdx === academicCalendarData.length - 1}
-                  className="rounded-full p-2 text-slate-500 transition hover:bg-amber-50 hover:text-amber-600 disabled:opacity-30 disabled:hover:bg-transparent"
+                  disabled={
+                    currentMonthIdx === academicCalendarData.length - 1
+                  }
+                  className="rounded-full p-2 text-slate-500 outline-none transition-all duration-200 hover:bg-amber-50 hover:text-amber-600 active:scale-[0.96] disabled:opacity-30"
                 >
                   <ChevronRight size={20} />
                 </button>
               </div>
 
-              {/* GRID HARI HINGGA TANGGAL (RESPONSIF) */}
               <div className="mt-6 grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-slate-400 sm:gap-2 sm:text-xs">
                 {["MIN", "SEN", "SEL", "RAB", "KAM", "JUM", "SAB"].map(
                   (day) => (
@@ -643,31 +806,36 @@ export default function Home() {
                   ),
                 )}
 
-                {/* Blank Slot Offset Hari Pertama */}
-                {Array.from({ length: activeMonth.firstDayOffset }, (_, i) => (
-                  <div key={`empty-${i}`} className="aspect-square" />
-                ))}
+                {Array.from(
+                  { length: activeMonth.firstDayOffset },
+                  (_, i) => (
+                    <div key={`empty-${i}`} className="aspect-square" />
+                  ),
+                )}
 
-                {/* Tanggal Bulan Ini */}
-                {Array.from({ length: activeMonth.daysInMonth }, (_, index) => {
-                  const dayNumber = index + 1;
-                  const eventMatch = activeMonth.events.find(
-                    (e) => e.dayNum === dayNumber,
-                  );
+                {Array.from(
+                  { length: activeMonth.daysInMonth },
+                  (_, index) => {
+                    const dayNumber = index + 1;
+                    const eventMatch = activeMonth.events.find(
+                      (e) => e.dayNum === dayNumber,
+                    );
 
-                  return (
-                    <span
-                      key={dayNumber}
-                      className={`flex aspect-square items-center justify-center rounded-lg text-xs transition sm:text-sm ${
-                        eventMatch
-                          ? "bg-amber-500 font-black text-white shadow-md shadow-amber-500/30"
-                          : "text-slate-700 hover:bg-amber-50"
-                      }`}
-                    >
-                      {dayNumber}
-                    </span>
-                  );
-                })}
+                    return (
+                      <button
+                        key={dayNumber}
+                        type="button"
+                        className={`flex aspect-square items-center justify-center rounded-lg text-xs outline-none transition-all duration-200 sm:text-sm ${
+                          eventMatch
+                            ? "bg-amber-500 font-black text-white shadow-md shadow-amber-500/30 hover:bg-amber-600 active:scale-[0.96]"
+                            : "text-slate-700 hover:bg-amber-50 hover:text-amber-700 active:scale-[0.96]"
+                        }`}
+                      >
+                        {dayNumber}
+                      </button>
+                    );
+                  },
+                )}
               </div>
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-4 border-t border-slate-100 pt-4 text-[11px] font-semibold text-slate-500">
@@ -683,7 +851,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* DAFTAR AGENDA BULAN INI */}
+            {/* AGENDA */}
             <div className="flex flex-col justify-between rounded-3xl bg-slate-900/95 p-5 text-white shadow-lg shadow-slate-900/10 backdrop-blur-md sm:p-8">
               <div>
                 <div className="flex items-center justify-between">
@@ -697,7 +865,10 @@ export default function Home() {
                     </h3>
                   </div>
 
-                  <CalendarDays className="text-amber-400 shrink-0" size={28} />
+                  <CalendarDays
+                    className="shrink-0 text-amber-400"
+                    size={28}
+                  />
                 </div>
 
                 <div className="mt-6 space-y-3">
@@ -705,12 +876,12 @@ export default function Home() {
                     activeMonth.events.map((event, idx) => (
                       <div
                         key={idx}
-                        className="group flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/5 p-3 transition hover:bg-white/10"
+                        className="group flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/5 p-3 transition-all duration-200 ease-out hover:bg-white/10 hover:shadow-lg hover:shadow-black/10"
                       >
                         <div
                           className={`flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl font-bold text-slate-900 ${event.color}`}
                         >
-                          <strong className="text-base sm:text-lg leading-none">
+                          <strong className="text-base leading-none sm:text-lg">
                             {event.day}
                           </strong>
                         </div>
@@ -722,7 +893,9 @@ export default function Home() {
 
                           <p className="mt-0.5 text-[11px] text-slate-400">
                             {event.type}
-                            <span className="mx-1 text-slate-600">•</span>
+                            <span className="mx-1 text-slate-600">
+                              •
+                            </span>
                             Polsri
                           </p>
                         </div>
@@ -743,13 +916,16 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ============================================================ */}
         {/* FOOTER */}
+        {/* ============================================================ */}
         <footer
           id="footer"
           className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8"
         >
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
+
               <div>
                 <div className="flex items-center gap-3">
                   <img
@@ -759,7 +935,9 @@ export default function Home() {
                   />
 
                   <div>
-                    <h2 className="font-bold">Kabinet Lentera Sriwijaya</h2>
+                    <h2 className="font-bold">
+                      Kabinet Lentera Sriwijaya
+                    </h2>
 
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
@@ -779,15 +957,24 @@ export default function Home() {
                 </h3>
 
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
-                  <a href="#visi" className="transition hover:text-white">
+                  <a
+                    href="#visi"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
+                  >
                     Tentang Kami
                   </a>
 
-                  <a href="#agenda" className="transition hover:text-white">
+                  <a
+                    href="#agenda"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
+                  >
                     Agenda Kegiatan
                   </a>
 
-                  <Link to="/contact" className="transition hover:text-white">
+                  <Link
+                    to="/contact"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
+                  >
                     Contact Us
                   </Link>
                 </div>
@@ -799,7 +986,10 @@ export default function Home() {
                 </h3>
 
                 <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
-                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />
+                  <Mail
+                    size={16}
+                    className="mt-1 shrink-0 text-amber-400"
+                  />
                   bem@polsri.ac.id
                 </p>
 
@@ -815,7 +1005,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 transition hover:bg-amber-500 hover:text-white"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   >
                     <Instagram size={16} />
                   </a>
@@ -825,7 +1015,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="X Twitter"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 font-bold transition hover:bg-amber-500 hover:text-white"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   >
                     𝕏
                   </a>
@@ -835,7 +1025,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="YouTube"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 transition hover:bg-amber-500 hover:text-white"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   >
                     <Youtube size={17} />
                   </a>
@@ -844,28 +1034,14 @@ export default function Home() {
             </div>
 
             <div className="mt-14 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
-              <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
+              <p>
+                © BEM Politeknik Negeri Sriwijaya. All rights reserved.
+              </p>
             </div>
           </div>
         </footer>
       </div>
     </main>
-  );
-}
-
-function Dropdown({ items }: { items: string[] }) {
-  return (
-    <div className="static mt-1 w-full rounded-xl border border-amber-100 bg-white p-2 shadow-xl lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:w-56">
-      {items.map((item) => (
-        <a
-          href="#agenda"
-          key={item}
-          className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
-        >
-          {item}
-        </a>
-      ))}
-    </div>
   );
 }
 
@@ -888,7 +1064,10 @@ function SectionIntro({
         {title}
       </h2>
 
-      <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">{text}</p>
+      <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
+        {text}
+      </p>
     </div>
   );
 }
+
