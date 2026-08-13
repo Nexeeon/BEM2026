@@ -2,25 +2,22 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
-  BookOpen,
   ChevronDown,
-  Clock,
-  FileText,
   Instagram,
-  Lock,
   Mail,
   Menu,
   MessageCircle,
   Scale,
   Shield,
-  Users,
   X,
   Youtube,
 } from "lucide-react";
 
 type DropdownName = "academic" | "echo" | null;
 
-// Data untuk card "MENGAPA BISIK KAMPUS?"
+// ============================================================
+// DATA CARD "MENGAPA BISIK KAMPUS?"
+// ============================================================
 const whyBisikData = [
   {
     icon: Shield,
@@ -42,35 +39,22 @@ const whyBisikData = [
   },
 ];
 
-// Data untuk statistik
+// ============================================================
+// DATA STATISTIK - 4 ITEM (DI DUPLIKAT UNTUK EFEK GULIR)
+// ============================================================
 const statsData = [
-  {
-    number: "50+",
-    label: "Aspirasi Terkumpul",
-    icon: FileText,
-    color: "bg-amber-500",
-  },
-  {
-    number: "99%",
-    label: "Tingkat Respons",
-    icon: Users,
-    color: "bg-green-500",
-  },
-  {
-    number: "24/7",
-    label: "Selalu Terbuka",
-    icon: Clock,
-    color: "bg-blue-500",
-  },
-  {
-    number: "100%",
-    label: "Terjaga Privasi",
-    icon: Lock,
-    color: "bg-purple-500",
-  },
+  { number: "50+", label: "Aspirasi Terkumpul" },
+  { number: "99%", label: "Tingkat Respons" },
+  { number: "24/7", label: "Selalu Terbuka" },
+  { number: "100%", label: "Terjaga Privasi" },
 ];
 
+// Duplikat 4 kali untuk efek seamless yang lebih panjang
+const statsMarquee = [...statsData, ...statsData, ...statsData, ...statsData];
+
+// ============================================================
 // LINK GOOGLE FORM BISIK KAMPUS
+// ============================================================
 const FORM_BISIK_KAMPUS =
   "https://docs.google.com/forms/d/e/1FAIpQLSeO0k_4l3ogFWdW6se2G-pEillmx1y70fTA5pn1Q3gkR6rtOQ/viewform";
 
@@ -79,177 +63,299 @@ export default function BisikKampus() {
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState(false);
 
+  // ============================================================
+  // SCROLL DETECTION
+  // ============================================================
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // ============================================================
+  // DROPDOWN
+  // ============================================================
   const toggleDropdown = (name: Exclude<DropdownName, null>) => {
     setOpenDropdown(openDropdown === name ? null : name);
   };
 
+  const closeMenus = () => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  };
+
   return (
-    <main className="min-h-screen bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat text-slate-900 scroll-smooth overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       <div className="min-h-screen bg-white/65">
-        {/* ============================================================ */}
-        {/* HEADER / NAVBAR */}
-        {/* ============================================================ */}
+        {/* ====================================================== */}
+        {/* NAVBAR */}
+        {/* ====================================================== */}
         <header
-          className={`sticky top-0 z-50 transition-all duration-300 ${
-            scrolled || mobileOpen
-              ? "border-b border-amber-100 bg-white/90 shadow-sm backdrop-blur-md py-3.5"
-              : "bg-transparent py-5"
+          className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
+            scrolled
+              ? "border-b border-slate-200/70 bg-white/80 shadow-sm backdrop-blur-xl"
+              : "border-b border-white/20 bg-white/20 backdrop-blur-md"
           }`}
         >
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-5 lg:px-8">
-            <Link
-              to="/"
-              className="flex items-center gap-3"
-              onClick={() => setMobileOpen(false)}
-            >
-              <img
-                src="/images/logo.png"
-                alt="Logo Kabinet Lentera Sriwijaya"
-                className="h-10 w-10 object-contain"
-              />
-              <div className="leading-tight">
-                <p className="font-bold tracking-tight text-slate-800">
-                  Kabinet Lentera Sriwijaya
-                </p>
-                <p className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">
-                  BEM Politeknik Negeri Sriwijaya
-                </p>
+          <div className="w-full">
+            <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
+              {/* BRANDING */}
+              <div className="flex shrink-0 items-center gap-3">
+                <img
+                  src="/images/logo.png"
+                  alt="Logo Kabinet Lentera Sriwijaya"
+                  className="h-10 w-10 object-contain"
+                />
+                <div className="leading-tight">
+                  <p className="text-sm font-bold tracking-tight text-slate-800 sm:text-[15px]">
+                    Kabinet Lentera Sriwijaya
+                  </p>
+                  <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500 sm:text-[10px]">
+                    BEM Politeknik Negeri Sriwijaya
+                  </p>
+                </div>
               </div>
-            </Link>
 
-            <button
-              aria-label="Buka menu"
-              className="rounded-lg p-2 text-slate-700 lg:hidden"
-              onClick={() => setMobileOpen(!mobileOpen)}
-            >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+              {/* DESKTOP NAV */}
+              <nav className="hidden items-center gap-1 lg:flex">
+                <Link
+                  to="/"
+                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  onClick={closeMenus}
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/#visi"
+                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  onClick={closeMenus}
+                >
+                  About
+                </Link>
 
-            <nav
-              className={`${
-                mobileOpen ? "absolute left-0 right-0 top-full flex" : "hidden"
-              } flex-col gap-1 border-b border-amber-100 bg-white/95 px-5 py-4 shadow-md lg:static lg:flex lg:flex-row lg:items-center lg:gap-6 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}
-            >
-              <Link
-                to="/"
-                className="font-medium text-slate-600 hover:text-amber-600 text-sm"
-                onClick={() => setMobileOpen(false)}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => toggleDropdown("academic")}
+                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
+                      openDropdown === "academic"
+                        ? "bg-white/60 text-amber-700"
+                        : "text-slate-600 hover:bg-white/55 hover:text-amber-600"
+                    }`}
+                  >
+                    Academic Information
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ease-out ${
+                        openDropdown === "academic" ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {openDropdown === "academic" && (
+                    <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+                      {[
+                        "Academic Calendar",
+                        "Scholarship Info",
+                        "Organisasi Mahasiswa",
+                        "Mahasiswa Berdampak",
+                      ].map((item) => (
+                        <a
+                          key={item}
+                          href="/#agenda"
+                          className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                          onClick={closeMenus}
+                        >
+                          {item}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => toggleDropdown("echo")}
+                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
+                      openDropdown === "echo"
+                        ? "bg-white/60 text-amber-700"
+                        : "text-amber-600 hover:bg-white/55 hover:text-amber-700"
+                    }`}
+                  >
+                    Campus Echo
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ease-out ${
+                        openDropdown === "echo" ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {openDropdown === "echo" && (
+                    <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+                      <Link
+                        to="/kajian"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Kajian
+                      </Link>
+                      <Link
+                        to="/bisik-kampus"
+                        className="block rounded-lg bg-amber-50 px-3 py-2.5 text-xs font-semibold text-amber-700 outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Bisik Kampus
+                      </Link>
+                      <a
+                        href="#"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        Polsrifess
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                <Link
+                  to="/contact"
+                  className="ml-1 rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/50 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  onClick={closeMenus}
+                >
+                  Contact Us
+                </Link>
+              </nav>
+
+              {/* MOBILE BUTTON */}
+              <button
+                type="button"
+                aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
+                aria-expanded={mobileOpen}
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/40 bg-white/40 text-slate-700 outline-none backdrop-blur-md transition-all duration-200 ease-out hover:border-amber-300 hover:bg-white/60 hover:text-amber-600 active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-amber-400/70 lg:hidden"
+                onClick={() => setMobileOpen(!mobileOpen)}
               >
-                Home
-              </Link>
-              <a
-                href="#visi"
-                className="font-medium text-slate-600 hover:text-amber-600 text-sm"
-                onClick={() => setMobileOpen(false)}
-              >
-                About
-              </a>
+                {mobileOpen ? <X size={21} /> : <Menu size={21} />}
+              </button>
+            </div>
 
-              <div className="relative">
+            {/* MOBILE NAV */}
+            {mobileOpen && (
+              <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
+                <Link
+                  to="/"
+                  className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/#visi"
+                  className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  About
+                </Link>
+
                 <button
-                  className="font-medium text-slate-600 hover:text-amber-600 text-sm flex w-full items-center justify-between gap-1 py-1 lg:py-0"
+                  type="button"
+                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
+                    openDropdown === "academic"
+                      ? "bg-amber-50 text-amber-700"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
+                  }`}
                   onClick={() => toggleDropdown("academic")}
                 >
-                  Academic Information{" "}
+                  Academic Information
                   <ChevronDown
                     size={14}
-                    className={
-                      openDropdown === "academic"
-                        ? "rotate-180 transition-transform"
-                        : "transition-transform"
-                    }
+                    className={`transition-transform duration-200 ease-out ${
+                      openDropdown === "academic" ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
                 {openDropdown === "academic" && (
-                  <Dropdown
-                    items={[
+                  <div className="mt-1 rounded-lg bg-slate-50 p-1">
+                    {[
                       "Academic Calendar",
                       "Scholarship Info",
                       "Organisasi Mahasiswa",
                       "Mahasiswa Berdampak",
-                    ]}
-                  />
+                    ].map((item) => (
+                      <a
+                        key={item}
+                        href="/#agenda"
+                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        {item}
+                      </a>
+                    ))}
+                  </div>
                 )}
-              </div>
 
-              <div className="relative">
                 <button
-                  className="font-medium text-amber-600 hover:text-amber-700 text-sm flex w-full items-center justify-between gap-1 py-1 lg:py-0"
+                  type="button"
+                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
+                    openDropdown === "echo"
+                      ? "bg-amber-50 text-amber-700"
+                      : "text-amber-600 hover:bg-slate-50 hover:text-amber-700"
+                  }`}
                   onClick={() => toggleDropdown("echo")}
                 >
-                  Campus Echo{" "}
+                  Campus Echo
                   <ChevronDown
                     size={14}
-                    className={
-                      openDropdown === "echo"
-                        ? "rotate-180 transition-transform"
-                        : "transition-transform"
-                    }
+                    className={`transition-transform duration-200 ease-out ${
+                      openDropdown === "echo" ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
                 {openDropdown === "echo" && (
-                  <div className="static mt-1 w-full rounded-xl border border-amber-100 bg-white p-2 shadow-xl lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:w-56">
+                  <div className="mt-1 rounded-lg bg-slate-50 p-1">
                     <Link
                       to="/kajian"
-                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
-                      onClick={() => {
-                        setMobileOpen(false);
-                        setOpenDropdown(null);
-                      }}
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Kajian
                     </Link>
                     <Link
                       to="/bisik-kampus"
-                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-amber-600 transition hover:bg-amber-50"
-                      onClick={() => {
-                        setMobileOpen(false);
-                        setOpenDropdown(null);
-                      }}
+                      className="block rounded-md bg-amber-50 px-3 py-2.5 text-sm font-semibold text-amber-700 outline-none transition-all duration-200 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Bisik Kampus
                     </Link>
                     <a
                       href="#"
-                      className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={(e) => e.preventDefault()}
                     >
                       Polsrifess
                     </a>
                   </div>
                 )}
-              </div>
 
-              <Link
-                to="/contact"
-                className="font-medium text-slate-600 hover:text-amber-600 text-sm"
-                onClick={() => setMobileOpen(false)}
-              >
-                Contact Us
-              </Link>
-            </nav>
+                <Link
+                  to="/contact"
+                  className="mt-1 block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  Contact Us
+                </Link>
+              </div>
+            )}
           </div>
         </header>
 
-        {/* ============================================================ */}
-        {/* 1. HERO SECTION - BISIK KAMPUS */}
-        {/* ============================================================ */}
+        {/* ======================================================== */}
+        {/* HERO SECTION */}
+        {/* ======================================================== */}
         <section className="relative mx-auto flex min-h-[60vh] w-full max-w-7xl items-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(2rem,5vh,5rem)]">
           <div className="grid w-full items-center gap-[clamp(2rem,4vw,5rem)] lg:grid-cols-12">
-            {/* Teks Kiri */}
             <div className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-6">
               <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
                 <MessageCircle size={14} className="text-amber-600" />
@@ -271,14 +377,12 @@ export default function BisikKampus() {
                 dengan pihak yang berwenang untuk menciptakan perubahan positif
                 di lingkungan kampus.
               </p>
-
-              {/* HANYA 1 TOMBOL - "Isi Form Bisik Kampus" ke Google Form */}
               <div className="mt-6">
                 <a
                   href={FORM_BISIK_KAMPUS}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-600 hover:shadow-amber-500/40 hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                 >
                   <MessageCircle size={18} />
                   Isi Form Bisik Kampus
@@ -287,34 +391,32 @@ export default function BisikKampus() {
               </div>
             </div>
 
-            {/* FRAME FOTO KOSONG DI SAMPING KANAN */}
             <div className="relative flex w-full items-center justify-center lg:col-span-6 lg:justify-end">
               <div className="relative flex w-full items-center justify-center">
                 <div
-                  className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-amber-200/30 blur-2xl pointer-events-none"
+                  className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-amber-200/30 blur-2xl"
                   style={{
                     width: "clamp(260px, 38vw, 540px)",
                     height: "clamp(260px, 38vw, 540px)",
                   }}
                 />
-
                 <div className="relative z-10 flex h-auto w-full flex-col items-center justify-center">
                   <div
-                    className="w-full max-w-md rounded-3xl border-2 border-dashed border-amber-300/60 bg-white/40 backdrop-blur-sm shadow-xl transition hover:shadow-2xl hover:-translate-y-1 duration-300 flex items-center justify-center"
+                    className="flex w-full max-w-md items-center justify-center rounded-3xl border-2 border-dashed border-amber-300/60 bg-white/40 shadow-xl backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl"
                     style={{ aspectRatio: "4/3" }}
                   >
-                    <div className="text-center p-8">
-                      <div className="text-amber-300/60 text-6xl mb-3">🖼️</div>
+                    <div className="p-8 text-center">
+                      <div className="mb-3 text-6xl text-amber-300/60">🖼️</div>
                       <p className="text-sm font-medium text-slate-400">
                         Foto Kampus
                       </p>
-                      <p className="text-xs text-slate-300 mt-1">
+                      <p className="mt-1 text-xs text-slate-300">
                         (Segera hadir)
                       </p>
                       <div className="mt-4 flex justify-center gap-2">
-                        <span className="w-12 h-0.5 bg-amber-200/50 rounded-full"></span>
-                        <span className="w-6 h-0.5 bg-amber-300/70 rounded-full"></span>
-                        <span className="w-12 h-0.5 bg-amber-200/50 rounded-full"></span>
+                        <span className="h-0.5 w-12 rounded-full bg-amber-200/50" />
+                        <span className="h-0.5 w-6 rounded-full bg-amber-300/70" />
+                        <span className="h-0.5 w-12 rounded-full bg-amber-200/50" />
                       </div>
                     </div>
                   </div>
@@ -325,77 +427,108 @@ export default function BisikKampus() {
         </section>
 
         {/* ============================================================ */}
-        {/* 2. STATS SECTION */}
+        {/* 2. STATS SECTION - GRADIENT AMBER, BERGULIR OTOMATIS KE KIRI */}
         {/* ============================================================ */}
-        <section className="bg-white/85 px-5 py-16 backdrop-blur-md lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-              {statsData.map((stat, index) => (
-                <div
-                  key={index}
-                  className="group rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5 text-center"
-                >
+        <section className="relative overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-orange-600 py-14 lg:py-16">
+          {/* KEYFRAME ANIMASI - LANGSUNG DI SINI, TIDAK PERLU FILE CSS TERPISAH */}
+          <style>{`
+            @keyframes marquee-smooth {
+              from {
+                transform: translateX(0);
+              }
+              to {
+                transform: translateX(-25%);
+              }
+            }
+            .animate-marquee-smooth {
+              animation: marquee-smooth 25s linear infinite;
+            }
+          `}</style>
+
+          {/* FADE KIRI */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-amber-400 via-amber-400/60 to-transparent" />
+
+          {/* FADE KANAN */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-orange-600 via-orange-600/60 to-transparent" />
+
+          {/* CONTAINER GULIR */}
+          <div className="relative mx-auto max-w-7xl overflow-hidden px-5 lg:px-8">
+            <div className="relative flex items-center">
+              {/* ANIMASI GULIR OTOMATIS KE KIRI */}
+              <div className="flex animate-marquee-smooth items-center gap-16 whitespace-nowrap">
+                {statsMarquee.map((stat, index) => (
                   <div
-                    className={`mx-auto flex h-14 w-14 items-center justify-center rounded-2xl ${stat.color} text-white transition group-hover:scale-110 duration-300`}
+                    key={index}
+                    className="flex items-center gap-5 px-2 py-3"
                   >
-                    <stat.icon size={28} />
+                    {/* Angka - putih biar kontras di atas gradient amber */}
+                    <span
+                      className="font-black tracking-tight text-white drop-shadow-sm"
+                      style={{ fontSize: "clamp(2.6rem, 4.5vw, 4.2rem)" }}
+                    >
+                      {stat.number}
+                    </span>
+
+                    {/* Garis pemisah */}
+                    <span className="h-10 w-px bg-white/40" />
+
+                    {/* Label */}
+                    <span className="text-sm font-semibold uppercase tracking-wider text-white/90 sm:text-base lg:text-lg">
+                      {stat.label}
+                    </span>
                   </div>
-                  <p
-                    className="mt-4 font-black text-slate-900"
-                    style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)" }}
-                  >
-                    {stat.number}
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+        {/* 3. MENGAPA BISIK KAMPUS? */}
+        {/* ======================================================== */}
+        <section className="bg-white/85 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+                MENGAPA BISIK KAMPUS?
+              </h2>
+              <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
+                Platform terpercaya untuk menyampaikan aspirasi, keluhan, dan
+                saran demi kemajuan kampus bersama.
+              </p>
+            </div>
+
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {whyBisikData.map((item, index) => (
+                <article
+                  key={index}
+                  className="group rounded-3xl border border-slate-200 bg-white/90 p-8 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition-all duration-300 group-hover:bg-amber-500 group-hover:text-white">
+                    <item.icon size={28} />
+                  </div>
+                  <h3 className="mt-6 text-lg font-black tracking-tight text-slate-900">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    {item.description}
                   </p>
-                  <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                    {stat.label}
-                  </p>
-                </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ============================================================ */}
-        {/* 3. MENGAPA BISIK KAMPUS? SECTION */}
-        {/* ============================================================ */}
-        <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
-              MENGAPA BISIK KAMPUS?
-            </h2>
-            <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
-              Platform terpercaya untuk menyampaikan aspirasi, keluhan, dan
-              saran demi kemajuan kampus bersama.
-            </p>
-          </div>
-
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {whyBisikData.map((item, index) => (
-              <article
-                key={index}
-                className="group rounded-3xl border border-slate-200 bg-white/90 p-8 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition group-hover:bg-amber-500 group-hover:text-white">
-                  <item.icon size={28} />
-                </div>
-                <h3 className="mt-6 text-lg font-black tracking-tight text-slate-900">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
-                  {item.description}
-                </p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* ============================================================ */}
-        {/* 4. CTA SECTION */}
-        {/* ============================================================ */}
-        <section className="bg-gradient-to-br from-amber-50 via-white to-amber-50/50 px-5 py-20 lg:px-8 lg:py-28">
+        {/* ======================================================== */}
+        {/* 4. CTA */}
+        {/* ======================================================== */}
+        <section className="px-5 py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-4xl text-center">
-            <div className="rounded-3xl border border-amber-300/40 bg-white/80 p-8 backdrop-blur-md shadow-xl transition hover:shadow-2xl duration-300 sm:p-12">
-              <MessageCircle size={48} className="text-amber-500 mx-auto mb-4" />
+            <div className="rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12">
+              <MessageCircle
+                size={48}
+                className="mx-auto mb-4 text-amber-500"
+              />
               <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
                 SUARAKAN ASPIRASIMU SEKARANG!
               </h2>
@@ -408,7 +541,7 @@ export default function BisikKampus() {
                 href={FORM_BISIK_KAMPUS}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-3 rounded-full bg-amber-500 px-10 py-4 text-sm font-bold text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-600 hover:shadow-amber-500/40 hover:-translate-y-0.5"
+                className="mt-8 inline-flex items-center gap-3 rounded-full bg-amber-500 px-10 py-4 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
               >
                 <MessageCircle size={18} />
                 MULAI SAMPAIKAN ASPIRASI
@@ -418,9 +551,9 @@ export default function BisikKampus() {
           </div>
         </section>
 
-        {/* ============================================================ */}
+        {/* ======================================================== */}
         {/* FOOTER */}
-        {/* ============================================================ */}
+        {/* ======================================================== */}
         <footer className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
@@ -448,13 +581,22 @@ export default function BisikKampus() {
                   Navigasi
                 </h3>
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
-                  <a href="/#visi" className="transition hover:text-white">
+                  <Link
+                    to="/#visi"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
+                  >
                     Tentang Kami
-                  </a>
-                  <a href="/#agenda" className="transition hover:text-white">
+                  </Link>
+                  <Link
+                    to="/#agenda"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
+                  >
                     Agenda Kegiatan
-                  </a>
-                  <Link to="/contact" className="transition hover:text-white">
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
+                  >
                     Contact Us
                   </Link>
                 </div>
@@ -464,7 +606,7 @@ export default function BisikKampus() {
                   Mari Terhubung
                 </h3>
                 <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
-                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />{" "}
+                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />
                   bem@polsri.ac.id
                 </p>
                 <p className="mt-3 text-sm leading-6 text-slate-400">
@@ -478,7 +620,7 @@ export default function BisikKampus() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 transition hover:bg-amber-500 hover:text-white"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   >
                     <Instagram size={16} />
                   </a>
@@ -487,7 +629,7 @@ export default function BisikKampus() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="X Twitter"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 font-bold transition hover:bg-amber-500 hover:text-white"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   >
                     𝕏
                   </a>
@@ -496,7 +638,7 @@ export default function BisikKampus() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="YouTube"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 transition hover:bg-amber-500 hover:text-white"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   >
                     <Youtube size={17} />
                   </a>
@@ -510,25 +652,5 @@ export default function BisikKampus() {
         </footer>
       </div>
     </main>
-  );
-}
-
-// ============================================================
-// KOMPONEN DROPDOWN
-// ============================================================
-function Dropdown({ items }: { items: string[] }) {
-  return (
-    <div className="static mt-1 w-full rounded-xl border border-amber-100 bg-white p-2 shadow-xl lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:w-56">
-      {items.map((item) => (
-        <a
-          href="#"
-          key={item}
-          className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-amber-50 hover:text-amber-700"
-          onClick={(e) => e.preventDefault()}
-        >
-          {item}
-        </a>
-      ))}
-    </div>
   );
 }
