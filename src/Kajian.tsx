@@ -162,21 +162,43 @@ export default function Kajian() {
 
                   {openDropdown === "academic" && (
                     <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
-                      {[
-                        "Academic Calendar",
-                        "Scholarship Info",
-                        "Organisasi Mahasiswa",
-                        "Mahasiswa Berdampak",
-                      ].map((item) => (
-                        <a
-                          key={item}
-                          href="/#agenda"
-                          className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                          onClick={closeMenus}
-                        >
-                          {item}
-                        </a>
-                      ))}
+
+                      {/* ACADEMIC CALENDAR */}
+                      <Link
+                        to="/calendar"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Academic Calendar
+                      </Link>
+
+                      {/* SCHOLARSHIP INFO */}
+                      <a
+                        href="/#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Scholarship Info
+                      </a>
+
+                      {/* ORGANISASI MAHASISWA */}
+                      <a
+                        href="/#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Organisasi Mahasiswa
+                      </a>
+
+                      {/* MAHASISWA BERDAMPAK */}
+                      <a
+                        href="/#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Mahasiswa Berdampak
+                      </a>
+
                     </div>
                   )}
                 </div>
@@ -233,6 +255,7 @@ export default function Kajian() {
                       >
                         Polsrifess
                       </a>
+
                     </div>
                   )}
                 </div>
@@ -245,6 +268,7 @@ export default function Kajian() {
                 >
                   Contact Us
                 </Link>
+
               </nav>
 
               {/* ================================================== */}
@@ -259,6 +283,7 @@ export default function Kajian() {
               >
                 {mobileOpen ? <X size={21} /> : <Menu size={21} />}
               </button>
+
             </div>
 
             {/* ====================================================== */}
@@ -307,21 +332,43 @@ export default function Kajian() {
 
                 {openDropdown === "academic" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
-                    {[
-                      "Academic Calendar",
-                      "Scholarship Info",
-                      "Organisasi Mahasiswa",
-                      "Mahasiswa Berdampak",
-                    ].map((item) => (
-                      <a
-                        key={item}
-                        href="/#agenda"
-                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                        onClick={closeMenus}
-                      >
-                        {item}
-                      </a>
-                    ))}
+
+                    {/* MOBILE ACADEMIC CALENDAR */}
+                    <Link
+                      to="/calendar"
+                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Academic Calendar
+                    </Link>
+
+                    {/* MOBILE SCHOLARSHIP INFO */}
+                    <a
+                      href="/#agenda"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Scholarship Info
+                    </a>
+
+                    {/* MOBILE ORGANISASI MAHASISWA */}
+                    <a
+                      href="/#agenda"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Organisasi Mahasiswa
+                    </a>
+
+                    {/* MOBILE MAHASISWA BERDAMPAK */}
+                    <a
+                      href="/#agenda"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Mahasiswa Berdampak
+                    </a>
+
                   </div>
                 )}
 
@@ -349,6 +396,7 @@ export default function Kajian() {
 
                 {openDropdown === "echo" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
+
                     <Link
                       to="/kajian"
                       className="block rounded-md bg-amber-50 px-3 py-2.5 text-sm font-semibold text-amber-700 outline-none transition-all duration-200 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -372,6 +420,7 @@ export default function Kajian() {
                     >
                       Polsrifess
                     </a>
+
                   </div>
                 )}
 
@@ -383,6 +432,7 @@ export default function Kajian() {
                 >
                   Contact Us
                 </Link>
+
               </div>
             )}
           </div>
@@ -396,6 +446,7 @@ export default function Kajian() {
 
             {/* TEKS KIRI */}
             <div className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-6">
+
               <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
                 <BookOpen size={14} className="text-amber-600" />
                 Campus Echo
@@ -432,6 +483,7 @@ export default function Kajian() {
                   <ArrowRight size={18} />
                 </a>
               </div>
+
             </div>
 
             {/* FOTO KAMPUS */}
@@ -477,6 +529,7 @@ export default function Kajian() {
 
               </div>
             </div>
+
           </div>
         </section>
 
@@ -686,6 +739,7 @@ export default function Kajian() {
 
                 </div>
               </div>
+
             </div>
 
             {/* COPYRIGHT */}
@@ -697,6 +751,7 @@ export default function Kajian() {
 
           </div>
         </footer>
+
       </div>
     </main>
   );

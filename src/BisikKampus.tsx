@@ -90,6 +90,7 @@ export default function BisikKampus() {
   return (
     <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       <div className="min-h-screen bg-white/65">
+
         {/* ====================================================== */}
         {/* NAVBAR */}
         {/* ====================================================== */}
@@ -102,6 +103,7 @@ export default function BisikKampus() {
         >
           <div className="w-full">
             <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
+
               {/* BRANDING */}
               <div className="flex shrink-0 items-center gap-3">
                 <img
@@ -109,10 +111,12 @@ export default function BisikKampus() {
                   alt="Logo Kabinet Lentera Sriwijaya"
                   className="h-10 w-10 object-contain"
                 />
+
                 <div className="leading-tight">
                   <p className="text-sm font-bold tracking-tight text-slate-800 sm:text-[15px]">
                     Kabinet Lentera Sriwijaya
                   </p>
+
                   <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500 sm:text-[10px]">
                     BEM Politeknik Negeri Sriwijaya
                   </p>
@@ -121,6 +125,8 @@ export default function BisikKampus() {
 
               {/* DESKTOP NAV */}
               <nav className="hidden items-center gap-1 lg:flex">
+
+                {/* HOME */}
                 <Link
                   to="/"
                   className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
@@ -128,6 +134,8 @@ export default function BisikKampus() {
                 >
                   Home
                 </Link>
+
+                {/* ABOUT */}
                 <Link
                   to="/#visi"
                   className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
@@ -136,6 +144,7 @@ export default function BisikKampus() {
                   About
                 </Link>
 
+                {/* ACADEMIC INFORMATION */}
                 <div className="relative">
                   <button
                     type="button"
@@ -147,34 +156,61 @@ export default function BisikKampus() {
                     }`}
                   >
                     Academic Information
+
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
-                        openDropdown === "academic" ? "rotate-180" : ""
+                        openDropdown === "academic"
+                          ? "rotate-180"
+                          : ""
                       }`}
                     />
                   </button>
+
                   {openDropdown === "academic" && (
                     <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
-                      {[
-                        "Academic Calendar",
-                        "Scholarship Info",
-                        "Organisasi Mahasiswa",
-                        "Mahasiswa Berdampak",
-                      ].map((item) => (
-                        <a
-                          key={item}
-                          href="/#agenda"
-                          className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                          onClick={closeMenus}
-                        >
-                          {item}
-                        </a>
-                      ))}
+
+                      {/* ACADEMIC CALENDAR */}
+                      <Link
+                        to="/calendar"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Academic Calendar
+                      </Link>
+
+                      {/* SCHOLARSHIP INFO */}
+                      <a
+                        href="/#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Scholarship Info
+                      </a>
+
+                      {/* ORGANISASI MAHASISWA */}
+                      <a
+                        href="/#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Organisasi Mahasiswa
+                      </a>
+
+                      {/* MAHASISWA BERDAMPAK */}
+                      <a
+                        href="/#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Mahasiswa Berdampak
+                      </a>
+
                     </div>
                   )}
                 </div>
 
+                {/* CAMPUS ECHO */}
                 <div className="relative">
                   <button
                     type="button"
@@ -186,15 +222,21 @@ export default function BisikKampus() {
                     }`}
                   >
                     Campus Echo
+
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
-                        openDropdown === "echo" ? "rotate-180" : ""
+                        openDropdown === "echo"
+                          ? "rotate-180"
+                          : ""
                       }`}
                     />
                   </button>
+
                   {openDropdown === "echo" && (
                     <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+
+                      {/* KAJIAN */}
                       <Link
                         to="/kajian"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -202,6 +244,8 @@ export default function BisikKampus() {
                       >
                         Kajian
                       </Link>
+
+                      {/* BISIK KAMPUS */}
                       <Link
                         to="/bisik-kampus"
                         className="block rounded-lg bg-amber-50 px-3 py-2.5 text-xs font-semibold text-amber-700 outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -209,6 +253,8 @@ export default function BisikKampus() {
                       >
                         Bisik Kampus
                       </Link>
+
+                      {/* POLSRIFESS */}
                       <a
                         href="#"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -216,10 +262,12 @@ export default function BisikKampus() {
                       >
                         Polsrifess
                       </a>
+
                     </div>
                   )}
                 </div>
 
+                {/* CONTACT */}
                 <Link
                   to="/contact"
                   className="ml-1 rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/50 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
@@ -227,6 +275,7 @@ export default function BisikKampus() {
                 >
                   Contact Us
                 </Link>
+
               </nav>
 
               {/* MOBILE BUTTON */}
@@ -239,11 +288,14 @@ export default function BisikKampus() {
               >
                 {mobileOpen ? <X size={21} /> : <Menu size={21} />}
               </button>
+
             </div>
 
             {/* MOBILE NAV */}
             {mobileOpen && (
               <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
+
+                {/* HOME */}
                 <Link
                   to="/"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -251,6 +303,8 @@ export default function BisikKampus() {
                 >
                   Home
                 </Link>
+
+                {/* ABOUT */}
                 <Link
                   to="/#visi"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -259,6 +313,7 @@ export default function BisikKampus() {
                   About
                 </Link>
 
+                {/* MOBILE ACADEMIC */}
                 <button
                   type="button"
                   className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
@@ -269,33 +324,60 @@ export default function BisikKampus() {
                   onClick={() => toggleDropdown("academic")}
                 >
                   Academic Information
+
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ease-out ${
-                      openDropdown === "academic" ? "rotate-180" : ""
+                      openDropdown === "academic"
+                        ? "rotate-180"
+                        : ""
                     }`}
                   />
                 </button>
+
                 {openDropdown === "academic" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
-                    {[
-                      "Academic Calendar",
-                      "Scholarship Info",
-                      "Organisasi Mahasiswa",
-                      "Mahasiswa Berdampak",
-                    ].map((item) => (
-                      <a
-                        key={item}
-                        href="/#agenda"
-                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                        onClick={closeMenus}
-                      >
-                        {item}
-                      </a>
-                    ))}
+
+                    {/* MOBILE ACADEMIC CALENDAR */}
+                    <Link
+                      to="/calendar"
+                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Academic Calendar
+                    </Link>
+
+                    {/* MOBILE SCHOLARSHIP INFO */}
+                    <a
+                      href="/#agenda"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Scholarship Info
+                    </a>
+
+                    {/* MOBILE ORGANISASI MAHASISWA */}
+                    <a
+                      href="/#agenda"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Organisasi Mahasiswa
+                    </a>
+
+                    {/* MOBILE MAHASISWA BERDAMPAK */}
+                    <a
+                      href="/#agenda"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Mahasiswa Berdampak
+                    </a>
+
                   </div>
                 )}
 
+                {/* MOBILE CAMPUS ECHO */}
                 <button
                   type="button"
                   className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
@@ -306,15 +388,20 @@ export default function BisikKampus() {
                   onClick={() => toggleDropdown("echo")}
                 >
                   Campus Echo
+
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ease-out ${
-                      openDropdown === "echo" ? "rotate-180" : ""
+                      openDropdown === "echo"
+                        ? "rotate-180"
+                        : ""
                     }`}
                   />
                 </button>
+
                 {openDropdown === "echo" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
+
                     <Link
                       to="/kajian"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -322,6 +409,7 @@ export default function BisikKampus() {
                     >
                       Kajian
                     </Link>
+
                     <Link
                       to="/bisik-kampus"
                       className="block rounded-md bg-amber-50 px-3 py-2.5 text-sm font-semibold text-amber-700 outline-none transition-all duration-200 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -329,6 +417,7 @@ export default function BisikKampus() {
                     >
                       Bisik Kampus
                     </Link>
+
                     <a
                       href="#"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -336,16 +425,19 @@ export default function BisikKampus() {
                     >
                       Polsrifess
                     </a>
+
                   </div>
                 )}
 
+                {/* CONTACT */}
                 <Link
                   to="/contact"
-                  className="mt-1 block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  className="mt-1 block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   onClick={closeMenus}
                 >
                   Contact Us
                 </Link>
+
               </div>
             )}
           </div>
@@ -356,17 +448,21 @@ export default function BisikKampus() {
         {/* ======================================================== */}
         <section className="relative mx-auto flex min-h-[60vh] w-full max-w-7xl items-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(2rem,5vh,5rem)]">
           <div className="grid w-full items-center gap-[clamp(2rem,4vw,5rem)] lg:grid-cols-12">
+
             <div className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-6">
+
               <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
                 <MessageCircle size={14} className="text-amber-600" />
                 Campus Echo
               </span>
+
               <h1
                 className="font-serif font-black uppercase tracking-wide text-amber-500 leading-[1.12]"
                 style={{ fontSize: "clamp(2.8rem, 5.5vw, 5rem)" }}
               >
                 BISIK KAMPUS
               </h1>
+
               <p
                 className="mt-[clamp(1rem,1.8vw,1.75rem)] max-w-2xl font-medium leading-relaxed text-slate-700"
                 style={{ fontSize: "clamp(0.95rem, 1.15vw, 1.1rem)" }}
@@ -377,6 +473,7 @@ export default function BisikKampus() {
                 dengan pihak yang berwenang untuk menciptakan perubahan positif
                 di lingkungan kampus.
               </p>
+
               <div className="mt-6">
                 <a
                   href={FORM_BISIK_KAMPUS}
@@ -389,10 +486,12 @@ export default function BisikKampus() {
                   <ArrowRight size={18} />
                 </a>
               </div>
+
             </div>
 
             <div className="relative flex w-full items-center justify-center lg:col-span-6 lg:justify-end">
               <div className="relative flex w-full items-center justify-center">
+
                 <div
                   className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-amber-200/30 blur-2xl"
                   style={{
@@ -400,29 +499,40 @@ export default function BisikKampus() {
                     height: "clamp(260px, 38vw, 540px)",
                   }}
                 />
+
                 <div className="relative z-10 flex h-auto w-full flex-col items-center justify-center">
+
                   <div
                     className="flex w-full max-w-md items-center justify-center rounded-3xl border-2 border-dashed border-amber-300/60 bg-white/40 shadow-xl backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl"
                     style={{ aspectRatio: "4/3" }}
                   >
                     <div className="p-8 text-center">
-                      <div className="mb-3 text-6xl text-amber-300/60">🖼️</div>
+
+                      <div className="mb-3 text-6xl text-amber-300/60">
+                        🖼️
+                      </div>
+
                       <p className="text-sm font-medium text-slate-400">
                         Foto Kampus
                       </p>
+
                       <p className="mt-1 text-xs text-slate-300">
                         (Segera hadir)
                       </p>
+
                       <div className="mt-4 flex justify-center gap-2">
                         <span className="h-0.5 w-12 rounded-full bg-amber-200/50" />
                         <span className="h-0.5 w-6 rounded-full bg-amber-300/70" />
                         <span className="h-0.5 w-12 rounded-full bg-amber-200/50" />
                       </div>
+
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
+
           </div>
         </section>
 
@@ -430,7 +540,7 @@ export default function BisikKampus() {
         {/* 2. STATS SECTION - GRADIENT AMBER, BERGULIR OTOMATIS KE KIRI */}
         {/* ============================================================ */}
         <section className="relative overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-orange-600 py-14 lg:py-16">
-          {/* KEYFRAME ANIMASI - LANGSUNG DI SINI, TIDAK PERLU FILE CSS TERPISAH */}
+
           <style>{`
             @keyframes marquee-smooth {
               from {
@@ -440,6 +550,7 @@ export default function BisikKampus() {
                 transform: translateX(-25%);
               }
             }
+
             .animate-marquee-smooth {
               animation: marquee-smooth 25s linear infinite;
             }
@@ -453,15 +564,17 @@ export default function BisikKampus() {
 
           {/* CONTAINER GULIR */}
           <div className="relative mx-auto max-w-7xl overflow-hidden px-5 lg:px-8">
+
             <div className="relative flex items-center">
-              {/* ANIMASI GULIR OTOMATIS KE KIRI */}
+
               <div className="flex animate-marquee-smooth items-center gap-16 whitespace-nowrap">
+
                 {statsMarquee.map((stat, index) => (
                   <div
                     key={index}
                     className="flex items-center gap-5 px-2 py-3"
                   >
-                    {/* Angka - putih biar kontras di atas gradient amber */}
+
                     <span
                       className="font-black tracking-tight text-white drop-shadow-sm"
                       style={{ fontSize: "clamp(2.6rem, 4.5vw, 4.2rem)" }}
@@ -469,15 +582,15 @@ export default function BisikKampus() {
                       {stat.number}
                     </span>
 
-                    {/* Garis pemisah */}
                     <span className="h-10 w-px bg-white/40" />
 
-                    {/* Label */}
                     <span className="text-sm font-semibold uppercase tracking-wider text-white/90 sm:text-base lg:text-lg">
                       {stat.label}
                     </span>
+
                   </div>
                 ))}
+
               </div>
             </div>
           </div>
@@ -487,34 +600,45 @@ export default function BisikKampus() {
         {/* 3. MENGAPA BISIK KAMPUS? */}
         {/* ======================================================== */}
         <section className="bg-white/85 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28">
+
           <div className="mx-auto max-w-7xl">
+
             <div className="max-w-2xl">
+
               <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
                 MENGAPA BISIK KAMPUS?
               </h2>
+
               <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
                 Platform terpercaya untuk menyampaikan aspirasi, keluhan, dan
                 saran demi kemajuan kampus bersama.
               </p>
+
             </div>
 
             <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
               {whyBisikData.map((item, index) => (
                 <article
                   key={index}
                   className="group rounded-3xl border border-slate-200 bg-white/90 p-8 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
                 >
+
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition-all duration-300 group-hover:bg-amber-500 group-hover:text-white">
                     <item.icon size={28} />
                   </div>
+
                   <h3 className="mt-6 text-lg font-black tracking-tight text-slate-900">
                     {item.title}
                   </h3>
+
                   <p className="mt-3 text-sm leading-7 text-slate-600">
                     {item.description}
                   </p>
+
                 </article>
               ))}
+
             </div>
           </div>
         </section>
@@ -523,20 +647,26 @@ export default function BisikKampus() {
         {/* 4. CTA */}
         {/* ======================================================== */}
         <section className="px-5 py-20 lg:px-8 lg:py-28">
+
           <div className="mx-auto max-w-4xl text-center">
+
             <div className="rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12">
+
               <MessageCircle
                 size={48}
                 className="mx-auto mb-4 text-amber-500"
               />
+
               <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
                 SUARAKAN ASPIRASIMU SEKARANG!
               </h2>
+
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">
                 Bergabunglah dengan mahasiswa lainnya yang telah mempercayai
                 Bisik Kampus sebagai wadah aspirasi. Setiap suara penting untuk
                 kemajuan kampus kita bersama.
               </p>
+
               <a
                 href={FORM_BISIK_KAMPUS}
                 target="_blank"
@@ -547,6 +677,7 @@ export default function BisikKampus() {
                 MULAI SAMPAIKAN ASPIRASI
                 <ArrowRight size={18} />
               </a>
+
             </div>
           </div>
         </section>
@@ -555,66 +686,104 @@ export default function BisikKampus() {
         {/* FOOTER */}
         {/* ======================================================== */}
         <footer className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8">
+
           <div className="mx-auto max-w-7xl">
+
             <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
+
+              {/* BRAND */}
               <div>
+
                 <div className="flex items-center gap-3">
+
                   <img
                     src="/images/logo.png"
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />
+
                   <div>
-                    <h2 className="font-bold">Kabinet Lentera Sriwijaya</h2>
+
+                    <h2 className="font-bold">
+                      Kabinet Lentera Sriwijaya
+                    </h2>
+
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
                     </p>
+
                   </div>
+
                 </div>
+
                 <p className="mt-6 max-w-xs text-sm leading-7 text-slate-400">
                   Menjadi wadah yang aktif, responsif, dan konstruktif untuk
                   Politeknik Negeri Sriwijaya yang lebih berdampak.
                 </p>
+
               </div>
+
+              {/* NAVIGASI */}
               <div>
+
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Navigasi
                 </h3>
+
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
+
                   <Link
                     to="/#visi"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Tentang Kami
                   </Link>
+
                   <Link
                     to="/#agenda"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Agenda Kegiatan
                   </Link>
+
                   <Link
                     to="/contact"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Contact Us
                   </Link>
+
                 </div>
+
               </div>
+
+              {/* MARI TERHUBUNG */}
               <div>
+
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Mari Terhubung
                 </h3>
+
                 <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
-                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />
+
+                  <Mail
+                    size={16}
+                    className="mt-1 shrink-0 text-amber-400"
+                  />
+
                   bem@polsri.ac.id
+
                 </p>
+
                 <p className="mt-3 text-sm leading-6 text-slate-400">
                   Jl. Srijaya Negara, Bukit Besar,
                   <br />
                   Palembang, Sumatera Selatan
                 </p>
+
                 <div className="mt-5 flex gap-2">
+
+                  {/* INSTAGRAM */}
                   <a
                     href="https://www.instagram.com/bempolsri_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                     target="_blank"
@@ -624,6 +793,8 @@ export default function BisikKampus() {
                   >
                     <Instagram size={16} />
                   </a>
+
+                  {/* X */}
                   <a
                     href="https://x.com/polsrimenfess"
                     target="_blank"
@@ -633,6 +804,8 @@ export default function BisikKampus() {
                   >
                     𝕏
                   </a>
+
+                  {/* YOUTUBE */}
                   <a
                     href="https://www.youtube.com/@bemkmpolsri3259"
                     target="_blank"
@@ -642,14 +815,22 @@ export default function BisikKampus() {
                   >
                     <Youtube size={17} />
                   </a>
+
                 </div>
               </div>
+
             </div>
+
+            {/* COPYRIGHT */}
             <div className="mt-14 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
-              <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
+              <p>
+                © BEM Politeknik Negeri Sriwijaya. All rights reserved.
+              </p>
             </div>
+
           </div>
         </footer>
+
       </div>
     </main>
   );

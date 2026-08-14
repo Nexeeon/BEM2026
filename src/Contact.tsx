@@ -138,21 +138,43 @@ export default function Contact() {
 
                   {openDropdown === "academic" && (
                     <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
-                      {[
-                        "Academic Calendar",
-                        "Scholarship Info",
-                        "Organisasi Mahasiswa",
-                        "Mahasiswa Berdampak",
-                      ].map((item) => (
-                        <Link
-                          to="/#agenda"
-                          key={item}
-                          className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                          onClick={closeMenus}
-                        >
-                          {item}
-                        </Link>
-                      ))}
+
+                      {/* ACADEMIC CALENDAR */}
+                      <Link
+                        to="/calendar"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Academic Calendar
+                      </Link>
+
+                      {/* SCHOLARSHIP INFO */}
+                      <Link
+                        to="/#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Scholarship Info
+                      </Link>
+
+                      {/* ORGANISASI MAHASISWA */}
+                      <Link
+                        to="/#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Organisasi Mahasiswa
+                      </Link>
+
+                      {/* MAHASISWA BERDAMPAK */}
+                      <Link
+                        to="/#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Mahasiswa Berdampak
+                      </Link>
+
                     </div>
                   )}
                 </div>
@@ -183,6 +205,7 @@ export default function Contact() {
                   {openDropdown === "echo" && (
                     <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
 
+                      {/* KAJIAN */}
                       <Link
                         to="/kajian"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -191,6 +214,7 @@ export default function Contact() {
                         Kajian
                       </Link>
 
+                      {/* BISIK KAMPUS */}
                       <Link
                         to="/bisik-kampus"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -199,6 +223,7 @@ export default function Contact() {
                         Bisik Kampus
                       </Link>
 
+                      {/* POLSRIFESS */}
                       <a
                         href="#"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -221,6 +246,7 @@ export default function Contact() {
                 >
                   Contact Us
                 </Link>
+
               </nav>
 
               {/* MOBILE BUTTON */}
@@ -292,21 +318,43 @@ export default function Contact() {
 
                 {openDropdown === "academic" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
-                    {[
-                      "Academic Calendar",
-                      "Scholarship Info",
-                      "Organisasi Mahasiswa",
-                      "Mahasiswa Berdampak",
-                    ].map((item) => (
-                      <Link
-                        to="/#agenda"
-                        key={item}
-                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                        onClick={closeMenus}
-                      >
-                        {item}
-                      </Link>
-                    ))}
+
+                    {/* MOBILE ACADEMIC CALENDAR */}
+                    <Link
+                      to="/calendar"
+                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Academic Calendar
+                    </Link>
+
+                    {/* MOBILE SCHOLARSHIP INFO */}
+                    <Link
+                      to="/#agenda"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Scholarship Info
+                    </Link>
+
+                    {/* MOBILE ORGANISASI MAHASISWA */}
+                    <Link
+                      to="/#agenda"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Organisasi Mahasiswa
+                    </Link>
+
+                    {/* MOBILE MAHASISWA BERDAMPAK */}
+                    <Link
+                      to="/#agenda"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Mahasiswa Berdampak
+                    </Link>
+
                   </div>
                 )}
 
