@@ -3,32 +3,75 @@ import { Link } from "react-router-dom";
 import {
   ArrowUpRight,
   CalendarDays,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Compass,
+  Instagram,
   Lightbulb,
+  Mail,
   Megaphone,
   Menu,
   Scale,
-  Tag,
   Target,
   Users,
   X,
+  Youtube,
+  LucideProps,
 } from "lucide-react";
-
-/* ============================================================================
- * TYPE DEFINITIONS & DATA
- * ============================================================================ */
 
 type DropdownName = "academic" | "echo" | null;
 
-interface Mission {
-  icon: React.ElementType;
+interface MissionItem {
+  icon: React.ComponentType<LucideProps>;
   number: string;
   text: string;
 }
 
-const missions: Mission[] = [
+interface UpdateInfoItemData {
+  number: string;
+  category: string;
+  title: string;
+  description: string;
+  fullDescription: string;
+  image: string;
+}
+
+/* DATA 3 UPDATE INFO TERBARU */
+const updateInfos: UpdateInfoItemData[] = [
+  {
+    number: "01",
+    category: "INOVASI & KREATIVITAS",
+    title: "Program Kreatifitas Mahasiswa",
+    description:
+      "Kegiatan Ditjenbelmawa & Kemendikbudristek untuk memberi ruang mahasiswa mengembangkan potensi dan keahlian inovasi.",
+    fullDescription:
+      "Program Kreatifitas Mahasiswa (PKM) adalah kegiatan yang diselenggarkan oleh Ditjenbelmawa (Direktorat Jendral Pembelajaran dan Kemahasiswaan) Serta Kemendikbudristek dengan tujuan untuk memberi ruang kepada mahasiswa dalam mengembangkan potensi dan keahlian pada inovasi dan kreatifitas.",
+    image: "/images/Program_Kreatifitas_Mahasiswa.jpg",
+  },
+  {
+    number: "02",
+    category: "ORGANISASI & KEPEMIMPINAN",
+    title: "PPK ORMAWA",
+    description:
+      "Program memperkuat peran organisasi kemahasiswaan dalam pengembangan kapasitas, kepemimpinan, dan kontribusi nyata.",
+    fullDescription:
+      "PPK ORMAWA (Program Penguatan Kapasitas Organisasi Kemahasiswaan) Tahun 2025 merupakan program yang bertujuan untuk memperkuat peran organisasi kemahasiswaan dalam pengembangan kapasitas, kepemimpinan, serta kontribusi nyata terhadap masyarakat. Program ini menyeleksi proposal kegiatan dari berbagai organisasi mahasiswa. Sebanyak 10 proposal terbaik diumumkan sebagai bentuk apresiasi atas gagasan dan rencana kegiatan yang dinilai unggul dan berdampak.",
+    image: "/images/PPK_ORMAWA.jpg",
+  },
+  {
+    number: "03",
+    category: "KEWIRAUSAHAAN",
+    title: "Program Mahasiswa Wirausaha (PMW)",
+    description:
+      "Program Polsri melalui UPKK untuk membekali mahasiswa dengan pengetahuan dan pengalaman berwirausaha nyata.",
+    fullDescription:
+      "Program Mahasiswa Wirausaha (PMW) Tahun 2025 adalah program yang diselenggarakan oleh Politeknik Negeri Sriwijaya melalui Unit Pengembangan Karir dan Kewirausahaan. Tujuannya adalah membekali mahasiswa dengan pengetahuan dan pengalaman berwirausaha secara nyata. Tahapan program meliputi seleksi proposal, pembekalan, pendampingan bisnis, program magang, monitoring dan evaluasi, hingga kompetisi dan expo rencana bisnis.",
+    image: "/images/Program_Mahasiswa_Wirausaha.jpg",
+  },
+];
+
+const missions: MissionItem[] = [
   {
     icon: Compass,
     number: "01",
@@ -286,52 +329,14 @@ const academicCalendarData: CalendarMonthData[] = [
   },
 ];
 
-export interface UpdateInfoData {
-  number: string;
-  category: string;
-  title: string;
-  description: string;
-  image: string;
-}
-
-/* DATA HANYA MEMUAT 3 PROGRAM (PKM, PPK ORMAWA, PMW) */
-const updateInfos: UpdateInfoData[] = [
-  {
-    number: "01",
-    category: "Inovasi & Kreativitas",
-    title: "Program Kreatifitas Mahasiswa (PKM)",
-    description:
-      "Program Kreatifitas Mahasiswa (PKM) adalah kegiatan yang diselenggarakan oleh Ditjenbelmawa (Direktorat Jendral Pembelajaran dan Kemahasiswaan) Serta Kemendikbudristek dengan tujuan untuk memberi ruang kepada mahasiswa dalam mengembangkan potensi dan keahlian pada inovasi dan kreatifitas.",
-    image: "/assets/PPK_ORMAWAA.jpg",
-  },
-  {
-    number: "02",
-    category: "Kapasitas Ormawa",
-    title: "PPK ORMAWA",
-    description:
-      "PPK ORMAWA (Program Penguatan Kapasitas Organisasi Kemahasiswaan) Tahun 2025 merupakan program yang bertujuan untuk memperkuat peran organisasi kemahasiswaan dalam pengembangan kapasitas, kepemimpinan, serta kontribusi nyata terhadap masyarakat. Program ini menyeleksi proposal kegiatan dari berbagai organisasi mahasiswa. Sebanyak 10 proposal terbaik diumumkan sebagai bentuk apresiasi atas gagasan dan rencana kegiatan yang dinilai unggul dan berdampak.",
-    image: "/assets/Program_Kreatifitas_Mahasiswa.jpg",
-  },
-  {
-    number: "03",
-    category: "Kewirausahaan",
-    title: "Program Mahasiswa Wirausaha (PMW)",
-    description:
-      "Program Mahasiswa Wirausaha (PMW) Tahun 2025 adalah program yang diselenggarakan oleh Politeknik Negeri Sriwijaya melalui Unit Pengembangan Karir dan Kewirausahaan. Tujuannya adalah membekali mahasiswa dengan pengetahuan dan pengalaman berwirausaha secara nyata. Tahapan program meliputi seleksi proposal, pembekalan, pendampingan bisnis, program magang, monitoring dan evaluasi, hingga kompetisi dan expo rencana bisnis.",
-    image: "/assets/Program_Mahasiswa_Wirausaha.jpg",
-  },
-];
-
-/* ============================================================================
- * MAIN HOME COMPONENT
- * ============================================================================ */
-
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [, setOpenDropdown] = useState<DropdownName>(null);
+  const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [currentMonthIdx, setCurrentMonthIdx] = useState(0);
   const [scrolled, setScrolled] = useState(false);
-  const [selectedInfo, setSelectedInfo] = useState<UpdateInfoData | null>(null);
+  const [selectedModal, setSelectedModal] = useState<UpdateInfoItemData | null>(
+    null,
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -339,20 +344,15 @@ export default function Home() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  // Control body scroll when modal is active
-  useEffect(() => {
-    if (selectedInfo) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [selectedInfo]);
+  const toggleDropdown = (name: Exclude<DropdownName, null>) => {
+    setOpenDropdown(openDropdown === name ? null : name);
+  };
 
   const closeMenus = () => {
     setMobileOpen(false);
@@ -386,67 +386,270 @@ export default function Home() {
         >
           <div className="w-full">
             <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
+              {/* BRANDING */}
               <div className="flex shrink-0 items-center gap-3">
                 <img
                   src="/images/logo.png"
                   alt="Logo Kabinet Kilau Gemilang"
                   className="h-10 w-10 object-contain"
                 />
+
                 <div className="leading-tight">
                   <p className="text-sm font-bold tracking-tight text-slate-800 sm:text-[15px]">
                     Kabinet Kilau Gemilang
                   </p>
+
                   <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500 sm:text-[10px]">
                     BEM Politeknik Negeri Sriwijaya
                   </p>
                 </div>
               </div>
 
+              {/* DESKTOP NAV */}
               <nav className="hidden items-center gap-1 lg:flex">
                 <Link
                   to="/"
-                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-amber-600 outline-none transition-all duration-200 hover:bg-amber-50/80 hover:text-amber-700 active:scale-[0.98]"
+                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-amber-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50/80 hover:text-amber-700 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   onClick={closeMenus}
                 >
                   Home
                 </Link>
+
                 <a
                   href="#visi"
-                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-white/55 hover:text-amber-600 active:scale-[0.98]"
+                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   onClick={closeMenus}
                 >
                   About
                 </a>
-                <a
-                  href="#update-info"
-                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-white/55 hover:text-amber-600 active:scale-[0.98]"
-                  onClick={closeMenus}
-                >
-                  Update Info
-                </a>
+
+                {/* ACADEMIC INFORMATION */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => toggleDropdown("academic")}
+                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
+                      openDropdown === "academic"
+                        ? "bg-white/60 text-amber-700"
+                        : "text-slate-600 hover:bg-white/55 hover:text-amber-600"
+                    }`}
+                  >
+                    Academic Information
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ease-out ${
+                        openDropdown === "academic" ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {openDropdown === "academic" && (
+                    <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+                      {[
+                        "Academic Calendar",
+                        "Scholarship Info",
+                        "Organisasi Mahasiswa",
+                        "Mahasiswa Berdampak",
+                      ].map((item) => (
+                        <a
+                          key={item}
+                          href="#agenda"
+                          className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                          onClick={closeMenus}
+                        >
+                          {item}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* CAMPUS ECHO */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => toggleDropdown("echo")}
+                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
+                      openDropdown === "echo"
+                        ? "bg-white/60 text-amber-700"
+                        : "text-slate-600 hover:bg-white/55 hover:text-amber-600"
+                    }`}
+                  >
+                    Campus Echo
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ease-out ${
+                        openDropdown === "echo" ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {openDropdown === "echo" && (
+                    <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+                      <Link
+                        to="/kajian"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Kajian
+                      </Link>
+
+                      <Link
+                        to="/bisik-kampus"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Bisik Kampus
+                      </Link>
+
+                      <a
+                        href="#"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        Polsrifess
+                      </a>
+                    </div>
+                  )}
+                </div>
+
                 <Link
                   to="/contact"
-                  className="ml-1 rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-white/50 hover:text-amber-600 active:scale-[0.98]"
+                  className="ml-1 rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/50 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   onClick={closeMenus}
                 >
                   Contact Us
                 </Link>
               </nav>
 
+              {/* MOBILE MENU BUTTON */}
               <button
                 type="button"
                 aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
                 aria-expanded={mobileOpen}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/40 bg-white/40 text-slate-700 outline-none backdrop-blur-md transition-all duration-200 hover:border-amber-300 hover:bg-white/60 hover:text-amber-600 active:scale-[0.97] lg:hidden"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/40 bg-white/40 text-slate-700 outline-none backdrop-blur-md transition-all duration-200 ease-out hover:border-amber-300 hover:bg-white/60 hover:text-amber-600 active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-amber-400/70 lg:hidden"
                 onClick={() => setMobileOpen(!mobileOpen)}
               >
                 {mobileOpen ? <X size={21} /> : <Menu size={21} />}
               </button>
             </div>
+
+            {/* MOBILE MENU CONTENT */}
+            {mobileOpen && (
+              <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
+                <Link
+                  to="/"
+                  className="block rounded-lg px-3 py-3 text-sm font-semibold text-amber-600 outline-none transition-all duration-200 hover:bg-amber-50 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  Home
+                </Link>
+
+                <a
+                  href="#visi"
+                  className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  About
+                </a>
+
+                <button
+                  type="button"
+                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
+                    openDropdown === "academic"
+                      ? "bg-amber-50 text-amber-700"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
+                  }`}
+                  onClick={() => toggleDropdown("academic")}
+                >
+                  Academic Information
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-200 ease-out ${
+                      openDropdown === "academic" ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {openDropdown === "academic" && (
+                  <div className="mt-1 rounded-lg bg-slate-50 p-1">
+                    {[
+                      "Academic Calendar",
+                      "Scholarship Info",
+                      "Organisasi Mahasiswa",
+                      "Mahasiswa Berdampak",
+                    ].map((item) => (
+                      <a
+                        key={item}
+                        href="#agenda"
+                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        {item}
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                <button
+                  type="button"
+                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
+                    openDropdown === "echo"
+                      ? "bg-amber-50 text-amber-700"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
+                  }`}
+                  onClick={() => toggleDropdown("echo")}
+                >
+                  Campus Echo
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-200 ease-out ${
+                      openDropdown === "echo" ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {openDropdown === "echo" && (
+                  <div className="mt-1 rounded-lg bg-slate-50 p-1">
+                    <Link
+                      to="/kajian"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Kajian
+                    </Link>
+
+                    <Link
+                      to="/bisik-kampus"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
+                    >
+                      Bisik Kampus
+                    </Link>
+
+                    <a
+                      href="#"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Polsrifess
+                    </a>
+                  </div>
+                )}
+
+                <Link
+                  to="/contact"
+                  className="mt-1 block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  Contact Us
+                </Link>
+              </div>
+            )}
           </div>
         </header>
 
-        {/* HERO SECTION */}
+        {/* HERO */}
         <section
           id="home"
           className="relative mx-auto flex min-h-[calc(100vh-72px)] w-full max-w-7xl items-center justify-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(1.5rem,3.5vh,4rem)]"
@@ -459,21 +662,41 @@ export default function Home() {
               >
                 BEM POLITEKNIK NEGERI SRIWIJAYA
               </h1>
+
               <p
                 className="mt-[clamp(1rem,1.8vw,1.75rem)] max-w-xl font-medium leading-relaxed text-slate-700"
                 style={{ fontSize: "clamp(0.875rem, 1.1vw, 1.05rem)" }}
               >
                 BEM Polsri adalah organisasi mahasiswa yang menjalankan fungsi
-                eksekutif di lingkungan Politeknik Negeri Sriwijaya.
+                eksekutif di lingkungan Politeknik Negeri Sriwijaya. Kami
+                berkomitmen untuk menjadi wadah yang aktif, responsif, dan
+                konstruktif melalui berbagai program kerja, pengabdian, serta
+                pelayanan yang berdampak bagi mahasiswa dan masyarakat.
               </p>
+
+              <div className="mt-[clamp(1.25rem,2.2vw,2.25rem)]" />
             </div>
 
             <div className="relative flex w-full items-center justify-center lg:col-span-6 lg:justify-end">
-              <img
-                src="/images/logo.png"
-                alt="Gedung Politeknik Negeri Sriwijaya"
-                className="relative z-10 h-auto w-full max-w-md object-contain"
-              />
+              <div className="relative flex w-full items-center justify-center">
+                <div
+                  className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-amber-200/30 blur-2xl"
+                  style={{
+                    width: "clamp(260px, 38vw, 540px)",
+                    height: "clamp(260px, 38vw, 540px)",
+                  }}
+                />
+
+                <img
+                  src="/images/logo.png"
+                  alt="Gedung Politeknik Negeri Sriwijaya"
+                  className="relative z-10 h-auto w-full object-contain filter drop-shadow-md transition-all duration-300"
+                  style={{
+                    width: "clamp(280px, 42vw, 580px)",
+                    maxHeight: "clamp(320px, 58vh, 600px)",
+                  }}
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -492,11 +715,14 @@ export default function Home() {
 
             <div className="mt-14 grid gap-5 lg:grid-cols-[.8fr_1.2fr]">
               <div className="relative overflow-hidden rounded-3xl border border-amber-300/40 bg-gradient-to-br from-amber-50 via-white to-amber-50 p-8 shadow-xl backdrop-blur-md lg:p-10">
+                <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full border-[25px] border-amber-500/20" />
+
                 <div className="relative">
                   <div className="mb-8 flex items-center justify-between">
                     <span className="rounded-full bg-amber-400 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-900">
                       Visi
                     </span>
+
                     <Target className="text-amber-500" size={30} />
                   </div>
 
@@ -505,29 +731,39 @@ export default function Home() {
                     <span className="text-amber-600">berdampak positif</span>{" "}
                     bagi mahasiswa dan institusi.
                   </h3>
+
+                  <p className="mt-7 text-sm leading-7 text-slate-600">
+                    Menjadikan Badan Eksekutif Mahasiswa Politeknik Negeri
+                    Sriwijaya sebagai lembaga yang berdampak positif bagi
+                    Mahasiswa/i dan Institusi Politeknik Negeri Sriwijaya.
+                  </p>
                 </div>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
-                {missions.map((mission) => (
-                  <article
-                    key={mission.number}
-                    className="group rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition-all duration-200 group-hover:bg-amber-500 group-hover:text-white">
-                        <mission.icon size={21} />
-                      </div>
-                      <span className="text-3xl font-black text-slate-200">
-                        {mission.number}
-                      </span>
-                    </div>
+                {missions.map((mission) => {
+                  const Icon = mission.icon;
+                  return (
+                    <article
+                      key={mission.number}
+                      className="group rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition-all duration-200 group-hover:bg-amber-500 group-hover:text-white">
+                          <Icon size={21} />
+                        </div>
 
-                    <p className="mt-5 text-xs leading-6 text-slate-600">
-                      {mission.text}
-                    </p>
-                  </article>
-                ))}
+                        <span className="text-3xl font-black text-slate-200">
+                          {mission.number}
+                        </span>
+                      </div>
+
+                      <p className="mt-5 text-xs leading-6 text-slate-600">
+                        {mission.text}
+                      </p>
+                    </article>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -546,14 +782,14 @@ export default function Home() {
 
           <div className="mt-10 grid gap-6 lg:grid-cols-[.85fr_1.15fr]">
             {/* KALENDER */}
-            <div className="rounded-3xl bg-white/90 p-5 shadow-lg backdrop-blur-md sm:p-8">
+            <div className="rounded-3xl bg-white/90 p-5 shadow-lg shadow-slate-900/5 backdrop-blur-md sm:p-8">
               <div className="flex items-center justify-between">
                 <button
                   type="button"
                   aria-label="Bulan sebelumnya"
                   onClick={handlePrevMonth}
                   disabled={currentMonthIdx === 0}
-                  className="rounded-full p-2 text-slate-500 outline-none transition-all duration-200 hover:bg-amber-50 hover:text-amber-600 disabled:opacity-30"
+                  className="rounded-full p-2 text-slate-500 outline-none transition-all duration-200 hover:bg-amber-50 hover:text-amber-600 active:scale-[0.96] disabled:opacity-30"
                 >
                   <ChevronLeft size={20} />
                 </button>
@@ -562,6 +798,7 @@ export default function Home() {
                   <p className="text-[10px] font-bold uppercase tracking-widest text-amber-600 sm:text-xs">
                     Kalender Akademik 2026/2027
                   </p>
+
                   <h3 className="mt-0.5 text-lg font-black text-slate-900 sm:text-xl">
                     {activeMonth.monthName}
                   </h3>
@@ -572,7 +809,7 @@ export default function Home() {
                   aria-label="Bulan berikutnya"
                   onClick={handleNextMonth}
                   disabled={currentMonthIdx === academicCalendarData.length - 1}
-                  className="rounded-full p-2 text-slate-500 outline-none transition-all duration-200 hover:bg-amber-50 hover:text-amber-600 disabled:opacity-30"
+                  className="rounded-full p-2 text-slate-500 outline-none transition-all duration-200 hover:bg-amber-50 hover:text-amber-600 active:scale-[0.96] disabled:opacity-30"
                 >
                   <ChevronRight size={20} />
                 </button>
@@ -603,8 +840,8 @@ export default function Home() {
                       type="button"
                       className={`flex aspect-square items-center justify-center rounded-lg text-xs outline-none transition-all duration-200 sm:text-sm ${
                         eventMatch
-                          ? "bg-amber-500 font-black text-white shadow-md hover:bg-amber-600"
-                          : "text-slate-700 hover:bg-amber-50 hover:text-amber-700"
+                          ? "bg-amber-500 font-black text-white shadow-md shadow-amber-500/30 hover:bg-amber-600 active:scale-[0.96]"
+                          : "text-slate-700 hover:bg-amber-50 hover:text-amber-700 active:scale-[0.96]"
                       }`}
                     >
                       {dayNumber}
@@ -612,20 +849,34 @@ export default function Home() {
                   );
                 })}
               </div>
+
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-4 border-t border-slate-100 pt-4 text-[11px] font-semibold text-slate-500">
+                <span className="flex items-center gap-1.5">
+                  <i className="h-2.5 w-2.5 rounded-full bg-amber-500" />
+                  Tanggal Penting / Event
+                </span>
+
+                <span className="flex items-center gap-1.5">
+                  <i className="h-2.5 w-2.5 rounded-full bg-slate-200" />
+                  Hari Biasa
+                </span>
+              </div>
             </div>
 
             {/* AGENDA */}
-            <div className="flex flex-col justify-between rounded-3xl bg-slate-900/95 p-5 text-white shadow-lg backdrop-blur-md sm:p-8">
+            <div className="flex flex-col justify-between rounded-3xl bg-slate-900/95 p-5 text-white shadow-lg shadow-slate-900/10 backdrop-blur-md sm:p-8">
               <div>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-amber-400">
                       Agenda & Kegiatan
                     </p>
+
                     <h3 className="mt-1 text-xl font-bold sm:text-2xl">
                       {activeMonth.monthName}
                     </h3>
                   </div>
+
                   <CalendarDays className="shrink-0 text-amber-400" size={28} />
                 </div>
 
@@ -634,7 +885,7 @@ export default function Home() {
                     activeMonth.events.map((event, idx) => (
                       <div
                         key={idx}
-                        className="group flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/5 p-3 transition-all duration-200 hover:bg-white/10"
+                        className="group flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/5 p-3 transition-all duration-200 ease-out hover:bg-white/10 hover:shadow-lg hover:shadow-black/10"
                       >
                         <div
                           className={`flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl font-bold text-slate-900 ${event.color}`}
@@ -648,8 +899,11 @@ export default function Home() {
                           <h4 className="truncate text-xs font-bold text-white sm:text-sm">
                             {event.title}
                           </h4>
+
                           <p className="mt-0.5 text-[11px] text-slate-400">
-                            {event.type} • Polsri
+                            {event.type}
+                            <span className="mx-1 text-slate-600">•</span>
+                            Polsri
                           </p>
                         </div>
                       </div>
@@ -661,168 +915,143 @@ export default function Home() {
                   )}
                 </div>
               </div>
+
+              <div className="mt-6 border-t border-white/10 pt-4 text-xs text-slate-400">
+                * Jadwal dapat berubah sewaktu-waktu sesuai kebijakan kampus.
+              </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION UPDATE INFO */}
+        {/* SATU SECTION UPDATE INFO (TEPAT DI BAWAH CALENDAR) */}
         <section
           id="update-info"
-          className="relative border-t border-slate-200/60 bg-white/80 py-20 backdrop-blur-md lg:py-32"
+          className="relative mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28"
         >
-          <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-              {/* LEFT SIDE: STICKY INTRO */}
-              <div className="lg:col-span-5">
-                <div className="lg:sticky lg:top-28 lg:max-h-[calc(100vh-140px)] lg:flex lg:flex-col lg:justify-between">
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-[0.25em] text-amber-600">
-                      LIST OF
-                    </p>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            {/* BAGIAN KIRI (STICKY DESKTOP) */}
+            <div className="lg:col-span-5">
+              <div className="lg:sticky lg:top-28">
+                <p className="text-xs font-black uppercase tracking-[0.25em] text-amber-600">
+                  LIST OF
+                </p>
 
-                    <h2 className="mt-2 font-serif text-4xl font-black uppercase tracking-tight text-slate-900 sm:text-5xl lg:text-6xl lg:leading-[1.08]">
-                      UPDATE <br className="hidden lg:block" />
-                      <span className="text-amber-500">INFO</span>
-                    </h2>
-
-                    <div className="my-6 h-1 w-16 rounded-full bg-amber-500" />
-
-                    <p className="max-w-md text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
-                      Sebagai bentuk komitmen dalam menyediakan informasi
-                      terkini, BEM Polsri menghadirkan pusat informasi kampus.
-                      Mulai dari program hibah nasional, pengembangan kapasitas
-                      organisasi, hingga pembekalan wirausaha—semua informasi
-                      penting tersedia di sini.
-                    </p>
-                  </div>
-
-                  <div className="hidden lg:mt-12 lg:block">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400">
-                      Scroll untuk melihat artikel
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* RIGHT SIDE: EDITORIAL FEED */}
-              <div className="flex flex-col gap-16 sm:gap-24 lg:col-span-7 lg:gap-32">
-                {updateInfos.map((item) => (
-                  <article
-                    key={item.number}
-                    onClick={() => setSelectedInfo(item)}
-                    className="group relative cursor-pointer border-b border-slate-200/80 pb-12 transition-all duration-300 ease-out hover:border-amber-400/80 sm:pb-16"
-                  >
-                    <div className="flex items-baseline justify-between">
-                      <span className="font-serif text-4xl font-black text-amber-500 transition-transform duration-300 group-hover:scale-105 sm:text-5xl lg:text-6xl">
-                        {item.number}
-                      </span>
-
-                      <span className="rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-600 transition-colors duration-300 group-hover:bg-amber-500 group-hover:text-white">
-                        {item.category}
-                      </span>
-                    </div>
-
-                    <h3 className="mt-4 flex items-center justify-between text-2xl font-bold tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-amber-600 sm:text-3xl lg:text-4xl">
-                      <span>{item.title}</span>
-                      <ArrowUpRight
-                        size={28}
-                        className="shrink-0 text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-amber-500"
-                      />
-                    </h3>
-
-                    <div className="relative mt-6 overflow-hidden rounded-2xl bg-slate-100 shadow-md transition-shadow duration-300 group-hover:shadow-xl sm:mt-8">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        loading="lazy"
-                        className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025]"
-                      />
-
-                      <div className="absolute inset-0 bg-slate-950/0 transition-colors duration-300 group-hover:bg-slate-950/10" />
-                    </div>
-
-                    <p className="mt-6 text-sm leading-relaxed text-slate-600 sm:text-base sm:leading-7">
-                      {item.description}
-                    </p>
-
-                    <div className="mt-4 inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider text-amber-600 transition-colors group-hover:text-amber-700">
-                      <span>Lihat Detail Informasi</span>
-                      <ArrowUpRight size={14} />
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* MODAL DETAIL UPDATE INFO */}
-        {selectedInfo && (
-          <div
-            className="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 md:p-10"
-            aria-modal="true"
-            role="dialog"
-          >
-            {/* Backdrop Overlay */}
-            <div
-              className="fixed inset-0 bg-slate-950/70 backdrop-blur-md transition-opacity animate-in fade-in duration-300"
-              onClick={() => setSelectedInfo(null)}
-            />
-
-            {/* Modal Card Content */}
-            <div className="relative z-10 max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-slate-200/80 bg-white shadow-2xl transition-all duration-300 animate-in zoom-in-95">
-              <button
-                type="button"
-                onClick={() => setSelectedInfo(null)}
-                aria-label="Tutup Detail"
-                className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200/80 bg-white/80 text-slate-700 backdrop-blur-md transition-all duration-200 hover:bg-slate-100 hover:text-amber-600 active:scale-95"
-              >
-                <X size={20} />
-              </button>
-
-              <div className="relative w-full overflow-hidden bg-slate-900 pt-[56.25%]">
-                <img
-                  src={selectedInfo.image}
-                  alt={selectedInfo.title}
-                  className="absolute inset-0 h-full w-full object-contain"
-                />
-              </div>
-
-              <div className="p-6 sm:p-8 md:p-10">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="font-serif text-2xl font-black text-amber-500/80 sm:text-3xl">
-                    {selectedInfo.number}
-                  </span>
-                  <div className="h-4 w-px bg-slate-200" />
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-bold text-amber-600">
-                    <Tag size={12} />
-                    {selectedInfo.category}
-                  </span>
-                </div>
-
-                <h2 className="mt-4 text-2xl font-black tracking-tight text-slate-900 sm:text-3xl md:text-4xl">
-                  {selectedInfo.title}
+                <h2 className="mt-2 font-serif text-4xl font-black uppercase tracking-tight text-slate-900 leading-none sm:text-5xl lg:text-6xl">
+                  UPDATE <br />
+                  <span className="text-amber-500">INFO</span>
                 </h2>
 
-                <div className="mt-6 border-t border-slate-100 pt-6">
-                  <p className="whitespace-pre-line text-sm leading-relaxed text-slate-600 sm:text-base sm:leading-8">
-                    {selectedInfo.description}
-                  </p>
-                </div>
+                <p className="mt-6 text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
+                  Sebagai bentuk komitmen dalam menyediakan informasi terkini,
+                  BEM Polsri menghadirkan pusat informasi kampus. Informasi
+                  penting terkait pengembangan potensi, organisasi, dan
+                  kewirausahaan mahasiswa tersedia di sini.
+                </p>
 
-                <div className="mt-8 flex justify-end">
+                <div className="mt-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400">
+                  <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-amber-500" />
+                  SCROLL UNTUK MELIHAT ARTIKEL
+                </div>
+              </div>
+            </div>
+
+            {/* BAGIAN KANAN (EDITORIAL ARTICLES LIST) */}
+            <div className="space-y-16 lg:col-span-7 lg:space-y-24">
+              {updateInfos.map((item) => (
+                <article
+                  key={item.number}
+                  className="group relative border-b border-slate-200/80 pb-12 transition-all duration-300 hover:opacity-100"
+                >
+                  <div className="flex items-baseline justify-between">
+                    <span className="font-serif text-3xl font-black text-amber-500/80 sm:text-4xl">
+                      {item.number}
+                    </span>
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-600">
+                      {item.category}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 transition-colors group-hover:text-amber-600 sm:text-3xl">
+                    {item.title}
+                  </h3>
+
+                  {/* FOTO SESUAI FILE YANG TERSEDIA */}
+                  <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm transition-all duration-300 group-hover:shadow-lg">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      className="h-[260px] w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105 sm:h-[340px]"
+                    />
+                  </div>
+
+                  <p className="mt-5 text-sm leading-relaxed text-slate-600 sm:text-base">
+                    {item.description}
+                  </p>
+
                   <button
                     type="button"
-                    onClick={() => setSelectedInfo(null)}
-                    className="rounded-xl bg-slate-900 px-6 py-2.5 text-xs font-bold text-white transition-all hover:bg-amber-500 active:scale-95"
+                    onClick={() => setSelectedModal(item)}
+                    className="mt-6 inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-900 transition-colors hover:text-amber-600"
                   >
-                    Tutup Informasi
+                    LIHAT DETAIL INFORMASI
+                    <ArrowUpRight size={16} className="text-amber-500" />
+                  </button>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          {/* MODAL DETAIL INFORMASI - GAMBAR TAMPIL UTUH */}
+          {selectedModal && (
+            <div className="fixed inset-0 z-[150] flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm transition-opacity">
+              <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
+                <button
+                  type="button"
+                  onClick={() => setSelectedModal(null)}
+                  className="absolute right-5 top-5 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-colors hover:bg-amber-500 hover:text-white"
+                >
+                  <X size={18} />
+                </button>
+
+                <span className="font-serif text-2xl font-black text-amber-500">
+                  {selectedModal.number}
+                </span>
+
+                <span className="ml-3 rounded-full bg-amber-50 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-amber-700">
+                  {selectedModal.category}
+                </span>
+
+                <h3 className="mt-3 text-2xl font-bold text-slate-900 sm:text-3xl">
+                  {selectedModal.title}
+                </h3>
+
+                {/* CONTAINER GAMBAR UTUH (CONTAIN) */}
+                <div className="mt-5 flex items-center justify-center overflow-hidden rounded-2xl border border-slate-100 bg-slate-900/5 p-2">
+                  <img
+                    src={selectedModal.image}
+                    alt={selectedModal.title}
+                    className="max-h-[60vh] w-full object-contain"
+                  />
+                </div>
+
+                <p className="mt-6 text-sm leading-relaxed text-slate-700 sm:text-base">
+                  {selectedModal.fullDescription}
+                </p>
+
+                <div className="mt-8 border-t border-slate-100 pt-4 text-right">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedModal(null)}
+                    className="rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-bold text-white transition-colors hover:bg-amber-500"
+                  >
+                    Tutup
                   </button>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </section>
 
         {/* FOOTER */}
         <footer
@@ -830,7 +1059,110 @@ export default function Home() {
           className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8"
         >
           <div className="mx-auto max-w-7xl">
-            <div className="flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
+            <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
+              <div>
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/images/logo.png"
+                    alt="Logo BEM Polsri"
+                    className="h-12 w-12 object-contain"
+                  />
+
+                  <div>
+                    <h2 className="font-bold">Kabinet Kilau Gemilang</h2>
+
+                    <p className="mt-1 text-xs text-slate-400">
+                      BEM Politeknik Negeri Sriwijaya
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mt-6 max-w-xs text-sm leading-7 text-slate-400">
+                  Menjadi wadah yang aktif, responsif, dan konstruktif untuk
+                  Politeknik Negeri Sriwijaya yang lebih berdampak.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
+                  Navigasi
+                </h3>
+
+                <div className="mt-5 grid gap-3 text-sm text-slate-400">
+                  <a
+                    href="#visi"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
+                  >
+                    Tentang Kami
+                  </a>
+
+                  <a
+                    href="#agenda"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
+                  >
+                    Agenda Kegiatan
+                  </a>
+
+                  <Link
+                    to="/contact"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
+                  >
+                    Contact Us
+                  </Link>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
+                  Mari Terhubung
+                </h3>
+
+                <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
+                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />
+                  bem@polsri.ac.id
+                </p>
+
+                <p className="mt-3 text-sm leading-6 text-slate-400">
+                  Jl. Srijaya Negara, Bukit Besar,
+                  <br />
+                  Palembang, Sumatera Selatan
+                </p>
+
+                <div className="mt-5 flex gap-2">
+                  <a
+                    href="https://www.instagram.com/bempolsri_/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  >
+                    <Instagram size={16} />
+                  </a>
+
+                  <a
+                    href="https://x.com/polsrimenfess"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="X Twitter"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-xs font-black text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  >
+                    𝕏
+                  </a>
+
+                  <a
+                    href="https://www.youtube.com/@bemkmpolsri3259"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="YouTube"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  >
+                    <Youtube size={17} />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-14 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
               <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
             </div>
           </div>
@@ -840,7 +1172,6 @@ export default function Home() {
   );
 }
 
-/* Helper Component */
 function SectionIntro({
   eyebrow,
   title,
@@ -855,9 +1186,11 @@ function SectionIntro({
       <p className="text-xs font-black uppercase tracking-[0.2em] text-amber-600">
         {eyebrow}
       </p>
+
       <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
         {title}
       </h2>
+
       <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">{text}</p>
     </div>
   );
