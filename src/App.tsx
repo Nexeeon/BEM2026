@@ -3,6 +3,8 @@ import Home from "./home";
 import Contact from "./Contact";
 import Kajian from "./Kajian";
 import BisikKampus from "./BisikKampus";
+// Import disesuaikan karena AcademicCalendar.tsx ada langsung di folder src
+import AcademicCalendar from "./AcademicCalendar"; 
 
 function App() {
   return (
@@ -17,6 +19,10 @@ function App() {
         {/* Campus Echo */}
         <Route path="/kajian" element={<Kajian />} />
         <Route path="/bisik-kampus" element={<BisikKampus />} />
+
+        {/* Academic Calendar */}
+        <Route path="/calendar" element={<AcademicCalendar />} />
+        <Route path="/academic-calendar" element={<AcademicCalendar />} />
       </Routes>
     </Router>
   );
