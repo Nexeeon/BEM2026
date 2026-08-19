@@ -415,7 +415,7 @@ export default function Home() {
                 </Link>
 
                 <a
-                  href="#visi"
+                  href="/about"
                   className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   onClick={closeMenus}
                 >
@@ -564,7 +564,7 @@ export default function Home() {
                 </Link>
 
                 <a
-                  href="#visi"
+                  href="/about"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                   onClick={closeMenus}
                 >
@@ -1141,7 +1141,7 @@ export default function Home() {
 
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
                   <a
-                    href="#visi"
+                    href="/about"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Tentang Kami

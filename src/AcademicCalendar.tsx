@@ -785,7 +785,7 @@ export default function AcademicCalendarPage() {
                 </Link>
 
                 <a
-                  href="/#visi"
+                  href="/about"
                   className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all hover:bg-white/55 hover:text-amber-600"
                   onClick={closeMenus}
                 >
