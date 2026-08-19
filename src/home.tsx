@@ -334,9 +334,8 @@ export default function Home() {
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [currentMonthIdx, setCurrentMonthIdx] = useState(0);
   const [scrolled, setScrolled] = useState(false);
-  const [selectedModal, setSelectedModal] = useState<UpdateInfoItemData | null>(
-    null,
-  );
+  const [selectedModal, setSelectedModal] =
+    useState<UpdateInfoItemData | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -435,6 +434,7 @@ export default function Home() {
                     }`}
                   >
                     Academic Information
+
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
@@ -492,6 +492,7 @@ export default function Home() {
                     }`}
                   >
                     Campus Echo
+
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
@@ -518,13 +519,14 @@ export default function Home() {
                         Bisik Kampus
                       </Link>
 
-                      <a
-                        href="#"
+                      {/* POLSRIFESS - FIX */}
+                      <Link
+                        to="/polsrifess"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={closeMenus}
                       >
                         Polsrifess
-                      </a>
+                      </Link>
                     </div>
                   )}
                 </div>
@@ -569,6 +571,7 @@ export default function Home() {
                   About
                 </a>
 
+                {/* MOBILE ACADEMIC */}
                 <button
                   type="button"
                   className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
@@ -579,6 +582,7 @@ export default function Home() {
                   onClick={() => toggleDropdown("academic")}
                 >
                   Academic Information
+
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ease-out ${
@@ -623,6 +627,7 @@ export default function Home() {
                   </div>
                 )}
 
+                {/* MOBILE CAMPUS ECHO */}
                 <button
                   type="button"
                   className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
@@ -633,6 +638,7 @@ export default function Home() {
                   onClick={() => toggleDropdown("echo")}
                 >
                   Campus Echo
+
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ease-out ${
@@ -659,13 +665,14 @@ export default function Home() {
                       Bisik Kampus
                     </Link>
 
-                    <a
-                      href="#"
-                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                      onClick={(e) => e.preventDefault()}
+                    {/* POLSRIFESS - FIX */}
+                    <Link
+                      to="/polsrifess"
+                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Polsrifess
-                    </a>
+                    </Link>
                   </div>
                 )}
 
@@ -775,6 +782,7 @@ export default function Home() {
               <div className="grid gap-4 sm:grid-cols-2">
                 {missions.map((mission) => {
                   const Icon = mission.icon;
+
                   return (
                     <article
                       key={mission.number}
@@ -840,7 +848,9 @@ export default function Home() {
                   type="button"
                   aria-label="Bulan berikutnya"
                   onClick={handleNextMonth}
-                  disabled={currentMonthIdx === academicCalendarData.length - 1}
+                  disabled={
+                    currentMonthIdx === academicCalendarData.length - 1
+                  }
                   className="rounded-full p-2 text-slate-500 outline-none transition-all duration-200 hover:bg-amber-50 hover:text-amber-600 active:scale-[0.96] disabled:opacity-30"
                 >
                   <ChevronRight size={20} />
@@ -856,30 +866,37 @@ export default function Home() {
                   ),
                 )}
 
-                {Array.from({ length: activeMonth.firstDayOffset }, (_, i) => (
-                  <div key={`empty-${i}`} className="aspect-square" />
-                ))}
+                {Array.from(
+                  { length: activeMonth.firstDayOffset },
+                  (_, i) => (
+                    <div key={`empty-${i}`} className="aspect-square" />
+                  ),
+                )}
 
-                {Array.from({ length: activeMonth.daysInMonth }, (_, index) => {
-                  const dayNumber = index + 1;
-                  const eventMatch = activeMonth.events.find(
-                    (e) => e.dayNum === dayNumber,
-                  );
+                {Array.from(
+                  { length: activeMonth.daysInMonth },
+                  (_, index) => {
+                    const dayNumber = index + 1;
 
-                  return (
-                    <button
-                      key={dayNumber}
-                      type="button"
-                      className={`flex aspect-square items-center justify-center rounded-lg text-xs outline-none transition-all duration-200 sm:text-sm ${
-                        eventMatch
-                          ? "bg-amber-500 font-black text-white shadow-md shadow-amber-500/30 hover:bg-amber-600 active:scale-[0.96]"
-                          : "text-slate-700 hover:bg-amber-50 hover:text-amber-700 active:scale-[0.96]"
-                      }`}
-                    >
-                      {dayNumber}
-                    </button>
-                  );
-                })}
+                    const eventMatch = activeMonth.events.find(
+                      (e) => e.dayNum === dayNumber,
+                    );
+
+                    return (
+                      <button
+                        key={dayNumber}
+                        type="button"
+                        className={`flex aspect-square items-center justify-center rounded-lg text-xs outline-none transition-all duration-200 sm:text-sm ${
+                          eventMatch
+                            ? "bg-amber-500 font-black text-white shadow-md shadow-amber-500/30 hover:bg-amber-600 active:scale-[0.96]"
+                            : "text-slate-700 hover:bg-amber-50 hover:text-amber-700 active:scale-[0.96]"
+                        }`}
+                      >
+                        {dayNumber}
+                      </button>
+                    );
+                  },
+                )}
               </div>
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-4 border-t border-slate-100 pt-4 text-[11px] font-semibold text-slate-500">
@@ -909,7 +926,10 @@ export default function Home() {
                     </h3>
                   </div>
 
-                  <CalendarDays className="shrink-0 text-amber-400" size={28} />
+                  <CalendarDays
+                    className="shrink-0 text-amber-400"
+                    size={28}
+                  />
                 </div>
 
                 <div className="mt-6 space-y-3">
@@ -955,13 +975,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SATU SECTION UPDATE INFO (TEPAT DI BAWAH CALENDAR) */}
+        {/* UPDATE INFO */}
         <section
           id="update-info"
           className="relative mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28"
         >
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            {/* BAGIAN KIRI (STICKY DESKTOP) */}
+            {/* BAGIAN KIRI */}
             <div className="lg:col-span-5">
               <div className="lg:sticky lg:top-28">
                 <p className="text-xs font-black uppercase tracking-[0.25em] text-amber-600">
@@ -987,7 +1007,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* BAGIAN KANAN (EDITORIAL ARTICLES LIST) */}
+            {/* BAGIAN KANAN */}
             <div className="space-y-16 lg:col-span-7 lg:space-y-24">
               {updateInfos.map((item) => (
                 <article
@@ -998,6 +1018,7 @@ export default function Home() {
                     <span className="font-serif text-3xl font-black text-amber-500/80 sm:text-4xl">
                       {item.number}
                     </span>
+
                     <span className="rounded-full bg-slate-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-600">
                       {item.category}
                     </span>
@@ -1007,7 +1028,6 @@ export default function Home() {
                     {item.title}
                   </h3>
 
-                  {/* FOTO SESUAI FILE YANG TERSEDIA */}
                   <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm transition-all duration-300 group-hover:shadow-lg">
                     <img
                       src={item.image}
@@ -1034,7 +1054,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* MODAL DETAIL INFORMASI - GAMBAR TAMPIL UTUH */}
+          {/* MODAL */}
           {selectedModal && (
             <div className="fixed inset-0 z-[150] flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm transition-opacity">
               <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
@@ -1058,7 +1078,6 @@ export default function Home() {
                   {selectedModal.title}
                 </h3>
 
-                {/* CONTAINER GAMBAR UTUH (CONTAIN) */}
                 <div className="mt-5 flex items-center justify-center overflow-hidden rounded-2xl border border-slate-100 bg-slate-900/5 p-2">
                   <img
                     src={selectedModal.image}
@@ -1223,7 +1242,9 @@ function SectionIntro({
         {title}
       </h2>
 
-      <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">{text}</p>
+      <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
+        {text}
+      </p>
     </div>
   );
 }

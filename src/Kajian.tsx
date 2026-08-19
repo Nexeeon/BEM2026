@@ -94,7 +94,7 @@ export default function Kajian() {
             <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
 
               {/* ================================================== */}
-              {/* BRANDING - TIDAK BISA DIKLIK */}
+              {/* BRANDING */}
               {/* ================================================== */}
               <div className="flex shrink-0 items-center gap-3">
                 <img
@@ -248,13 +248,13 @@ export default function Kajian() {
                       </Link>
 
                       {/* POLSRIFESS */}
-                      <a
-                        href="#"
+                      <Link
+                        to="/polsrifess"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={closeMenus}
                       >
                         Polsrifess
-                      </a>
+                      </Link>
 
                     </div>
                   )}
@@ -292,6 +292,7 @@ export default function Kajian() {
             {mobileOpen && (
               <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
 
+                {/* HOME */}
                 <Link
                   to="/"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -300,6 +301,7 @@ export default function Kajian() {
                   Home
                 </Link>
 
+                {/* ABOUT */}
                 <Link
                   to="/#visi"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -333,7 +335,6 @@ export default function Kajian() {
                 {openDropdown === "academic" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
 
-                    {/* MOBILE ACADEMIC CALENDAR */}
                     <Link
                       to="/calendar"
                       className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -342,7 +343,6 @@ export default function Kajian() {
                       Academic Calendar
                     </Link>
 
-                    {/* MOBILE SCHOLARSHIP INFO */}
                     <a
                       href="/#agenda"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -351,7 +351,6 @@ export default function Kajian() {
                       Scholarship Info
                     </a>
 
-                    {/* MOBILE ORGANISASI MAHASISWA */}
                     <a
                       href="/#agenda"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -360,7 +359,6 @@ export default function Kajian() {
                       Organisasi Mahasiswa
                     </a>
 
-                    {/* MOBILE MAHASISWA BERDAMPAK */}
                     <a
                       href="/#agenda"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -397,6 +395,7 @@ export default function Kajian() {
                 {openDropdown === "echo" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
 
+                    {/* KAJIAN */}
                     <Link
                       to="/kajian"
                       className="block rounded-md bg-amber-50 px-3 py-2.5 text-sm font-semibold text-amber-700 outline-none transition-all duration-200 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -405,6 +404,7 @@ export default function Kajian() {
                       Kajian
                     </Link>
 
+                    {/* BISIK KAMPUS */}
                     <Link
                       to="/bisik-kampus"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -413,13 +413,14 @@ export default function Kajian() {
                       Bisik Kampus
                     </Link>
 
-                    <a
-                      href="#"
+                    {/* POLSRIFESS */}
+                    <Link
+                      to="/polsrifess"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={closeMenus}
                     >
                       Polsrifess
-                    </a>
+                    </Link>
 
                   </div>
                 )}
@@ -535,7 +536,6 @@ export default function Kajian() {
 
         {/* ======================================================== */}
         {/* MENGAPA KAJIAN? */}
-        {/* SAMA SEPERTI ARAH GERAK KAMI DI HOME */}
         {/* ======================================================== */}
         <section className="bg-white/85 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28">
           <div className="mx-auto max-w-7xl">
@@ -577,12 +577,10 @@ export default function Kajian() {
 
         {/* ======================================================== */}
         {/* CTA */}
-        {/* BACKGROUND MENYATU DENGAN HALAMAN */}
         {/* ======================================================== */}
         <section className="px-5 py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-4xl text-center">
 
-            {/* CARD PUTIH */}
             <div className="rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12">
 
               <BookOpen

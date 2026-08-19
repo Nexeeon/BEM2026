@@ -90,7 +90,9 @@ export default function Contact() {
                 </div>
               </div>
 
+              {/* ================================================== */}
               {/* DESKTOP NAV */}
+              {/* ================================================== */}
               <nav className="hidden items-center gap-1 lg:flex">
 
                 {/* HOME */}
@@ -111,7 +113,9 @@ export default function Contact() {
                   About
                 </Link>
 
+                {/* ================================================== */}
                 {/* ACADEMIC INFORMATION */}
+                {/* ================================================== */}
                 <div className="relative">
                   <button
                     type="button"
@@ -179,7 +183,9 @@ export default function Contact() {
                   )}
                 </div>
 
+                {/* ================================================== */}
                 {/* CAMPUS ECHO */}
+                {/* ================================================== */}
                 <div className="relative">
                   <button
                     type="button"
@@ -223,16 +229,14 @@ export default function Contact() {
                         Bisik Kampus
                       </Link>
 
-                      {/* POLSRIFESS */}
-                      <a
-                        href="#"
+                      {/* POLSRIFESS - SUDAH DIPERBAIKI */}
+                      <Link
+                        to="/polsrifess"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                        onClick={(e) =>
-                          e.preventDefault()
-                        }
+                        onClick={closeMenus}
                       >
                         Polsrifess
-                      </a>
+                      </Link>
 
                     </div>
                   )}
@@ -249,7 +253,9 @@ export default function Contact() {
 
               </nav>
 
+              {/* ================================================== */}
               {/* MOBILE BUTTON */}
+              {/* ================================================== */}
               <button
                 type="button"
                 aria-label={
@@ -272,10 +278,13 @@ export default function Contact() {
 
             </div>
 
+            {/* ================================================== */}
             {/* MOBILE NAV */}
+            {/* ================================================== */}
             {mobileOpen && (
               <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
 
+                {/* HOME */}
                 <Link
                   to="/"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -284,6 +293,7 @@ export default function Contact() {
                   Home
                 </Link>
 
+                {/* ABOUT */}
                 <Link
                   to="/#visi"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -292,7 +302,9 @@ export default function Contact() {
                   About
                 </Link>
 
+                {/* ================================================== */}
                 {/* MOBILE ACADEMIC */}
+                {/* ================================================== */}
                 <button
                   type="button"
                   className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
@@ -319,7 +331,7 @@ export default function Contact() {
                 {openDropdown === "academic" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
 
-                    {/* MOBILE ACADEMIC CALENDAR */}
+                    {/* ACADEMIC CALENDAR */}
                     <Link
                       to="/calendar"
                       className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -328,7 +340,7 @@ export default function Contact() {
                       Academic Calendar
                     </Link>
 
-                    {/* MOBILE SCHOLARSHIP INFO */}
+                    {/* SCHOLARSHIP INFO */}
                     <Link
                       to="/#agenda"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -337,7 +349,7 @@ export default function Contact() {
                       Scholarship Info
                     </Link>
 
-                    {/* MOBILE ORGANISASI MAHASISWA */}
+                    {/* ORGANISASI MAHASISWA */}
                     <Link
                       to="/#agenda"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -346,7 +358,7 @@ export default function Contact() {
                       Organisasi Mahasiswa
                     </Link>
 
-                    {/* MOBILE MAHASISWA BERDAMPAK */}
+                    {/* MAHASISWA BERDAMPAK */}
                     <Link
                       to="/#agenda"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -358,7 +370,9 @@ export default function Contact() {
                   </div>
                 )}
 
+                {/* ================================================== */}
                 {/* MOBILE CAMPUS ECHO */}
+                {/* ================================================== */}
                 <button
                   type="button"
                   className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
@@ -385,6 +399,7 @@ export default function Contact() {
                 {openDropdown === "echo" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
 
+                    {/* KAJIAN */}
                     <Link
                       to="/kajian"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -393,6 +408,7 @@ export default function Contact() {
                       Kajian
                     </Link>
 
+                    {/* BISIK KAMPUS */}
                     <Link
                       to="/bisik-kampus"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -401,19 +417,19 @@ export default function Contact() {
                       Bisik Kampus
                     </Link>
 
-                    <a
-                      href="#"
+                    {/* POLSRIFESS - SUDAH DIPERBAIKI */}
+                    <Link
+                      to="/polsrifess"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
-                      onClick={(e) =>
-                        e.preventDefault()
-                      }
+                      onClick={closeMenus}
                     >
                       Polsrifess
-                    </a>
+                    </Link>
 
                   </div>
                 )}
 
+                {/* CONTACT */}
                 <Link
                   to="/contact"
                   className="mt-1 block rounded-lg bg-amber-50 px-3 py-3 text-sm font-semibold text-amber-700 outline-none transition-all duration-200 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -548,6 +564,7 @@ export default function Contact() {
 
                   <div className="mt-4 flex gap-2">
 
+                    {/* INSTAGRAM */}
                     <SocialButton
                       href="https://www.instagram.com/bempolsri_/"
                       label="Instagram BEM POLSRI"
@@ -555,6 +572,7 @@ export default function Contact() {
                       <Instagram size={17} />
                     </SocialButton>
 
+                    {/* YOUTUBE */}
                     <SocialButton
                       href="https://www.youtube.com/@BEMKMPOLSRI"
                       label="YouTube BEM KM POLSRI"
@@ -562,6 +580,7 @@ export default function Contact() {
                       <Youtube size={17} />
                     </SocialButton>
 
+                    {/* X */}
                     <a
                       href="https://x.com/polsrimenfess"
                       target="_blank"
@@ -714,6 +733,7 @@ export default function Contact() {
 
                 <div className="mt-5 flex gap-2">
 
+                  {/* INSTAGRAM */}
                   <a
                     href="https://www.instagram.com/bempolsri_/"
                     target="_blank"
@@ -724,6 +744,7 @@ export default function Contact() {
                     <Instagram size={16} />
                   </a>
 
+                  {/* X */}
                   <a
                     href="https://x.com/polsrimenfess"
                     target="_blank"
@@ -734,6 +755,7 @@ export default function Contact() {
                     𝕏
                   </a>
 
+                  {/* YOUTUBE */}
                   <a
                     href="https://www.youtube.com/@BEMKMPOLSRI"
                     target="_blank"
@@ -820,4 +842,3 @@ function SocialButton({
     </a>
   );
 }
-
