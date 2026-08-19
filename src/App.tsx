@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./home";
-import About from "./about"; // <-- Import file about.tsx / about.jsx
+import About from "./about";
 import Contact from "./Contact";
 import Kajian from "./Kajian";
 import BisikKampus from "./BisikKampus";
-import AcademicCalendar from "./AcademicCalendar"; 
+import Polsrifess from "./Polsrifess";
+import AcademicCalendar from "./AcademicCalendar";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         {/* Campus Echo */}
         <Route path="/kajian" element={<Kajian />} />
         <Route path="/bisik-kampus" element={<BisikKampus />} />
+        <Route path="/polsrifess" element={<Polsrifess />} />
 
         {/* Academic Calendar */}
         <Route path="/calendar" element={<AcademicCalendar />} />

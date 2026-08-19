@@ -242,7 +242,7 @@ export default function About(): React.ReactElement {
                     Academic Information
                     <ChevronDown
                       size={14}
-                      className={`transition-transform ${
+                      className={`transition-transform duration-200 ease-out ${
                         openDropdown === "academic" ? "rotate-180" : ""
                       }`}
                     />
@@ -252,17 +252,34 @@ export default function About(): React.ReactElement {
                     <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
                       <Link
                         to="/calendar"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:text-[#F39A0A]"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Academic Calendar
                       </Link>
+
                       <a
-                        href="/#agenda"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:text-[#F39A0A]"
+                        href="#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Scholarship Info
+                      </a>
+
+                      <a
+                        href="#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Organisasi Mahasiswa
+                      </a>
+
+                      <a
+                        href="#agenda"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
+                      >
+                        Mahasiswa Berdampak
                       </a>
                     </div>
                   )}
