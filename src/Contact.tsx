@@ -106,7 +106,7 @@ export default function Contact() {
 
                 {/* ABOUT */}
                 <Link
-                  to="/#visi"
+                  to="/about"
                   className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   onClick={closeMenus}
                 >

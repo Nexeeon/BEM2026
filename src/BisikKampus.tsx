@@ -335,7 +335,7 @@ export default function BisikKampus() {
 
                 {/* ABOUT */}
                 <Link
-                  to="/#visi"
+                  to="/about"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                   onClick={closeMenus}
                 >
