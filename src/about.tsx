@@ -215,7 +215,7 @@ export default function About() {
 
             {/* MOBILE NAV */}
             {mobileOpen && (
-              <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden text-slate-900">
+              <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl text-slate-900 lg:hidden">
                 <Link
                   to="/"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-amber-600"
@@ -365,6 +365,113 @@ export default function About() {
               </motion.div>
             </div>
           </motion.div>
+        </section>
+
+        {/* ====================================================== */}
+        {/* SECTION VISI & MISI (LAYOUT MENYAMPING) */}
+        {/* ====================================================== */}
+        <section id="visi" className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
+            {/* KOLOM KIRI: TEKS VISION & MISSION */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-col justify-center space-y-8 text-slate-800"
+            >
+              {/* VISION */}
+              <div>
+                <h2 className="text-3xl font-black uppercase tracking-wider text-amber-500 sm:text-4xl">
+                  VISION
+                </h2>
+                <p className="mt-4 text-base font-medium leading-relaxed text-slate-700 sm:text-lg">
+                  Menjadikan Badan Eksekutif Mahasiswa Politeknik Negeri
+                  Sriwijaya sebagai lembaga yang berdampak positif bagi
+                  Mahasiswa/i dan Institusi Politeknik Negeri Sriwijaya.
+                </p>
+              </div>
+
+              {/* MISSION */}
+              <div>
+                <h2 className="text-3xl font-black uppercase tracking-wider text-amber-500 sm:text-4xl">
+                  MISSION
+                </h2>
+                <ol className="mt-4 space-y-4 text-base font-normal leading-relaxed text-slate-700">
+                  <li className="flex gap-2">
+                    <span className="font-semibold text-slate-900">1.</span>
+                    <span>
+                      Mewadahi dan memperjuangkan aspirasi mahasiswa secara
+                      terbuka, responsif, dan bertanggung jawab melalui
+                      mekanisme penyerapan aspirasi yang aktif, dialogis, dan
+                      berkelanjutan.
+                    </span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="font-semibold text-slate-900">2.</span>
+                    <span>
+                      Mendorong peningkatan kualitas pembelajaran organisasi dan
+                      kepemimpinan mahasiswa melalui program pengembangan soft
+                      skill, manajerial, dan profesionalisme yang terarah.
+                    </span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="font-semibold text-slate-900">3.</span>
+                    <span>
+                      Mengembangkan budaya kajian dan advokasi yang konstruktif
+                      dan solutif sebagai landasan pengambilan sikap BEM
+                      terhadap isu-isu yang ada.
+                    </span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="font-semibold text-slate-900">4.</span>
+                    <span>
+                      Memperkuat sinergi dan kolaborasi internal maupun
+                      eksternal melalui kerja sama antar lembaga mahasiswa serta
+                      partisipasi aktif dalam kegiatan yang berdampak positif.
+                    </span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="font-semibold text-slate-900">5.</span>
+                    <span>
+                      Meningkatkan kualitas dan kuantitas informasi yang
+                      disajikan kepada mahasiswa dan masyarakat melalui berbagai
+                      media.
+                    </span>
+                  </li>
+                </ol>
+              </div>
+            </motion.div>
+
+            {/* KOLOM KANAN: LOGO & SLOGAN CARD */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col items-center justify-center space-y-10"
+            >
+              {/* Logo Ring */}
+              <div className="relative flex h-40 w-40 items-center justify-center rounded-full border-4 border-amber-400 bg-white p-4 shadow-xl">
+                <img
+                  src="/images/logo.png"
+                  alt="Logo BEM Polsri"
+                  className="h-24 w-24 object-contain"
+                />
+              </div>
+
+              {/* Slogan Box */}
+              <div className="w-full rounded-2xl border border-amber-300/60 bg-white/90 p-6 text-center shadow-lg backdrop-blur-sm sm:p-8">
+                <span className="text-3xl font-serif text-amber-400">“</span>
+                <p className="mt-[-10px] text-lg font-semibold italic text-slate-800">
+                  Kabinet Lentera Sriwijaya
+                </p>
+                <p className="mt-3 text-xs font-bold uppercase tracking-widest text-amber-600">
+                  - BEM POLSRI 2026 -
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </section>
 
         {/* FOOTER */}
