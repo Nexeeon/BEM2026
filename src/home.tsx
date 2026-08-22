@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import LoadingScreen from "./LoadingScreen";
 import {
   ArrowUpRight,
   CalendarDays,
@@ -330,12 +331,18 @@ const academicCalendarData: CalendarMonthData[] = [
 ];
 
 export default function Home() {
+  // Mengecek apakah intro sudah pernah diputar pada sesi ini
+  const [showLoading, setShowLoading] = useState<boolean>(() => {
+    return sessionStorage.getItem("homeIntroPlayed") !== "true";
+  });
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [currentMonthIdx, setCurrentMonthIdx] = useState(0);
   const [scrolled, setScrolled] = useState(false);
-  const [selectedModal, setSelectedModal] =
-    useState<UpdateInfoItemData | null>(null);
+  const [selectedModal, setSelectedModal] = useState<UpdateInfoItemData | null>(
+    null,
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -348,6 +355,11 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleFinishLoading = () => {
+    sessionStorage.setItem("homeIntroPlayed", "true");
+    setShowLoading(false);
+  };
 
   const toggleDropdown = (name: Exclude<DropdownName, null>) => {
     setOpenDropdown(openDropdown === name ? null : name);
@@ -374,6 +386,9 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
+      {/* LOADING SCREEN (Hanya dirender jika showLoading bernilai true) */}
+      {showLoading && <LoadingScreen onFinish={handleFinishLoading} />}
+
       <div className="min-h-screen bg-white/65">
         {/* NAVBAR */}
         <header
@@ -434,7 +449,6 @@ export default function Home() {
                     }`}
                   >
                     Academic Information
-
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
@@ -492,7 +506,6 @@ export default function Home() {
                     }`}
                   >
                     Campus Echo
-
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
@@ -582,7 +595,6 @@ export default function Home() {
                   onClick={() => toggleDropdown("academic")}
                 >
                   Academic Information
-
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ease-out ${
@@ -638,7 +650,6 @@ export default function Home() {
                   onClick={() => toggleDropdown("echo")}
                 >
                   Campus Echo
-
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ease-out ${
@@ -848,9 +859,7 @@ export default function Home() {
                   type="button"
                   aria-label="Bulan berikutnya"
                   onClick={handleNextMonth}
-                  disabled={
-                    currentMonthIdx === academicCalendarData.length - 1
-                  }
+                  disabled={currentMonthIdx === academicCalendarData.length - 1}
                   className="rounded-full p-2 text-slate-500 outline-none transition-all duration-200 hover:bg-amber-50 hover:text-amber-600 active:scale-[0.96] disabled:opacity-30"
                 >
                   <ChevronRight size={20} />
@@ -866,37 +875,31 @@ export default function Home() {
                   ),
                 )}
 
-                {Array.from(
-                  { length: activeMonth.firstDayOffset },
-                  (_, i) => (
-                    <div key={`empty-${i}`} className="aspect-square" />
-                  ),
-                )}
+                {Array.from({ length: activeMonth.firstDayOffset }, (_, i) => (
+                  <div key={`empty-${i}`} className="aspect-square" />
+                ))}
 
-                {Array.from(
-                  { length: activeMonth.daysInMonth },
-                  (_, index) => {
-                    const dayNumber = index + 1;
+                {Array.from({ length: activeMonth.daysInMonth }, (_, index) => {
+                  const dayNumber = index + 1;
 
-                    const eventMatch = activeMonth.events.find(
-                      (e) => e.dayNum === dayNumber,
-                    );
+                  const eventMatch = activeMonth.events.find(
+                    (e) => e.dayNum === dayNumber,
+                  );
 
-                    return (
-                      <button
-                        key={dayNumber}
-                        type="button"
-                        className={`flex aspect-square items-center justify-center rounded-lg text-xs outline-none transition-all duration-200 sm:text-sm ${
-                          eventMatch
-                            ? "bg-amber-500 font-black text-white shadow-md shadow-amber-500/30 hover:bg-amber-600 active:scale-[0.96]"
-                            : "text-slate-700 hover:bg-amber-50 hover:text-amber-700 active:scale-[0.96]"
-                        }`}
-                      >
-                        {dayNumber}
-                      </button>
-                    );
-                  },
-                )}
+                  return (
+                    <button
+                      key={dayNumber}
+                      type="button"
+                      className={`flex aspect-square items-center justify-center rounded-lg text-xs outline-none transition-all duration-200 sm:text-sm ${
+                        eventMatch
+                          ? "bg-amber-500 font-black text-white shadow-md shadow-amber-500/30 hover:bg-amber-600 active:scale-[0.96]"
+                          : "text-slate-700 hover:bg-amber-50 hover:text-amber-700 active:scale-[0.96]"
+                      }`}
+                    >
+                      {dayNumber}
+                    </button>
+                  );
+                })}
               </div>
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-4 border-t border-slate-100 pt-4 text-[11px] font-semibold text-slate-500">
@@ -926,10 +929,7 @@ export default function Home() {
                     </h3>
                   </div>
 
-                  <CalendarDays
-                    className="shrink-0 text-amber-400"
-                    size={28}
-                  />
+                  <CalendarDays className="shrink-0 text-amber-400" size={28} />
                 </div>
 
                 <div className="mt-6 space-y-3">
@@ -1242,9 +1242,7 @@ function SectionIntro({
         {title}
       </h2>
 
-      <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
-        {text}
-      </p>
+      <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">{text}</p>
     </div>
   );
 }
