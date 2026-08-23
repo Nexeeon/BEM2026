@@ -815,18 +815,35 @@ export default function AcademicCalendarPage() {
                     <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
                       <Link
                         to="/calendar"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-amber-700 bg-amber-50"
+                        className="block rounded-lg bg-amber-50 px-3 py-2.5 text-xs font-semibold text-amber-700"
                         onClick={closeMenus}
                       >
                         Academic Calendar
                       </Link>
+
+                      <Link
+                        to="/academic-information"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:text-amber-700"
+                        onClick={closeMenus}
+                      >
+                        Scholarship Info
+                      </Link>
+
                       <a
                         href="/#agenda"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:text-amber-700"
                         onClick={closeMenus}
                       >
-                        Scholarship Info
+                        Organisasi Mahasiswa
                       </a>
+
+                      <Link
+                        to="/academic-guide"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:text-amber-700"
+                        onClick={closeMenus}
+                      >
+                        Mahasiswa Berdampak
+                      </Link>
                     </div>
                   )}
                 </div>

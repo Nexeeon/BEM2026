@@ -551,30 +551,14 @@ export default function BisikKampus() {
                 <div className="relative z-10 flex h-auto w-full flex-col items-center justify-center">
 
                   <div
-                    className="flex w-full max-w-md items-center justify-center rounded-3xl border-2 border-dashed border-amber-300/60 bg-white/40 shadow-xl backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl"
+                    className="w-full max-w-md overflow-hidden rounded-3xl shadow-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl"
                     style={{ aspectRatio: "4/3" }}
                   >
-                    <div className="p-8 text-center">
-
-                      <div className="mb-3 text-6xl text-amber-300/60">
-                        🖼️
-                      </div>
-
-                      <p className="text-sm font-medium text-slate-400">
-                        Foto Kampus
-                      </p>
-
-                      <p className="mt-1 text-xs text-slate-300">
-                        (Segera hadir)
-                      </p>
-
-                      <div className="mt-4 flex justify-center gap-2">
-                        <span className="h-0.5 w-12 rounded-full bg-amber-200/50" />
-                        <span className="h-0.5 w-6 rounded-full bg-amber-300/70" />
-                        <span className="h-0.5 w-12 rounded-full bg-amber-200/50" />
-                      </div>
-
-                    </div>
+                    <img
+                      src="/images/Program_kerja/bisik-kampus.png"
+                      alt="Foto Bisik Kampus"
+                      className="h-full w-full object-cover"
+                    />
                   </div>
 
                 </div>
