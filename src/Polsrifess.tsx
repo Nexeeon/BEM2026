@@ -444,73 +444,58 @@ export default function Polsrifess() {
           </div>
         </header>
 
-        {/* HERO */}
-        <section className="relative mx-auto flex min-h-[calc(100vh-72px)] w-full max-w-7xl items-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(2rem,4vh,4rem)]">
-          <div className="grid w-full items-center gap-[clamp(2rem,4vw,4rem)] lg:grid-cols-12">
-            <Reveal className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-6">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100/80 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-amber-700">
-                <Sparkles size={13} />
-                Ruang Aspirasi Anonim
-              </span>
+        {/* HERO — FULL SCREEN */}
+        <section
+          className="relative w-full"
+          style={{ height: "calc(100svh - 72px)" }}
+        >
+          <Reveal className="h-full w-full">
+            <img
+              src="/images/Program_kerja/polsrifess.jpeg"
+              alt="Tampilan Polsrifess"
+              className="h-full w-full object-cover"
+            />
+          </Reveal>
+        </section>
 
-              <h1
-                className="mt-5 font-serif font-black uppercase tracking-wide text-amber-500 leading-[1.1]"
-                style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)" }}
+        {/* KONTEN POLSRIFESS */}
+        <section className="relative mx-auto w-full max-w-7xl px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(3rem,7vw,6rem)]">
+          <Reveal className="flex flex-col items-start text-left">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100/80 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-amber-700">
+              <Sparkles size={13} />
+              Ruang Aspirasi Anonim
+            </span>
+
+            <h1
+              className="mt-5 font-serif font-black uppercase tracking-wide text-amber-500 leading-[1.1]"
+              style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)" }}
+            >
+              POLSRIFESS
+            </h1>
+
+            <p
+              className="mt-5 max-w-3xl font-medium leading-relaxed text-slate-700"
+              style={{ fontSize: "clamp(0.875rem, 1.1vw, 1.05rem)" }}
+            >
+              Platform berbasis media sosial yang dikelola BEM Polsri sebagai
+              wadah berbagi cerita, opini, keresahan, maupun informasi seputar
+              kampus secara anonim - dibangun untuk komunikasi dua arah yang
+              santai namun tetap aktif dan bertanggung jawab.
+            </p>
+
+            <div className="mt-6">
+              <a
+                href={MENFESS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
               >
-                POLSRIFESS
-              </h1>
-
-              <p
-                className="mt-5 max-w-xl font-medium leading-relaxed text-slate-700"
-                style={{ fontSize: "clamp(0.875rem, 1.1vw, 1.05rem)" }}
-              >
-                Platform berbasis media sosial yang dikelola BEM Polsri
-                sebagai wadah berbagi cerita, opini, keresahan, maupun
-                informasi seputar kampus secara anonim - dibangun untuk
-                komunikasi dua arah yang santai namun tetap aktif dan
-                bertanggung jawab.
-              </p>
-
-              <div className="mt-6">
-                <a
-                  href={MENFESS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
-                >
-                  <Send size={18} />
-                  Kunjungi Polsrifess
-                  <ExternalLink size={18} />
-                </a>
-              </div>
-            </Reveal>
-
-            {/* VISUAL — foto Polsrifess */}
-            <Reveal delay={120} className="relative flex w-full items-center justify-center lg:col-span-6 lg:justify-end">
-              <div className="relative flex w-full items-center justify-center">
-                <div
-                  className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-amber-200/30 blur-2xl"
-                  style={{
-                    width: "clamp(260px, 38vw, 540px)",
-                    height: "clamp(260px, 38vw, 540px)",
-                  }}
-                />
-
-                <div className="relative z-10 flex h-auto w-full flex-col items-center justify-center">
-                  <div
-                    className="w-full max-w-md overflow-hidden rounded-3xl shadow-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl"
-                    style={{ aspectRatio: "4/3" }}
-                  >
-                    <img
-                      src="/images/Program_kerja/polsrifess.jpeg"
-                      alt="Tampilan Polsrifess"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
+                <Send size={18} />
+                Kunjungi Polsrifess
+                <ExternalLink size={18} />
+              </a>
+            </div>
+          </Reveal>
         </section>
 
         {/* STATISTIK — marquee bergulir otomatis, gaya sama seperti Bisik Kampus */}
@@ -535,7 +520,10 @@ export default function Polsrifess() {
             <div className="relative flex items-center">
               <div className="flex animate-marquee-smooth items-center gap-16 whitespace-nowrap">
                 {statsMarquee.map((stat, index) => (
-                  <div key={index} className="flex items-center gap-5 px-2 py-3">
+                  <div
+                    key={index}
+                    className="flex items-center gap-5 px-2 py-3"
+                  >
                     <span
                       className="font-black tracking-tight text-white drop-shadow-sm"
                       style={{ fontSize: "clamp(2.6rem, 4.5vw, 4.2rem)" }}
@@ -652,7 +640,10 @@ export default function Polsrifess() {
                       key={item}
                       className="flex items-start gap-2.5 text-xs leading-6 text-slate-300 sm:text-sm"
                     >
-                      <Ban size={16} className="mt-0.5 shrink-0 text-amber-400" />
+                      <Ban
+                        size={16}
+                        className="mt-0.5 shrink-0 text-amber-400"
+                      />
                       {item}
                     </li>
                   ))}

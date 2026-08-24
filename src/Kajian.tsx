@@ -42,8 +42,7 @@ const whyKajianData = [
 
 export default function Kajian() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] =
-    useState<DropdownName>(null);
+  const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState(false);
 
   // ============================================================
@@ -79,7 +78,6 @@ export default function Kajian() {
       {/* OVERLAY BACKGROUND */}
       {/* ======================================================== */}
       <div className="min-h-screen bg-white/65">
-
         {/* ====================================================== */}
         {/* NAVBAR */}
         {/* ====================================================== */}
@@ -92,7 +90,6 @@ export default function Kajian() {
         >
           <div className="w-full">
             <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
-
               {/* ================================================== */}
               {/* BRANDING */}
               {/* ================================================== */}
@@ -118,7 +115,6 @@ export default function Kajian() {
               {/* DESKTOP NAVIGATION */}
               {/* ================================================== */}
               <nav className="hidden items-center gap-1 lg:flex">
-
                 {/* HOME */}
                 <Link
                   to="/"
@@ -149,20 +145,16 @@ export default function Kajian() {
                     }`}
                   >
                     Academic Information
-
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
-                        openDropdown === "academic"
-                          ? "rotate-180"
-                          : ""
+                        openDropdown === "academic" ? "rotate-180" : ""
                       }`}
                     />
                   </button>
 
                   {openDropdown === "academic" && (
                     <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
-
                       {/* ACADEMIC CALENDAR */}
                       <Link
                         to="/calendar"
@@ -198,7 +190,6 @@ export default function Kajian() {
                       >
                         Mahasiswa Berdampak
                       </a>
-
                     </div>
                   )}
                 </div>
@@ -215,20 +206,16 @@ export default function Kajian() {
                     }`}
                   >
                     Campus Echo
-
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
-                        openDropdown === "echo"
-                          ? "rotate-180"
-                          : ""
+                        openDropdown === "echo" ? "rotate-180" : ""
                       }`}
                     />
                   </button>
 
                   {openDropdown === "echo" && (
                     <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
-
                       {/* KAJIAN */}
                       <Link
                         to="/kajian"
@@ -255,7 +242,6 @@ export default function Kajian() {
                       >
                         Polsrifess
                       </Link>
-
                     </div>
                   )}
                 </div>
@@ -268,7 +254,6 @@ export default function Kajian() {
                 >
                   Contact Us
                 </Link>
-
               </nav>
 
               {/* ================================================== */}
@@ -283,7 +268,6 @@ export default function Kajian() {
               >
                 {mobileOpen ? <X size={21} /> : <Menu size={21} />}
               </button>
-
             </div>
 
             {/* ====================================================== */}
@@ -291,7 +275,6 @@ export default function Kajian() {
             {/* ====================================================== */}
             {mobileOpen && (
               <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
-
                 {/* HOME */}
                 <Link
                   to="/"
@@ -321,20 +304,16 @@ export default function Kajian() {
                   onClick={() => toggleDropdown("academic")}
                 >
                   Academic Information
-
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ease-out ${
-                      openDropdown === "academic"
-                        ? "rotate-180"
-                        : ""
+                      openDropdown === "academic" ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
                 {openDropdown === "academic" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
-
                     <Link
                       to="/calendar"
                       className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -366,7 +345,6 @@ export default function Kajian() {
                     >
                       Mahasiswa Berdampak
                     </a>
-
                   </div>
                 )}
 
@@ -381,20 +359,16 @@ export default function Kajian() {
                   onClick={() => toggleDropdown("echo")}
                 >
                   Campus Echo
-
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ease-out ${
-                      openDropdown === "echo"
-                        ? "rotate-180"
-                        : ""
+                      openDropdown === "echo" ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
                 {openDropdown === "echo" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
-
                     {/* KAJIAN */}
                     <Link
                       to="/kajian"
@@ -421,7 +395,6 @@ export default function Kajian() {
                     >
                       Polsrifess
                     </Link>
-
                   </div>
                 )}
 
@@ -433,7 +406,6 @@ export default function Kajian() {
                 >
                   Contact Us
                 </Link>
-
               </div>
             )}
           </div>
@@ -442,26 +414,36 @@ export default function Kajian() {
         {/* ======================================================== */}
         {/* HERO SECTION - KAJIAN */}
         {/* ======================================================== */}
-        <section className="relative mx-auto flex min-h-[60vh] w-full max-w-7xl items-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(2rem,5vh,5rem)]">
-          <div className="grid w-full items-center gap-[clamp(2rem,4vw,5rem)] lg:grid-cols-12">
+        <section className="relative w-full pt-0 pb-16">
+          <div className="flex w-full flex-col">
+            {/* 1. HERO IMAGE — FULL WIDTH, BERSIH TANPA TEKS */}
+            <div className="relative w-full overflow-hidden bg-slate-100">
+              <img
+                src="/images/Program_kerja/kajian.png"
+                alt="Banner Kajian BEM POLSRI"
+                className="block h-[calc(100svh-72px)] min-h-[520px] w-full object-cover object-center"
+              />
+            </div>
 
-            {/* TEKS KIRI */}
-            <div className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-6">
-
-              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
+            {/* 2. TULISAN DI BAWAH FOTO */}
+            <div className="mx-auto mt-10 flex w-full max-w-7xl flex-col items-start px-5 lg:mt-14 lg:px-8">
+              {/* BADGE */}
+              <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
                 <BookOpen size={14} className="text-amber-600" />
                 Campus Echo
               </span>
 
+              {/* JUDUL PROGRAM */}
               <h1
                 className="font-serif font-black uppercase tracking-wide text-amber-500 leading-[1.12]"
-                style={{ fontSize: "clamp(2.8rem, 5.5vw, 5rem)" }}
+                style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
               >
                 KAJIAN
               </h1>
 
+              {/* DESKRIPSI PROGRAM */}
               <p
-                className="mt-[clamp(1rem,1.8vw,1.75rem)] max-w-2xl font-medium leading-relaxed text-slate-700"
+                className="mt-4 max-w-3xl font-medium leading-relaxed text-slate-700"
                 style={{ fontSize: "clamp(0.95rem, 1.15vw, 1.1rem)" }}
               >
                 Proses analisis isu-isu terkini baik internal kampus maupun
@@ -471,8 +453,8 @@ export default function Kajian() {
                 mahasiswa.
               </p>
 
-              {/* TOMBOL */}
-              <div className="mt-6">
+              {/* TOMBOL AKSI */}
+              <div className="mt-6 sm:mt-8">
                 <a
                   href="https://zaap.bio/kajianbempolsri25"
                   target="_blank"
@@ -484,37 +466,7 @@ export default function Kajian() {
                   <ArrowRight size={18} />
                 </a>
               </div>
-
             </div>
-
-            {/* FOTO KAMPUS */}
-            <div className="relative flex w-full items-center justify-center lg:col-span-6 lg:justify-end">
-              <div className="relative flex w-full items-center justify-center">
-
-                <div
-                  className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-amber-200/30 blur-2xl"
-                  style={{
-                    width: "clamp(260px, 38vw, 540px)",
-                    height: "clamp(260px, 38vw, 540px)",
-                  }}
-                />
-
-                <div className="relative z-10 flex h-auto w-full flex-col items-center justify-center">
-                  <div
-                    className="w-full max-w-md overflow-hidden rounded-3xl shadow-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl"
-                    style={{ aspectRatio: "4/3" }}
-                  >
-                    <img
-                      src="/images/Program_kerja/kajian.png"
-                      alt="Foto Kajian"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
           </div>
         </section>
 
@@ -523,7 +475,6 @@ export default function Kajian() {
         {/* ======================================================== */}
         <section className="bg-white/85 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28">
           <div className="mx-auto max-w-7xl">
-
             <div className="max-w-2xl">
               <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
                 MENGAPA KAJIAN?
@@ -555,7 +506,6 @@ export default function Kajian() {
                 </article>
               ))}
             </div>
-
           </div>
         </section>
 
@@ -564,13 +514,8 @@ export default function Kajian() {
         {/* ======================================================== */}
         <section className="px-5 py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-4xl text-center">
-
             <div className="rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12">
-
-              <BookOpen
-                size={48}
-                className="mx-auto mb-4 text-amber-500"
-              />
+              <BookOpen size={48} className="mx-auto mb-4 text-amber-500" />
 
               <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
                 BERGABUNG DENGAN KAJIAN
@@ -578,9 +523,8 @@ export default function Kajian() {
 
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">
                 Akses kajian-kajian terbaru dari Departemen KASTRAT BEM POLSRI
-                dan temukan wawasan baru dari isu-isu yang sedang hangat.
-                Setiap kajian tersedia dalam format PDF untuk dibaca kapan
-                saja.
+                dan temukan wawasan baru dari isu-isu yang sedang hangat. Setiap
+                kajian tersedia dalam format PDF untuk dibaca kapan saja.
               </p>
 
               <a
@@ -593,7 +537,6 @@ export default function Kajian() {
                 LIHAT KAJIAN SEKARANG
                 <ArrowRight size={18} />
               </a>
-
             </div>
           </div>
         </section>
@@ -603,9 +546,7 @@ export default function Kajian() {
         {/* ======================================================== */}
         <footer className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8">
           <div className="mx-auto max-w-7xl">
-
             <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
-
               {/* BRAND */}
               <div>
                 <div className="flex items-center gap-3">
@@ -616,9 +557,7 @@ export default function Kajian() {
                   />
 
                   <div>
-                    <h2 className="font-bold">
-                      Kabinet Lentera Sriwijaya
-                    </h2>
+                    <h2 className="font-bold">Kabinet Lentera Sriwijaya</h2>
 
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
@@ -639,7 +578,6 @@ export default function Kajian() {
                 </h3>
 
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
-
                   <Link
                     to="/#visi"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
@@ -660,7 +598,6 @@ export default function Kajian() {
                   >
                     Contact Us
                   </Link>
-
                 </div>
               </div>
 
@@ -671,10 +608,7 @@ export default function Kajian() {
                 </h3>
 
                 <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
-                  <Mail
-                    size={16}
-                    className="mt-1 shrink-0 text-amber-400"
-                  />
+                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />
                   bem@polsri.ac.id
                 </p>
 
@@ -685,7 +619,6 @@ export default function Kajian() {
                 </p>
 
                 <div className="mt-5 flex gap-2">
-
                   {/* INSTAGRAM */}
                   <a
                     href="https://www.instagram.com/bempolsri_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
@@ -718,22 +651,16 @@ export default function Kajian() {
                   >
                     <Youtube size={17} />
                   </a>
-
                 </div>
               </div>
-
             </div>
 
             {/* COPYRIGHT */}
             <div className="mt-14 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
-              <p>
-                © BEM Politeknik Negeri Sriwijaya. All rights reserved.
-              </p>
+              <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
             </div>
-
           </div>
         </footer>
-
       </div>
     </main>
   );
