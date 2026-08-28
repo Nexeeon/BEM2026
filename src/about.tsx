@@ -61,12 +61,12 @@ export default function About() {
               <div className="flex shrink-0 items-center gap-3">
                 <img
                   src="/images/logo.png"
-                  alt="Logo Kabinet Lentera Sriwijaya"
+                  alt="Logo Kabinet Kilau Gemilang"
                   className="h-10 w-10 object-contain"
                 />
                 <div className="leading-tight">
                   <p className="text-sm font-bold tracking-tight text-slate-800 sm:text-[15px]">
-                    Kabinet Lentera Sriwijaya
+                    Kabinet Kilau Gemilang
                   </p>
                   <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500 sm:text-[10px]">
                     BEM Politeknik Negeri Sriwijaya
@@ -464,7 +464,7 @@ export default function About() {
               <div className="w-full rounded-2xl border border-amber-300/60 bg-white/90 p-6 text-center shadow-lg backdrop-blur-sm sm:p-8">
                 <span className="text-3xl font-serif text-amber-400">“</span>
                 <p className="mt-[-10px] text-lg font-semibold italic text-slate-800">
-                  Kabinet Lentera Sriwijaya
+                  Kabinet Kilau Gemilang
                 </p>
                 <p className="mt-3 text-xs font-bold uppercase tracking-widest text-amber-600">
                   - BEM POLSRI 2026 -
@@ -489,7 +489,7 @@ export default function About() {
                     className="h-12 w-12 object-contain"
                   />
                   <div>
-                    <h2 className="font-bold">Kabinet Lentera Sriwijaya</h2>
+                    <h2 className="font-bold">Kabinet Kilau Gemilang</h2>
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
                     </p>
@@ -506,10 +506,10 @@ export default function About() {
                   Navigasi
                 </h3>
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
-                  <Link to="/#visi" className="hover:text-white">
+                  <Link to="/about" className="hover:text-white">
                     Tentang Kami
                   </Link>
-                  <Link to="/#agenda" className="hover:text-white">
+                  <Link to="/calendar" className="hover:text-white">
                     Agenda Kegiatan
                   </Link>
                   <Link to="/contact" className="hover:text-white">

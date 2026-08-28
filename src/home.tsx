@@ -1068,7 +1068,6 @@ export default function Home() {
                 di lapangan—seluruh program ini dirancang untuk memperkuat
                 kepemimpinan, mendorong kolaborasi, dan memberikan dampak nyata.
               </p>
-            
             </div>
           </div>
 
@@ -1324,7 +1323,7 @@ export default function Home() {
                   </a>
 
                   <a
-                    href="#agenda"
+                    href="/calendar"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Agenda Kegiatan

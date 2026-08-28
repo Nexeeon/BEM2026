@@ -109,13 +109,13 @@ export default function BisikKampus() {
               <div className="flex shrink-0 items-center gap-3">
                 <img
                   src="/images/logo.png"
-                  alt="Logo Kabinet Lentera Sriwijaya"
+                  alt="Logo Kabinet Kilau Gemilang"
                   className="h-10 w-10 object-contain"
                 />
 
                 <div className="leading-tight">
                   <p className="text-sm font-bold tracking-tight text-slate-800 sm:text-[15px]">
-                    Kabinet Lentera Sriwijaya
+                    Kabinet Kilau Gemilang
                   </p>
 
                   <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500 sm:text-[10px]">
@@ -640,7 +640,7 @@ export default function BisikKampus() {
                   />
 
                   <div>
-                    <h2 className="font-bold">Kabinet Lentera Sriwijaya</h2>
+                    <h2 className="font-bold">Kabinet Kilau Gemilang</h2>
 
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
@@ -662,14 +662,14 @@ export default function BisikKampus() {
 
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
                   <Link
-                    to="/#visi"
+                    to="/about"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Tentang Kami
                   </Link>
 
                   <Link
-                    to="/#agenda"
+                    to="/calendar"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Agenda Kegiatan

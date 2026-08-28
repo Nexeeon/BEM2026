@@ -57,7 +57,6 @@ export default function Contact() {
   return (
     <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900">
       <div className="min-h-screen bg-white/65">
-
         {/* ====================================================== */}
         {/* NAVBAR */}
         {/* ====================================================== */}
@@ -70,12 +69,11 @@ export default function Contact() {
         >
           <div className="w-full">
             <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
-
               {/* BRANDING */}
               <div className="flex shrink-0 items-center gap-3">
                 <img
                   src="/images/logo.png"
-                  alt="Logo Kabinet Lentera Sriwijaya"
+                  alt="Logo Kabinet Kilau Gemilang"
                   className="h-10 w-10 object-contain"
                 />
 
@@ -94,7 +92,6 @@ export default function Contact() {
               {/* DESKTOP NAV */}
               {/* ================================================== */}
               <nav className="hidden items-center gap-1 lg:flex">
-
                 {/* HOME */}
                 <Link
                   to="/"
@@ -119,9 +116,7 @@ export default function Contact() {
                 <div className="relative">
                   <button
                     type="button"
-                    onClick={() =>
-                      toggleDropdown("academic")
-                    }
+                    onClick={() => toggleDropdown("academic")}
                     className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
                       openDropdown === "academic"
                         ? "bg-white/60 text-amber-700"
@@ -129,20 +124,16 @@ export default function Contact() {
                     }`}
                   >
                     Academic Information
-
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
-                        openDropdown === "academic"
-                          ? "rotate-180"
-                          : ""
+                        openDropdown === "academic" ? "rotate-180" : ""
                       }`}
                     />
                   </button>
 
                   {openDropdown === "academic" && (
                     <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
-
                       {/* ACADEMIC CALENDAR */}
                       <Link
                         to="/calendar"
@@ -178,7 +169,6 @@ export default function Contact() {
                       >
                         Mahasiswa Berdampak
                       </Link>
-
                     </div>
                   )}
                 </div>
@@ -197,20 +187,16 @@ export default function Contact() {
                     }`}
                   >
                     Campus Echo
-
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
-                        openDropdown === "echo"
-                          ? "rotate-180"
-                          : ""
+                        openDropdown === "echo" ? "rotate-180" : ""
                       }`}
                     />
                   </button>
 
                   {openDropdown === "echo" && (
                     <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
-
                       {/* KAJIAN */}
                       <Link
                         to="/kajian"
@@ -237,7 +223,6 @@ export default function Contact() {
                       >
                         Polsrifess
                       </Link>
-
                     </div>
                   )}
                 </div>
@@ -250,7 +235,6 @@ export default function Contact() {
                 >
                   Contact Us
                 </Link>
-
               </nav>
 
               {/* ================================================== */}
@@ -258,24 +242,13 @@ export default function Contact() {
               {/* ================================================== */}
               <button
                 type="button"
-                aria-label={
-                  mobileOpen
-                    ? "Tutup menu"
-                    : "Buka menu"
-                }
+                aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
                 aria-expanded={mobileOpen}
                 className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/40 bg-white/40 text-slate-700 outline-none backdrop-blur-md transition-all duration-200 ease-out hover:border-amber-300 hover:bg-white/60 hover:text-amber-600 active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-amber-400/70 lg:hidden"
-                onClick={() =>
-                  setMobileOpen(!mobileOpen)
-                }
+                onClick={() => setMobileOpen(!mobileOpen)}
               >
-                {mobileOpen ? (
-                  <X size={21} />
-                ) : (
-                  <Menu size={21} />
-                )}
+                {mobileOpen ? <X size={21} /> : <Menu size={21} />}
               </button>
-
             </div>
 
             {/* ================================================== */}
@@ -283,7 +256,6 @@ export default function Contact() {
             {/* ================================================== */}
             {mobileOpen && (
               <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
-
                 {/* HOME */}
                 <Link
                   to="/"
@@ -312,25 +284,19 @@ export default function Contact() {
                       ? "bg-amber-50 text-amber-700"
                       : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
                   }`}
-                  onClick={() =>
-                    toggleDropdown("academic")
-                  }
+                  onClick={() => toggleDropdown("academic")}
                 >
                   Academic Information
-
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ease-out ${
-                      openDropdown === "academic"
-                        ? "rotate-180"
-                        : ""
+                      openDropdown === "academic" ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
                 {openDropdown === "academic" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
-
                     {/* ACADEMIC CALENDAR */}
                     <Link
                       to="/calendar"
@@ -366,7 +332,6 @@ export default function Contact() {
                     >
                       Mahasiswa Berdampak
                     </Link>
-
                   </div>
                 )}
 
@@ -380,25 +345,19 @@ export default function Contact() {
                       ? "bg-amber-50 text-amber-700"
                       : "text-amber-600 hover:bg-slate-50 hover:text-amber-700"
                   }`}
-                  onClick={() =>
-                    toggleDropdown("echo")
-                  }
+                  onClick={() => toggleDropdown("echo")}
                 >
                   Campus Echo
-
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ease-out ${
-                      openDropdown === "echo"
-                        ? "rotate-180"
-                        : ""
+                      openDropdown === "echo" ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
                 {openDropdown === "echo" && (
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
-
                     {/* KAJIAN */}
                     <Link
                       to="/kajian"
@@ -425,7 +384,6 @@ export default function Contact() {
                     >
                       Polsrifess
                     </Link>
-
                   </div>
                 )}
 
@@ -437,7 +395,6 @@ export default function Contact() {
                 >
                   Contact Us
                 </Link>
-
               </div>
             )}
           </div>
@@ -447,12 +404,9 @@ export default function Contact() {
         {/* CONTACT CONTENT */}
         {/* ====================================================== */}
         <section className="relative px-5 py-20 lg:px-8 lg:py-28">
-
           <div className="mx-auto max-w-7xl">
-
             {/* HEADER */}
             <div className="mx-auto max-w-3xl text-center">
-
               <span className="inline-flex items-center rounded-full bg-amber-100/80 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-amber-700 backdrop-blur-sm">
                 Hubungi Kami
               </span>
@@ -460,30 +414,25 @@ export default function Contact() {
               <h1
                 className="mt-5 font-serif font-black uppercase tracking-wide text-amber-500"
                 style={{
-                  fontSize:
-                    "clamp(3rem, 6vw, 5rem)",
+                  fontSize: "clamp(3rem, 6vw, 5rem)",
                 }}
               >
                 CONTACT US
               </h1>
 
               <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-slate-700 sm:text-base">
-                Kami dari BEM POLSRI siap mendengarkan suara dan
-                aspirasi kalian. Apapun yang ingin disampaikan—
-                baik kritik, saran, pertanyaan, maupun kerja sama—
-                kalian bisa langsung hubungi kami lewat kontak
-                yang tersedia.
+                Kami dari BEM POLSRI siap mendengarkan suara dan aspirasi
+                kalian. Apapun yang ingin disampaikan— baik kritik, saran,
+                pertanyaan, maupun kerja sama— kalian bisa langsung hubungi kami
+                lewat kontak yang tersedia.
               </p>
-
             </div>
 
             {/* MAIN CONTACT AREA */}
             <div className="mt-16 grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
-
               {/* LOGO */}
               <div className="flex justify-center lg:col-span-4">
                 <div className="relative flex aspect-square w-full max-w-sm items-center justify-center rounded-[2.5rem] border border-white/60 bg-white/45 p-10 shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
-
                   <div className="pointer-events-none absolute inset-8 rounded-full bg-amber-300/15 blur-3xl" />
 
                   <img
@@ -491,15 +440,12 @@ export default function Contact() {
                     alt="Logo BEM POLSRI"
                     className="relative z-10 w-52 object-contain drop-shadow-md transition-transform duration-500 ease-out hover:scale-[1.03] sm:w-60 lg:w-72"
                   />
-
                 </div>
               </div>
 
               {/* CONTACT INFORMATION */}
               <div className="lg:col-span-5">
-
                 <div className="grid gap-4 sm:grid-cols-2">
-
                   {/* ALAMAT */}
                   <ContactCard
                     icon={<HomeIcon size={20} />}
@@ -538,14 +484,11 @@ export default function Contact() {
                     title="More Information"
                     description="About Us"
                   />
-
                 </div>
 
                 {/* SOCIAL MEDIA */}
                 <div className="mt-7 rounded-2xl border border-slate-200/80 bg-white/75 p-5 backdrop-blur-sm">
-
                   <div className="flex items-center gap-3">
-
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
                       <Share2 size={17} />
                     </div>
@@ -559,11 +502,9 @@ export default function Contact() {
                         Ikuti informasi terbaru dari BEM POLSRI.
                       </p>
                     </div>
-
                   </div>
 
                   <div className="mt-4 flex gap-2">
-
                     {/* INSTAGRAM */}
                     <SocialButton
                       href="https://www.instagram.com/bempolsri_/"
@@ -590,17 +531,13 @@ export default function Contact() {
                     >
                       𝕏
                     </a>
-
                   </div>
                 </div>
-
               </div>
 
               {/* QR CODE */}
               <div className="flex justify-center lg:col-span-3">
-
                 <div className="w-full max-w-sm rounded-3xl border border-amber-200/70 bg-white/90 p-7 text-center shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
-
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-amber-600">
                     <QrCode size={22} />
                   </div>
@@ -625,13 +562,9 @@ export default function Contact() {
                     Lihat informasi resmi BEM POLSRI
                     <ArrowRight size={14} />
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
         </section>
 
@@ -643,14 +576,10 @@ export default function Contact() {
           className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8"
         >
           <div className="mx-auto max-w-7xl">
-
             <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
-
               {/* BRAND */}
               <div>
-
                 <div className="flex items-center gap-3">
-
                   <img
                     src="/images/logo.png"
                     alt="Logo BEM Polsri"
@@ -658,42 +587,36 @@ export default function Contact() {
                   />
 
                   <div>
-                    <h2 className="font-bold">
-                      Kabinet Kilau Gemilang
-                    </h2>
+                    <h2 className="font-bold">Kabinet Kilau Gemilang</h2>
 
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
                     </p>
                   </div>
-
                 </div>
 
                 <p className="mt-6 max-w-xs text-sm leading-7 text-slate-400">
-                  Menjadi wadah yang aktif, responsif, dan konstruktif
-                  untuk Politeknik Negeri Sriwijaya yang lebih berdampak.
+                  Menjadi wadah yang aktif, responsif, dan konstruktif untuk
+                  Politeknik Negeri Sriwijaya yang lebih berdampak.
                 </p>
-
               </div>
 
               {/* NAVIGASI */}
               <div>
-
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Navigasi
                 </h3>
 
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
-
                   <Link
-                    to="/#visi"
+                    to="/about"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Tentang Kami
                   </Link>
 
                   <Link
-                    to="/#agenda"
+                    to="/calendar"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Agenda Kegiatan
@@ -705,23 +628,17 @@ export default function Contact() {
                   >
                     Contact Us
                   </Link>
-
                 </div>
-
               </div>
 
               {/* KONTAK */}
               <div>
-
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Mari Terhubung
                 </h3>
 
                 <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
-                  <Mail
-                    size={16}
-                    className="mt-1 shrink-0 text-amber-400"
-                  />
+                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />
                   bem@polsri.ac.id
                 </p>
 
@@ -732,7 +649,6 @@ export default function Contact() {
                 </p>
 
                 <div className="mt-5 flex gap-2">
-
                   {/* INSTAGRAM */}
                   <a
                     href="https://www.instagram.com/bempolsri_/"
@@ -765,11 +681,8 @@ export default function Contact() {
                   >
                     <Youtube size={17} />
                   </a>
-
                 </div>
-
               </div>
-
             </div>
 
             {/* COPYRIGHT */}
@@ -778,10 +691,8 @@ export default function Contact() {
                 © 2026 BEM Politeknik Negeri Sriwijaya. All rights reserved.
               </p>
             </div>
-
           </div>
         </footer>
-
       </div>
     </main>
   );
