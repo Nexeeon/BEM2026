@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "./LoadingScreen";
 import {
@@ -7,24 +7,16 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  Compass,
   Instagram,
-  Lightbulb,
   Mail,
-  Megaphone,
   Menu,
-  Scale,
-  Target,
-  Users,
   X,
   Youtube,
-  LucideProps,
 } from "lucide-react";
 
 type DropdownName = "academic" | "echo" | null;
 
 interface MissionItem {
-  icon: React.ComponentType<LucideProps>;
   number: string;
   text: string;
 }
@@ -37,6 +29,30 @@ interface UpdateInfoItemData {
   fullDescription: string;
   image: string;
 }
+
+/* DATA PROGRAM KERJA */
+const programs = [
+  {
+    title: "AKSI",
+    image: "/images/Program_kerja/aksi.jpeg",
+  },
+  {
+    title: "BISIK KAMPUS",
+    image: "/images/Program_kerja/bisik-kampus.png",
+  },
+  {
+    title: "INSPIRE PROJECT",
+    image: "/images/Program_kerja/Inpire Project.png",
+  },
+  {
+    title: "KAJIAN",
+    image: "/images/Program_kerja/kajian.png",
+  },
+  {
+    title: "POLSRIESS",
+    image: "/images/Program_kerja/polsrifess.jpeg",
+  },
+];
 
 /* DATA 3 UPDATE INFO TERBARU */
 const updateInfos: UpdateInfoItemData[] = [
@@ -74,27 +90,22 @@ const updateInfos: UpdateInfoItemData[] = [
 
 const missions: MissionItem[] = [
   {
-    icon: Compass,
     number: "01",
     text: "Mewadahi dan memperjuangkan aspirasi mahasiswa secara terbuka, responsif, dan bertanggung jawab melalui mekanisme penyerapan aspirasi yang aktif, dialogis, dan berkelanjutan.",
   },
   {
-    icon: Lightbulb,
     number: "02",
     text: "Mendorong peningkatan kualitas pembelajaran organisasi dan kepemimpinan mahasiswa melalui program pengembangan soft skill, manajerial, dan profesionalisme yang terarah.",
   },
   {
-    icon: Scale,
     number: "03",
     text: "Mengembangkan budaya kajian dan advokasi yang konstruktif dan solutif sebagai landasan pengambilan sikap BEM terhadap isu-isu yang ada.",
   },
   {
-    icon: Users,
     number: "04",
     text: "Memperkuat sinergi dan kolaborasi internal maupun eksternal melalui kerja sama antar lembaga mahasiswa serta partisipasi aktif dalam kegiatan yang berdampak positif.",
   },
   {
-    icon: Megaphone,
     number: "05",
     text: "Meningkatkan kualitas dan kuantitas informasi yang disajikan kepada mahasiswa dan masyarakat melalui berbagai media.",
   },
@@ -331,7 +342,6 @@ const academicCalendarData: CalendarMonthData[] = [
 ];
 
 export default function Home() {
-  // Mengecek apakah intro sudah pernah diputar pada sesi ini
   const [showLoading, setShowLoading] = useState<boolean>(() => {
     return sessionStorage.getItem("homeIntroPlayed") !== "true";
   });
@@ -344,6 +354,11 @@ export default function Home() {
     null,
   );
 
+  /* STATE CAROUSEL PROGRAM KAMI */
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -355,6 +370,43 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // Autoplay Carousel (5 detik per slide)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % programs.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % programs.length);
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? programs.length - 1 : prev - 1));
+  };
+
+  // Swipe gesture handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const distance = touchStartX.current - touchEndX.current;
+    if (distance > 50) {
+      handleNextSlide();
+    } else if (distance < -50) {
+      handlePrevSlide();
+    }
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+  };
 
   const handleFinishLoading = () => {
     sessionStorage.setItem("homeIntroPlayed", "true");
@@ -386,7 +438,7 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
-      {/* LOADING SCREEN (Hanya dirender jika showLoading bernilai true) */}
+      {/* LOADING SCREEN */}
       {showLoading && <LoadingScreen onFinish={handleFinishLoading} />}
 
       <div className="min-h-screen bg-white/65">
@@ -532,7 +584,6 @@ export default function Home() {
                         Bisik Kampus
                       </Link>
 
-                      {/* POLSRIFESS - FIX */}
                       <Link
                         to="/polsrifess"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -676,7 +727,6 @@ export default function Home() {
                       Bisik Kampus
                     </Link>
 
-                    {/* POLSRIFESS - FIX */}
                     <Link
                       to="/polsrifess"
                       className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -751,70 +801,85 @@ export default function Home() {
           </div>
         </section>
 
-        {/* VISI & MISI */}
+        {/* VISI & MISI SECTION */}
         <section
           id="visi"
-          className="bg-white/85 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28"
+          className="relative bg-gradient-to-b from-white/90 via-amber-50/30 to-white/90 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28"
         >
           <div className="mx-auto max-w-7xl">
-            <SectionIntro
-              eyebrow="Arah Gerak Kami"
-              title="Visi & Misi BEM Polsri — Kabinet Kilau Gemilang"
-              text="Menjadi penerang bagi seluruh mahasiswa untuk bertumbuh, berkolaborasi, dan menciptakan perubahan yang berarti."
-            />
-
-            <div className="mt-14 grid gap-5 lg:grid-cols-[.8fr_1.2fr]">
-              <div className="relative overflow-hidden rounded-3xl border border-amber-300/40 bg-gradient-to-br from-amber-50 via-white to-amber-50 p-8 shadow-xl backdrop-blur-md lg:p-10">
-                <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full border-[25px] border-amber-500/20" />
-
-                <div className="relative">
-                  <div className="mb-8 flex items-center justify-between">
-                    <span className="rounded-full bg-amber-400 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-900">
-                      Visi
-                    </span>
-
-                    <Target className="text-amber-500" size={30} />
+            {/* GRID DESKTOP */}
+            <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
+              {/* BAGIAN KIRI: VISI & MISI */}
+              <div className="flex flex-col justify-between lg:col-span-7">
+                {/* VISI */}
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-amber-100/60 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-amber-700 backdrop-blur-sm">
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
+                    ARAH GERAK KAMI
                   </div>
 
-                  <h3 className="text-2xl font-bold leading-snug text-slate-900">
-                    Menjadikan BEM Polsri sebagai lembaga{" "}
-                    <span className="text-amber-600">berdampak positif</span>{" "}
-                    bagi mahasiswa dan institusi.
+                  <h2 className="mt-4 font-serif text-4xl font-black uppercase tracking-tight text-amber-500 sm:text-5xl lg:text-6xl">
+                    VISI
+                  </h2>
+
+                  <p className="mt-5 text-base font-medium leading-relaxed text-slate-700 sm:text-lg lg:text-xl lg:leading-normal">
+                    Menjadikan Badan Eksekutif Mahasiswa Politeknik Negeri
+                    Sriwijaya sebagai lembaga yang{" "}
+                    <span className="font-bold text-amber-600 underline decoration-amber-300 decoration-2 underline-offset-4">
+                      berdampak positif
+                    </span>{" "}
+                    bagi Mahasiswa/i dan Institusi Politeknik Negeri Sriwijaya.
+                  </p>
+                </div>
+
+                <hr className="my-10 border-slate-200/80 lg:my-12" />
+
+                {/* MISI */}
+                <div>
+                  <h3 className="font-serif text-3xl font-black uppercase tracking-tight text-amber-500 sm:text-4xl">
+                    MISI
                   </h3>
 
-                  <p className="mt-7 text-sm leading-7 text-slate-600">
-                    Menjadikan Badan Eksekutif Mahasiswa Politeknik Negeri
-                    Sriwijaya sebagai lembaga yang berdampak positif bagi
-                    Mahasiswa/i dan Institusi Politeknik Negeri Sriwijaya.
-                  </p>
+                  <div className="mt-8 space-y-6 sm:space-y-7">
+                    {missions.map((mission) => (
+                      <div
+                        key={mission.number}
+                        className="group flex items-start gap-4 rounded-2xl border border-slate-100 bg-white/70 p-4 transition-all duration-300 hover:border-amber-300/80 hover:bg-white hover:shadow-md sm:gap-6 sm:p-5"
+                      >
+                        <span className="font-serif text-2xl font-black text-amber-500/90 transition-transform duration-300 group-hover:scale-110 sm:text-3xl">
+                          {mission.number}
+                        </span>
+
+                        <p className="text-sm font-medium leading-relaxed text-slate-700 sm:text-base">
+                          {mission.text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                {missions.map((mission) => {
-                  const Icon = mission.icon;
+              {/* BAGIAN KANAN: FOTO UTAMA & CARD */}
+              <div className="flex flex-col items-center justify-center lg:col-span-5 lg:sticky lg:top-28">
+                <div className="relative w-full overflow-hidden rounded-3xl border border-amber-300/50 bg-white p-3 shadow-xl shadow-amber-900/5 backdrop-blur-md transition-all duration-300 hover:border-amber-400 hover:shadow-2xl sm:p-4">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100">
+                    <img
+                      src="/images/foto_KabinetKilauGemilang.jpeg"
+                      alt="Foto Kabinet Kilau Gemilang - BEM POLSRI"
+                      className="h-full w-full object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
 
-                  return (
-                    <article
-                      key={mission.number}
-                      className="group rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
-                    >
-                      <div className="flex items-start justify-between">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition-all duration-200 group-hover:bg-amber-500 group-hover:text-white">
-                          <Icon size={21} />
-                        </div>
-
-                        <span className="text-3xl font-black text-slate-200">
-                          {mission.number}
-                        </span>
-                      </div>
-
-                      <p className="mt-5 text-xs leading-6 text-slate-600">
-                        {mission.text}
-                      </p>
-                    </article>
-                  );
-                })}
+                  <div className="mt-4 rounded-xl border border-amber-200/60 bg-gradient-to-r from-amber-50/90 via-white to-amber-50/90 p-4 text-center shadow-inner">
+                    <p className="font-serif text-lg font-bold tracking-tight text-slate-900 sm:text-xl">
+                      "Kabinet Kilau Gemilang"
+                    </p>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-600">
+                      — BEM POLSRI 2026 —
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -975,13 +1040,125 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ================================================== */}
+        {/* SECTION PROGRAM KAMI */}
+        {/* ================================================== */}
+        <section
+          id="program-kami"
+          className="relative py-20 lg:py-28 overflow-hidden"
+        >
+          {/* HEADING & PENJELASAN */}
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <div className="text-center">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 sm:text-sm">
+                LIST OF
+              </p>
+              <h2 className="mt-1 font-serif text-4xl font-black uppercase tracking-tight text-amber-500 sm:text-5xl lg:text-6xl">
+                PROGRAM KAMI
+              </h2>
+            </div>
+
+            <div className="mx-auto mt-6 max-w-3xl text-center">
+              <p className="text-sm font-medium leading-relaxed text-slate-700 sm:text-base lg:text-lg lg:leading-normal">
+                Sebagai bentuk komitmen dalam menghadirkan peran aktif mahasiswa
+                terhadap berbagai isu di lingkungan kampus dan masyarakat, BEM
+                Polsri menghadirkan sejumlah program unggulan. Mulai dari ruang
+                edukasi dan inovasi, media komunikasi mahasiswa, kegiatan
+                sosial, kewirausahaan melalui unit usaha, hingga aksi langsung
+                di lapangan—seluruh program ini dirancang untuk memperkuat
+                kepemimpinan, mendorong kolaborasi, dan memberikan dampak nyata.
+              </p>
+            
+            </div>
+          </div>
+
+          {/* CAROUSEL AREA (FULL WIDTH EDGE-TO-EDGE) */}
+          <div className="relative mt-12 sm:mt-16 w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+            {/* Tombol Navigasi Kanan Atas */}
+            <div className="absolute right-6 top-6 z-30 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handlePrevSlide}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-slate-950/60 text-white backdrop-blur-md transition-all duration-200 hover:bg-amber-500 hover:text-slate-950 active:scale-95"
+                aria-label="Previous Slide"
+              >
+                <ChevronLeft size={22} />
+              </button>
+
+              <button
+                type="button"
+                onClick={handleNextSlide}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-slate-950/60 text-white backdrop-blur-md transition-all duration-200 hover:bg-amber-500 hover:text-slate-950 active:scale-95"
+                aria-label="Next Slide"
+              >
+                <ChevronRight size={22} />
+              </button>
+            </div>
+
+            {/* SLIDER CONTAINER */}
+            <div
+              className="relative w-full overflow-hidden bg-slate-950 h-[380px] sm:h-[500px] lg:h-[600px]"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              {programs.map((item, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 h-full w-full transition-opacity duration-700 ease-in-out ${
+                    index === currentSlide
+                      ? "opacity-100 z-10"
+                      : "opacity-0 z-0"
+                  }`}
+                >
+                  {/* Layer 1: Foto Program */}
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="h-full w-full object-cover object-center"
+                  />
+
+                  {/* Layer 2: Overlay Gradient Transparan (Tanpa Background Solid Gelap) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
+
+                  {/* Layer 3 & 4: Badge & Judul Program */}
+                  <div className="absolute bottom-8 left-6 right-6 z-20 sm:bottom-12 sm:left-12 sm:right-12 lg:left-16">
+                    <span className="inline-block rounded-full border border-amber-400/50 bg-amber-500/20 px-3 py-1 text-xs font-black tracking-widest text-amber-300 backdrop-blur-md">
+                      PROGRAM KERJA
+                    </span>
+                    <h3 className="mt-2 font-serif text-3xl font-black uppercase tracking-wider text-white drop-shadow-md sm:text-4xl lg:text-5xl">
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Layer 5: Indicator Dots Navigasi */}
+            <div className="absolute bottom-4 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 sm:bottom-6">
+              {programs.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => setCurrentSlide(index)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    index === currentSlide
+                      ? "w-8 bg-amber-500"
+                      : "w-2.5 bg-white/40 hover:bg-white/70"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* UPDATE INFO */}
         <section
           id="update-info"
           className="relative mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28"
         >
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            {/* BAGIAN KIRI */}
             <div className="lg:col-span-5">
               <div className="lg:sticky lg:top-28">
                 <p className="text-xs font-black uppercase tracking-[0.25em] text-amber-600">
@@ -1007,7 +1184,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* BAGIAN KANAN */}
             <div className="space-y-16 lg:col-span-7 lg:space-y-24">
               {updateInfos.map((item) => (
                 <article
