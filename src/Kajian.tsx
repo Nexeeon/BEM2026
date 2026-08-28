@@ -166,7 +166,7 @@ export default function Kajian() {
 
                       {/* SCHOLARSHIP INFO */}
                       <a
-                        href="/#agenda"
+                        href="/scholarship-info"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
@@ -184,7 +184,7 @@ export default function Kajian() {
 
                       {/* MAHASISWA BERDAMPAK */}
                       <a
-                        href="/#agenda"
+                        href="/mahasiswa-berdampak"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >

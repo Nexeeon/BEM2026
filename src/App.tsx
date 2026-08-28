@@ -6,6 +6,8 @@ import Kajian from "./Kajian";
 import BisikKampus from "./BisikKampus";
 import Polsrifess from "./Polsrifess";
 import AcademicCalendar from "./AcademicCalendar";
+import ScholarshipInfo from "./scholarship-info";
+import MahasiswaBerdampak from "./mahasiswa_berdampak";
 
 function App() {
   return (
@@ -25,9 +27,11 @@ function App() {
         <Route path="/bisik-kampus" element={<BisikKampus />} />
         <Route path="/polsrifess" element={<Polsrifess />} />
 
-        {/* Academic Calendar */}
+        {/* Academic Information */}
         <Route path="/calendar" element={<AcademicCalendar />} />
         <Route path="/academic-calendar" element={<AcademicCalendar />} />
+        <Route path="/scholarship-info" element={<ScholarshipInfo />} />
+        <Route path="/mahasiswa-berdampak" element={<MahasiswaBerdampak />} />
       </Routes>
     </Router>
   );
