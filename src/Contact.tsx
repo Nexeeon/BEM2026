@@ -81,7 +81,7 @@ export default function Contact() {
 
                 <div className="leading-tight">
                   <p className="text-sm font-bold tracking-tight text-slate-800 sm:text-[15px]">
-                    Kabinet Lentera Sriwijaya
+                    Kabinet Kilau Gemilang
                   </p>
 
                   <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500 sm:text-[10px]">
@@ -659,7 +659,7 @@ export default function Contact() {
 
                   <div>
                     <h2 className="font-bold">
-                      Kabinet Lentera Sriwijaya
+                      Kabinet Kilau Gemilang
                     </h2>
 
                     <p className="mt-1 text-xs text-slate-400">
