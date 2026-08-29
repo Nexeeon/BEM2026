@@ -1,22 +1,140 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, PanInfo } from "framer-motion";
 import {
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Menu,
   X as CloseIcon,
   Mail,
   Instagram,
   Youtube,
+  Quote,
 } from "lucide-react";
 
 type DropdownName = "academic" | "echo" | null;
+
+// DATA ANGGOTA PEJABAT TERAS BEM
+const pejabatTerasData = [
+  {
+    nama: "Hartanti Adiningtyas",
+    jabatan: "Sekretaris Umum",
+    instagram: "@hartanti_tyas",
+    url: "https://instagram.com/hartanti_tyas",
+    foto: "/images/Pejabat_Teras/Sekretaris Umum.png",
+  },
+  {
+    nama: "Citra Maulidya",
+    jabatan: "Wakil Sekretaris Umum",
+    instagram: "@citramldyaa",
+    url: "https://instagram.com/citramldyaa",
+    foto: "/images/Pejabat_Teras/Wakil Sekretaris Umum.png",
+  },
+  {
+    nama: "Sulistiani Zahra",
+    jabatan: "Bendahara Umum",
+    instagram: "@sulistz",
+    url: "https://instagram.com/sulistz",
+    foto: "/images/Pejabat_Teras/Bendahara Umum.png",
+  },
+  {
+    nama: "Khezia Firma Dwi Aulia",
+    jabatan: "Wakil Bendahara Umum",
+    instagram: "@kheziafdaulia",
+    url: "https://instagram.com/kheziafdaulia",
+    foto: "/images/Pejabat_Teras/Wakil Bendahara Umum.png",
+  },
+  {
+    nama: "Afiq Al Bukhari",
+    jabatan: "Pelaksana Tugas Wakil Ketua Umum",
+    instagram: "@afiqqqqquunn_",
+    url: "https://instagram.com/afiqqqqquunn_",
+    foto: "/images/Pejabat_Teras/Pelaksana Tugas Wakil Ketua Umum.png",
+  },
+  {
+    nama: "Helal Humandra",
+    jabatan: "Koordinator Bidang I",
+    instagram: "@humandra10",
+    url: "https://instagram.com/humandra10",
+    foto: "/images/Pejabat_Teras/Koordinator Bidang I.png",
+  },
+  {
+    nama: "Agoes Putra Pratama",
+    jabatan: "Koordinator Bidang II",
+    instagram: "@agoesptrp",
+    url: "https://instagram.com/agoesptrp",
+    foto: "/images/Pejabat_Teras/Koordinator Bidang II.png",
+  },
+];
 
 export default function About() {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [videoError, setVideoError] = useState<boolean>(false);
+
+  // ============================================================
+  // CAROUSEL & AUTO-SLIDING STATE
+  // ============================================================
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+
+  const getItemsPerPage = () => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth >= 1024) return 4; // Desktop: 4 kartu
+      if (window.innerWidth >= 768) return 2; // Tablet: 2 kartu
+    }
+    return 1; // Mobile: 1 kartu
+  };
+
+  const [itemsPerPage, setItemsPerPage] = useState<number>(getItemsPerPage());
+
+  useEffect(() => {
+    const handleResize = () => {
+      const newItemsPerPage = getItemsPerPage();
+      setItemsPerPage(newItemsPerPage);
+      setCurrentIndex((prev) =>
+        Math.min(prev, Math.max(0, pejabatTerasData.length - newItemsPerPage)),
+      );
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const maxIndex = Math.max(0, pejabatTerasData.length - itemsPerPage);
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  // EFEK AUTO SLIDE (Setiap 3 Detik)
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3000); // Durasi per ganti slide: 3000 ms = 3 detik
+
+    return () => clearInterval(interval);
+  }, [currentIndex, isPaused, maxIndex]);
+
+  // Touch / Drag Swipe Handler
+  const handleDragEnd = (_: any, info: PanInfo) => {
+    const offset = info.offset.x;
+    const velocity = info.velocity.x;
+
+    if (offset < -50 || velocity < -500) {
+      nextSlide();
+    } else if (offset > 50 || velocity > 500) {
+      prevSlide();
+    }
+  };
 
   // ============================================================
   // SCROLL DETECTION
@@ -27,9 +145,7 @@ export default function About() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // ============================================================
@@ -337,7 +453,7 @@ export default function About() {
                     Video tidak dapat diputar.
                   </p>
                   <p className="mt-2 text-sm text-slate-400">
-                    Pastikan file file video berada di
+                    Pastikan file video berada di
                     public/vidiobem/PengenalanBEM.mp4
                   </p>
                 </div>
@@ -367,12 +483,9 @@ export default function About() {
           </motion.div>
         </section>
 
-        {/* ====================================================== */}
-        {/* SECTION VISI & MISI (LAYOUT MENYAMPING) */}
-        {/* ====================================================== */}
+        {/* SECTION VISI & MISI */}
         <section id="visi" className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
-            {/* KOLOM KIRI: TEKS VISION & MISSION */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -380,7 +493,6 @@ export default function About() {
               transition={{ duration: 0.6 }}
               className="flex flex-col justify-center space-y-8 text-slate-800"
             >
-              {/* VISION */}
               <div>
                 <h2 className="text-3xl font-black uppercase tracking-wider text-amber-500 sm:text-4xl">
                   VISION
@@ -392,7 +504,6 @@ export default function About() {
                 </p>
               </div>
 
-              {/* MISSION */}
               <div>
                 <h2 className="text-3xl font-black uppercase tracking-wider text-amber-500 sm:text-4xl">
                   MISSION
@@ -443,7 +554,6 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* KOLOM KANAN: LOGO & SLOGAN CARD */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -451,7 +561,6 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex flex-col items-center justify-center space-y-10"
             >
-              {/* Logo Ring */}
               <div className="relative flex h-40 w-40 items-center justify-center rounded-full border-4 border-amber-400 bg-white p-4 shadow-xl">
                 <img
                   src="/images/logo.png"
@@ -460,7 +569,6 @@ export default function About() {
                 />
               </div>
 
-              {/* Slogan Box */}
               <div className="w-full rounded-2xl border border-amber-300/60 bg-white/90 p-6 text-center shadow-lg backdrop-blur-sm sm:p-8">
                 <span className="text-3xl font-serif text-amber-400">“</span>
                 <p className="mt-[-10px] text-lg font-semibold italic text-slate-800">
@@ -471,6 +579,221 @@ export default function About() {
                 </p>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* SECTION KETUA UMUM BEM */}
+        <section
+          id="ketua-umum"
+          className="mx-auto max-w-7xl px-5 pb-12 pt-4 lg:px-8"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-8 text-center"
+          >
+            <h2 className="text-3xl font-black uppercase tracking-wider text-amber-500 sm:text-4xl">
+              Pejabat Teras
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="rounded-3xl border border-amber-200/80 bg-white/90 p-6 shadow-xl backdrop-blur-md sm:p-8 md:p-10"
+          >
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-10">
+              <div className="flex flex-col justify-between lg:col-span-7">
+                <div>
+                  <div className="mb-2">
+                    <Quote
+                      size={36}
+                      className="rotate-180 text-amber-500 fill-amber-500/20 stroke-[1.5]"
+                    />
+                  </div>
+
+                  <h3 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-3xl">
+                    Ketua Umum BEM Politeknik Sriwijaya
+                  </h3>
+
+                  <div className="my-6 border-l-4 border-amber-400 pl-4 py-0.5">
+                    <p className="text-sm font-normal italic leading-relaxed text-slate-600 sm:text-base">
+                      "Mahasiswa bukan hanya bagian dari perubahan, tetapi
+                      merupakan penggerak utama perubahan itu sendiri. Bersama,
+                      kita wujudkan Kabinet Kilau Gemilang yang berdampak,
+                      inklusif, dan berkelanjutan."
+                    </p>
+                  </div>
+                </div>
+
+                <div className="border-t border-slate-200/80 pt-5">
+                  <h4 className="text-lg font-bold text-slate-900 sm:text-xl">
+                    Achmad Jemmy Ramadhan
+                  </h4>
+                  <div className="mt-1 space-y-0.5 text-xs font-semibold sm:text-sm">
+                    <p className="text-amber-600">
+                      Jabatan : Ketua Umum BEM Politeknik Sriwijaya
+                    </p>
+                    <p className="uppercase tracking-wider text-slate-400">
+                      Kabinet : Kabinet Kilau Gemilang
+                    </p>
+                    <a
+                      href="https://www.instagram.com/achmdjmmyr_/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 pt-1 text-slate-600 hover:text-amber-600 transition-colors"
+                    >
+                      <Instagram size={15} className="text-amber-500" />
+                      <span>@achmdjmmyr_</span>
+                    </a>
+                  </div>
+
+                  <div className="mt-2 flex justify-end">
+                    <Quote
+                      size={36}
+                      className="text-amber-500 fill-amber-500/20 stroke-[1.5]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5 flex justify-center items-center">
+                <div className="relative overflow-hidden rounded-2xl border-2 border-amber-300/80 bg-slate-100 shadow-xl w-full h-[360px] sm:h-[420px]">
+                  <img
+                    src="/images/Pejabat_Teras/Ketua Umum BEM.png"
+                    alt="Achmad Jemmy Ramadhan - Ketua Umum BEM Politeknik Sriwijaya"
+                    className="h-full w-full object-cover object-center filter contrast-[1.02] brightness-[1.01] transition-all duration-300 hover:scale-105"
+                  />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* ====================================================== */}
+        {/* SECTION CAROUSEL SLIDER OTOMATIS (AUTO-SLIDE) */}
+        {/* ====================================================== */}
+        <section
+          id="pejabat-teras-bem"
+          className="mx-auto max-w-7xl px-5 pb-16 pt-2 lg:px-8"
+        >
+          <div
+            className="relative"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
+            {/* NAVIGASI TOMBOL SLIDER (KANAN ATAS) */}
+            <div className="mb-6 flex items-center justify-between">
+              <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+             
+              </span>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={prevSlide}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/90 shadow-md text-slate-700 backdrop-blur-sm transition-all hover:bg-amber-50 hover:text-amber-600 active:scale-95"
+                  aria-label="Previous Slide"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  type="button"
+                  onClick={nextSlide}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/90 shadow-md text-slate-700 backdrop-blur-sm transition-all hover:bg-amber-50 hover:text-amber-600 active:scale-95"
+                  aria-label="Next Slide"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            </div>
+
+            {/* SLIDER CAROUSEL TRACK (ANIMATED WITH FRAMER MOTION) */}
+            <div className="overflow-hidden rounded-2xl py-2">
+              <motion.div
+                className="flex cursor-grab active:cursor-grabbing"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={handleDragEnd}
+                animate={{
+                  x: `-${currentIndex * (100 / itemsPerPage)}%`,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 25,
+                }}
+              >
+                {pejabatTerasData.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="w-full shrink-0 px-3 sm:w-1/2 lg:w-1/4 select-none"
+                  >
+                    <motion.div
+                      whileHover={{ y: -6 }}
+                      transition={{ duration: 0.2 }}
+                      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-amber-200/80 bg-white/90 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-2xl"
+                    >
+                      {/* FOTO CONTAINER */}
+                      <div className="relative h-[320px] w-full overflow-hidden bg-slate-100 sm:h-[340px]">
+                        <img
+                          src={item.foto}
+                          alt={item.nama}
+                          draggable={false}
+                          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+
+                      {/* DETAIL TEKS */}
+                      <div className="flex flex-1 flex-col justify-between p-5">
+                        <div>
+                          <h4 className="text-base font-bold text-slate-900 sm:text-lg">
+                            {item.nama}
+                          </h4>
+                          <p className="mt-1 text-xs font-semibold text-amber-600 sm:text-sm">
+                            {item.jabatan}
+                          </p>
+                        </div>
+
+                        <div className="mt-4 border-t border-slate-200/80 pt-3">
+                          <a
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 transition-colors hover:text-amber-600 sm:text-sm"
+                          >
+                            <Instagram size={15} className="text-amber-500" />
+                            <span>{item.instagram}</span>
+                          </a>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* DOTS INDICATOR */}
+            <div className="mt-8 flex justify-center gap-2">
+              {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    currentIndex === idx
+                      ? "w-8 bg-amber-500"
+                      : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
