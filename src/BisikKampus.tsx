@@ -94,7 +94,7 @@ export default function BisikKampus() {
     <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       <div className="min-h-screen bg-white/65">
         {/* ====================================================== */}
-        {/* NAVBAR */}
+        {/* NAVBAR — TIDAK DIUBAH */}
         {/* ====================================================== */}
         <header
           className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
@@ -251,7 +251,7 @@ export default function BisikKampus() {
                         Bisik Kampus
                       </Link>
 
-                      {/* POLSRIFESS - SUDAH DIPERBAIKI */}
+                      {/* POLSRIFESS */}
                       <Link
                         to="/polsrifess"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -414,7 +414,7 @@ export default function BisikKampus() {
                       Bisik Kampus
                     </Link>
 
-                    {/* POLSRIFESS - SUDAH DIPERBAIKI */}
+                    {/* POLSRIFESS */}
                     <Link
                       to="/polsrifess"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
@@ -441,62 +441,60 @@ export default function BisikKampus() {
         </header>
 
         {/* ======================================================== */}
-        {/* HERO SECTION */}
+        {/* HERO SECTION — DIRINGKAS, TEKS OVERLAY DI ATAS GAMBAR */}
         {/* ======================================================== */}
         <section className="relative w-full">
-          {/* FOTO BISIK KAMPUS - FULL WIDE */}
-          <div className="relative w-full overflow-hidden">
+          <div className="relative w-full overflow-hidden bg-slate-100">
+            {/* FOTO BISIK KAMPUS — TINGGI DIPERKECIL */}
             <img
               src="/images/Program_kerja/bisik-kampus.png"
               alt="Foto Bisik Kampus"
-              className="block h-[clamp(300px,52vw,760px)] w-full object-cover"
+              className="block h-[360px] w-full object-cover object-center sm:h-[440px] lg:h-[520px]"
             />
-          </div>
 
-          {/* KONTEN */}
-          <div className="mx-auto w-full max-w-7xl px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(3rem,6vw,6rem)]">
-            <div className="max-w-3xl">
-              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
-                <MessageCircle size={14} className="text-amber-600" />
-                Campus Echo
-              </span>
+            {/* SCRIM GELAP AGAR TEKS TERBACA */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
 
-              <h1
-                className="font-serif font-black uppercase leading-[1.12] tracking-wide text-amber-500"
-                style={{ fontSize: "clamp(2.8rem, 5.5vw, 5rem)" }}
-              >
-                BISIK KAMPUS
-              </h1>
+            {/* KONTEN DI ATAS GAMBAR */}
+            <div className="absolute inset-x-0 bottom-0">
+              <div className="mx-auto max-w-7xl px-5 pb-8 lg:px-8 lg:pb-12">
+                <div className="max-w-3xl">
+                  {/* BADGE */}
+                  <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-amber-100/90 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
+                    <MessageCircle size={14} className="text-amber-600" />
+                    Campus Echo
+                  </span>
 
-              <p
-                className="mt-[clamp(1rem,1.8vw,1.75rem)] max-w-2xl font-medium leading-relaxed text-slate-700"
-                style={{ fontSize: "clamp(0.95rem, 1.15vw, 1.1rem)" }}
-              >
-                Form Bisik Kampus sebagai wadah untuk menampung, menyalurkan dan
-                menindaklanjuti setiap aspirasi Mahasiswa Politeknik Negeri
-                Sriwijaya. Sebuah platform yang menghubungkan suara mahasiswa
-                dengan pihak yang berwenang untuk menciptakan perubahan positif
-                di lingkungan kampus.
-              </p>
+                  {/* DESKRIPSI */}
+                  <p className="max-w-2xl text-sm font-medium leading-relaxed text-white/90 sm:text-base">
+                    Form Bisik Kampus sebagai wadah untuk menampung,
+                    menyalurkan dan menindaklanjuti setiap aspirasi Mahasiswa
+                    Politeknik Negeri Sriwijaya. Sebuah platform yang
+                    menghubungkan suara mahasiswa dengan pihak yang berwenang
+                    untuk menciptakan perubahan positif di lingkungan kampus.
+                  </p>
 
-              <div className="mt-6">
-                <a
-                  href={FORM_BISIK_KAMPUS}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
-                >
-                  <MessageCircle size={18} />
-                  Isi Form Bisik Kampus
-                  <ArrowRight size={18} />
-                </a>
+                  {/* TOMBOL AKSI */}
+                  <div className="mt-5 sm:mt-6">
+                    <a
+                      href={FORM_BISIK_KAMPUS}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                    >
+                      <MessageCircle size={18} />
+                      Isi Form Bisik Kampus
+                      <ArrowRight size={18} />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* ============================================================ */}
-        {/* STATS SECTION */}
+        {/* STATS SECTION — TIDAK DIUBAH */}
         {/* ============================================================ */}
         <section className="relative overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-orange-600 py-14 lg:py-16">
           <style>{`
@@ -551,7 +549,7 @@ export default function BisikKampus() {
         </section>
 
         {/* ======================================================== */}
-        {/* MENGAPA BISIK KAMPUS? */}
+        {/* MENGAPA BISIK KAMPUS? — TIDAK DIUBAH */}
         {/* ======================================================== */}
         <section className="bg-white/85 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28">
           <div className="mx-auto max-w-7xl">
@@ -590,7 +588,7 @@ export default function BisikKampus() {
         </section>
 
         {/* ======================================================== */}
-        {/* CTA */}
+        {/* CTA — TIDAK DIUBAH */}
         {/* ======================================================== */}
         <section className="px-5 py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-4xl text-center">
@@ -625,7 +623,7 @@ export default function BisikKampus() {
         </section>
 
         {/* ======================================================== */}
-        {/* FOOTER */}
+        {/* FOOTER — TIDAK DIUBAH */}
         {/* ======================================================== */}
         <footer className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8">
           <div className="mx-auto max-w-7xl">

@@ -5,11 +5,13 @@ import {
   BookOpen,
   ChevronDown,
   Compass,
+  FileText,
   Instagram,
   Lightbulb,
   Mail,
   Menu,
   MessageCircle,
+  Tag,
   X,
   Youtube,
 } from "lucide-react";
@@ -37,6 +39,30 @@ const whyKajianData = [
     title: "WAWASAN BARU",
     description:
       "Membuka perspektif baru tentang fenomena sosial, politik, dan akademik melalui publikasi kajian yang relevan.",
+  },
+];
+
+// ============================================================
+// DATA CARD "KAJIAN TERBARU" — ganti sesuai data asli kamu
+// ============================================================
+const latestKajianData = [
+  {
+    title: "Dampak Kenaikan UKT terhadap Aksesibilitas Pendidikan Vokasi",
+    category: "Akademik",
+    date: "Agustus 2026",
+    link: "https://zaap.bio/kajianbempolsri25",
+  },
+  {
+    title: "Polemik Regulasi Organisasi Mahasiswa di Lingkungan Kampus",
+    category: "Kebijakan Kampus",
+    date: "Juli 2026",
+    link: "https://zaap.bio/kajianbempolsri25",
+  },
+  {
+    title: "Menilik Isu Ketenagakerjaan Lulusan Vokasi di Era Digital",
+    category: "Sosial",
+    date: "Juni 2026",
+    link: "https://zaap.bio/kajianbempolsri25",
   },
 ];
 
@@ -79,7 +105,7 @@ export default function Kajian() {
       {/* ======================================================== */}
       <div className="min-h-screen bg-white/65">
         {/* ====================================================== */}
-        {/* NAVBAR */}
+        {/* NAVBAR — TIDAK DIUBAH */}
         {/* ====================================================== */}
         <header
           className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
@@ -412,59 +438,51 @@ export default function Kajian() {
         </header>
 
         {/* ======================================================== */}
-        {/* HERO SECTION - KAJIAN */}
+        {/* HERO SECTION - KAJIAN (DIRINGKAS, TEKS OVERLAY DI GAMBAR) */}
         {/* ======================================================== */}
-        <section className="relative w-full pt-0 pb-16">
-          <div className="flex w-full flex-col">
-            {/* 1. HERO IMAGE — FULL WIDTH, BERSIH TANPA TEKS */}
-            <div className="relative w-full overflow-hidden bg-slate-100">
-              <img
-                src="/images/Program_kerja/kajian.png"
-                alt="Banner Kajian BEM POLSRI"
-                className="block h-[calc(100svh-72px)] min-h-[520px] w-full object-cover object-center"
-              />
-            </div>
+        <section className="relative w-full">
+          <div className="relative w-full overflow-hidden bg-slate-100">
+            {/* GAMBAR HERO — TINGGI DIPERKECIL */}
+            <img
+              src="/images/Program_kerja/kajian.png"
+              alt="Banner Kajian BEM POLSRI"
+              className="block h-[340px] w-full object-cover object-center sm:h-[420px] lg:h-[500px]"
+            />
 
-            {/* 2. TULISAN DI BAWAH FOTO */}
-            <div className="mx-auto mt-10 flex w-full max-w-7xl flex-col items-start px-5 lg:mt-14 lg:px-8">
-              {/* BADGE */}
-              <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
-                <BookOpen size={14} className="text-amber-600" />
-                Campus Echo
-              </span>
+            {/* SCRIM GELAP DI BAWAH GAMBAR AGAR TEKS TERBACA */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
 
-              {/* JUDUL PROGRAM */}
-              <h1
-                className="font-serif font-black uppercase tracking-wide text-amber-500 leading-[1.12]"
-                style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
-              >
-                KAJIAN
-              </h1>
+            {/* KONTEN DI ATAS GAMBAR */}
+            <div className="absolute inset-x-0 bottom-0">
+              <div className="mx-auto flex max-w-7xl flex-col items-start px-5 pb-8 lg:px-8 lg:pb-12">
+                {/* BADGE */}
+                <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-amber-100/90 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
+                  <BookOpen size={14} className="text-amber-600" />
+                  Campus Echo
+                </span>
 
-              {/* DESKRIPSI PROGRAM */}
-              <p
-                className="mt-4 max-w-3xl font-medium leading-relaxed text-slate-700"
-                style={{ fontSize: "clamp(0.95rem, 1.15vw, 1.1rem)" }}
-              >
-                Proses analisis isu-isu terkini baik internal kampus maupun
-                eksternal, dilakukan secara berkala oleh Departemen KASTRAT.
-                Platform ini menjadi wadah diskusi mendalam tentang fenomena
-                sosial, politik, dan akademik yang relevan dengan kehidupan
-                mahasiswa.
-              </p>
+                {/* DESKRIPSI PROGRAM */}
+                <p className="max-w-3xl text-sm font-medium leading-relaxed text-white/90 sm:text-base">
+                  Proses analisis isu-isu terkini baik internal kampus maupun
+                  eksternal, dilakukan secara berkala oleh Departemen KASTRAT.
+                  Platform ini menjadi wadah diskusi mendalam tentang fenomena
+                  sosial, politik, dan akademik yang relevan dengan kehidupan
+                  mahasiswa.
+                </p>
 
-              {/* TOMBOL AKSI */}
-              <div className="mt-6 sm:mt-8">
-                <a
-                  href="https://zaap.bio/kajianbempolsri25"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
-                >
-                  <BookOpen size={18} />
-                  Lihat Kajian Sekarang
-                  <ArrowRight size={18} />
-                </a>
+                {/* TOMBOL AKSI */}
+                <div className="mt-5 sm:mt-6">
+                  <a
+                    href="https://zaap.bio/kajianbempolsri25"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  >
+                    <BookOpen size={18} />
+                    Lihat Kajian Sekarang
+                    <ArrowRight size={18} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -473,7 +491,7 @@ export default function Kajian() {
         {/* ======================================================== */}
         {/* MENGAPA KAJIAN? */}
         {/* ======================================================== */}
-        <section className="bg-white/85 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28">
+        <section className="bg-white/85 px-5 py-16 backdrop-blur-md lg:px-8 lg:py-20">
           <div className="mx-auto max-w-7xl">
             <div className="max-w-2xl">
               <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
@@ -486,7 +504,7 @@ export default function Kajian() {
               </p>
             </div>
 
-            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {whyKajianData.map((item, index) => (
                 <article
                   key={index}
@@ -510,9 +528,94 @@ export default function Kajian() {
         </section>
 
         {/* ======================================================== */}
+        {/* KAJIAN TERBARU — SECTION BARU */}
+        {/* ======================================================== */}
+        <section className="px-5 py-16 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+              <div className="max-w-2xl">
+                <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+                  KAJIAN TERBARU
+                </h2>
+
+                <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
+                  Beberapa publikasi terbaru dari Departemen KASTRAT. Klik
+                  untuk membaca kajian lengkap dalam format PDF.
+                </p>
+              </div>
+
+              <a
+                href="https://zaap.bio/kajianbempolsri25"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden shrink-0 items-center gap-2 rounded-full border border-amber-300 bg-white px-5 py-2.5 text-xs font-bold text-amber-700 outline-none transition-all duration-200 ease-out hover:bg-amber-50 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/50 sm:inline-flex"
+              >
+                Lihat Semua
+                <ArrowRight size={14} />
+              </a>
+            </div>
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {latestKajianData.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-700">
+                        <Tag size={11} />
+                        {item.category}
+                      </span>
+
+                      <FileText
+                        size={18}
+                        className="text-slate-300 transition-all duration-200 group-hover:text-amber-500"
+                      />
+                    </div>
+
+                    <h3 className="mt-4 text-base font-bold leading-snug text-slate-900 group-hover:text-amber-700">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                    <span className="text-xs font-medium text-slate-400">
+                      {item.date}
+                    </span>
+
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-600">
+                      Baca PDF
+                      <ArrowRight
+                        size={13}
+                        className="transition-transform duration-200 group-hover:translate-x-0.5"
+                      />
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            {/* TOMBOL LIHAT SEMUA — MOBILE */}
+            <a
+              href="https://zaap.bio/kajianbempolsri25"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 flex items-center justify-center gap-2 rounded-full border border-amber-300 bg-white px-5 py-3 text-xs font-bold text-amber-700 outline-none transition-all duration-200 ease-out hover:bg-amber-50 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/50 sm:hidden"
+            >
+              Lihat Semua Kajian
+              <ArrowRight size={14} />
+            </a>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
         {/* CTA */}
         {/* ======================================================== */}
-        <section className="px-5 py-20 lg:px-8 lg:py-28">
+        <section className="px-5 py-16 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-4xl text-center">
             <div className="rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12">
               <BookOpen size={48} className="mx-auto mb-4 text-amber-500" />
@@ -542,7 +645,7 @@ export default function Kajian() {
         </section>
 
         {/* ======================================================== */}
-        {/* FOOTER */}
+        {/* FOOTER — TIDAK DIUBAH */}
         {/* ======================================================== */}
         <footer className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8">
           <div className="mx-auto max-w-7xl">

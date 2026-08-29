@@ -444,61 +444,60 @@ export default function Polsrifess() {
           </div>
         </header>
 
-        {/* HERO — FULL SCREEN */}
-        <section
-          className="relative w-full"
-          style={{ height: "calc(100svh - 72px)" }}
-        >
-          <Reveal className="h-full w-full">
+        {/* ======================================================== */}
+        {/* HERO — DIRINGKAS, TEKS OVERLAY DI ATAS GAMBAR */}
+        {/* ======================================================== */}
+        <section className="relative w-full">
+          <Reveal className="relative block w-full overflow-hidden bg-slate-100">
+            {/* GAMBAR HERO — TINGGI DIPERKECIL DARI FULL SCREEN */}
             <img
               src="/images/Program_kerja/polsrifess.jpeg"
               alt="Tampilan Polsrifess"
-              className="h-full w-full object-cover"
+              className="block h-[360px] w-full object-cover object-center sm:h-[440px] lg:h-[520px]"
             />
-          </Reveal>
-        </section>
 
-        {/* KONTEN POLSRIFESS */}
-        <section className="relative mx-auto w-full max-w-7xl px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(3rem,7vw,6rem)]">
-          <Reveal className="flex flex-col items-start text-left">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100/80 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-amber-700">
-              <Sparkles size={13} />
-              Ruang Aspirasi Anonim
-            </span>
+            {/* SCRIM GELAP AGAR TEKS TERBACA */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
 
-            <h1
-              className="mt-5 font-serif font-black uppercase tracking-wide text-amber-500 leading-[1.1]"
-              style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)" }}
-            >
-              POLSRIFESS
-            </h1>
+            {/* KONTEN DI ATAS GAMBAR */}
+            <div className="absolute inset-x-0 bottom-0">
+              <div className="mx-auto max-w-7xl px-5 pb-8 lg:px-8 lg:pb-12">
+                <div className="max-w-3xl">
+                  {/* BADGE */}
+                  <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-amber-100/90 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-amber-700 backdrop-blur-sm">
+                    <Sparkles size={13} />
+                    Ruang Aspirasi Anonim
+                  </span>
 
-            <p
-              className="mt-5 max-w-3xl font-medium leading-relaxed text-slate-700"
-              style={{ fontSize: "clamp(0.875rem, 1.1vw, 1.05rem)" }}
-            >
-              Platform berbasis media sosial yang dikelola BEM Polsri sebagai
-              wadah berbagi cerita, opini, keresahan, maupun informasi seputar
-              kampus secara anonim - dibangun untuk komunikasi dua arah yang
-              santai namun tetap aktif dan bertanggung jawab.
-            </p>
+                  {/* DESKRIPSI */}
+                  <p className="max-w-2xl text-sm font-medium leading-relaxed text-white/90 sm:text-base">
+                    Platform berbasis media sosial yang dikelola BEM Polsri
+                    sebagai wadah berbagi cerita, opini, keresahan, maupun
+                    informasi seputar kampus secara anonim - dibangun untuk
+                    komunikasi dua arah yang santai namun tetap aktif dan
+                    bertanggung jawab.
+                  </p>
 
-            <div className="mt-6">
-              <a
-                href={MENFESS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
-              >
-                <Send size={18} />
-                Kunjungi Polsrifess
-                <ExternalLink size={18} />
-              </a>
+                  {/* TOMBOL AKSI */}
+                  <div className="mt-5 sm:mt-6">
+                    <a
+                      href={MENFESS_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                    >
+                      <Send size={18} />
+                      Kunjungi Polsrifess
+                      <ExternalLink size={18} />
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </Reveal>
         </section>
 
-        {/* STATISTIK — marquee bergulir otomatis, gaya sama seperti Bisik Kampus */}
+        {/* STATISTIK — marquee bergulir otomatis, TIDAK DIUBAH */}
         <section className="relative overflow-hidden bg-gradient-to-r from-amber-400 via-amber-500 to-orange-600 py-14 lg:py-16">
           <style>{`
             @keyframes marquee-smooth {
@@ -541,7 +540,7 @@ export default function Polsrifess() {
           </div>
         </section>
 
-        {/* CARA PENGGUNAAN */}
+        {/* CARA PENGGUNAAN — TIDAK DIUBAH */}
         <section
           id="cara-penggunaan"
           className="bg-white/85 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28"
@@ -584,7 +583,7 @@ export default function Polsrifess() {
           </div>
         </section>
 
-        {/* PANDUAN / ATURAN */}
+        {/* PANDUAN / ATURAN — TIDAK DIUBAH */}
         <section className="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-24">
           <Reveal>
             <SectionIntro
@@ -653,7 +652,7 @@ export default function Polsrifess() {
           </div>
         </section>
 
-        {/* CTA PANDUAN LENGKAP */}
+        {/* CTA PANDUAN LENGKAP — TIDAK DIUBAH */}
         <section className="mx-auto max-w-7xl px-5 pb-20 lg:px-8 lg:pb-28">
           <Reveal>
             <div className="relative overflow-hidden rounded-3xl border border-amber-300/40 bg-gradient-to-br from-amber-50 via-white to-amber-50 p-8 text-center shadow-xl backdrop-blur-md sm:p-12">

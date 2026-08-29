@@ -9,7 +9,6 @@ import {
   Calendar as CalendarIcon,
   Search,
   Filter,
-  CheckCircle2,
   Clock,
 } from "lucide-react";
 
@@ -29,12 +28,15 @@ interface CalendarMonthData {
   year: number;
   monthIndex: number;
   monthName: string;
-  firstDayOffset: number; // 0: Min, 1: Sen, 2: Sel, dst.
+  firstDayOffset: number;
   daysInMonth: number;
   events: CalendarEvent[];
 }
 
-// Data Kalender Lengkap berdasarkan Dokumen Resmi Polsri TA 2026/2027
+// ============================================================
+// DATA KALENDER LENGKAP
+// ============================================================
+
 const academicCalendarData: CalendarMonthData[] = [
   {
     year: 2026,
@@ -503,7 +505,10 @@ const academicCalendarData: CalendarMonthData[] = [
   },
 ];
 
-// Daftar Agenda Lengkap Semester Ganjil (dari gambar Keterangan)
+// ============================================================
+// DAFTAR AGENDA SEMESTER GANJIL
+// ============================================================
+
 const ganjilFullList = [
   {
     no: "1",
@@ -515,9 +520,21 @@ const ganjilFullList = [
     title: "Pendaftar Ulang Mhs. Baru 2025/2026",
     date: "Maret - Juli 2026",
   },
-  { no: "3a", title: "Diksarlin Gelombang 1", date: "27 Juli - 1 Ags. 2026" },
-  { no: "3b", title: "Diksarlin Gelombang 2", date: "3 - 8 Agustus 2026" },
-  { no: "3c", title: "SISDIKTI", date: "10 - 13 Agustus 2026" },
+  {
+    no: "3a",
+    title: "Diksarlin Gelombang 1",
+    date: "27 Juli - 1 Ags. 2026",
+  },
+  {
+    no: "3b",
+    title: "Diksarlin Gelombang 2",
+    date: "3 - 8 Agustus 2026",
+  },
+  {
+    no: "3c",
+    title: "SISDIKTI",
+    date: "10 - 13 Agustus 2026",
+  },
   {
     no: "4",
     title: "Yudisium Semester Genap TA. 2025/2026",
@@ -533,7 +550,11 @@ const ganjilFullList = [
     title: "Daftar Ulang SMT. Ganjil TA. 2025/2026",
     date: "27 Juli - 31 Ags. 2026",
   },
-  { no: "7", title: "Wisuda ke-42", date: "22 - 23 Agustus 2026" },
+  {
+    no: "7",
+    title: "Wisuda ke-42",
+    date: "22 - 23 Agustus 2026",
+  },
   {
     no: "8",
     title: "Audit Mutu Internal (AMI)",
@@ -544,9 +565,21 @@ const ganjilFullList = [
     title: "Ujian LA/Skripsi Susulan (3 bln)",
     date: "19 - 21 Oktober 2026",
   },
-  { no: "10", title: "Yudisium Susulan", date: "27 Oktober 2026" },
-  { no: "11", title: "Wisuda ke-42 Susulan", date: "7 November 2026" },
-  { no: "12", title: "Libur Akhir Tahun 2026", date: "25 Desember 2026" },
+  {
+    no: "10",
+    title: "Yudisium Susulan",
+    date: "27 Oktober 2026",
+  },
+  {
+    no: "11",
+    title: "Wisuda ke-42 Susulan",
+    date: "7 November 2026",
+  },
+  {
+    no: "12",
+    title: "Libur Akhir Tahun 2026",
+    date: "25 Desember 2026",
+  },
   {
     no: "13",
     title: "Awal Kegiatan SMT. Ganjil TA. 2026/2027",
@@ -562,14 +595,26 @@ const ganjilFullList = [
     title: "Ujian Tengah Semester TA. 2026/2027",
     date: "26 - 31 Okt 2026",
   },
-  { no: "16", title: "Input Nilai UTS di SISAK", date: "2 - 7 November 2026" },
+  {
+    no: "16",
+    title: "Input Nilai UTS di SISAK",
+    date: "2 - 7 November 2026",
+  },
   {
     no: "17",
     title: "Ujian Akhir Semester Ganjil TA. 2026/2027",
     date: "11 - 16 Januari 2027",
   },
-  { no: "18", title: "Input Nilai UAS di SISAK", date: "12 - 23 Januari 2027" },
-  { no: "19", title: "Seminar Laporan KP", date: "18 - 23 Januari 2027" },
+  {
+    no: "18",
+    title: "Input Nilai UAS di SISAK",
+    date: "12 - 23 Januari 2027",
+  },
+  {
+    no: "19",
+    title: "Seminar Laporan KP",
+    date: "18 - 23 Januari 2027",
+  },
   {
     no: "20",
     title: "Pra Yudisium Semester Ganjil 2026/2027",
@@ -587,7 +632,10 @@ const ganjilFullList = [
   },
 ];
 
-// Daftar Agenda Lengkap Semester Genap (dari gambar Keterangan)
+// ============================================================
+// DAFTAR AGENDA SEMESTER GENAP
+// ============================================================
+
 const genapFullList = [
   {
     no: "1",
@@ -634,7 +682,11 @@ const genapFullList = [
     title: "Ujian Tengah Semester (UTS) TA. 2026/2027",
     date: "12 - 17 April 2027",
   },
-  { no: "9", title: "Input Nilai UTS di SISAK", date: "19 - 23 April 2027" },
+  {
+    no: "9",
+    title: "Input Nilai UTS di SISAK",
+    date: "19 - 23 April 2027",
+  },
   {
     no: "10",
     title: "Akhir Kegiatan Pembelajaran SMT. Genap TA. 2026/2027",
@@ -650,8 +702,16 @@ const genapFullList = [
     title: "Ujian Lap. Akhir / Tugas Akhir TA. 2026/2027",
     date: "28 Juni - 3 Juli 2027",
   },
-  { no: "13", title: "Pra Yudisium", date: "5 - 9 Juli 2027" },
-  { no: "14", title: "Seminar MBKM", date: "12 - 17 Juli 2027" },
+  {
+    no: "13",
+    title: "Pra Yudisium",
+    date: "5 - 9 Juli 2027",
+  },
+  {
+    no: "14",
+    title: "Seminar MBKM",
+    date: "12 - 17 Juli 2027",
+  },
   {
     no: "15a",
     title: "Diksarlin TA. 27/28 Gelombang 1",
@@ -662,7 +722,11 @@ const genapFullList = [
     title: "Diksarlin TA. 27/28 Gelombang 2",
     date: "2 - 7 Agustus 2027",
   },
-  { no: "15c", title: "SISDIKTI TA. 27/28", date: "9 - 12 Agustus 2027" },
+  {
+    no: "15c",
+    title: "SISDIKTI TA. 27/28",
+    date: "9 - 12 Agustus 2027",
+  },
   {
     no: "16",
     title: "Yudisium Semester Genap TA. 2026/2027",
@@ -683,13 +747,21 @@ const genapFullList = [
     title: "Daftar Ulang SMT. Ganjil TA. 2026/2027",
     date: "26 Juli - 31 Ags. 2027",
   },
-  { no: "20", title: "Wisuda ke-43", date: "20 - 21 Agustus 2027" },
+  {
+    no: "20",
+    title: "Wisuda ke-43",
+    date: "20 - 21 Agustus 2027",
+  },
   {
     no: "21",
     title: "Awal Kegiatan SMT. Ganjil TA. 2027/2028",
     date: "Senin, 6 Sep. 2027",
   },
-  { no: "22", title: "Audit Mutu Internal (AMI)", date: "20 - 24 Sep. 2027" },
+  {
+    no: "22",
+    title: "Audit Mutu Internal (AMI)",
+    date: "20 - 24 Sep. 2027",
+  },
 ];
 
 export default function AcademicCalendarPage() {
@@ -699,13 +771,14 @@ export default function AcademicCalendarPage() {
   const [scrolled, setScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState<string>("Semua");
-  const [selectedSemester, setSelectedSemester] = useState<"Ganjil" | "Genap">(
-    "Ganjil",
-  );
+  const [selectedSemester, setSelectedSemester] =
+    useState<"Ganjil" | "Genap">("Ganjil");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -721,19 +794,25 @@ export default function AcademicCalendarPage() {
   const activeMonth = academicCalendarData[currentMonthIdx];
 
   const handlePrevMonth = () => {
-    if (currentMonthIdx > 0) setCurrentMonthIdx(currentMonthIdx - 1);
+    if (currentMonthIdx > 0) {
+      setCurrentMonthIdx(currentMonthIdx - 1);
+    }
   };
 
   const handleNextMonth = () => {
-    if (currentMonthIdx < academicCalendarData.length - 1)
+    if (currentMonthIdx < academicCalendarData.length - 1) {
       setCurrentMonthIdx(currentMonthIdx + 1);
+    }
   };
 
   const filteredEvents = activeMonth.events.filter((event) => {
     const matchesSearch = event.title
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
-    const matchesType = selectedType === "Semua" || event.type === selectedType;
+
+    const matchesType =
+      selectedType === "Semua" || event.type === selectedType;
+
     return matchesSearch && matchesType;
   });
 
@@ -749,7 +828,11 @@ export default function AcademicCalendarPage() {
   return (
     <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       <div className="min-h-screen bg-white/70">
+
+        {/* ====================================================== */}
         {/* NAVBAR */}
+        {/* ====================================================== */}
+
         <header
           className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
             scrolled
@@ -758,24 +841,33 @@ export default function AcademicCalendarPage() {
           }`}
         >
           <div className="w-full">
-            <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
+            <div className="relative mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
+
+              {/* LOGO */}
               <div className="flex shrink-0 items-center gap-3">
                 <img
                   src="/images/logo.png"
                   alt="Logo Kabinet Kilau Gemilang"
                   className="h-10 w-10 object-contain"
                 />
+
                 <div className="leading-tight">
                   <p className="text-sm font-bold tracking-tight text-slate-800 sm:text-[15px]">
                     Kabinet Kilau Gemilang
                   </p>
+
                   <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500 sm:text-[10px]">
                     BEM Politeknik Negeri Sriwijaya
                   </p>
                 </div>
               </div>
 
+              {/* ================================================== */}
+              {/* DESKTOP NAVIGATION */}
+              {/* ================================================== */}
+
               <nav className="hidden items-center gap-1 lg:flex">
+
                 <Link
                   to="/"
                   className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all hover:bg-white/55 hover:text-amber-600"
@@ -792,6 +884,7 @@ export default function AcademicCalendarPage() {
                   About
                 </a>
 
+                {/* DESKTOP ACADEMIC */}
                 <div className="relative">
                   <button
                     type="button"
@@ -803,6 +896,7 @@ export default function AcademicCalendarPage() {
                     }`}
                   >
                     Academic Information
+
                     <ChevronDown
                       size={14}
                       className={`transition-transform ${
@@ -813,6 +907,7 @@ export default function AcademicCalendarPage() {
 
                   {openDropdown === "academic" && (
                     <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+
                       <Link
                         to="/calendar"
                         className="block rounded-lg bg-amber-50 px-3 py-2.5 text-xs font-semibold text-amber-700"
@@ -844,10 +939,12 @@ export default function AcademicCalendarPage() {
                       >
                         Mahasiswa Berdampak
                       </Link>
+
                     </div>
                   )}
                 </div>
 
+                {/* DESKTOP CAMPUS ECHO */}
                 <div className="relative">
                   <button
                     type="button"
@@ -859,6 +956,7 @@ export default function AcademicCalendarPage() {
                     }`}
                   >
                     Campus Echo
+
                     <ChevronDown
                       size={14}
                       className={`transition-transform ${
@@ -869,6 +967,7 @@ export default function AcademicCalendarPage() {
 
                   {openDropdown === "echo" && (
                     <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+
                       <Link
                         to="/kajian"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:text-amber-700"
@@ -876,6 +975,7 @@ export default function AcademicCalendarPage() {
                       >
                         Kajian
                       </Link>
+
                       <Link
                         to="/bisik-kampus"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:text-amber-700"
@@ -883,6 +983,7 @@ export default function AcademicCalendarPage() {
                       >
                         Bisik Kampus
                       </Link>
+
                       <Link
                         to="/polsrifess"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:text-amber-700"
@@ -890,6 +991,7 @@ export default function AcademicCalendarPage() {
                       >
                         Polsrifess
                       </Link>
+
                     </div>
                   )}
                 </div>
@@ -901,24 +1003,188 @@ export default function AcademicCalendarPage() {
                 >
                   Contact Us
                 </Link>
+
               </nav>
+
+              {/* ================================================== */}
+              {/* MOBILE HAMBURGER */}
+              {/* ================================================== */}
 
               <button
                 type="button"
                 className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/40 bg-white/40 text-slate-700 lg:hidden"
                 onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label="Toggle mobile menu"
+                aria-expanded={mobileOpen}
               >
                 {mobileOpen ? <X size={21} /> : <Menu size={21} />}
               </button>
+
+              {/* ================================================== */}
+              {/* MOBILE NAVIGATION */}
+              {/* ================================================== */}
+
+              {mobileOpen && (
+                <div className="absolute left-0 right-0 top-[72px] border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
+
+                  {/* HOME */}
+                  <Link
+                    to="/"
+                    className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600"
+                    onClick={closeMenus}
+                  >
+                    Home
+                  </Link>
+
+                  {/* ABOUT */}
+                  <a
+                    href="/about"
+                    className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600"
+                    onClick={closeMenus}
+                  >
+                    About
+                  </a>
+
+                  {/* ================================================= */}
+                  {/* MOBILE ACADEMIC */}
+                  {/* ================================================= */}
+
+                  <button
+                    type="button"
+                    className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ${
+                      openDropdown === "academic"
+                        ? "bg-amber-50 text-amber-700"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
+                    }`}
+                    onClick={() => toggleDropdown("academic")}
+                  >
+                    <span>Academic Information</span>
+
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ${
+                        openDropdown === "academic" ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {openDropdown === "academic" && (
+                    <div className="mt-1 rounded-lg bg-slate-50 p-1">
+
+                      <Link
+                        to="/calendar"
+                        className="block rounded-md bg-amber-50 px-3 py-2.5 text-sm font-semibold text-amber-700"
+                        onClick={closeMenus}
+                      >
+                        Academic Calendar
+                      </Link>
+
+                      <Link
+                        to="/scholarship-info"
+                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-700"
+                        onClick={closeMenus}
+                      >
+                        Scholarship Info
+                      </Link>
+
+                      <a
+                        href="/#agenda"
+                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-700"
+                        onClick={closeMenus}
+                      >
+                        Organisasi Mahasiswa
+                      </a>
+
+                      <Link
+                        to="/mahasiswa-berdampak"
+                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-700"
+                        onClick={closeMenus}
+                      >
+                        Mahasiswa Berdampak
+                      </Link>
+
+                    </div>
+                  )}
+
+                  {/* ================================================= */}
+                  {/* MOBILE CAMPUS ECHO */}
+                  {/* ================================================= */}
+
+                  <button
+                    type="button"
+                    className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ${
+                      openDropdown === "echo"
+                        ? "bg-amber-50 text-amber-700"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
+                    }`}
+                    onClick={() => toggleDropdown("echo")}
+                  >
+                    <span>Campus Echo</span>
+
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ${
+                        openDropdown === "echo" ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {openDropdown === "echo" && (
+                    <div className="mt-1 rounded-lg bg-slate-50 p-1">
+
+                      <Link
+                        to="/kajian"
+                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-700"
+                        onClick={closeMenus}
+                      >
+                        Kajian
+                      </Link>
+
+                      <Link
+                        to="/bisik-kampus"
+                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-700"
+                        onClick={closeMenus}
+                      >
+                        Bisik Kampus
+                      </Link>
+
+                      <Link
+                        to="/polsrifess"
+                        className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-700"
+                        onClick={closeMenus}
+                      >
+                        Polsrifess
+                      </Link>
+
+                    </div>
+                  )}
+
+                  {/* CONTACT */}
+                  <Link
+                    to="/contact"
+                    className="mt-1 block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600"
+                    onClick={closeMenus}
+                  >
+                    Contact Us
+                  </Link>
+
+                </div>
+              )}
+
             </div>
           </div>
         </header>
 
+        {/* ====================================================== */}
         {/* CONTENT */}
+        {/* ====================================================== */}
+
         <section className="relative px-5 py-10 lg:px-8 lg:py-14">
           <div className="mx-auto max-w-7xl">
+
             {/* TITLE HEADER */}
             <div className="mx-auto max-w-3xl text-center">
+
               <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100/90 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-amber-800 backdrop-blur-sm">
                 <CalendarIcon size={13} />
                 Politeknik Negeri Sriwijaya
@@ -934,15 +1200,21 @@ export default function AcademicCalendarPage() {
               <p className="mx-auto mt-2 text-xs font-bold uppercase tracking-widest text-slate-600 sm:text-sm">
                 TAHUN AKADEMIK 2026 / 2027
               </p>
+
             </div>
 
-            {/* CONTROLS (SEARCH & FILTER) */}
+            {/* ================================================== */}
+            {/* CONTROLS */}
+            {/* ================================================== */}
+
             <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-white/80 bg-white/60 p-4 shadow-sm backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
+
               <div className="relative flex-1">
                 <Search
                   size={18}
                   className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
                 />
+
                 <input
                   type="text"
                   placeholder="Cari agenda, ujian, yudisium, atau libur..."
@@ -954,30 +1226,42 @@ export default function AcademicCalendarPage() {
 
               <div className="flex flex-wrap items-center gap-2">
                 <Filter size={15} className="text-slate-500" />
-                {["Semua", "Akademik", "Ujian", "Kemahasiswaan", "Libur"].map(
-                  (type) => (
-                    <button
-                      key={type}
-                      type="button"
-                      onClick={() => setSelectedType(type)}
-                      className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
-                        selectedType === type
-                          ? "bg-amber-500 text-white shadow-sm"
-                          : "bg-white/80 text-slate-600 hover:bg-amber-50 hover:text-amber-700"
-                      }`}
-                    >
-                      {type}
-                    </button>
-                  ),
-                )}
+
+                {[
+                  "Semua",
+                  "Akademik",
+                  "Ujian",
+                  "Kemahasiswaan",
+                  "Libur",
+                ].map((type) => (
+                  <button
+                    key={type}
+                    type="button"
+                    onClick={() => setSelectedType(type)}
+                    className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
+                      selectedType === type
+                        ? "bg-amber-500 text-white shadow-sm"
+                        : "bg-white/80 text-slate-600 hover:bg-amber-50 hover:text-amber-700"
+                    }`}
+                  >
+                    {type}
+                  </button>
+                ))}
               </div>
+
             </div>
 
-            {/* MONTHLY CALENDAR GRID & MONTH DETAILED EVENT */}
+            {/* ================================================== */}
+            {/* MONTHLY CALENDAR */}
+            {/* ================================================== */}
+
             <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
+
               {/* CALENDAR GRID */}
               <div className="rounded-3xl border border-white/80 bg-white/95 p-6 shadow-xl backdrop-blur-md sm:p-8">
+
                 <div className="flex items-center justify-between">
+
                   <button
                     type="button"
                     onClick={handlePrevMonth}
@@ -991,6 +1275,7 @@ export default function AcademicCalendarPage() {
                     <p className="text-[10px] font-bold uppercase tracking-widest text-amber-600">
                       Kalender Akademik Polsri
                     </p>
+
                     <h2 className="mt-0.5 text-xl font-black text-slate-900 sm:text-2xl">
                       {activeMonth.monthName}
                     </h2>
@@ -1006,10 +1291,12 @@ export default function AcademicCalendarPage() {
                   >
                     <ChevronRight size={22} />
                   </button>
+
                 </div>
 
                 {/* DAYS OF WEEK */}
                 <div className="mt-6 grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-slate-400 sm:gap-2 sm:text-xs">
+
                   {["MIN", "SEN", "SEL", "RAB", "KAM", "JUM", "SAB"].map(
                     (day) => (
                       <span key={day} className="py-1">
@@ -1029,6 +1316,7 @@ export default function AcademicCalendarPage() {
                     { length: activeMonth.daysInMonth },
                     (_, index) => {
                       const dayNumber = index + 1;
+
                       const eventMatch = activeMonth.events.find(
                         (e) => e.dayNum === dayNumber,
                       );
@@ -1047,44 +1335,57 @@ export default function AcademicCalendarPage() {
                       );
                     },
                   )}
+
                 </div>
 
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-4 border-t border-slate-100 pt-4 text-xs font-semibold text-slate-500">
+
                   <span className="flex items-center gap-1.5">
                     <span className="h-3 w-3 rounded-full bg-amber-500" />
                     Tanggal Agenda/Event
                   </span>
+
                   <span className="flex items-center gap-1.5">
                     <span className="h-3 w-3 rounded-full bg-slate-200" />
                     Hari Kuliah Regular
                   </span>
+
                 </div>
+
               </div>
 
               {/* MONTH EVENTS SUMMARY */}
               <div className="flex flex-col justify-between rounded-3xl bg-slate-900/95 p-6 text-white shadow-2xl backdrop-blur-md sm:p-8">
+
                 <div>
+
                   <div className="flex items-center justify-between border-b border-white/10 pb-5">
+
                     <div>
                       <p className="text-xs font-bold uppercase tracking-widest text-amber-400">
                         Agenda Bulan Ini
                       </p>
+
                       <h3 className="mt-1 text-2xl font-bold">
                         {activeMonth.monthName}
                       </h3>
                     </div>
+
                     <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-amber-300">
                       {filteredEvents.length} Kegiatan
                     </span>
+
                   </div>
 
                   <div className="mt-6 space-y-3.5">
+
                     {filteredEvents.length > 0 ? (
                       filteredEvents.map((event) => (
                         <div
                           key={event.id}
                           className="flex items-start gap-3.5 rounded-2xl border border-white/10 bg-white/5 p-3.5 transition-all hover:bg-white/10"
                         >
+
                           <div
                             className={`flex min-w-[70px] shrink-0 flex-col items-center justify-center rounded-xl px-2 py-2 text-center font-bold ${event.color}`}
                           >
@@ -1094,13 +1395,17 @@ export default function AcademicCalendarPage() {
                           </div>
 
                           <div className="min-w-0 flex-1">
+
                             <span className="inline-block rounded bg-white/10 px-2 py-0.5 text-[9px] font-semibold tracking-wide text-amber-300">
                               {event.type} • Semester {event.semester}
                             </span>
-                            <h4 className="mt-1 text-sm font-semibold text-white leading-snug">
+
+                            <h4 className="mt-1 text-sm font-semibold leading-snug text-white">
                               {event.title}
                             </h4>
+
                           </div>
+
                         </div>
                       ))
                     ) : (
@@ -1108,30 +1413,41 @@ export default function AcademicCalendarPage() {
                         Tidak ada agenda khusus pada bulan ini.
                       </div>
                     )}
+
                   </div>
+
                 </div>
 
                 <div className="mt-6 border-t border-white/10 pt-4 text-[11px] text-slate-400">
                   * Klik tombol navigasi bulan di samping untuk melihat jadwal
                   perkuliahan bulan lainnya.
                 </div>
+
               </div>
+
             </div>
 
-            {/* FULL TABULAR KETERANGAN (SEMESTER GANJIL & GENAP) */}
+            {/* ================================================== */}
+            {/* FULL TABULAR KETERANGAN */}
+            {/* ================================================== */}
+
             <div className="mt-14 rounded-3xl border border-white/80 bg-white/90 p-6 shadow-xl backdrop-blur-md sm:p-10">
+
               <div className="flex flex-col gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-center sm:justify-between">
+
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-widest text-amber-600">
                     Daftar Keterangan Lengkap
                   </span>
+
                   <h2 className="mt-1 text-2xl font-black text-slate-900 sm:text-3xl">
                     Agenda Akademik Polsri 2026/2027
                   </h2>
                 </div>
 
-                {/* SEMESTER TOGGLE BUTTONS */}
+                {/* SEMESTER TOGGLE */}
                 <div className="inline-flex rounded-xl bg-slate-100 p-1">
+
                   <button
                     type="button"
                     onClick={() => setSelectedSemester("Ganjil")}
@@ -1143,6 +1459,7 @@ export default function AcademicCalendarPage() {
                   >
                     Semester Ganjil
                   </button>
+
                   <button
                     type="button"
                     onClick={() => setSelectedSemester("Genap")}
@@ -1154,40 +1471,66 @@ export default function AcademicCalendarPage() {
                   >
                     Semester Genap
                   </button>
+
                 </div>
+
               </div>
 
-              {/* LIST ITEMS TABLE */}
+              {/* TABLE */}
               <div className="mt-6 overflow-x-auto">
-                <table className="w-full text-left border-collapse">
+
+                <table className="w-full border-collapse text-left">
+
                   <thead>
                     <tr className="border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                      <th className="py-3 px-3 w-12 text-center">No</th>
-                      <th className="py-3 px-4">Nama Kegiatan / Agenda</th>
-                      <th className="py-3 px-4 text-right sm:text-left">
+
+                      <th className="w-12 px-3 py-3 text-center">
+                        No
+                      </th>
+
+                      <th className="px-4 py-3">
+                        Nama Kegiatan / Agenda
+                      </th>
+
+                      <th className="px-4 py-3 text-right sm:text-left">
                         Tanggal / Waktu Pelaksanaan
                       </th>
+
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100 text-xs sm:text-sm font-medium text-slate-800">
+
+                  <tbody className="divide-y divide-slate-100 text-xs font-medium text-slate-800 sm:text-sm">
+
                     {filteredFullList.length > 0 ? (
                       filteredFullList.map((item, idx) => (
                         <tr
                           key={idx}
                           className="transition-colors hover:bg-amber-50/60"
                         >
-                          <td className="py-3.5 px-3 text-center font-bold text-amber-600">
+
+                          <td className="px-3 py-3.5 text-center font-bold text-amber-600">
                             {item.no}
                           </td>
-                          <td className="py-3.5 px-4 font-semibold text-slate-900">
+
+                          <td className="px-4 py-3.5 font-semibold text-slate-900">
                             {item.title}
                           </td>
-                          <td className="py-3.5 px-4 text-right sm:text-left text-slate-600 font-semibold">
+
+                          <td className="px-4 py-3.5 text-right font-semibold text-slate-600 sm:text-left">
+
                             <span className="inline-flex items-center gap-1.5 rounded-md bg-slate-100 px-2.5 py-1 text-xs text-slate-700">
-                              <Clock size={12} className="text-amber-600" />
+
+                              <Clock
+                                size={12}
+                                className="text-amber-600"
+                              />
+
                               {item.date}
+
                             </span>
+
                           </td>
+
                         </tr>
                       ))
                     ) : (
@@ -1200,85 +1543,124 @@ export default function AcademicCalendarPage() {
                         </td>
                       </tr>
                     )}
+
                   </tbody>
+
                 </table>
+
               </div>
+
             </div>
+
           </div>
         </section>
 
+        {/* ====================================================== */}
         {/* FOOTER */}
+        {/* ====================================================== */}
+
         <footer
           id="footer"
           className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8"
         >
           <div className="mx-auto max-w-7xl">
+
             <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
+
               <div>
+
                 <div className="flex items-center gap-3">
+
                   <img
                     src="/images/logo.png"
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />
+
                   <div>
-                    <h2 className="font-bold">Kabinet Kilau Gemilang</h2>
+                    <h2 className="font-bold">
+                      Kabinet Kilau Gemilang
+                    </h2>
+
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
                     </p>
                   </div>
+
                 </div>
 
                 <p className="mt-6 max-w-xs text-sm leading-7 text-slate-400">
                   Menjadi wadah yang aktif, responsif, dan konstruktif untuk
                   Politeknik Negeri Sriwijaya yang lebih berdampak.
                 </p>
+
               </div>
 
               <div>
+
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Navigasi
                 </h3>
+
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
-                  <a href="/about" className="hover:text-white transition-all">
+
+                  <a
+                    href="/about"
+                    className="transition-all hover:text-white"
+                  >
                     Tentang Kami
                   </a>
+
                   <a
                     href="/calendar"
-                    className="hover:text-white transition-all"
+                    className="transition-all hover:text-white"
                   >
                     Agenda Kegiatan
                   </a>
+
                   <Link
                     to="/contact"
-                    className="hover:text-white transition-all"
+                    className="transition-all hover:text-white"
                   >
                     Contact Us
                   </Link>
+
                 </div>
+
               </div>
 
               <div>
+
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Mari Terhubung
                 </h3>
+
                 <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
-                  <span className="mt-1 shrink-0 text-amber-400">✉</span>
+                  <span className="mt-1 shrink-0 text-amber-400">
+                    ✉
+                  </span>
                   bem@polsri.ac.id
                 </p>
+
                 <p className="mt-3 text-sm leading-6 text-slate-400">
                   Jl. Srijaya Negara, Bukit Besar,
                   <br />
                   Palembang, Sumatera Selatan
                 </p>
+
               </div>
+
             </div>
 
             <div className="mt-14 border-t border-white/10 pt-6 text-xs text-slate-500">
-              <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
+              <p>
+                © BEM Politeknik Negeri Sriwijaya. All rights reserved.
+              </p>
             </div>
+
           </div>
         </footer>
+
       </div>
     </main>
   );
