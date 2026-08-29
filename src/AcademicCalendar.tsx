@@ -1240,11 +1240,11 @@ export default function AcademicCalendarPage() {
                   Navigasi
                 </h3>
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
-                  <a href="/#visi" className="hover:text-white transition-all">
+                  <a href="/about" className="hover:text-white transition-all">
                     Tentang Kami
                   </a>
                   <a
-                    href="/#agenda"
+                    href="/calendar"
                     className="hover:text-white transition-all"
                   >
                     Agenda Kegiatan

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, PanInfo } from "framer-motion";
 import {
@@ -11,6 +11,7 @@ import {
   Instagram,
   Youtube,
   Quote,
+  ArrowRight,
 } from "lucide-react";
 
 type DropdownName = "academic" | "echo" | null;
@@ -68,24 +69,51 @@ const pejabatTerasData = [
   },
 ];
 
+// DATA DEPARTEMEN BEM
+const departmentsData = [
+  {
+    name: "Departemen Adkesma",
+    desc: "Advokasi & Kesejahteraan Mahasiswa",
+    image: "/images/adkesma/ADKESMA.png",
+  },
+  {
+    name: "Departemen Humas",
+    desc: "Hubungan Masyarakat & Eksternal",
+    image: "/images/humas/HUMAS.png",
+  },
+  {
+    name: "Departemen Kastrat",
+    desc: "Kajian & Aksi Strategis",
+    image: "/images/kastrat/KASTRAT.png",
+  },
+  {
+    name: "Departemen Medinfo",
+    desc: "Media, Data & Informasi",
+    image: "/images/medinfo/MEDINFO.png",
+  },
+  {
+    name: "Departemen PSDM",
+    desc: "Pengembangan Sumber Daya Mahasiswa",
+    image: "/images/psdm/PSDM.png",
+  },
+];
+
 export default function About() {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [videoError, setVideoError] = useState<boolean>(false);
 
-  // ============================================================
   // CAROUSEL & AUTO-SLIDING STATE
-  // ============================================================
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isPaused, setIsPaused] = useState<boolean>(false);
 
   const getItemsPerPage = () => {
     if (typeof window !== "undefined") {
-      if (window.innerWidth >= 1024) return 4; // Desktop: 4 kartu
-      if (window.innerWidth >= 768) return 2; // Tablet: 2 kartu
+      if (window.innerWidth >= 1024) return 4;
+      if (window.innerWidth >= 768) return 2;
     }
-    return 1; // Mobile: 1 kartu
+    return 1;
   };
 
   const [itemsPerPage, setItemsPerPage] = useState<number>(getItemsPerPage());
@@ -113,18 +141,14 @@ export default function About() {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
-  // EFEK AUTO SLIDE (Setiap 3 Detik)
   useEffect(() => {
     if (isPaused) return;
-
     const interval = setInterval(() => {
       nextSlide();
-    }, 3000); // Durasi per ganti slide: 3000 ms = 3 detik
-
+    }, 3000);
     return () => clearInterval(interval);
   }, [currentIndex, isPaused, maxIndex]);
 
-  // Touch / Drag Swipe Handler
   const handleDragEnd = (_: any, info: PanInfo) => {
     const offset = info.offset.x;
     const velocity = info.velocity.x;
@@ -136,21 +160,14 @@ export default function About() {
     }
   };
 
-  // ============================================================
-  // SCROLL DETECTION
-  // ============================================================
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ============================================================
-  // DROPDOWN & MENU HANDLERS
-  // ============================================================
   const toggleDropdown = (name: Exclude<DropdownName, null>) => {
     setOpenDropdown((prev) => (prev === name ? null : name));
   };
@@ -167,13 +184,12 @@ export default function About() {
         <header
           className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
             scrolled
-              ? "border-b border-slate-200/70 bg-white/80 shadow-sm backdrop-blur-xl text-slate-900"
+              ? "border-b border-slate-200/70 bg-white/85 shadow-sm backdrop-blur-xl text-slate-900"
               : "border-b border-white/20 bg-white/20 backdrop-blur-md text-slate-900"
           }`}
         >
           <div className="w-full">
             <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
-              {/* BRANDING */}
               <div className="flex shrink-0 items-center gap-3">
                 <img
                   src="/images/logo.png"
@@ -190,7 +206,6 @@ export default function About() {
                 </div>
               </div>
 
-              {/* DESKTOP NAV */}
               <nav className="hidden items-center gap-1 lg:flex">
                 <Link
                   to="/"
@@ -208,7 +223,6 @@ export default function About() {
                   About
                 </Link>
 
-                {/* ACADEMIC INFORMATION */}
                 <div className="relative">
                   <button
                     type="button"
@@ -262,7 +276,6 @@ export default function About() {
                   )}
                 </div>
 
-                {/* CAMPUS ECHO */}
                 <div className="relative">
                   <button
                     type="button"
@@ -318,7 +331,6 @@ export default function About() {
                 </Link>
               </nav>
 
-              {/* MOBILE MENU BUTTON */}
               <button
                 type="button"
                 aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
@@ -329,7 +341,6 @@ export default function About() {
               </button>
             </div>
 
-            {/* MOBILE NAV */}
             {mobileOpen && (
               <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl text-slate-900 lg:hidden">
                 <Link
@@ -635,7 +646,6 @@ export default function About() {
                     Achmad Jemmy Ramadhan
                   </h4>
                   <div className="mt-1 space-y-0.5 text-xs font-semibold sm:text-sm">
-                   
                     <a
                       href="https://www.instagram.com/achmdjmmyr_/"
                       target="_blank"
@@ -661,7 +671,7 @@ export default function About() {
                   <img
                     src="/images/Pejabat_Teras/Ketua Umum BEM.png"
                     alt="Achmad Jemmy Ramadhan - Ketua Umum BEM Politeknik Sriwijaya"
-                    className="h-full w-full object-cover object-center filter contrast-[1.02] brightness-[1.01] transition-all duration-300 hover:scale-105"
+                    className="h-full w-full object-cover object-top transition-all duration-300 hover:scale-105"
                   />
                 </div>
               </div>
@@ -669,9 +679,7 @@ export default function About() {
           </motion.div>
         </section>
 
-        {/* ====================================================== */}
-        {/* SECTION CAROUSEL SLIDER OTOMATIS (AUTO-SLIDE) */}
-        {/* ====================================================== */}
+        {/* SECTION CAROUSEL SLIDER OTOMATIS */}
         <section
           id="pejabat-teras-bem"
           className="mx-auto max-w-7xl px-5 pb-16 pt-2 lg:px-8"
@@ -683,11 +691,8 @@ export default function About() {
             onTouchStart={() => setIsPaused(true)}
             onTouchEnd={() => setIsPaused(false)}
           >
-            {/* NAVIGASI TOMBOL SLIDER (KANAN ATAS) */}
             <div className="mb-6 flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-             
-              </span>
+              <span className="text-xs font-semibold uppercase tracking-widest text-slate-400"></span>
               <div className="flex gap-2">
                 <button
                   type="button"
@@ -708,7 +713,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* SLIDER CAROUSEL TRACK (ANIMATED WITH FRAMER MOTION) */}
             <div className="overflow-hidden rounded-2xl py-2">
               <motion.div
                 className="flex cursor-grab active:cursor-grabbing"
@@ -735,7 +739,6 @@ export default function About() {
                       transition={{ duration: 0.2 }}
                       className="group flex h-full flex-col overflow-hidden rounded-2xl border border-amber-200/80 bg-white/90 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-2xl"
                     >
-                      {/* FOTO CONTAINER */}
                       <div className="relative h-[320px] w-full overflow-hidden bg-slate-100 sm:h-[340px]">
                         <img
                           src={item.foto}
@@ -745,7 +748,6 @@ export default function About() {
                         />
                       </div>
 
-                      {/* DETAIL TEKS */}
                       <div className="flex flex-1 flex-col justify-between p-5">
                         <div>
                           <h4 className="text-base font-bold text-slate-900 sm:text-lg">
@@ -774,7 +776,6 @@ export default function About() {
               </motion.div>
             </div>
 
-            {/* DOTS INDICATOR */}
             <div className="mt-8 flex justify-center gap-2">
               {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
                 <button
@@ -789,6 +790,67 @@ export default function About() {
                 />
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ===================================================================== */}
+        {/* SECTION DEPARTEMEN - TATA LETAK 3 & 2 (BARIS TERAKHIR POSISI DI TENGAH) */}
+        {/* ===================================================================== */}
+        <section
+          id="departemen"
+          className="mx-auto max-w-7xl px-5 pb-20 pt-4 lg:px-8"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-12 text-center"
+          >
+            <h2 className="text-3xl font-black uppercase tracking-wider text-amber-500 sm:text-4xl">
+              Departemen BEM Polsri
+            </h2>
+          </motion.div>
+
+          {/* Menggunakan Flexbox dengan justify-center agar sisa 2 item di baris terakhir otomatis ditengah */}
+          <div className="flex flex-wrap justify-center gap-8">
+            {departmentsData.map((dept, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-amber-200/80 bg-white/90 shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)] max-w-sm"
+              >
+                {/* CONTAINER GAMBAR DENGAN OBJECT-TOP AGAR BAGIAN ATAS TERLIHAT UTUH */}
+                <div className="relative h-[320px] w-full overflow-hidden bg-slate-100 sm:h-[360px]">
+                  <img
+                    src={dept.image}
+                    alt={dept.name}
+                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+
+                <div className="flex flex-1 flex-col justify-between p-5">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900 sm:text-xl">
+                      {dept.name}
+                    </h3>
+                    <p className="mt-1 text-xs font-medium text-slate-600 sm:text-sm">
+                      {dept.desc}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 border-t border-slate-200/85 pt-3">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-600 group-hover:underline sm:text-sm">
+                      <span>Selengkapnya</span>
+                      <ArrowRight size={15} />
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </section>
 
