@@ -635,12 +635,7 @@ export default function About() {
                     Achmad Jemmy Ramadhan
                   </h4>
                   <div className="mt-1 space-y-0.5 text-xs font-semibold sm:text-sm">
-                    <p className="text-amber-600">
-                      Jabatan : Ketua Umum BEM Politeknik Sriwijaya
-                    </p>
-                    <p className="uppercase tracking-wider text-slate-400">
-                      Kabinet : Kabinet Kilau Gemilang
-                    </p>
+                   
                     <a
                       href="https://www.instagram.com/achmdjmmyr_/"
                       target="_blank"
