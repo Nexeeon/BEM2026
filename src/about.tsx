@@ -808,7 +808,7 @@ export default function About() {
             className="mb-12 text-center"
           >
             <h2 className="text-3xl font-black uppercase tracking-wider text-amber-500 sm:text-4xl">
-              Departemen BEM Polsri
+              Departemen 
             </h2>
           </motion.div>
 
