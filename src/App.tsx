@@ -8,6 +8,7 @@ import Polsrifess from "./Polsrifess";
 import AcademicCalendar from "./AcademicCalendar";
 import ScholarshipInfo from "./scholarship-info";
 import MahasiswaBerdampak from "./mahasiswa_berdampak";
+import OrganisasiMahasiswa from "./Organisasi_Mahasiswa";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/calendar" element={<AcademicCalendar />} />
         <Route path="/academic-calendar" element={<AcademicCalendar />} />
         <Route path="/scholarship-info" element={<ScholarshipInfo />} />
+        <Route path="/organisasi-mahasiswa" element={<OrganisasiMahasiswa />} />
         <Route path="/mahasiswa-berdampak" element={<MahasiswaBerdampak />} />
       </Routes>
     </Router>
