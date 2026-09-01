@@ -1,793 +1,982 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
-  Menu,
-  X,
-  ChevronDown,
-  ChevronRight,
-  ExternalLink,
-  Mail,
-  MapPin,
-  Instagram,
-  Youtube,
-  Globe,
-  Users,
-  Award,
-  Layers,
-  Sparkles,
+  ArrowRight,
   ArrowUpRight,
+  ChevronDown,
+  Instagram,
+  Layers,
+  Mail,
+  Menu,
+  Sparkles,
+  Users,
+  X,
+  Youtube,
+  Search,
+  ExternalLink,
 } from "lucide-react";
 
-// Data Organisasi sesuai spesifikasi & urutan asset
-const hmjData = [
-  { name: "Administrasi Bisnis", image: "/images/HMJ/AB.png", category: "HMJ" },
-  { name: "Akuntansi", image: "/images/HMJ/akuntansi.png", category: "HMJ" },
+type DropdownName = "academic" | "echo" | null;
+
+interface OrgItem {
+  id: string;
+  name: string;
+  category: "HMJ" | "UKM" | "Komunitas";
+  image: string;
+}
+
+// ============================================================
+// DATA ORGANISASI MAHASISWA (URUTAN WAJIB)
+// ============================================================
+const hmjData: OrgItem[] = [
   {
+    id: "hmj-1",
+    name: "Administrasi Bisnis",
+    category: "HMJ",
+    image: "/images/HMJ/AB.png",
+  },
+  {
+    id: "hmj-2",
+    name: "Akuntansi",
+    category: "HMJ",
+    image: "/images/HMJ/akuntansi.png",
+  },
+  {
+    id: "hmj-3",
     name: "Bahasa dan Pariwisata",
+    category: "HMJ",
     image: "/images/HMJ/bahasa dan pariwisata.png",
-    category: "HMJ",
   },
-  { name: "Teknik Elektro", image: "/images/HMJ/elektro.png", category: "HMJ" },
-  { name: "Teknik Mesin", image: "/images/HMJ/mesin.png", category: "HMJ" },
   {
+    id: "hmj-4",
+    name: "Teknik Elektro",
+    category: "HMJ",
+    image: "/images/HMJ/elektro.png",
+  },
+  {
+    id: "hmj-5",
+    name: "Teknik Mesin",
+    category: "HMJ",
+    image: "/images/HMJ/mesin.png",
+  },
+  {
+    id: "hmj-6",
     name: "Manajemen Informatika",
+    category: "HMJ",
     image: "/images/HMJ/mi.png",
-    category: "HMJ",
   },
   {
+    id: "hmj-7",
     name: "Rekayasa Teknologi dan Bisnis Pertanian",
-    image: "/images/HMJ/RTBP.png",
     category: "HMJ",
+    image: "/images/HMJ/RTBP.png",
   },
-  { name: "Teknik Sipil", image: "/images/HMJ/sipil.png", category: "HMJ" },
-  { name: "Teknik Kimia", image: "/images/HMJ/Tekkim.png", category: "HMJ" },
-  { name: "Teknik Komputer", image: "/images/HMJ/tekom.png", category: "HMJ" },
+  {
+    id: "hmj-8",
+    name: "Teknik Sipil",
+    category: "HMJ",
+    image: "/images/HMJ/sipil.png",
+  },
+  {
+    id: "hmj-9",
+    name: "Teknik Kimia",
+    category: "HMJ",
+    image: "/images/HMJ/Tekkim.png",
+  },
+  {
+    id: "hmj-10",
+    name: "Teknik Komputer",
+    category: "HMJ",
+    image: "/images/HMJ/tekom.png",
+  },
 ];
 
-const ukmData = [
+const ukmData: OrgItem[] = [
   {
+    id: "ukm-1",
     name: "English Debating Society (EDS)",
+    category: "UKM",
     image: "/images/UKM/eds.webp",
-    category: "UKM",
   },
   {
+    id: "ukm-2",
     name: "UKM Himpala Bahtera Buana (HBB)",
+    category: "UKM",
     image: "/images/UKM/himpala.webp",
-    category: "UKM",
   },
   {
+    id: "ukm-3",
     name: "Keluarga Tarbiyah Islamiah (KARISMA)",
+    category: "UKM",
     image: "/images/UKM/karisma.webp",
-    category: "UKM",
   },
   {
+    id: "ukm-4",
     name: "Mahasiswa Riset dan Sains (MARS)",
+    category: "UKM",
     image: "/images/UKM/mars.webp",
-    category: "UKM",
   },
-  { name: "Olahraga", image: "/images/UKM/olahraga.webp", category: "UKM" },
-  { name: "Simpony", image: "/images/UKM/simpony.webp", category: "UKM" },
   {
+    id: "ukm-5",
+    name: "Olahraga",
+    category: "UKM",
+    image: "/images/UKM/olahraga.webp",
+  },
+  {
+    id: "ukm-6",
+    name: "Simpony",
+    category: "UKM",
+    image: "/images/UKM/simpony.webp",
+  },
+  {
+    id: "ukm-7",
     name: "Warta Politeknik Sriwijaya (WPS)",
-    image: "/images/UKM/wps.webp",
     category: "UKM",
+    image: "/images/UKM/wps.webp",
   },
 ];
 
-const komunitasData = [
+const komunitasData: OrgItem[] = [
   {
+    id: "kom-1",
     name: "Bujang Gadis Politeknik Negeri Sriwijaya (BGPOL)",
+    category: "Komunitas",
     image: "/images/Komunitas/bgp.webp",
-    category: "Komunitas",
   },
   {
-    name: "Automation Robotic Club of Sriwijaya (ARCOS)",
-    image: "/images/Komunitas/robotik.webp",
+    id: "kom-2",
+    name: "Majelis Permusyawaratan Mahasiswa (MPM)",
     category: "Komunitas",
-  },
-  {
-    name: "Pramuka",
-    image: "/images/Komunitas/pramuka.webp",
-    category: "Komunitas",
-  },
-  {
-    name: "Entrepreneur (Kewirausahaan) Polsri",
-    image: "/images/Komunitas/wirausaha.webp",
-    category: "Komunitas",
-  },
-  {
-    name: "MPM Polsri",
     image: "/images/Komunitas/mpm.webp",
+  },
+  {
+    id: "kom-3",
+    name: "Pramuka",
     category: "Komunitas",
+    image: "/images/Komunitas/pramuka.webp",
+  },
+  {
+    id: "kom-4",
+    name: "Automation Robotic Club of Sriwijaya (ARCOS)",
+    category: "Komunitas",
+    image: "/images/Komunitas/robotik.webp",
+  },
+  {
+    id: "kom-5",
+    name: "Entrepreneur (Kewirausahaan) Polsri",
+    category: "Komunitas",
+    image: "/images/Komunitas/wirausaha.webp",
   },
 ];
 
-export const OrganisasiMahasiswa: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [academicDropdownOpen, setAcademicDropdownOpen] = useState(false);
-  const [campusEchoDropdownOpen, setCampusEchoDropdownOpen] = useState(false);
-  const [mobileAcademicOpen, setMobileAcademicOpen] = useState(false);
-  const [mobileEchoOpen, setMobileEchoOpen] = useState(false);
+export default function OrganisasiMahasiswa() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // Handle Navbar Shadow & Background on Scroll
+  // ============================================================
+  // SCROLL DETECTION
+  // ============================================================
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  // Smooth scroll handler for filter buttons
+  // ============================================================
+  // DROPDOWN & HELPER FUNCTIONS
+  // ============================================================
+  const toggleDropdown = (name: Exclude<DropdownName, null>) => {
+    setOpenDropdown(openDropdown === name ? null : name);
+  };
+
+  const closeMenus = () => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  };
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
+  const filterItems = (list: OrgItem[]) => {
+    if (!searchQuery) return list;
+    return list.filter((item) =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans relative selection:bg-amber-500/30 selection:text-amber-200 overflow-x-hidden">
-      {/* BACKGROUND IMAGE WITH OVERLAY */}
-      <div
-        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 pointer-events-none"
-        style={{ backgroundImage: `url('/images/bgweb.jpeg')` }}
-      />
-      <div className="fixed inset-0 z-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950/95 pointer-events-none" />
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
+      {/* ======================================================== */}
+      {/* OVERLAY BACKGROUND */}
+      {/* ======================================================== */}
+      <div className="min-h-screen bg-white/65">
+        {/* ====================================================== */}
+        {/* NAVBAR — PERSIS DENGAN KAJIAN.TSX */}
+        {/* ====================================================== */}
+        <header
+          className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
+            scrolled
+              ? "border-b border-slate-200/70 bg-white/80 shadow-sm backdrop-blur-xl"
+              : "border-b border-white/20 bg-white/20 backdrop-blur-md"
+          }`}
+        >
+          <div className="w-full">
+            <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
+              {/* BRANDING */}
+              <div className="flex shrink-0 items-center gap-3">
+                <img
+                  src="/images/logo.png"
+                  alt="Logo Kabinet Kilau Gemilang"
+                  className="h-10 w-10 object-contain"
+                />
 
-      {/* ================= NAVBAR ================= */}
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-lg border-b border-slate-200 dark:border-slate-800 py-3"
-            : "bg-white/60 dark:bg-slate-950/60 backdrop-blur-md border-b border-white/10 py-4"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* Logo & Brand */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <img
-                src="/images/logo.png"
-                alt="Logo BEM Polsri"
-                className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="flex flex-col">
-                <span className="font-bold text-slate-900 dark:text-white tracking-wide text-sm sm:text-base leading-tight">
-                  Kabinet Kilau Gemilang
-                </span>
-                <span className="text-xs text-amber-600 dark:text-amber-400 font-medium">
-                  BEM Politeknik Negeri Sriwijaya
-                </span>
+                <div className="leading-tight">
+                  <p className="text-sm font-bold tracking-tight text-slate-800 sm:text-[15px]">
+                    Kabinet Kilau Gemilang
+                  </p>
+
+                  <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500 sm:text-[10px]">
+                    BEM Politeknik Negeri Sriwijaya
+                  </p>
+                </div>
               </div>
-            </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-              <Link
-                to="/"
-                className="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-100/60 dark:hover:bg-slate-800/60 transition-all"
-              >
-                Home
-              </Link>
+              {/* DESKTOP NAVIGATION */}
+              <nav className="hidden items-center gap-1 lg:flex">
+                {/* HOME */}
+                <Link
+                  to="/"
+                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  onClick={closeMenus}
+                >
+                  Home
+                </Link>
 
-              <Link
-                to="/about"
-                className="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-100/60 dark:hover:bg-slate-800/60 transition-all"
-              >
-                About
-              </Link>
+                {/* ABOUT */}
+                <Link
+                  to="/about"
+                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  onClick={closeMenus}
+                >
+                  About
+                </Link>
 
-              {/* Academic Information Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setAcademicDropdownOpen(true)}
-                onMouseLeave={() => setAcademicDropdownOpen(false)}
-              >
-                <button className="px-3.5 py-2 rounded-xl text-sm font-medium text-amber-600 dark:text-amber-400 bg-amber-500/10 flex items-center gap-1.5 transition-all">
-                  Academic Information
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${academicDropdownOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
+                {/* ACADEMIC INFORMATION */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => toggleDropdown("academic")}
+                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
+                      openDropdown === "academic"
+                        ? "bg-white/60 text-amber-700"
+                        : "text-amber-600 hover:bg-white/55 hover:text-amber-700"
+                    }`}
+                  >
+                    Academic Information
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ease-out ${
+                        openDropdown === "academic" ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
 
-                {academicDropdownOpen && (
-                  <div className="absolute top-full left-0 w-60 pt-2 animate-in fade-in slide-in-from-top-2 duration-200">
-                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl p-2 backdrop-blur-lg">
+                  {openDropdown === "academic" && (
+                    <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+                      {/* ACADEMIC CALENDAR */}
                       <Link
-                        to="/academic-calendar"
-                        className="block px-3.5 py-2.5 rounded-xl text-sm text-slate-700 dark:text-slate-300 hover:bg-amber-500/10 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                        to="/calendar"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
                       >
                         Academic Calendar
                       </Link>
-                      <Link
-                        to="/scholarship-info"
-                        className="block px-3.5 py-2.5 rounded-xl text-sm text-slate-700 dark:text-slate-300 hover:bg-amber-500/10 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+
+                      {/* SCHOLARSHIP INFO */}
+                      <a
+                        href="/scholarship-info"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
                       >
                         Scholarship Info
-                      </Link>
+                      </a>
+
+                      {/* ORGANISASI MAHASISWA (ACTIVE) */}
                       <Link
                         to="/organisasi-mahasiswa"
-                        className="block px-3.5 py-2.5 rounded-xl text-sm font-semibold text-amber-600 dark:text-amber-400 bg-amber-500/10 transition-colors"
+                        className="block rounded-lg bg-amber-50 px-3 py-2.5 text-xs font-semibold text-amber-700 outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
                       >
                         Organisasi Mahasiswa
                       </Link>
-                      <Link
-                        to="/mahasiswa-berdampak"
-                        className="block px-3.5 py-2.5 rounded-xl text-sm text-slate-700 dark:text-slate-300 hover:bg-amber-500/10 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+
+                      {/* MAHASISWA BERDAMPAK */}
+                      <a
+                        href="/mahasiswa-berdampak"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
                       >
                         Mahasiswa Berdampak
-                      </Link>
+                      </a>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
 
-              {/* Campus Echo Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setCampusEchoDropdownOpen(true)}
-                onMouseLeave={() => setCampusEchoDropdownOpen(false)}
-              >
-                <button className="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-100/60 dark:hover:bg-slate-800/60 flex items-center gap-1.5 transition-all">
-                  Campus Echo
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${campusEchoDropdownOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
+                {/* CAMPUS ECHO */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => toggleDropdown("echo")}
+                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
+                      openDropdown === "echo"
+                        ? "bg-white/60 text-amber-700"
+                        : "text-slate-600 hover:bg-white/55 hover:text-amber-600"
+                    }`}
+                  >
+                    Campus Echo
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ease-out ${
+                        openDropdown === "echo" ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
 
-                {campusEchoDropdownOpen && (
-                  <div className="absolute top-full left-0 w-48 pt-2 animate-in fade-in slide-in-from-top-2 duration-200">
-                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl p-2 backdrop-blur-lg">
+                  {openDropdown === "echo" && (
+                    <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
+                      {/* KAJIAN */}
                       <Link
                         to="/kajian"
-                        className="block px-3.5 py-2.5 rounded-xl text-sm text-slate-700 dark:text-slate-300 hover:bg-amber-500/10 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
                       >
                         Kajian
                       </Link>
+
+                      {/* BISIK KAMPUS */}
                       <Link
                         to="/bisik-kampus"
-                        className="block px-3.5 py-2.5 rounded-xl text-sm text-slate-700 dark:text-slate-300 hover:bg-amber-500/10 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
                       >
                         Bisik Kampus
                       </Link>
+
+                      {/* POLSRIFESS */}
                       <Link
                         to="/polsrifess"
-                        className="block px-3.5 py-2.5 rounded-xl text-sm text-slate-700 dark:text-slate-300 hover:bg-amber-500/10 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        onClick={closeMenus}
                       >
                         Polsrifess
                       </Link>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
 
-              <Link
-                to="/contact-us"
-                className="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-100/60 dark:hover:bg-slate-800/60 transition-all"
-              >
-                Contact Us
-              </Link>
-            </nav>
+                {/* CONTACT US */}
+                <Link
+                  to="/contact"
+                  className="ml-1 rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/50 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  onClick={closeMenus}
+                >
+                  Contact Us
+                </Link>
+              </nav>
 
-            {/* Mobile Menu Button */}
-            <div className="flex items-center lg:hidden">
+              {/* MOBILE BUTTON */}
               <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none"
-                aria-label="Toggle Menu"
+                type="button"
+                aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
+                aria-expanded={mobileOpen}
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/40 bg-white/40 text-slate-700 outline-none backdrop-blur-md transition-all duration-200 ease-out hover:border-amber-300 hover:bg-white/60 hover:text-amber-600 active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-amber-400/70 lg:hidden"
+                onClick={() => setMobileOpen(!mobileOpen)}
               >
-                {mobileMenuOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
+                {mobileOpen ? <X size={21} /> : <Menu size={21} />}
               </button>
             </div>
-          </div>
-        </div>
 
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-2xl p-4 transition-all animate-in slide-in-from-top-4 duration-300">
-            <div className="flex flex-col gap-2">
-              <Link
-                to="/"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
-              >
-                Home
-              </Link>
-              <Link
-                to="/about"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
-              >
-                About
-              </Link>
-
-              {/* Mobile Academic Dropdown */}
-              <div>
-                <button
-                  onClick={() => setMobileAcademicOpen(!mobileAcademicOpen)}
-                  className="w-full px-4 py-3 rounded-xl text-base font-medium text-amber-600 dark:text-amber-400 bg-amber-500/10 flex items-center justify-between"
+            {/* MOBILE NAVIGATION */}
+            {mobileOpen && (
+              <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
+                <Link
+                  to="/"
+                  className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
                 >
-                  <span>Academic Information</span>
+                  Home
+                </Link>
+
+                <Link
+                  to="/about"
+                  className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  About
+                </Link>
+
+                {/* MOBILE ACADEMIC */}
+                <button
+                  type="button"
+                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
+                    openDropdown === "academic"
+                      ? "bg-amber-50 text-amber-700"
+                      : "text-amber-600 hover:bg-slate-50 hover:text-amber-700"
+                  }`}
+                  onClick={() => toggleDropdown("academic")}
+                >
+                  Academic Information
                   <ChevronDown
-                    className={`w-5 h-5 transition-transform ${mobileAcademicOpen ? "rotate-180" : ""}`}
+                    size={14}
+                    className={`transition-transform duration-200 ease-out ${
+                      openDropdown === "academic" ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
-                {mobileAcademicOpen && (
-                  <div className="pl-4 py-2 flex flex-col gap-1 mt-1 border-l-2 border-amber-500/30 ml-4">
+
+                {openDropdown === "academic" && (
+                  <div className="mt-1 rounded-lg bg-slate-50 p-1">
                     <Link
-                      to="/academic-calendar"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300"
+                      to="/calendar"
+                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Academic Calendar
                     </Link>
-                    <Link
-                      to="/scholarship-info"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300"
+
+                    <a
+                      href="/scholarship-info"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Scholarship Info
-                    </Link>
+                    </a>
+
                     <Link
                       to="/organisasi-mahasiswa"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg text-sm font-semibold text-amber-600 dark:text-amber-400 bg-amber-500/10"
+                      className="block rounded-md bg-amber-50 px-3 py-2.5 text-sm font-semibold text-amber-700 outline-none transition-all duration-200 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Organisasi Mahasiswa
                     </Link>
-                    <Link
-                      to="/mahasiswa-berdampak"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300"
+
+                    <a
+                      href="/mahasiswa-berdampak"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Mahasiswa Berdampak
-                    </Link>
+                    </a>
                   </div>
                 )}
-              </div>
 
-              {/* Mobile Campus Echo Dropdown */}
-              <div>
+                {/* MOBILE CAMPUS ECHO */}
                 <button
-                  onClick={() => setMobileEchoOpen(!mobileEchoOpen)}
-                  className="w-full px-4 py-3 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-between"
+                  type="button"
+                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
+                    openDropdown === "echo"
+                      ? "bg-amber-50 text-amber-700"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
+                  }`}
+                  onClick={() => toggleDropdown("echo")}
                 >
-                  <span>Campus Echo</span>
+                  Campus Echo
                   <ChevronDown
-                    className={`w-5 h-5 transition-transform ${mobileEchoOpen ? "rotate-180" : ""}`}
+                    size={14}
+                    className={`transition-transform duration-200 ease-out ${
+                      openDropdown === "echo" ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
-                {mobileEchoOpen && (
-                  <div className="pl-4 py-2 flex flex-col gap-1 mt-1 border-l-2 border-amber-500/30 ml-4">
+
+                {openDropdown === "echo" && (
+                  <div className="mt-1 rounded-lg bg-slate-50 p-1">
                     <Link
                       to="/kajian"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300"
+                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Kajian
                     </Link>
+
                     <Link
                       to="/bisik-kampus"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Bisik Kampus
                     </Link>
+
                     <Link
                       to="/polsrifess"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      onClick={closeMenus}
                     >
                       Polsrifess
                     </Link>
                   </div>
                 )}
+
+                <Link
+                  to="/contact"
+                  className="mt-1 block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                  onClick={closeMenus}
+                >
+                  Contact Us
+                </Link>
+              </div>
+            )}
+          </div>
+        </header>
+
+        {/* ======================================================== */}
+        {/* HERO SECTION */}
+        {/* ======================================================== */}
+        <section className="px-5 pt-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="relative overflow-hidden rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12 lg:p-14">
+              {/* ACCENT GLOW */}
+              <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-amber-400/20 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-orange-400/20 blur-3xl" />
+
+              <div className="relative z-10 mx-auto max-w-3xl text-center">
+                {/* BADGE */}
+                <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100/90 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
+                  <Sparkles size={14} className="text-amber-600" />
+                  KABINET KILAU GEMILANG
+                </span>
+
+                <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+                  ORGANISASI MAHASISWA
+                </h1>
+
+                <p className="mt-4 text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
+                  Ruang tumbuh, berkolaborasi, dan berdampak bagi mahasiswa
+                  Politeknik Negeri Sriwijaya.
+                </p>
+
+                <div className="mt-8 flex flex-wrap justify-center gap-3">
+                  <button
+                    onClick={() => scrollToSection("section-hmj")}
+                    className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  >
+                    Jelajahi Organisasi
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+        {/* INTRODUCTION & STATISTIK SECTION */}
+        {/* ======================================================== */}
+        <section className="px-5 py-12 lg:px-8 lg:py-16">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-6 lg:grid-cols-12 lg:items-stretch">
+              {/* INTRO TEXT */}
+              <div className="flex flex-col justify-center rounded-3xl border border-slate-200 bg-white/90 p-8 backdrop-blur-md lg:col-span-7">
+                <span className="mb-2 inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-600">
+                  <Layers size={14} />
+                  Mengenal Lebih Dekat
+                </span>
+                <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                  Wadah Potensi & Pengembangan Diri
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-slate-600">
+                  Organisasi Mahasiswa Politeknik Negeri Sriwijaya merupakan
+                  wadah mahasiswa untuk mengembangkan minat, bakat, kompetensi,
+                  kepemimpinan, kreativitas, serta kontribusi nyata di
+                  lingkungan kampus maupun masyarakat luas.
+                </p>
               </div>
 
+              {/* STATISTIK */}
+              <div className="flex flex-col justify-between rounded-3xl border border-slate-800 bg-slate-950 p-8 text-white shadow-xl lg:col-span-5">
+                <div>
+                  <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
+                    Total Organisasi Aktif
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-400">
+                    Struktur Ormawa Politeknik Negeri Sriwijaya
+                  </p>
+                </div>
+
+                <div className="mt-6 grid grid-cols-3 gap-3 text-center">
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <p className="text-3xl font-black text-amber-400 sm:text-4xl">
+                      10
+                    </p>
+                    <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-slate-300">
+                      HMJ
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <p className="text-3xl font-black text-amber-400 sm:text-4xl">
+                      7
+                    </p>
+                    <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-slate-300">
+                      UKM
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <p className="text-3xl font-black text-amber-400 sm:text-4xl">
+                      5
+                    </p>
+                    <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-slate-300">
+                      Komunitas
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mt-6 text-[11px] text-slate-400">
+                  Bersama mewujudkan insan akademis yang proaktif, solid, dan
+                  berprestasi.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+        {/* INTERACTIVE FILTER & SEARCH TOOLBAR */}
+        {/* ======================================================== */}
+        <section className="sticky top-[80px] z-40 px-5 py-3 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col gap-4 rounded-2xl border border-amber-300/40 bg-white/95 p-3.5 shadow-lg backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
+              {/* FILTER BUTTONS */}
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("section-hmj")}
+                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-700 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
+                >
+                  HMJ (10)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("section-ukm")}
+                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-700 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
+                >
+                  UKM (7)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("section-komunitas")}
+                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-700 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
+                >
+                  Komunitas (5)
+                </button>
+              </div>
+
+              {/* SEARCH INPUT */}
+              <div className="relative w-full sm:w-64">
+                <Search
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  placeholder="Cari organisasi..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50/80 py-2 pl-9 pr-4 text-xs font-medium text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-400/30"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+        {/* SECTION HMJ */}
+        {/* ======================================================== */}
+        <section id="section-hmj" className="scroll-mt-36 px-5 py-10 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                HIMPUNAN MAHASISWA JURUSAN
+              </h2>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Wadah mahasiswa pada masing-masing jurusan untuk mengembangkan
+                kompetensi akademik, profesional, dan solidaritas mahasiswa.
+              </p>
+            </div>
+
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+              {filterItems(hmjData).map((item) => (
+                <OrgCard key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+        {/* SECTION UKM */}
+        {/* ======================================================== */}
+        <section id="section-ukm" className="scroll-mt-36 px-5 py-10 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                UNIT KEGIATAN MAHASISWA
+              </h2>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Wadah mahasiswa Politeknik Negeri Sriwijaya untuk mengembangkan
+                minat, bakat, kreativitas, dan prestasi.
+              </p>
+            </div>
+
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {filterItems(ukmData).map((item) => (
+                <OrgCard key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+        {/* SECTION KOMUNITAS */}
+        {/* ======================================================== */}
+        <section
+          id="section-komunitas"
+          className="scroll-mt-36 px-5 py-10 lg:px-8"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                KOMUNITAS
+              </h2>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                Ruang kolaborasi mahasiswa yang terbentuk berdasarkan minat,
+                kreativitas, bakat, dan ketertarikan yang sama.
+              </p>
+            </div>
+
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+              {filterItems(komunitasData).map((item) => (
+                <OrgCard key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+        {/* CTA / PENUTUP */}
+        {/* ======================================================== */}
+        <section className="px-5 py-16 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12">
+              <Users size={48} className="mx-auto mb-4 text-amber-500" />
+
+              <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+                BERSAMA, BERKOLABORASI, DAN BERDAMPAK
+              </h2>
+
+              <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">
+                Temukan tempat bereksplorasi dan maksimalkan potensi terbaikmu
+                selama perkuliahan di Politeknik Negeri Sriwijaya.
+              </p>
+
               <Link
-                to="/contact-us"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                to="/contact"
+                className="mt-8 inline-flex items-center gap-3 rounded-full bg-amber-500 px-10 py-4 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
               >
-                Contact Us
+                HUBUNGI KAMI
+                <ArrowRight size={18} />
               </Link>
             </div>
           </div>
-        )}
-      </header>
-
-      {/* Main Content Wrapper */}
-      <main className="relative z-10 pt-28 pb-20">
-        {/* ================= HERO SECTION ================= */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 overflow-hidden border border-slate-700/50 bg-gradient-to-br from-slate-900/90 via-slate-900/70 to-slate-950/90 shadow-2xl backdrop-blur-xl">
-            {/* Glow Decorative Elements */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="relative z-10 max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs sm:text-sm font-semibold mb-6 tracking-wide uppercase">
-                <Sparkles className="w-4 h-4" />
-                Kabinet Kilau Gemilang
-              </div>
-
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
-                ORGANISASI{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">
-                  MAHASISWA
-                </span>
-              </h1>
-
-              <p className="text-base sm:text-xl text-slate-300 font-normal leading-relaxed mb-8">
-                "Ruang tumbuh, berkolaborasi, dan berdampak bagi mahasiswa
-                Politeknik Negeri Sriwijaya."
-              </p>
-
-              {/* Quick Filter Navigation Buttons */}
-              <div className="flex flex-wrap gap-3 pt-2">
-                <button
-                  onClick={() => scrollToSection("section-hmj")}
-                  className="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition-all duration-300 shadow-lg shadow-amber-500/20 hover:scale-105 flex items-center gap-2"
-                >
-                  HMJ <ChevronRight className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => scrollToSection("section-ukm")}
-                  className="px-6 py-3 rounded-2xl bg-slate-800/80 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 transition-all duration-300 hover:scale-105 flex items-center gap-2"
-                >
-                  UKM <ChevronRight className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => scrollToSection("section-komunitas")}
-                  className="px-6 py-3 rounded-2xl bg-slate-800/80 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 transition-all duration-300 hover:scale-105 flex items-center gap-2"
-                >
-                  Komunitas <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
         </section>
 
-        {/* ================= STATISTIK SECTION ================= */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Stat Card 1 */}
-            <div className="rounded-3xl p-6 sm:p-8 bg-slate-900/60 border border-slate-800 backdrop-blur-md shadow-xl flex items-center gap-5 transition-all duration-300 hover:border-amber-500/50 hover:bg-slate-900/80 group">
-              <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
-                <Layers className="w-7 h-7" />
-              </div>
+        {/* ======================================================== */}
+        {/* FOOTER — PERSIS DENGAN KAJIAN.TSX */}
+        {/* ======================================================== */}
+        <footer className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
+              {/* BRAND */}
               <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-1">
-                  10
-                </div>
-                <div className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">
-                  Himpunan Mahasiswa Jurusan
-                </div>
-              </div>
-            </div>
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/images/logo.png"
+                    alt="Logo BEM Polsri"
+                    className="h-12 w-12 object-contain"
+                  />
 
-            {/* Stat Card 2 */}
-            <div className="rounded-3xl p-6 sm:p-8 bg-slate-900/60 border border-slate-800 backdrop-blur-md shadow-xl flex items-center gap-5 transition-all duration-300 hover:border-amber-500/50 hover:bg-slate-900/80 group">
-              <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
-                <Award className="w-7 h-7" />
+                  <div>
+                    <h2 className="font-bold">KabinetKilau Gemilang</h2>
+
+                    <p className="mt-1 text-xs text-slate-400">
+                      BEM Politeknik Negeri Sriwijaya
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mt-6 max-w-xs text-sm leading-7 text-slate-400">
+                  Menjadi wadah yang aktif, responsif, dan konstruktif untuk
+                  Politeknik Negeri Sriwijaya yang lebih berdampak.
+                </p>
               </div>
+
+              {/* NAVIGASI */}
               <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-1">
-                  7
-                </div>
-                <div className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">
-                  Unit Kegiatan Mahasiswa
-                </div>
-              </div>
-            </div>
+                <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
+                  Navigasi
+                </h3>
 
-            {/* Stat Card 3 */}
-            <div className="rounded-3xl p-6 sm:p-8 bg-slate-900/60 border border-slate-800 backdrop-blur-md shadow-xl flex items-center gap-5 transition-all duration-300 hover:border-amber-500/50 hover:bg-slate-900/80 group">
-              <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
-                <Users className="w-7 h-7" />
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-1">
-                  5
-                </div>
-                <div className="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">
-                  Komunitas
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ================= SECTION 1 — HMJ ================= */}
-        <section
-          id="section-hmj"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-28"
-        >
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-amber-400 text-xs sm:text-sm font-bold uppercase tracking-widest block mb-2">
-              Pilar Akademik & Profesional
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-              HIMPUNAN MAHASISWA JURUSAN
-            </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
-              "Wadah mahasiswa pada masing-masing jurusan untuk mengembangkan
-              kompetensi akademik, profesional, dan solidaritas mahasiswa."
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {hmjData.map((item, index) => (
-              <div
-                key={index}
-                className="rounded-3xl bg-slate-900/70 border border-slate-800/80 p-6 flex flex-col justify-between backdrop-blur-md shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/50 hover:shadow-2xl group"
-              >
-                <div>
-                  {/* Logo Container */}
-                  <div className="w-full h-48 rounded-2xl bg-slate-950/60 border border-slate-800/50 flex items-center justify-center p-4 mb-6 overflow-hidden relative">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-
-                  {/* Category & Name */}
-                  <span className="inline-block px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold mb-2">
-                    {item.category}
-                  </span>
-                  <h3 className="text-lg font-bold text-white leading-snug mb-4 group-hover:text-amber-400 transition-colors">
-                    {item.name}
-                  </h3>
-                </div>
-
-                {/* Detail Action */}
-                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-sm font-semibold text-amber-400 group-hover:text-amber-300 cursor-pointer">
-                  <span>Lihat Detail</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ================= SECTION 2 — UKM ================= */}
-        <section
-          id="section-ukm"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 scroll-mt-28"
-        >
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-amber-400 text-xs sm:text-sm font-bold uppercase tracking-widest block mb-2">
-              Minat, Bakat & Kreativitas
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-              UNIT KEGIATAN MAHASISWA
-            </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
-              "Wadah mahasiswa Politeknik Negeri Sriwijaya untuk mengembangkan
-              minat, bakat, kreativitas, dan prestasi."
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {ukmData.map((item, index) => (
-              <div
-                key={index}
-                className="rounded-3xl bg-slate-900/70 border border-slate-800/80 p-6 flex flex-col justify-between backdrop-blur-md shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/50 hover:shadow-2xl group"
-              >
-                <div>
-                  {/* Logo Container */}
-                  <div className="w-full h-48 rounded-2xl bg-slate-950/60 border border-slate-800/50 flex items-center justify-center p-4 mb-6 overflow-hidden relative">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-
-                  {/* Category & Name */}
-                  <span className="inline-block px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold mb-2">
-                    {item.category}
-                  </span>
-                  <h3 className="text-lg font-bold text-white leading-snug mb-4 group-hover:text-amber-400 transition-colors">
-                    {item.name}
-                  </h3>
-                </div>
-
-                {/* Detail Action */}
-                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-sm font-semibold text-amber-400 group-hover:text-amber-300 cursor-pointer">
-                  <span>Lihat Detail</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ================= SECTION 3 — KOMUNITAS ================= */}
-        <section
-          id="section-komunitas"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 scroll-mt-28"
-        >
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-amber-400 text-xs sm:text-sm font-bold uppercase tracking-widest block mb-2">
-              Kolaborasi & Pengabdian
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-              KOMUNITAS
-            </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
-              "Kumpulan ruang gerak kolaboratif mahasiswa untuk mengeksplorasi
-              potensi khusus di luar kegiatan akademik utama."
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {komunitasData.map((item, index) => (
-              <div
-                key={index}
-                className="rounded-3xl bg-slate-900/70 border border-slate-800/80 p-6 flex flex-col justify-between backdrop-blur-md shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/50 hover:shadow-2xl group"
-              >
-                <div>
-                  {/* Logo Container */}
-                  <div className="w-full h-48 rounded-2xl bg-slate-950/60 border border-slate-800/50 flex items-center justify-center p-4 mb-6 overflow-hidden relative">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-
-                  {/* Category & Name */}
-                  <span className="inline-block px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold mb-2">
-                    {item.category}
-                  </span>
-                  <h3 className="text-lg font-bold text-white leading-snug mb-4 group-hover:text-amber-400 transition-colors">
-                    {item.name}
-                  </h3>
-                </div>
-
-                {/* Detail Action */}
-                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-sm font-semibold text-amber-400 group-hover:text-amber-300 cursor-pointer">
-                  <span>Lihat Detail</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      {/* ================= FOOTER ================= */}
-      <footer className="bg-slate-950 border-t border-slate-800 text-slate-300 pt-16 pb-12 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-            {/* Brand Info */}
-            <div className="lg:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <img
-                  src="/images/logo.png"
-                  alt="Logo BEM"
-                  className="w-10 h-10 object-contain"
-                />
-                <div>
-                  <h3 className="text-lg font-bold text-white">
-                    Kabinet Kilau Gemilang
-                  </h3>
-                  <p className="text-xs text-amber-400 font-medium">
-                    BEM Politeknik Negeri Sriwijaya
-                  </p>
-                </div>
-              </div>
-              <p className="text-slate-400 text-sm leading-relaxed max-w-md mb-6">
-                "Menjadi wadah yang aktif, responsif, dan konstruktif untuk
-                Politeknik Negeri Sriwijaya yang lebih berdampak."
-              </p>
-              {/* Social Media Links */}
-              <div className="flex items-center gap-3">
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-amber-400 hover:border-amber-500/50 transition-colors"
-                >
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://youtube.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-amber-400 hover:border-amber-500/50 transition-colors"
-                >
-                  <Youtube className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://polsri.ac.id"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-amber-400 hover:border-amber-500/50 transition-colors"
-                >
-                  <Globe className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Navigasi Column */}
-            <div>
-              <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
-                NAVIGASI
-              </h4>
-              <ul className="space-y-2.5 text-sm">
-                <li>
+                <div className="mt-5 grid gap-3 text-sm text-slate-400">
                   <Link
-                    to="/about"
-                    className="hover:text-amber-400 transition-colors"
+                    to="/#visi"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Tentang Kami
                   </Link>
-                </li>
-                <li>
+
                   <Link
-                    to="/agenda"
-                    className="hover:text-amber-400 transition-colors"
+                    to="/#agenda"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Agenda Kegiatan
                   </Link>
-                </li>
-                <li>
+
                   <Link
-                    to="/contact-us"
-                    className="hover:text-amber-400 transition-colors"
+                    to="/contact"
+                    className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Contact Us
                   </Link>
-                </li>
-              </ul>
-            </div>
+                </div>
+              </div>
 
-            {/* Mari Terhubung Column */}
-            <div>
-              <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
-                MARI TERHUBUNG
-              </h4>
-              <ul className="space-y-3 text-sm text-slate-400">
-                <li className="flex items-start gap-2.5">
-                  <Mail className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+              {/* MARI TERHUBUNG */}
+              <div>
+                <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
+                  Mari Terhubung
+                </h3>
+
+                <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
+                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />
+                  bem@polsri.ac.id
+                </p>
+
+                <p className="mt-3 text-sm leading-6 text-slate-400">
+                  Jl. Srijaya Negara, Bukit Besar,
+                  <br />
+                  Palembang, Sumatera Selatan
+                </p>
+
+                <div className="mt-5 flex gap-2">
+                  {/* INSTAGRAM */}
                   <a
-                    href="mailto:bem@polsri.ac.id"
-                    className="hover:text-amber-400 transition-colors"
+                    href="https://www.instagram.com/bempolsri_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   >
-                    bem@polsri.ac.id
+                    <Instagram size={16} />
                   </a>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                  <span>
-                    Jl. Srijaya Negara, Bukit Besar, Palembang, Sumatera Selatan
-                  </span>
-                </li>
-              </ul>
+
+                  {/* X */}
+                  <a
+                    href="https://x.com/polsrimenfess"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="X Twitter"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  >
+                    𝕏
+                  </a>
+
+                  {/* YOUTUBE */}
+                  <a
+                    href="https://www.youtube.com/@bemkmpolsri3259"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="YouTube"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 outline-none transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.95] focus-visible:ring-2 focus-visible:ring-amber-400/70"
+                  >
+                    <Youtube size={17} />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* COPYRIGHT */}
+            <div className="mt-14 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
+              <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
             </div>
           </div>
-
-          <div className="pt-8 border-t border-slate-800/80 text-center text-xs text-slate-500">
-            &copy; {new Date().getFullYear()} BEM Politeknik Negeri Sriwijaya —
-            Kabinet Kilau Gemilang. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </main>
   );
-};
+}
 
-export default OrganisasiMahasiswa;
+// ============================================================
+// SUBKOMPONEN CARD ORGANISASI MAHASISWA (PERSIS GAYA KAJIAN)
+// ============================================================
+function OrgCard({ item }: { item: OrgItem }) {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <article className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5">
+      <div>
+        {/* TOP BADGE */}
+        <div className="flex items-center justify-between">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-700">
+            {item.category}
+          </span>
+          <ExternalLink
+            size={16}
+            className="text-slate-300 transition-all duration-200 group-hover:text-amber-500"
+          />
+        </div>
+
+        {/* LOGO ORGANISASI */}
+        <div className="my-6 flex h-28 w-full items-center justify-center rounded-2xl bg-slate-50/70 p-3 transition-transform duration-200 group-hover:scale-105">
+          {!imgError ? (
+            <img
+              src={item.image}
+              alt={item.name}
+              onError={() => setImgError(true)}
+              className="max-h-full max-w-full object-contain drop-shadow-sm"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center rounded-xl bg-amber-100/70 font-black text-amber-700">
+              {item.name.substring(0, 3).toUpperCase()}
+            </div>
+          )}
+        </div>
+
+        {/* NAMA ORGANISASI */}
+        <h3 className="text-base font-black leading-snug text-slate-900 transition-colors duration-200 group-hover:text-amber-700">
+          {item.name}
+        </h3>
+      </div>
+
+      {/* FOOTER CARD */}
+      <div className="mt-6 border-t border-slate-100 pt-4">
+        <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-600">
+          Lihat Detail
+          <ArrowUpRight
+            size={14}
+            className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
+        </span>
+      </div>
+    </article>
+  );
+}
