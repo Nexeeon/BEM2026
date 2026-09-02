@@ -26,16 +26,17 @@ export default function ScholarshipInfo() {
   };
 
   return (
-    <main
+    <main 
       className="relative flex min-h-screen flex-col overflow-x-hidden text-slate-900 scroll-smooth bg-[#fdfbf7] bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url('/images/bgweb.jpeg')` }}
     >
-      {/* OVERLAY KREM TRANSPARAN IDENTIK DENGAN HALAMAN ABOUT */}
+      {/* OVERLAY KREM TRANSPARAN */}
       <div className="absolute inset-0 bg-[#fdfbf7]/60 pointer-events-none z-0" />
 
       <div className="relative flex min-h-screen flex-1 flex-col z-10">
-        {/* NAVBAR FULL-WIDTH */}
-        <header className="relative z-[100] w-full bg-[#fdfbf7]/90 backdrop-blur-md border-b border-amber-900/10">
+        
+        {/* NAVBAR STICKY (MENGIKUT KE BAWAH) */}
+        <header className="sticky top-0 z-[100] w-full bg-[#fdfbf7]/90 backdrop-blur-md border-b border-amber-900/10 shadow-sm transition-all duration-200">
           <div className="w-full">
             <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
               {/* BRANDING */}
@@ -203,7 +204,7 @@ export default function ScholarshipInfo() {
 
             {/* MOBILE MENU CONTENT */}
             {mobileOpen && (
-              <div className="border-t border-amber-900/10 bg-[#fdfbf7] px-5 py-3 shadow-lg lg:hidden">
+              <div className="border-t border-amber-900/10 bg-[#fdfbf7] px-5 py-3 shadow-lg lg:hidden max-h-[calc(100vh-72px)] overflow-y-auto">
                 <Link
                   to="/"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 hover:bg-amber-100/50 hover:text-amber-700"
@@ -333,7 +334,12 @@ export default function ScholarshipInfo() {
         <section className="relative flex flex-1 flex-col items-center justify-center px-5 py-20 lg:py-28 overflow-hidden text-center">
           <div className="relative z-10 mx-auto w-full max-w-4xl flex flex-col items-center">
             {/* BADGE */}
-           
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-900/10 bg-[#fdfbf7]/80 px-4 py-1.5 shadow-sm backdrop-blur-md">
+              <Sparkles className="h-4 w-4 text-amber-600" />
+              <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
+                PORTAL BEASISWA POLSRI
+              </span>
+            </div>
 
             {/* SUBTITLE */}
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-slate-600 mb-6">
@@ -363,9 +369,9 @@ export default function ScholarshipInfo() {
 
             {/* DESKRIPSI */}
             <p className="mt-8 max-w-xl text-sm sm:text-base font-medium text-slate-700 leading-relaxed">
-              Kami sedang menyiapkan portal informasi beasiswa lengkap untuk
-              membantu mahasiswa Politeknik Negeri Sriwijaya mengakses berbagai
-              bantuan pendidikan dan kesempatan pendanaan studi.
+              Kami sedang menyiapkan portal informasi beasiswa lengkap untuk membantu
+              mahasiswa Politeknik Negeri Sriwijaya mengakses berbagai bantuan pendidikan
+              dan kesempatan pendanaan studi.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
