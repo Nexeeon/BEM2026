@@ -8,7 +8,6 @@ import {
   Layers,
   Mail,
   Menu,
-  X,
   Youtube,
   Search,
   ExternalLink,
@@ -16,6 +15,7 @@ import {
   Trophy,
   UsersRound,
   RotateCcw,
+  X,
 } from "lucide-react";
 
 type DropdownName = "academic" | "echo" | null;
@@ -308,8 +308,8 @@ export default function OrganisasiMahasiswa() {
                     onClick={() => toggleDropdown("academic")}
                     className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
                       openDropdown === "academic"
-                        ? "bg-white/60 text-amber-700"
-                        : "text-amber-600 hover:bg-white/55 hover:text-amber-700"
+                        ? "bg-white/60 text-amber-600"
+                        : "text-amber-600 hover:bg-white/55 hover:text-amber-600"
                     }`}
                   >
                     Academic Information
@@ -326,7 +326,7 @@ export default function OrganisasiMahasiswa() {
                       {/* ACADEMIC CALENDAR */}
                       <Link
                         to="/calendar"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Academic Calendar
@@ -335,7 +335,7 @@ export default function OrganisasiMahasiswa() {
                       {/* SCHOLARSHIP INFO */}
                       <a
                         href="/scholarship-info"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Scholarship Info
@@ -344,7 +344,7 @@ export default function OrganisasiMahasiswa() {
                       {/* ORGANISASI MAHASISWA (ACTIVE) */}
                       <Link
                         to="/organisasi-mahasiswa"
-                        className="block rounded-lg bg-amber-50 px-3 py-2.5 text-xs font-semibold text-amber-700 outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        className="block rounded-lg bg-amber-50 px-3 py-2.5 text-xs font-semibold text-amber-600 outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Organisasi Mahasiswa
@@ -353,7 +353,7 @@ export default function OrganisasiMahasiswa() {
                       {/* MAHASISWA BERDAMPAK */}
                       <a
                         href="/mahasiswa-berdampak"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Mahasiswa Berdampak
@@ -369,7 +369,7 @@ export default function OrganisasiMahasiswa() {
                     onClick={() => toggleDropdown("echo")}
                     className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
                       openDropdown === "echo"
-                        ? "bg-white/60 text-amber-700"
+                        ? "bg-white/60 text-amber-600"
                         : "text-slate-600 hover:bg-white/55 hover:text-amber-600"
                     }`}
                   >
@@ -387,7 +387,7 @@ export default function OrganisasiMahasiswa() {
                       {/* KAJIAN */}
                       <Link
                         to="/kajian"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Kajian
@@ -396,7 +396,7 @@ export default function OrganisasiMahasiswa() {
                       {/* BISIK KAMPUS */}
                       <Link
                         to="/bisik-kampus"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Bisik Kampus
@@ -405,7 +405,7 @@ export default function OrganisasiMahasiswa() {
                       {/* POLSRIFESS */}
                       <Link
                         to="/polsrifess"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Polsrifess
@@ -460,8 +460,8 @@ export default function OrganisasiMahasiswa() {
                   type="button"
                   className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
                     openDropdown === "academic"
-                      ? "bg-amber-50 text-amber-700"
-                      : "text-amber-600 hover:bg-slate-50 hover:text-amber-700"
+                      ? "bg-amber-50 text-amber-600"
+                      : "text-amber-600 hover:bg-slate-50 hover:text-amber-600"
                   }`}
                   onClick={() => toggleDropdown("academic")}
                 >
@@ -478,7 +478,7 @@ export default function OrganisasiMahasiswa() {
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
                     <Link
                       to="/calendar"
-                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Academic Calendar
@@ -486,7 +486,7 @@ export default function OrganisasiMahasiswa() {
 
                     <a
                       href="/scholarship-info"
-                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Scholarship Info
@@ -494,7 +494,7 @@ export default function OrganisasiMahasiswa() {
 
                     <Link
                       to="/organisasi-mahasiswa"
-                      className="block rounded-md bg-amber-50 px-3 py-2.5 text-sm font-semibold text-amber-700 outline-none transition-all duration-200 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      className="block rounded-md bg-amber-50 px-3 py-2.5 text-sm font-semibold text-amber-600 outline-none transition-all duration-200 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Organisasi Mahasiswa
@@ -502,7 +502,7 @@ export default function OrganisasiMahasiswa() {
 
                     <a
                       href="/mahasiswa-berdampak"
-                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Mahasiswa Berdampak
@@ -515,7 +515,7 @@ export default function OrganisasiMahasiswa() {
                   type="button"
                   className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
                     openDropdown === "echo"
-                      ? "bg-amber-50 text-amber-700"
+                      ? "bg-amber-50 text-amber-600"
                       : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
                   }`}
                   onClick={() => toggleDropdown("echo")}
@@ -533,7 +533,7 @@ export default function OrganisasiMahasiswa() {
                   <div className="mt-1 rounded-lg bg-slate-50 p-1">
                     <Link
                       to="/kajian"
-                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Kajian
@@ -541,7 +541,7 @@ export default function OrganisasiMahasiswa() {
 
                     <Link
                       to="/bisik-kampus"
-                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Bisik Kampus
@@ -549,7 +549,7 @@ export default function OrganisasiMahasiswa() {
 
                     <Link
                       to="/polsrifess"
-                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Polsrifess
@@ -578,11 +578,13 @@ export default function OrganisasiMahasiswa() {
               <div className="relative overflow-hidden rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12 lg:p-14">
                 {/* ACCENT GLOW */}
                 <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-amber-400/20 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-orange-400/20 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-amber-500/20 blur-3xl" />
 
                 <div className="relative z-10 mx-auto max-w-3xl text-center">
-                  <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-                    Organisasi Mahasiswa Politeknik Negeri Sriwijaya
+               
+
+                  <h1 className="text-3xl font-black tracking-tight text-amber-600 sm:text-4xl lg:text-5xl">
+                  Organisasi Mahasiswa Politeknik Negeri Sriwijayai
                   </h1>
 
                   <p className="mt-4 text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
@@ -604,7 +606,7 @@ export default function OrganisasiMahasiswa() {
           <section className="px-5 py-12 lg:px-8 lg:py-16">
             <div className="mx-auto max-w-7xl">
               <div className="mx-auto max-w-3xl text-center mb-10">
-                <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                <h2 className="text-2xl font-black tracking-tight text-amber-600 sm:text-3xl">
                   JENIS-JENIS ORGANISASI MAHASISWA
                 </h2>
                 <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
@@ -802,35 +804,35 @@ export default function OrganisasiMahasiswa() {
                 <button
                   type="button"
                   onClick={() => scrollToSection("section-mpm")}
-                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-700 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
+                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-600 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
                 >
                   MPM
                 </button>
                 <button
                   type="button"
                   onClick={() => scrollToSection("section-bem")}
-                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-700 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
+                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-600 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
                 >
                   BEM
                 </button>
                 <button
                   type="button"
                   onClick={() => scrollToSection("section-hmj")}
-                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-700 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
+                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-600 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
                 >
                   HMJ (10)
                 </button>
                 <button
                   type="button"
                   onClick={() => scrollToSection("section-ukm")}
-                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-700 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
+                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-600 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
                 >
                   UKM (7)
                 </button>
                 <button
                   type="button"
                   onClick={() => scrollToSection("section-komunitas")}
-                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-700 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
+                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-600 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
                 >
                   Komunitas (5)
                 </button>
@@ -863,7 +865,7 @@ export default function OrganisasiMahasiswa() {
               {searchResults.length > 0 ? (
                 <div>
                   <div className="mb-6">
-                    <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                    <h2 className="text-2xl font-black tracking-tight text-amber-600 sm:text-3xl">
                       HASIL PENCARIAN
                     </h2>
                     <p className="mt-1 text-sm text-slate-600">
@@ -913,7 +915,7 @@ export default function OrganisasiMahasiswa() {
             >
               <div className="mx-auto max-w-7xl">
                 <div className="max-w-3xl">
-                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                  <h2 className="text-2xl font-black tracking-tight text-amber-600 sm:text-3xl">
                     MAJELIS PERMUSYAWARATAN MAHASISWA
                   </h2>
                   <p className="mt-2 text-sm leading-7 text-slate-600">
@@ -939,7 +941,7 @@ export default function OrganisasiMahasiswa() {
             >
               <div className="mx-auto max-w-7xl">
                 <div className="max-w-3xl">
-                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                  <h2 className="text-2xl font-black tracking-tight text-amber-600 sm:text-3xl">
                     BADAN EKSEKUTIF MAHASISWA
                   </h2>
                   <p className="mt-2 text-sm leading-7 text-slate-600">
@@ -966,7 +968,7 @@ export default function OrganisasiMahasiswa() {
             >
               <div className="mx-auto max-w-7xl">
                 <div className="max-w-3xl">
-                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                  <h2 className="text-2xl font-black tracking-tight text-amber-600 sm:text-3xl">
                     HIMPUNAN MAHASISWA JURUSAN
                   </h2>
                   <p className="mt-2 text-sm leading-7 text-slate-600">
@@ -993,7 +995,7 @@ export default function OrganisasiMahasiswa() {
             >
               <div className="mx-auto max-w-7xl">
                 <div className="max-w-3xl">
-                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                  <h2 className="text-2xl font-black tracking-tight text-amber-600 sm:text-3xl">
                     UNIT KEGIATAN MAHASISWA
                   </h2>
                   <p className="mt-2 text-sm leading-7 text-slate-600">
@@ -1019,7 +1021,7 @@ export default function OrganisasiMahasiswa() {
             >
               <div className="mx-auto max-w-7xl">
                 <div className="max-w-3xl">
-                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                  <h2 className="text-2xl font-black tracking-tight text-amber-600 sm:text-3xl">
                     KOMUNITAS
                   </h2>
                   <p className="mt-2 text-sm leading-7 text-slate-600">
@@ -1050,7 +1052,7 @@ export default function OrganisasiMahasiswa() {
                 strokeWidth={2}
               />
 
-              <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+              <h2 className="text-3xl font-black tracking-tight text-amber-600 sm:text-4xl">
                 BERSAMA, BERKOLABORASI, DAN BERDAMPAK
               </h2>
 
@@ -1206,7 +1208,7 @@ function OrgCard({ item }: { item: OrgItem }) {
       <div>
         {/* TOP BADGE */}
         <div className="flex items-center justify-between">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-700">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-600">
             {item.category}
           </span>
           <ExternalLink
@@ -1225,14 +1227,14 @@ function OrgCard({ item }: { item: OrgItem }) {
               className="max-h-full max-w-full object-contain drop-shadow-sm"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center rounded-xl bg-amber-100/70 font-black text-amber-700">
+            <div className="flex h-full w-full items-center justify-center rounded-xl bg-amber-100/70 font-black text-amber-600">
               {item.name.substring(0, 3).toUpperCase()}
             </div>
           )}
         </div>
 
         {/* NAMA ORGANISASI */}
-        <h3 className="text-base font-black leading-snug text-slate-900 transition-colors duration-200 group-hover:text-amber-700">
+        <h3 className="text-base font-black leading-snug text-slate-900 transition-colors duration-200 group-hover:text-amber-600">
           {item.name}
         </h3>
       </div>

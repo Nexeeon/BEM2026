@@ -813,10 +813,7 @@ export default function Home() {
               <div className="flex flex-col justify-between lg:col-span-7">
                 {/* VISI */}
                 <div>
-                  <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-amber-100/60 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-amber-700 backdrop-blur-sm">
-                    <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
-                    ARAH GERAK KAMI
-                  </div>
+               
 
                   <h2 className="mt-4 font-serif text-4xl font-black uppercase tracking-tight text-amber-500 sm:text-5xl lg:text-6xl">
                     VISI
