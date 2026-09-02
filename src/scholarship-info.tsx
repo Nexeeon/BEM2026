@@ -334,12 +334,7 @@ export default function ScholarshipInfo() {
         <section className="relative flex flex-1 flex-col items-center justify-center px-5 py-20 lg:py-28 overflow-hidden text-center">
           <div className="relative z-10 mx-auto w-full max-w-4xl flex flex-col items-center">
             {/* BADGE */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-900/10 bg-[#fdfbf7]/80 px-4 py-1.5 shadow-sm backdrop-blur-md">
-              <Sparkles className="h-4 w-4 text-amber-600" />
-              <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
-                PORTAL BEASISWA POLSRI
-              </span>
-            </div>
+          
 
             {/* SUBTITLE */}
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-slate-600 mb-6">
