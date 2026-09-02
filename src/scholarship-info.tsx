@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, type ComponentType } from "react";
 import { Link } from "react-router-dom";
 import {
   ChevronDown,
@@ -7,10 +7,71 @@ import {
   Menu,
   X,
   Youtube,
-  Sparkles,
+  Landmark,
+  Users,
+  GraduationCap,
+  Star,
+  ArrowUpRight,
+  CalendarClock,
+  type LucideIcon,
 } from "lucide-react";
 
 type DropdownName = "academic" | "echo" | null;
+
+type Scholarship = {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  link: string;
+  deadline?: string;
+  icon: LucideIcon;
+  panel: "amber" | "slate";
+};
+
+const scholarships: Scholarship[] = [
+  {
+    id: "bi",
+    name: "Beasiswa Bank Indonesia",
+    category: "Beasiswa Instansi Pemerintah",
+    description:
+      "Diselenggarakan oleh Bank Indonesia untuk mahasiswa aktif minimal semester 2 dengan IPK ≥ 3.00. Penerima akan tergabung dalam komunitas GenBI dan mendapatkan pembinaan kepemimpinan, pelatihan soft skill, serta kesempatan berjejaring dengan sesama penerima se-Indonesia. Program ini menjadi langkah awal untuk mencetak generasi muda yang unggul dan berdaya saing dalam pembangunan nasional.",
+    link: "https://www.bi.go.id/id/default.aspx",
+    icon: Landmark,
+    panel: "amber",
+  },
+  {
+    id: "kse",
+    name: "Beasiswa Karya Salemba Empat",
+    category: "Beasiswa Yayasan",
+    description:
+      "Diselenggarakan oleh Yayasan Karya Salemba Empat bagi mahasiswa semester ≥2 dari keluarga kurang mampu. Selain tunjangan hidup Rp750.000/bulan selama 1 tahun, penerima juga mendapat pelatihan soft skill, akses jaringan alumni nasional, dan pendampingan pengembangan karakter. KSE mendorong mahasiswa POLSRI untuk tumbuh menjadi individu yang aktif, mandiri, dan siap menghadapi tantangan masa depan.",
+    link: "https://beasiswa.or.id/",
+    icon: Users,
+    panel: "slate",
+  },
+  {
+    id: "kip",
+    name: "Beasiswa KIP-Kuliah",
+    category: "Beasiswa Pemerintah",
+    description:
+      "Program pemerintah bagi mahasiswa baru dari keluarga tidak mampu namun berprestasi, mencakup pembebasan biaya kuliah penuh dan bantuan biaya hidup hingga lulus. KIP-Kuliah membuka akses pendidikan tinggi tanpa hambatan finansial, sekaligus mendukung POLSRI mencetak lulusan yang unggul, berdaya saing, dan siap membangun bangsa.",
+    link: "https://kip-kuliah.kemdiktisaintek.go.id/",
+    icon: GraduationCap,
+    panel: "amber",
+  },
+  {
+    id: "smart",
+    name: "Smart Scholarship",
+    category: "Beasiswa YBM BRILiaN",
+    description:
+      "Program pendayagunaan zakat YBM BRILiaN di bidang pendidikan bagi mahasiswa D3/D4/S1 berprestasi dari keluarga kurang mampu. Benefit yang didapat meliputi subsidi UKT 2 semester, jejaring nasional & internasional, mentoring, serta pengalaman pemberdayaan masyarakat untuk membentuk SDM yang unggul dan berkarakter.",
+    link: "https://brilianscholarship.id/login",
+    deadline: "Pendaftaran hingga 24 Oktober 2025",
+    icon: Star,
+    panel: "slate",
+  },
+];
 
 export default function ScholarshipInfo() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -25,18 +86,34 @@ export default function ScholarshipInfo() {
     setOpenDropdown(null);
   };
 
+  // Menutup menu ketika ukuran layar berubah ke desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setMobileOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <main 
-      className="relative flex min-h-screen flex-col overflow-x-hidden text-slate-900 scroll-smooth bg-[#fdfbf7] bg-cover bg-center bg-no-repeat"
+    <main
+      className="relative flex min-h-screen flex-col overflow-x-clip scroll-smooth bg-[#fdfbf7] bg-cover bg-center bg-no-repeat text-slate-900"
       style={{ backgroundImage: `url('/images/bgweb.jpeg')` }}
     >
       {/* OVERLAY KREM TRANSPARAN */}
-      <div className="absolute inset-0 bg-[#fdfbf7]/60 pointer-events-none z-0" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[#fdfbf7]/60" />
 
-      <div className="relative flex min-h-screen flex-1 flex-col z-10">
-        
-        {/* NAVBAR STICKY (MENGIKUT KE BAWAH) */}
-        <header className="sticky top-0 z-[100] w-full bg-[#fdfbf7]/90 backdrop-blur-md border-b border-amber-900/10 shadow-sm transition-all duration-200">
+      <div className="relative z-10 flex min-h-screen flex-1 flex-col">
+        {/* =========================================================
+            NAVBAR - SUDAH STICKY DENGAN POSITION STICKY
+        ========================================================= */}
+        <header className="sticky top-0 z-[100] w-full border-b border-amber-900/10 bg-[#fdfbf7]/90 shadow-sm backdrop-blur-md">
           <div className="w-full">
             <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
               {/* BRANDING */}
@@ -51,14 +128,18 @@ export default function ScholarshipInfo() {
                   <p className="text-sm font-bold tracking-tight text-slate-800 sm:text-[15px]">
                     Kabinet Kilau Gemilang
                   </p>
+
                   <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500 sm:text-[10px]">
                     BEM Politeknik Negeri Sriwijaya
                   </p>
                 </div>
               </div>
 
-              {/* DESKTOP NAV */}
+              {/* =====================================================
+                  DESKTOP NAVIGATION
+              ===================================================== */}
               <nav className="hidden items-center gap-1 lg:flex">
+                {/* HOME */}
                 <Link
                   to="/"
                   className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/50 hover:text-amber-700 active:scale-[0.98]"
@@ -67,6 +148,7 @@ export default function ScholarshipInfo() {
                   Home
                 </Link>
 
+                {/* ABOUT */}
                 <a
                   href="/about"
                   className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/50 hover:text-amber-700 active:scale-[0.98]"
@@ -75,7 +157,9 @@ export default function ScholarshipInfo() {
                   About
                 </a>
 
-                {/* ACADEMIC INFORMATION */}
+                {/* =================================================
+                    ACADEMIC INFORMATION
+                ================================================= */}
                 <div className="relative">
                   <button
                     type="button"
@@ -87,6 +171,7 @@ export default function ScholarshipInfo() {
                     }`}
                   >
                     Academic Information
+
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
@@ -96,7 +181,7 @@ export default function ScholarshipInfo() {
                   </button>
 
                   {openDropdown === "academic" && (
-                    <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-amber-900/10 bg-[#fdfbf7] p-1.5 shadow-xl">
+                    <div className="absolute left-0 top-full z-[110] mt-2 w-60 overflow-hidden rounded-xl border border-amber-900/10 bg-[#fdfbf7] p-1.5 shadow-xl">
                       <Link
                         to="/calendar"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/60 hover:text-amber-800"
@@ -132,7 +217,9 @@ export default function ScholarshipInfo() {
                   )}
                 </div>
 
-                {/* CAMPUS ECHO */}
+                {/* =================================================
+                    CAMPUS ECHO
+                ================================================= */}
                 <div className="relative">
                   <button
                     type="button"
@@ -144,6 +231,7 @@ export default function ScholarshipInfo() {
                     }`}
                   >
                     Campus Echo
+
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ease-out ${
@@ -153,7 +241,7 @@ export default function ScholarshipInfo() {
                   </button>
 
                   {openDropdown === "echo" && (
-                    <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-amber-900/10 bg-[#fdfbf7] p-1.5 shadow-xl">
+                    <div className="absolute left-0 top-full z-[110] mt-2 w-52 overflow-hidden rounded-xl border border-amber-900/10 bg-[#fdfbf7] p-1.5 shadow-xl">
                       <Link
                         to="/kajian"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/60 hover:text-amber-800"
@@ -181,6 +269,7 @@ export default function ScholarshipInfo() {
                   )}
                 </div>
 
+                {/* CONTACT */}
                 <Link
                   to="/contact"
                   className="ml-1 rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/50 hover:text-amber-700 active:scale-[0.98]"
@@ -190,7 +279,9 @@ export default function ScholarshipInfo() {
                 </Link>
               </nav>
 
-              {/* MOBILE MENU BUTTON */}
+              {/* =====================================================
+                  MOBILE MENU BUTTON
+              ===================================================== */}
               <button
                 type="button"
                 aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
@@ -202,9 +293,12 @@ export default function ScholarshipInfo() {
               </button>
             </div>
 
-            {/* MOBILE MENU CONTENT */}
+            {/* =====================================================
+                MOBILE MENU CONTENT
+            ===================================================== */}
             {mobileOpen && (
-              <div className="border-t border-amber-900/10 bg-[#fdfbf7] px-5 py-3 shadow-lg lg:hidden max-h-[calc(100vh-72px)] overflow-y-auto">
+              <div className="max-h-[calc(100vh-72px)] overflow-y-auto border-t border-amber-900/10 bg-[#fdfbf7] px-5 py-3 shadow-lg lg:hidden">
+                {/* HOME */}
                 <Link
                   to="/"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 hover:bg-amber-100/50 hover:text-amber-700"
@@ -213,6 +307,7 @@ export default function ScholarshipInfo() {
                   Home
                 </Link>
 
+                {/* ABOUT */}
                 <a
                   href="/about"
                   className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 hover:bg-amber-100/50 hover:text-amber-700"
@@ -232,6 +327,7 @@ export default function ScholarshipInfo() {
                   onClick={() => toggleDropdown("academic")}
                 >
                   Academic Information
+
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ${
@@ -249,6 +345,7 @@ export default function ScholarshipInfo() {
                     >
                       Academic Calendar
                     </Link>
+
                     <Link
                       to="/scholarship-info"
                       className="block rounded-md bg-white px-3 py-2.5 text-sm font-semibold text-amber-800"
@@ -256,6 +353,7 @@ export default function ScholarshipInfo() {
                     >
                       Scholarship Info
                     </Link>
+
                     <a
                       href="/organisasi-mahasiswa"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-800"
@@ -263,6 +361,7 @@ export default function ScholarshipInfo() {
                     >
                       Organisasi Mahasiswa
                     </a>
+
                     <a
                       href="/mahasiswa-berdampak"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-800"
@@ -284,6 +383,7 @@ export default function ScholarshipInfo() {
                   onClick={() => toggleDropdown("echo")}
                 >
                   Campus Echo
+
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ${
@@ -301,6 +401,7 @@ export default function ScholarshipInfo() {
                     >
                       Kajian
                     </Link>
+
                     <Link
                       to="/bisik-kampus"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-800"
@@ -308,6 +409,7 @@ export default function ScholarshipInfo() {
                     >
                       Bisik Kampus
                     </Link>
+
                     <Link
                       to="/polsrifess"
                       className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 hover:bg-white hover:text-amber-800"
@@ -318,6 +420,7 @@ export default function ScholarshipInfo() {
                   </div>
                 )}
 
+                {/* CONTACT */}
                 <Link
                   to="/contact"
                   className="mt-1 block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 hover:bg-amber-100/50 hover:text-amber-700"
@@ -330,67 +433,122 @@ export default function ScholarshipInfo() {
           </div>
         </header>
 
-        {/* HERO SECTION */}
-        <section className="relative flex flex-1 flex-col items-center justify-center px-5 py-20 lg:py-28 overflow-hidden text-center">
-          <div className="relative z-10 mx-auto w-full max-w-4xl flex flex-col items-center">
-            {/* BADGE */}
-          
-
-            {/* SUBTITLE */}
-            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-slate-600 mb-6">
-              COME! WE ARE PREPARING SOMETHING SPECIAL FOR YOU!
+        {/* =========================================================
+            HERO / INTRO SECTION
+        ========================================================= */}
+        <section className="relative px-5 pb-10 pt-16 lg:px-8 lg:pb-14 lg:pt-24">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-600 sm:text-sm">
+              Academic Information
             </p>
 
-            {/* COMING SOON TYPOGRAPHY & TICKER MARQUEE */}
-            <div className="relative w-full py-6 flex flex-col items-center justify-center my-2">
-              <h1 className="font-serif text-5xl sm:text-7xl lg:text-9xl font-black tracking-tight text-[#d97706] uppercase drop-shadow-sm select-none z-0">
-                COMING
-              </h1>
+            <h1 className="font-serif text-4xl font-black tracking-tight text-[#d97706] sm:text-5xl lg:text-6xl">
+              Informasi Beasiswa
+            </h1>
 
-              {/* TICKER MARQUEE SCHOLARSHIP */}
-              <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 -rotate-3 sm:-rotate-2 bg-[#d97706] py-3 sm:py-4 shadow-xl border-y-2 border-amber-400 z-20 overflow-hidden whitespace-nowrap flex items-center">
-                <div className="animate-marquee flex gap-6 text-xs sm:text-sm font-black uppercase tracking-[0.2em] text-white px-4">
-                  <span>✦ SCHOLARSHIP INFO ✦ COMING SOON</span>
-                  <span>✦ BEM POLSRI ✦ KABINET KILAU GEMILANG</span>
-                  <span>✦ STAY TUNED ✦ SCHOLARSHIP INFO ✦ COMING SOON</span>
-                  <span>✦ BEM POLSRI ✦ KABINET KILAU GEMILANG</span>
-                </div>
-              </div>
-
-              <h1 className="font-serif text-5xl sm:text-7xl lg:text-9xl font-black tracking-tight text-[#d97706] uppercase drop-shadow-sm select-none z-10 mt-1 sm:mt-2">
-                SOON
-              </h1>
-            </div>
-
-            {/* DESKRIPSI */}
-            <p className="mt-8 max-w-xl text-sm sm:text-base font-medium text-slate-700 leading-relaxed">
-              Kami sedang menyiapkan portal informasi beasiswa lengkap untuk membantu
-              mahasiswa Politeknik Negeri Sriwijaya mengakses berbagai bantuan pendidikan
-              dan kesempatan pendanaan studi.
-            </p>
-
-            <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
-              <Link
-                to="/"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-slate-900/10 transition-all duration-200 hover:bg-amber-700 hover:shadow-amber-700/20 active:scale-95"
-              >
-                Kembali ke Beranda
-              </Link>
-            </div>
-
-            <p className="mt-8 text-xs font-semibold tracking-wider uppercase text-slate-500">
-              STAY WITH US FOR MORE UPDATES
+            <p className="mx-auto mt-6 max-w-xl text-sm font-medium leading-relaxed text-slate-700 sm:text-base">
+              Kumpulan peluang beasiswa dan bantuan pendanaan studi yang bisa
+              diakses mahasiswa Politeknik Negeri Sriwijaya, mulai dari
+              program pemerintah hingga yayasan dan lembaga mitra kampus.
             </p>
           </div>
         </section>
 
-        {/* FOOTER */}
+        {/* =========================================================
+            SCHOLARSHIP LIST
+        ========================================================= */}
+        <section className="relative px-5 pb-20 lg:px-8 lg:pb-28">
+          <div className="mx-auto flex max-w-5xl flex-col gap-6">
+            {scholarships.map((item, index) => {
+              const Icon = item.icon;
+              const reversed = index % 2 === 1;
+              const isAmberPanel = item.panel === "amber";
+
+              return (
+                <article
+                  key={item.id}
+                  className="group overflow-hidden rounded-2xl border border-amber-900/10 bg-white/70 shadow-sm backdrop-blur-sm transition-all duration-200 ease-out hover:border-amber-900/20 hover:shadow-md"
+                >
+                  <div
+                    className={`flex flex-col ${
+                      reversed ? "md:flex-row-reverse" : "md:flex-row"
+                    }`}
+                  >
+                    {/* ICON PANEL */}
+                    <div
+                      className={`relative flex shrink-0 items-center justify-center overflow-hidden p-10 md:w-64 ${
+                        isAmberPanel
+                          ? "bg-gradient-to-br from-amber-600 to-amber-800"
+                          : "bg-gradient-to-br from-slate-900 to-slate-950"
+                      }`}
+                    >
+                      <div
+                        className="absolute inset-0 opacity-[0.15]"
+                        style={{
+                          backgroundImage:
+                            "radial-gradient(circle, #ffffff 1px, transparent 1px)",
+                          backgroundSize: "16px 16px",
+                        }}
+                      />
+
+                      <Icon
+                        size={56}
+                        className="relative z-10 text-white transition-transform duration-200 ease-out group-hover:scale-105"
+                      />
+                    </div>
+
+                    {/* CONTENT */}
+                    <div className="flex flex-1 flex-col justify-center px-6 py-7 sm:px-8">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-amber-700">
+                        {item.category}
+                      </p>
+
+                      <h2 className="mt-2 text-xl font-bold text-slate-900 sm:text-2xl">
+                        {item.name}
+                      </h2>
+
+                      <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                        {item.description}
+                      </p>
+
+                      {item.deadline && (
+                        <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-amber-700">
+                          <CalendarClock size={14} />
+                          {item.deadline}
+                        </p>
+                      )}
+
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-5 inline-flex w-fit items-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all duration-200 ease-out hover:bg-amber-700 active:scale-[0.98]"
+                      >
+                        Lihat Detail Beasiswa
+
+                        <ArrowUpRight
+                          size={14}
+                          className="transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* =========================================================
+            FOOTER
+        ========================================================= */}
         <footer
           id="footer"
           className="mt-auto bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8"
         >
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
+              {/* BRAND */}
               <div>
                 <div className="flex items-center gap-3">
                   <img
@@ -398,8 +556,10 @@ export default function ScholarshipInfo() {
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />
+
                   <div>
                     <h2 className="font-bold">Kabinet Kilau Gemilang</h2>
+
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
                     </p>
@@ -412,65 +572,84 @@ export default function ScholarshipInfo() {
                 </p>
               </div>
 
+              {/* NAVIGASI */}
               <div>
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Navigasi
                 </h3>
+
                 <div className="mt-5 grid gap-3 text-sm text-slate-400">
-                  <a href="/about" className="hover:text-white transition-all">
+                  <a
+                    href="/about"
+                    className="transition-all hover:text-white"
+                  >
                     Tentang Kami
                   </a>
+
                   <a
                     href="/#agenda"
-                    className="hover:text-white transition-all"
+                    className="transition-all hover:text-white"
                   >
                     Agenda Kegiatan
                   </a>
+
                   <Link
                     to="/contact"
-                    className="hover:text-white transition-all"
+                    className="transition-all hover:text-white"
                   >
                     Contact Us
                   </Link>
                 </div>
               </div>
 
+              {/* SOCIAL / CONTACT */}
               <div>
                 <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
                   Mari Terhubung
                 </h3>
+
                 <p className="mt-5 flex items-start gap-2 text-sm leading-6 text-slate-400">
-                  <Mail size={16} className="mt-1 shrink-0 text-amber-400" />
+                  <Mail
+                    size={16}
+                    className="mt-1 shrink-0 text-amber-400"
+                  />
                   bem@polsri.ac.id
                 </p>
+
                 <p className="mt-3 text-sm leading-6 text-slate-400">
                   Jl. Srijaya Negara, Bukit Besar, Palembang
                 </p>
+
                 <div className="mt-5 flex gap-2">
+                  {/* INSTAGRAM */}
                   <a
                     href="https://www.instagram.com/bempolsri_/"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 hover:bg-amber-500 hover:text-white transition-all"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 transition-all hover:bg-amber-500 hover:text-white"
                   >
                     <Instagram size={16} />
                   </a>
+
+                  {/* X */}
                   <a
                     href="https://x.com/polsrimenfess"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="X Twitter"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-xs font-black text-slate-300 hover:bg-amber-500 hover:text-white transition-all"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-xs font-black text-slate-300 transition-all hover:bg-amber-500 hover:text-white"
                   >
                     𝕏
                   </a>
+
+                  {/* YOUTUBE */}
                   <a
                     href="https://www.youtube.com/@bemkmpolsri3259"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="YouTube"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 hover:bg-amber-500 hover:text-white transition-all"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-slate-300 transition-all hover:bg-amber-500 hover:text-white"
                   >
                     <Youtube size={17} />
                   </a>
@@ -478,6 +657,7 @@ export default function ScholarshipInfo() {
               </div>
             </div>
 
+            {/* COPYRIGHT */}
             <div className="mt-14 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
               <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
             </div>
