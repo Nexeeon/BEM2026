@@ -259,7 +259,7 @@ export default function About() {
                         Scholarship Info
                       </Link>
                       <Link
-                        to="/#agenda"
+                        to="/organisasi-mahasiswa"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 hover:bg-amber-50 hover:text-amber-700"
                         onClick={closeMenus}
                       >
@@ -808,7 +808,7 @@ export default function About() {
             className="mb-12 text-center"
           >
             <h2 className="text-3xl font-black uppercase tracking-wider text-amber-500 sm:text-4xl">
-              Departemen 
+              Departemen
             </h2>
           </motion.div>
 

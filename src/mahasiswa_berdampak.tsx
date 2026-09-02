@@ -127,7 +127,7 @@ export default function MahasiswaBerdampak() {
                       </Link>
 
                       <a
-                        href="/#agenda"
+                        href="/organisasi-mahasiswa"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
@@ -272,7 +272,7 @@ export default function MahasiswaBerdampak() {
                     </Link>
 
                     <a
-                      href="/#agenda"
+                      href="/organisasi-mahasiswa"
                       className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
@@ -439,7 +439,7 @@ export default function MahasiswaBerdampak() {
                   </a>
 
                   <a
-                    href="/#agenda"
+                    href="/calendar"
                     className="rounded-md outline-none transition-all duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-amber-400/60"
                   >
                     Agenda Kegiatan

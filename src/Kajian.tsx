@@ -201,7 +201,7 @@ export default function Kajian() {
 
                       {/* ORGANISASI MAHASISWA */}
                       <a
-                        href="/#agenda"
+                        href="/organisasi-mahasiswa"
                         className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
@@ -539,8 +539,8 @@ export default function Kajian() {
                 </h2>
 
                 <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
-                  Beberapa publikasi terbaru dari Departemen KASTRAT. Klik
-                  untuk membaca kajian lengkap dalam format PDF.
+                  Beberapa publikasi terbaru dari Departemen KASTRAT. Klik untuk
+                  membaca kajian lengkap dalam format PDF.
                 </p>
               </div>
 

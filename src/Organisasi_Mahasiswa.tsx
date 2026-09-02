@@ -8,12 +8,14 @@ import {
   Layers,
   Mail,
   Menu,
-  Sparkles,
-  Users,
   X,
   Youtube,
   Search,
   ExternalLink,
+  House,
+  Trophy,
+  UsersRound,
+  RotateCcw,
 } from "lucide-react";
 
 type DropdownName = "academic" | "echo" | null;
@@ -21,13 +23,31 @@ type DropdownName = "academic" | "echo" | null;
 interface OrgItem {
   id: string;
   name: string;
-  category: "HMJ" | "UKM" | "Komunitas";
+  category: "HMJ" | "UKM" | "Komunitas" | "MPM" | "BEM";
   image: string;
 }
 
 // ============================================================
 // DATA ORGANISASI MAHASISWA (URUTAN WAJIB)
 // ============================================================
+const mpmData: OrgItem[] = [
+  {
+    id: "kom-2",
+    name: "Majelis Permusyawaratan Mahasiswa (MPM)",
+    category: "Komunitas",
+    image: "/images/Komunitas/mpm.webp",
+  },
+];
+
+const bemData: OrgItem[] = [
+  {
+    id: "bem-1",
+    name: "BEM Politeknik Negeri Sriwijaya",
+    category: "Komunitas",
+    image: "/images/logo.png",
+  },
+];
+
 const hmjData: OrgItem[] = [
   {
     id: "hmj-1",
@@ -209,12 +229,20 @@ export default function OrganisasiMahasiswa() {
     }
   };
 
-  const filterItems = (list: OrgItem[]) => {
-    if (!searchQuery) return list;
-    return list.filter((item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
-  };
+  // Gabungan seluruh organisasi untuk pencarian global
+  const allOrganizations: OrgItem[] = [
+    ...mpmData,
+    ...bemData,
+    ...hmjData,
+    ...ukmData,
+    ...komunitasData,
+  ];
+
+  const searchResults = searchQuery.trim()
+    ? allOrganizations.filter((item) =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase().trim()),
+      )
+    : [];
 
   return (
     <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
@@ -542,114 +570,226 @@ export default function OrganisasiMahasiswa() {
         </header>
 
         {/* ======================================================== */}
-        {/* HERO SECTION */}
+        {/* MENGENAL LEBIH DEKAT (HANYA MUNCUL SAAT SEARCH KOSONG) */}
         {/* ======================================================== */}
-        <section className="px-5 pt-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="relative overflow-hidden rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12 lg:p-14">
-              {/* ACCENT GLOW */}
-              <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-amber-400/20 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-orange-400/20 blur-3xl" />
+        {!searchQuery.trim() && (
+          <section className="px-5 pt-8 lg:px-8 lg:pt-12">
+            <div className="mx-auto max-w-7xl">
+              <div className="relative overflow-hidden rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12 lg:p-14">
+                {/* ACCENT GLOW */}
+                <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-amber-400/20 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-orange-400/20 blur-3xl" />
 
-              <div className="relative z-10 mx-auto max-w-3xl text-center">
-                {/* BADGE */}
-                <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-100/90 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
-                  <Sparkles size={14} className="text-amber-600" />
-                  KABINET KILAU GEMILANG
-                </span>
+                <div className="relative z-10 mx-auto max-w-3xl text-center">
+                  <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+                    Organisasi Mahasiswa Politeknik Negeri Sriwijaya
+                  </h1>
 
-                <h1 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-                  ORGANISASI MAHASISWA
-                </h1>
-
-                <p className="mt-4 text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
-                  Ruang tumbuh, berkolaborasi, dan berdampak bagi mahasiswa
-                  Politeknik Negeri Sriwijaya.
-                </p>
-
-                <div className="mt-8 flex flex-wrap justify-center gap-3">
-                  <button
-                    onClick={() => scrollToSection("section-hmj")}
-                    className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
-                  >
-                    Jelajahi Organisasi
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ======================================================== */}
-        {/* INTRODUCTION & STATISTIK SECTION */}
-        {/* ======================================================== */}
-        <section className="px-5 py-12 lg:px-8 lg:py-16">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid gap-6 lg:grid-cols-12 lg:items-stretch">
-              {/* INTRO TEXT */}
-              <div className="flex flex-col justify-center rounded-3xl border border-slate-200 bg-white/90 p-8 backdrop-blur-md lg:col-span-7">
-                <span className="mb-2 inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-600">
-                  <Layers size={14} />
-                  Mengenal Lebih Dekat
-                </span>
-                <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
-                  Wadah Potensi & Pengembangan Diri
-                </h2>
-                <p className="mt-4 text-sm leading-7 text-slate-600">
-                  Organisasi Mahasiswa Politeknik Negeri Sriwijaya merupakan
-                  wadah mahasiswa untuk mengembangkan minat, bakat, kompetensi,
-                  kepemimpinan, kreativitas, serta kontribusi nyata di
-                  lingkungan kampus maupun masyarakat luas.
-                </p>
-              </div>
-
-              {/* STATISTIK */}
-              <div className="flex flex-col justify-between rounded-3xl border border-slate-800 bg-slate-950 p-8 text-white shadow-xl lg:col-span-5">
-                <div>
-                  <h3 className="text-xs font-black uppercase tracking-widest text-amber-400">
-                    Total Organisasi Aktif
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-400">
-                    Struktur Ormawa Politeknik Negeri Sriwijaya
+                  <p className="mt-4 text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
+                    Organisasi Mahasiswa Politeknik Negeri Sriwijaya merupakan
+                    wadah mahasiswa untuk mengembangkan minat, bakat,
+                    kompetensi, kepemimpinan, kreativitas, serta kontribusi
+                    nyata di lingkungan kampus maupun masyarakat luas.
                   </p>
                 </div>
+              </div>
+            </div>
+          </section>
+        )}
 
-                <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <p className="text-3xl font-black text-amber-400 sm:text-4xl">
-                      10
+        {/* ======================================================== */}
+        {/* JENIS-JENIS ORGANISASI MAHASISWA (HANYA KONDISI KOSONG) */}
+        {/* ======================================================== */}
+        {!searchQuery.trim() && (
+          <section className="px-5 py-12 lg:px-8 lg:py-16">
+            <div className="mx-auto max-w-7xl">
+              <div className="mx-auto max-w-3xl text-center mb-10">
+                <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                  JENIS-JENIS ORGANISASI MAHASISWA
+                </h2>
+                <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+                  Organisasi Mahasiswa Politeknik Negeri Sriwijaya terdiri dari
+                  lima bentuk organisasi yang menjadi wadah mahasiswa untuk
+                  berorganisasi, mengembangkan potensi, serta berkontribusi di
+                  lingkungan kampus.
+                </p>
+              </div>
+
+              {/* 5 CARDS LAYOUT */}
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 items-stretch">
+                {/* 1. MPM */}
+                <div className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5">
+                  <div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 p-2 mb-5 transition-transform duration-200 group-hover:scale-110 overflow-hidden">
+                      <img
+                        src="/images/Komunitas/mpm.webp"
+                        alt="MPM Logo"
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                    <h3 className="text-lg font-black tracking-tight text-slate-900 group-hover:text-amber-600 transition-colors">
+                      MPM
+                    </h3>
+                    <p className="mt-1 text-xs font-bold text-amber-600 uppercase tracking-wider">
+                      Majelis Permusyawaratan Mahasiswa
                     </p>
-                    <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-slate-300">
-                      HMJ
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      Organisasi mahasiswa yang menjalankan fungsi legislasi,
+                      pengawasan, dan penegakan norma organisasi mahasiswa.
                     </p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <p className="text-3xl font-black text-amber-400 sm:text-4xl">
-                      7
-                    </p>
-                    <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-slate-300">
-                      UKM
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <p className="text-3xl font-black text-amber-400 sm:text-4xl">
-                      5
-                    </p>
-                    <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-slate-300">
-                      Komunitas
-                    </p>
+                  <div className="mt-6 pt-4 border-t border-slate-100">
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection("section-mpm")}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 hover:text-amber-700 transition-colors"
+                    >
+                      Lihat Organisasi
+                      <ArrowRight
+                        size={14}
+                        className="transition-transform duration-200 group-hover:translate-x-1"
+                      />
+                    </button>
                   </div>
                 </div>
 
-                <p className="mt-6 text-[11px] text-slate-400">
-                  Bersama mewujudkan insan akademis yang proaktif, solid, dan
-                  berprestasi.
-                </p>
+                {/* 2. BEM */}
+                <div className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5">
+                  <div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 p-2 mb-5 transition-transform duration-200 group-hover:scale-110 overflow-hidden">
+                      <img
+                        src="/images/logo.png"
+                        alt="BEM Logo"
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                    <h3 className="text-lg font-black tracking-tight text-slate-900 group-hover:text-amber-600 transition-colors">
+                      BEM
+                    </h3>
+                    <p className="mt-1 text-xs font-bold text-amber-600 uppercase tracking-wider">
+                      Badan Eksekutif Mahasiswa
+                    </p>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      Lembaga eksekutif mahasiswa yang menjalankan program
+                      kerja, mengoordinasikan kegiatan mahasiswa, dan menjadi
+                      jembatan antarorganisasi mahasiswa.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-100">
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection("section-bem")}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 hover:text-amber-700 transition-colors"
+                    >
+                      Lihat Organisasi
+                      <ArrowRight
+                        size={14}
+                        className="transition-transform duration-200 group-hover:translate-x-1"
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* 3. HMJ */}
+                <div className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5">
+                  <div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 mb-5 transition-transform duration-200 group-hover:scale-110">
+                      <House size={24} strokeWidth={2} />
+                    </div>
+                    <h3 className="text-lg font-black tracking-tight text-slate-900 group-hover:text-amber-600 transition-colors">
+                      HMJ
+                    </h3>
+                    <p className="mt-1 text-xs font-bold text-amber-600 uppercase tracking-wider">
+                      Himpunan Mahasiswa Jurusan
+                    </p>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      Wadah mahasiswa pada masing-masing jurusan untuk
+                      mengembangkan kompetensi akademik, profesional, dan
+                      solidaritas mahasiswa.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-100">
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection("section-hmj")}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 hover:text-amber-700 transition-colors"
+                    >
+                      Lihat Organisasi
+                      <ArrowRight
+                        size={14}
+                        className="transition-transform duration-200 group-hover:translate-x-1"
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* 4. UKM */}
+                <div className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5">
+                  <div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 mb-5 transition-transform duration-200 group-hover:scale-110">
+                      <Trophy size={24} strokeWidth={2} />
+                    </div>
+                    <h3 className="text-lg font-black tracking-tight text-slate-900 group-hover:text-amber-600 transition-colors">
+                      UKM
+                    </h3>
+                    <p className="mt-1 text-xs font-bold text-amber-600 uppercase tracking-wider">
+                      Unit Kegiatan Mahasiswa
+                    </p>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      Wadah mahasiswa untuk mengembangkan minat, bakat,
+                      kreativitas, dan prestasi dalam berbagai bidang.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-100">
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection("section-ukm")}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 hover:text-amber-700 transition-colors"
+                    >
+                      Lihat Organisasi
+                      <ArrowRight
+                        size={14}
+                        className="transition-transform duration-200 group-hover:translate-x-1"
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* 5. KOMUNITAS */}
+                <div className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5 sm:col-span-2 lg:col-span-1">
+                  <div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 mb-5 transition-transform duration-200 group-hover:scale-110">
+                      <UsersRound size={24} strokeWidth={2} />
+                    </div>
+                    <h3 className="text-lg font-black tracking-tight text-slate-900 group-hover:text-amber-600 transition-colors">
+                      KOMUNITAS
+                    </h3>
+                    <p className="mt-1 text-xs font-bold text-amber-600 uppercase tracking-wider">
+                      Komunitas Kampus
+                    </p>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      Ruang kolaborasi mahasiswa yang terbentuk berdasarkan
+                      minat, kreativitas, bakat, dan ketertarikan yang sama.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-100">
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection("section-komunitas")}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 hover:text-amber-700 transition-colors"
+                    >
+                      Lihat Organisasi
+                      <ArrowRight
+                        size={14}
+                        className="transition-transform duration-200 group-hover:translate-x-1"
+                      />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* ======================================================== */}
         {/* INTERACTIVE FILTER & SEARCH TOOLBAR */}
@@ -659,6 +799,20 @@ export default function OrganisasiMahasiswa() {
             <div className="flex flex-col gap-4 rounded-2xl border border-amber-300/40 bg-white/95 p-3.5 shadow-lg backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
               {/* FILTER BUTTONS */}
               <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("section-mpm")}
+                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-700 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
+                >
+                  MPM
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("section-bem")}
+                  className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2 text-xs font-bold text-amber-700 transition-all duration-200 hover:bg-amber-500 hover:text-white active:scale-[0.98]"
+                >
+                  BEM
+                </button>
                 <button
                   type="button"
                   onClick={() => scrollToSection("section-hmj")}
@@ -701,76 +855,188 @@ export default function OrganisasiMahasiswa() {
         </section>
 
         {/* ======================================================== */}
-        {/* SECTION HMJ */}
+        {/* CONDITIONAL RENDERING: SEARCH RESULTS MODE VS NORMAL MODE */}
         {/* ======================================================== */}
-        <section id="section-hmj" className="scroll-mt-36 px-5 py-10 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
-                HIMPUNAN MAHASISWA JURUSAN
-              </h2>
-              <p className="mt-2 text-sm leading-7 text-slate-600">
-                Wadah mahasiswa pada masing-masing jurusan untuk mengembangkan
-                kompetensi akademik, profesional, dan solidaritas mahasiswa.
-              </p>
-            </div>
+        {searchQuery.trim() ? (
+          <section className="px-5 py-10 lg:px-8">
+            <div className="mx-auto max-w-7xl">
+              {searchResults.length > 0 ? (
+                <div>
+                  <div className="mb-6">
+                    <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                      HASIL PENCARIAN
+                    </h2>
+                    <p className="mt-1 text-sm text-slate-600">
+                      Menampilkan {searchResults.length} organisasi yang sesuai
+                      dengan "{searchQuery}"
+                    </p>
+                  </div>
 
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-              {filterItems(hmjData).map((item) => (
-                <OrgCard key={item.id} item={item} />
-              ))}
+                  <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                    {searchResults.map((item) => (
+                      <OrgCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="mx-auto max-w-md rounded-3xl border border-slate-200 bg-white/90 p-10 text-center shadow-lg backdrop-blur-md">
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-50 text-amber-600">
+                    <Search size={24} />
+                  </div>
+                  <h3 className="text-lg font-black tracking-tight text-slate-900">
+                    Organisasi tidak ditemukan
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                    Tidak ada organisasi yang sesuai dengan pencarian "
+                    {searchQuery}".
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="mt-6 inline-flex items-center gap-2 rounded-xl bg-amber-500 px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-amber-500/20 transition-all hover:bg-amber-600 active:scale-95"
+                  >
+                    <RotateCcw size={14} />
+                    Reset Pencarian
+                  </button>
+                </div>
+              )}
             </div>
-          </div>
-        </section>
+          </section>
+        ) : (
+          <>
+            {/* ======================================================== */}
+            {/* SECTION MPM */}
+            {/* ======================================================== */}
+            <section
+              id="section-mpm"
+              className="scroll-mt-36 px-5 py-10 lg:px-8"
+            >
+              <div className="mx-auto max-w-7xl">
+                <div className="max-w-3xl">
+                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                    MAJELIS PERMUSYAWARATAN MAHASISWA
+                  </h2>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">
+                    Organisasi mahasiswa yang menjalankan fungsi legislasi,
+                    pengawasan, dan penegakan norma organisasi mahasiswa.
+                  </p>
+                </div>
 
-        {/* ======================================================== */}
-        {/* SECTION UKM */}
-        {/* ======================================================== */}
-        <section id="section-ukm" className="scroll-mt-36 px-5 py-10 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
-                UNIT KEGIATAN MAHASISWA
-              </h2>
-              <p className="mt-2 text-sm leading-7 text-slate-600">
-                Wadah mahasiswa Politeknik Negeri Sriwijaya untuk mengembangkan
-                minat, bakat, kreativitas, dan prestasi.
-              </p>
-            </div>
+                <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                  {mpmData.map((item) => (
+                    <OrgCard key={item.id} item={item} />
+                  ))}
+                </div>
+              </div>
+            </section>
 
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {filterItems(ukmData).map((item) => (
-                <OrgCard key={item.id} item={item} />
-              ))}
-            </div>
-          </div>
-        </section>
+            {/* ======================================================== */}
+            {/* SECTION BEM */}
+            {/* ======================================================== */}
+            <section
+              id="section-bem"
+              className="scroll-mt-36 px-5 py-10 lg:px-8"
+            >
+              <div className="mx-auto max-w-7xl">
+                <div className="max-w-3xl">
+                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                    BADAN EKSEKUTIF MAHASISWA
+                  </h2>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">
+                    Lembaga eksekutif mahasiswa yang menjalankan program kerja,
+                    mengoordinasikan kegiatan mahasiswa, dan menjadi jembatan
+                    antarorganisasi mahasiswa.
+                  </p>
+                </div>
 
-        {/* ======================================================== */}
-        {/* SECTION KOMUNITAS */}
-        {/* ======================================================== */}
-        <section
-          id="section-komunitas"
-          className="scroll-mt-36 px-5 py-10 lg:px-8"
-        >
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
-                KOMUNITAS
-              </h2>
-              <p className="mt-2 text-sm leading-7 text-slate-600">
-                Ruang kolaborasi mahasiswa yang terbentuk berdasarkan minat,
-                kreativitas, bakat, dan ketertarikan yang sama.
-              </p>
-            </div>
+                <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                  {bemData.map((item) => (
+                    <OrgCard key={item.id} item={item} />
+                  ))}
+                </div>
+              </div>
+            </section>
 
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-              {filterItems(komunitasData).map((item) => (
-                <OrgCard key={item.id} item={item} />
-              ))}
-            </div>
-          </div>
-        </section>
+            {/* ======================================================== */}
+            {/* SECTION HMJ */}
+            {/* ======================================================== */}
+            <section
+              id="section-hmj"
+              className="scroll-mt-36 px-5 py-10 lg:px-8"
+            >
+              <div className="mx-auto max-w-7xl">
+                <div className="max-w-3xl">
+                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                    HIMPUNAN MAHASISWA JURUSAN
+                  </h2>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">
+                    Wadah mahasiswa pada masing-masing jurusan untuk
+                    mengembangkan kompetensi akademik, profesional, dan
+                    solidaritas mahasiswa.
+                  </p>
+                </div>
+
+                <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                  {hmjData.map((item) => (
+                    <OrgCard key={item.id} item={item} />
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* ======================================================== */}
+            {/* SECTION UKM */}
+            {/* ======================================================== */}
+            <section
+              id="section-ukm"
+              className="scroll-mt-36 px-5 py-10 lg:px-8"
+            >
+              <div className="mx-auto max-w-7xl">
+                <div className="max-w-3xl">
+                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                    UNIT KEGIATAN MAHASISWA
+                  </h2>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">
+                    Wadah mahasiswa Politeknik Negeri Sriwijaya untuk
+                    mengembangkan minat, bakat, kreativitas, dan prestasi.
+                  </p>
+                </div>
+
+                <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                  {ukmData.map((item) => (
+                    <OrgCard key={item.id} item={item} />
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* ======================================================== */}
+            {/* SECTION KOMUNITAS */}
+            {/* ======================================================== */}
+            <section
+              id="section-komunitas"
+              className="scroll-mt-36 px-5 py-10 lg:px-8"
+            >
+              <div className="mx-auto max-w-7xl">
+                <div className="max-w-3xl">
+                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                    KOMUNITAS
+                  </h2>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">
+                    Ruang kolaborasi mahasiswa yang terbentuk berdasarkan minat,
+                    kreativitas, bakat, dan ketertarikan yang sama.
+                  </p>
+                </div>
+
+                <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+                  {komunitasData.map((item) => (
+                    <OrgCard key={item.id} item={item} />
+                  ))}
+                </div>
+              </div>
+            </section>
+          </>
+        )}
 
         {/* ======================================================== */}
         {/* CTA / PENUTUP */}
@@ -778,7 +1044,11 @@ export default function OrganisasiMahasiswa() {
         <section className="px-5 py-16 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-4xl text-center">
             <div className="rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12">
-              <Users size={48} className="mx-auto mb-4 text-amber-500" />
+              <UsersRound
+                size={48}
+                className="mx-auto mb-4 text-amber-500"
+                strokeWidth={2}
+              />
 
               <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
                 BERSAMA, BERKOLABORASI, DAN BERDAMPAK
@@ -816,7 +1086,7 @@ export default function OrganisasiMahasiswa() {
                   />
 
                   <div>
-                    <h2 className="font-bold">KabinetKilau Gemilang</h2>
+                    <h2 className="font-bold">Kabinet Kilau Gemilang</h2>
 
                     <p className="mt-1 text-xs text-slate-400">
                       BEM Politeknik Negeri Sriwijaya
