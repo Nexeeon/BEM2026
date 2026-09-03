@@ -9,6 +9,7 @@ import AcademicCalendar from "./AcademicCalendar";
 import ScholarshipInfo from "./scholarship-info";
 import MahasiswaBerdampak from "./mahasiswa_berdampak";
 import OrganisasiMahasiswa from "./Organisasi_Mahasiswa";
+import Medinfo from "./Medinfo";
 
 function App() {
   return (
@@ -34,6 +35,9 @@ function App() {
         <Route path="/scholarship-info" element={<ScholarshipInfo />} />
         <Route path="/organisasi-mahasiswa" element={<OrganisasiMahasiswa />} />
         <Route path="/mahasiswa-berdampak" element={<MahasiswaBerdampak />} />
+
+        {/* Halaman Departemen */}
+        <Route path="/medinfo" element={<Medinfo />} />
       </Routes>
     </Router>
   );

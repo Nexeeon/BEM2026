@@ -70,32 +70,36 @@ const pejabatTerasData = [
   },
 ];
 
-// DATA DEPARTEMEN BEM
 const departmentsData = [
   {
     name: "Departemen Adkesma",
     desc: "Advokasi & Kesejahteraan Mahasiswa",
     image: "/images/adkesma/ADKESMA.png",
+    route: "",
   },
   {
     name: "Departemen Humas",
     desc: "Hubungan Masyarakat & Eksternal",
     image: "/images/humas/HUMAS.png",
+    route: "",
   },
   {
     name: "Departemen Kastrat",
     desc: "Kajian & Aksi Strategis",
     image: "/images/kastrat/KASTRAT.png",
+    route: "",
   },
   {
     name: "Departemen Medinfo",
     desc: "Media, Data & Informasi",
     image: "/images/medinfo/MEDINFO.png",
+    route: "/medinfo",
   },
   {
     name: "Departemen PSDM",
     desc: "Pengembangan Sumber Daya Mahasiswa",
     image: "/images/psdm/PSDM.png",
+    route: "",
   },
 ];
 
@@ -560,45 +564,66 @@ export default function About() {
             </h2>
           </motion.div>
 
-          {/* Menggunakan Flexbox dengan justify-center agar sisa 2 item di baris terakhir otomatis ditengah */}
           <div className="flex flex-wrap justify-center gap-8">
-            {departmentsData.map((dept, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-amber-200/80 bg-white/90 shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)] max-w-sm"
-              >
-                {/* CONTAINER GAMBAR DENGAN OBJECT-TOP AGAR BAGIAN ATAS TERLIHAT UTUH */}
-                <div className="relative h-[320px] w-full overflow-hidden bg-slate-100 sm:h-[360px]">
-                  <img
-                    src={dept.image}
-                    alt={dept.name}
-                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-
-                <div className="flex flex-1 flex-col justify-between p-5">
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-900 sm:text-xl">
-                      {dept.name}
-                    </h3>
-                    <p className="mt-1 text-xs font-medium text-slate-600 sm:text-sm">
-                      {dept.desc}
-                    </p>
+            {departmentsData.map((dept, index) => {
+              const cardContent = (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`group flex flex-col overflow-hidden rounded-2xl border border-amber-200/80 bg-white/90 shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)] max-w-sm${
+                    dept.route ? " cursor-pointer" : ""
+                  }`}
+                >
+                  {/* CONTAINER GAMBAR */}
+                  <div className="relative h-[320px] w-full overflow-hidden bg-slate-100 sm:h-[360px]">
+                    <img
+                      src={dept.image}
+                      alt={dept.name}
+                      className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
 
-                  <div className="mt-4 border-t border-slate-200/85 pt-3">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-600 group-hover:underline sm:text-sm">
-                      <span>Selengkapnya</span>
-                      <ArrowRight size={15} />
-                    </span>
+                  <div className="flex flex-1 flex-col justify-between p-5">
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-900 sm:text-xl">
+                        {dept.name}
+                      </h3>
+                      <p className="mt-1 text-xs font-medium text-slate-600 sm:text-sm">
+                        {dept.desc}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 border-t border-slate-200/85 pt-3">
+                      <span
+                        className={`inline-flex items-center gap-1.5 text-xs font-semibold sm:text-sm ${
+                          dept.route
+                            ? "text-amber-600 group-hover:underline"
+                            : "text-slate-400"
+                        }`}
+                      >
+                        <span>
+                          {dept.route ? "Selengkapnya" : "Segera Hadir"}
+                        </span>
+                        {dept.route && <ArrowRight size={15} />}
+                      </span>
+                    </div>
                   </div>
+                </motion.div>
+              );
+
+              return dept.route ? (
+                <Link key={index} to={dept.route} className="contents">
+                  {cardContent}
+                </Link>
+              ) : (
+                <div key={index} className="contents">
+                  {cardContent}
                 </div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
