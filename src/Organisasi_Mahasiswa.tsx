@@ -894,7 +894,7 @@ export default function OrganisasiMahasiswa() {
                   <div className="mt-6 pt-4 border-t border-slate-100">
                     <button
                       type="button"
-                      onClick={() => setSelectedOrg(bemData[0])}
+                      onClick={() => scrollToSection("section-bem")}
                       className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 hover:text-amber-700 transition-colors"
                     >
                       Lihat Organisasi
@@ -1549,9 +1549,9 @@ function OrgDetailModal({
         <div className="mx-auto mb-5 flex h-32 w-32 items-center justify-center rounded-2xl bg-amber-50/60 p-4 shadow-inner">
           {!imgError ? (
             <img
-              src={item.image}
+              src={isBem ? "/images/logo.png" : item.image}
               alt={item.name}
-              onError={() => setImgError(true)}
+              onError={() => setImgError(type => true)}
               className="max-h-full max-w-full object-contain drop-shadow-md"
             />
           ) : (
