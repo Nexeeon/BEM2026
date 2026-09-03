@@ -345,9 +345,7 @@ const DivisiSection = memo(({ divisi }: { divisi: Divisi }) => {
           </div>
 
           <div className="flex justify-between items-center px-2 mt-3">
-            <span className="text-[11px] font-medium text-slate-400 italic">
-              💡 Tips: Klik & geser kursor atau usap layar untuk menelusuri anggota tim
-            </span>
+           
             <div className="flex sm:hidden items-center gap-3">
               <button
                 onClick={scrollLeftBtn}
@@ -485,11 +483,8 @@ export default function Medinfo() {
         {/* STRUKTUR BIDANG KEAHLIAN */}
         <section className="mx-auto max-w-7xl px-5 py-12 pb-28 lg:px-8 lg:py-20">
           <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-600 sm:text-sm">
-              OUR DIVISIONS
-            </p>
-            <h2 className="mt-2 font-serif text-3xl font-black uppercase tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              STRUKTUR TIM KEAHLIAN
+            <h2 className="mt-2 font-serif text-3xl font-black uppercase tracking-tight text-amber-500 sm:text-4xl lg:text-5xl">
+              STRUKTURAL DEPARTEMENT MEDINFO
             </h2>
           </div>
 
