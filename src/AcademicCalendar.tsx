@@ -1166,10 +1166,7 @@ export default function AcademicCalendarPage() {
           <div className="mx-auto max-w-7xl">
             {/* TITLE HEADER */}
             <div className="mx-auto max-w-3xl text-center">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100/90 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-amber-800 backdrop-blur-sm">
-                <CalendarIcon size={13} />
-                Politeknik Negeri Sriwijaya
-              </span>
+             
 
               <h1
                 className="mt-3 font-serif font-black uppercase tracking-wide text-amber-500 drop-shadow-sm"

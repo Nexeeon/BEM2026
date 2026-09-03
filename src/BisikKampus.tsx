@@ -460,10 +460,7 @@ export default function BisikKampus() {
               <div className="mx-auto max-w-7xl px-5 pb-8 lg:px-8 lg:pb-12">
                 <div className="max-w-3xl">
                   {/* BADGE */}
-                  <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-amber-100/90 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
-                    <MessageCircle size={14} className="text-amber-600" />
-                    Campus Echo
-                  </span>
+                  
 
                   {/* DESKRIPSI */}
                   <p className="max-w-2xl text-sm font-medium leading-relaxed text-white/90 sm:text-base">

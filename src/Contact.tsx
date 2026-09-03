@@ -407,9 +407,7 @@ export default function Contact() {
           <div className="mx-auto max-w-7xl">
             {/* HEADER */}
             <div className="mx-auto max-w-3xl text-center">
-              <span className="inline-flex items-center rounded-full bg-amber-100/80 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-amber-700 backdrop-blur-sm">
-                Hubungi Kami
-              </span>
+            
 
               <h1
                 className="mt-5 font-serif font-black uppercase tracking-wide text-amber-500"

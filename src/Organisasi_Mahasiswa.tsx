@@ -25,6 +25,8 @@ interface OrgItem {
   name: string;
   category: "HMJ" | "UKM" | "Komunitas" | "MPM" | "BEM";
   image: string;
+  description?: string;
+  alias?: string[];
 }
 
 // ============================================================
@@ -32,10 +34,18 @@ interface OrgItem {
 // ============================================================
 const mpmData: OrgItem[] = [
   {
-    id: "kom-2",
-    name: "Majelis Permusyawaratan Mahasiswa (MPM)",
-    category: "Komunitas",
+    id: "mpm-1",
+    name: "MPM (Majelis Permusyawaratan Mahasiswa)",
+    category: "MPM",
     image: "/images/Komunitas/mpm.webp",
+    description:
+      "Membawa cahaya semangat untuk menciptakan terobosan demi kesejahteraan mahasiswa. Lembaga legislatif mahasiswa Politeknik Negeri Sriwijaya yang berfungsi sebagai wadah musyawarah dan penetapan kebijakan kemahasiswaan. MPM juga mengawasi kinerja BEM demi tercapainya keseimbangan organisasi.",
+    alias: [
+      "MPM",
+      "Majelis Permusyawaratan Mahasiswa",
+      "Legislatif",
+      "Musyawarah",
+    ],
   },
 ];
 
@@ -43,149 +53,327 @@ const bemData: OrgItem[] = [
   {
     id: "bem-1",
     name: "BEM Politeknik Negeri Sriwijaya",
-    category: "Komunitas",
+    category: "BEM",
     image: "/images/logo.png",
+    alias: ["BEM", "Badan Eksekutif Mahasiswa"],
   },
 ];
 
 const hmjData: OrgItem[] = [
   {
     id: "hmj-1",
-    name: "Administrasi Bisnis",
+    name: "Himpunan Mahasiswa Administrasi Bisnis",
     category: "HMJ",
     image: "/images/HMJ/AB.png",
+    description:
+      "Himpunan ini adalah organisasi mahasiswa Jurusan Administrasi Bisnis. Kami fokus pada pengembangan soft skill dan wawasan bisnis mahasiswa melalui seminar, studi kasus, dan simulasi bisnis.",
+    alias: [
+      "HMJ AB",
+      "AB",
+      "Administrasi Bisnis",
+      "Himpunan Mahasiswa Administrasi Bisnis",
+      "Bisnis",
+    ],
   },
   {
     id: "hmj-2",
-    name: "Akuntansi",
+    name: "Himpunan Mahasiswa Akuntansi",
     category: "HMJ",
     image: "/images/HMJ/akuntansi.png",
+    description:
+      "Himpunan ini mewadahi mahasiswa Jurusan Akuntansi. Kami mengadakan pelatihan perpajakan, audit, dan kegiatan perlombaan.",
+    alias: [
+      "HMJ Akuntansi",
+      "Akuntansi",
+      "Audit",
+      "Pajak",
+      "Himpunan Mahasiswa Akuntansi",
+    ],
   },
   {
     id: "hmj-3",
-    name: "Bahasa dan Pariwisata",
+    name: "Himpunan Mahasiswa Bahasa dan Pariwisata",
     category: "HMJ",
     image: "/images/HMJ/bahasa dan pariwisata.png",
+    description:
+      "Himpunan ini adalah organisasi yang menampung kreativitas mahasiswa Jurusan Bahasa dan Pariwisata. Kami mengadakan pelatihan bahasa, kunjungan wisata, dan berbagai kegiatan lain untuk memperkenalkan budaya dan pariwisata.",
+    alias: [
+      "HMJ Bahasa dan Pariwisata",
+      "Bahasa",
+      "Pariwisata",
+      "Himpunan Mahasiswa Bahasa dan Pariwisata",
+      "Budaya",
+    ],
   },
   {
     id: "hmj-4",
-    name: "Teknik Elektro",
+    name: "Himpunan Mahasiswa Teknik Elektro",
     category: "HMJ",
     image: "/images/HMJ/elektro.png",
+    description:
+      "Tagline HMJ terbaik luar biasa, mengusung semangat keunggulan, inovasi, dan kerja sama untuk mencetak prestasi gemilang. HMJ Elektro adalah organisasi yang menampung kreativitas mahasiswa Jurusan Teknik Elektro.",
+    alias: [
+      "HMJ Teknik Elektro",
+      "Elektro",
+      "Teknik Elektro",
+      "Himpunan Mahasiswa Teknik Elektro",
+    ],
   },
   {
     id: "hmj-5",
-    name: "Teknik Mesin",
+    name: "Himpunan Mahasiswa Teknik Mesin",
     category: "HMJ",
     image: "/images/HMJ/mesin.png",
+    description:
+      "HMJ Teknik Mesin menjadi wadah bagi mahasiswa Jurusan Teknik Mesin untuk berkontribusi dan berinovasi. Kegiatan kami meliputi workshop, kunjungan industri, dan kompetisi.",
+    alias: [
+      "HMJ Teknik Mesin",
+      "Mesin",
+      "Teknik Mesin",
+      "Himpunan Mahasiswa Teknik Mesin",
+    ],
   },
   {
     id: "hmj-6",
-    name: "Manajemen Informatika",
+    name: "Himpunan Mahasiswa Manajemen Informatika",
     category: "HMJ",
     image: "/images/HMJ/mi.png",
+    description:
+      "Himpunan yang mewadahi mahasiswa Jurusan Manajemen Informatika. Kami berfokus pada pengembangan soft skill dan hard skill di bidang IT dan manajemen proyek.",
+    alias: [
+      "HMJ MI",
+      "MI",
+      "Manajemen Informatika",
+      "IT",
+      "Himpunan Mahasiswa Manajemen Informatika",
+    ],
   },
   {
     id: "hmj-7",
-    name: "Rekayasa Teknologi dan Bisnis Pertanian",
+    name: "Himpunan Mahasiswa Rekayasa Teknologi dan Bisnis Pertanian",
     category: "HMJ",
     image: "/images/HMJ/RTBP.png",
+    description:
+      "Himpunan ini adalah himpunan mahasiswa yang mewadahi mahasiswa Jurusan Rekayasa Teknologi dan Bisnis Pertanian. Kami fokus pada pengembangan soft skill dan wawasan bisnis mahasiswa melalui seminar, studi kasus, dan simulasi teknologi pertanian.",
+    alias: [
+      "HMJ RTBP",
+      "RTBP",
+      "Rekayasa Teknologi dan Bisnis Pertanian",
+      "Pertanian",
+      "Himpunan Mahasiswa Rekayasa Teknologi dan Bisnis Pertanian",
+    ],
   },
   {
     id: "hmj-8",
-    name: "Teknik Sipil",
+    name: "Himpunan Mahasiswa Teknik Sipil",
     category: "HMJ",
     image: "/images/HMJ/sipil.png",
+    description:
+      "Organisasi mahasiswa yang mewadahi mahasiswa Jurusan Teknik Sipil. Kami berfokus pada pengembangan soft skill dan hard skill melalui program-program yang relevan dengan dunia konstruksi dan infrastruktur.",
+    alias: [
+      "HMJ Teknik Sipil",
+      "Sipil",
+      "Teknik Sipil",
+      "Konstruksi",
+      "Himpunan Mahasiswa Teknik Sipil",
+    ],
   },
   {
     id: "hmj-9",
-    name: "Teknik Kimia",
+    name: "Himpunan Mahasiswa Teknik Kimia",
     category: "HMJ",
     image: "/images/HMJ/Tekkim.png",
+    description:
+      "HMJ Teknik Kimia berfokus pada pengembangan pengetahuan mahasiswa tentang industri kimia, penelitian, dan pengabdian masyarakat.",
+    alias: [
+      "HMJ Teknik Kimia",
+      "Tekkim",
+      "Kimia",
+      "Teknik Kimia",
+      "Himpunan Mahasiswa Teknik Kimia",
+    ],
   },
   {
     id: "hmj-10",
-    name: "Teknik Komputer",
+    name: "Himpunan Mahasiswa Teknik Komputer",
     category: "HMJ",
     image: "/images/HMJ/tekom.png",
+    description:
+      "Himpunan ini adalah organisasi yang mewadahi mahasiswa Jurusan Teknik Komputer. Kami mengadakan workshop coding, hackathon, dan berbagai kegiatan untuk meningkatkan kompetensi di bidang IT.",
+    alias: [
+      "HMJ Teknik Komputer",
+      "Tekom",
+      "Teknik Komputer",
+      "Coding",
+      "IT",
+      "Himpunan Mahasiswa Teknik Komputer",
+    ],
   },
 ];
 
 const ukmData: OrgItem[] = [
   {
     id: "ukm-1",
-    name: "English Debating Society (EDS)",
+    name: "UKM English Debating Society (EDS)",
     category: "UKM",
     image: "/images/UKM/eds.webp",
+    description:
+      "UKM EDS adalah wadah bagi mahasiswa yang ingin mengasah kemampuan berbahasa Inggris dan berdebat. UKM ini rutin mengadakan latihan debat dan berpartisipasi dalam kompetisi di tingkat regional maupun nasional.",
+    alias: [
+      "EDS",
+      "English Debating Society",
+      "Debat",
+      "Inggris",
+      "UKM English Debating Society (EDS)",
+    ],
   },
   {
     id: "ukm-2",
     name: "UKM Himpala Bahtera Buana (HBB)",
     category: "UKM",
     image: "/images/UKM/himpala.webp",
+    description:
+      "UKM Himpala Bahtera Buana (HBB) adalah Unit Kegiatan Mahasiswa pecinta alam yang bergerak di bidang konservasi lingkungan, penjelajahan alam, dan kepecintaan alaman.",
+    alias: ["HBB", "Himpala Bahtera Buana", "Pecinta Alam", "Himpala"],
   },
   {
     id: "ukm-3",
-    name: "Keluarga Tarbiyah Islamiah (KARISMA)",
+    name: "UKM Keluarga Tarbiyah Islamiah (KARISMA)",
     category: "UKM",
     image: "/images/UKM/karisma.webp",
+    description:
+      "UKM KARISMA adalah organisasi kerohanian yang berfokus pada pengembangan keilmuan dan praktik Islam. Kami mengadakan kajian rutin, bakti sosial, dan kegiatan dakwah lainnya.",
+    alias: [
+      "KARISMA",
+      "Keluarga Tarbiyah Islamiah",
+      "Islam",
+      "Kerohanian",
+      "UKM Keluarga Tarbiyah Islamiah (KARISMA)",
+    ],
   },
   {
     id: "ukm-4",
-    name: "Mahasiswa Riset dan Sains (MARS)",
+    name: "UKM Mahasiswa Riset dan Sains (MARS)",
     category: "UKM",
     image: "/images/UKM/mars.webp",
+    description:
+      "UKM MARS adalah wadah bagi mahasiswa yang memiliki minat di bidang penelitian dan sains. UKM ini mengadakan workshop penulisan karya ilmiah, riset, dan presentasi ilmiah.",
+    alias: [
+      "MARS",
+      "Mahasiswa Riset dan Sains",
+      "Riset",
+      "Sains",
+      "KTI",
+      "UKM Mahasiswa Riset dan Sains (MARS)",
+    ],
   },
   {
     id: "ukm-5",
-    name: "Olahraga",
+    name: "UKM Olahraga",
     category: "UKM",
     image: "/images/UKM/olahraga.webp",
+    description:
+      "UKM Olahraga mewadahi berbagai cabang olahraga seperti futsal, basket, voli, bulu tangkis, dan cabang olahraga lainnya. UKM ini rutin mengadakan latihan dan berpartisipasi dalam kompetisi antar kampus.",
+    alias: [
+      "Olahraga",
+      "UKM Olahraga",
+      "Futsal",
+      "Basket",
+      "Voli",
+      "Bulu Tangkis",
+      "Badminton",
+    ],
   },
   {
     id: "ukm-6",
-    name: "Simpony",
+    name: "UKM Simphony",
     category: "UKM",
     image: "/images/UKM/simpony.webp",
+    description:
+      "UKM Simphony adalah organisasi seni yang berfokus pada pengembangan bakat di bidang musik dan paduan suara. UKM ini rutin mengadakan konser dan pertunjukan musik di berbagai acara kampus.",
+    alias: ["Simphony", "UKM Simphony", "Musik", "Paduan Suara", "Seni"],
   },
   {
     id: "ukm-7",
-    name: "Warta Politeknik Sriwijaya (WPS)",
+    name: "UKM Warta Politeknik Sriwijaya (WPS)",
     category: "UKM",
     image: "/images/UKM/wps.webp",
+    description:
+      "UKM WPS adalah organisasi pers kampus yang bergerak di bidang jurnalistik. UKM ini menerbitkan berita seputar kehidupan kampus dan isu-isu terkini.",
+    alias: [
+      "WPS",
+      "UKM Warta Politeknik Sriwijaya (WPS)",
+      "Warta Politeknik Sriwijaya",
+      "Jurnalistik",
+      "Pers",
+      "Berita",
+    ],
   },
 ];
 
 const komunitasData: OrgItem[] = [
   {
     id: "kom-1",
-    name: "Bujang Gadis Politeknik Negeri Sriwijaya (BGPOL)",
+    name: "Komunitas Bujang Gadis Politeknik Negeri Sriwijaya (BGPOL)",
     category: "Komunitas",
     image: "/images/Komunitas/bgp.webp",
+    description:
+      "Komunitas BGPOL adalah Bujang Gadis Polsri yang mewakili Politeknik Negeri Sriwijaya dalam berbagai acara formal dan promosi. Kami berfokus pada pengembangan public speaking, etika, dan wawasan kebudayaan.",
+    alias: [
+      "BGPOL",
+      "Bujang Gadis",
+      "Komunitas Bujang Gadis Politeknik Negeri Sriwijaya (BGPOL)",
+      "Public Speaking",
+    ],
   },
   {
     id: "kom-2",
     name: "Majelis Permusyawaratan Mahasiswa (MPM)",
     category: "Komunitas",
     image: "/images/Komunitas/mpm.webp",
+    description:
+      "Membawa cahaya semangat untuk menciptakan terobosan demi kesejahteraan mahasiswa. Lembaga legislatif mahasiswa Politeknik Negeri Sriwijaya yang berfungsi sebagai wadah musyawarah dan penetapan kebijakan kemahasiswaan. MPM juga mengawasi kinerja BEM demi tercapainya keseimbangan organisasi.",
+    alias: ["MPM", "Majelis Permusyawaratan Mahasiswa"],
   },
   {
     id: "kom-3",
-    name: "Pramuka",
+    name: "Komunitas Pramuka",
     category: "Komunitas",
     image: "/images/Komunitas/pramuka.webp",
+    description:
+      "Komunitas Pramuka adalah wadah bagi mahasiswa yang ingin mengembangkan kedisiplinan, kepanduan, kepemimpinan, dan kecintaan pada alam.",
+    alias: ["Pramuka", "Komunitas Pramuka", "Kepanduan", "Kedisiplinan"],
   },
   {
     id: "kom-4",
-    name: "Automation Robotic Club of Sriwijaya (ARCOS)",
+    name: "Komunitas Automation Robotic Club of Sriwijaya (ARCOS)",
     category: "Komunitas",
     image: "/images/Komunitas/robotik.webp",
+    description:
+      "ARCOS adalah komunitas yang berfokus pada bidang robotika dan otomatisasi. Komunitas ini berkolaborasi dalam proyek-proyek robotik dan berpartisipasi dalam kompetisi robotika.",
+    alias: [
+      "ARCOS",
+      "Komunitas Automation Robotic Club of Sriwijaya (ARCOS)",
+      "Robotik",
+      "Robotika",
+      "Otomatisasi",
+      "Robot",
+    ],
   },
   {
     id: "kom-5",
-    name: "Entrepreneur (Kewirausahaan) Polsri",
+    name: "Komunitas Kewirausahaan Polsri",
     category: "Komunitas",
     image: "/images/Komunitas/wirausaha.webp",
+    description:
+      "Komunitas Kewirausahaan adalah wadah bagi mahasiswa yang memiliki minat dalam dunia bisnis dan kewirausahaan. Komunitas ini mengadakan workshop, seminar, dan mentoring untuk membantu mahasiswa memulai usaha.",
+    alias: [
+      "Entrepreneur",
+      "Kewirausahaan",
+      "Komunitas Kewirausahaan",
+      "Bisnis",
+      "Wirausaha",
+    ],
   },
 ];
 
@@ -194,9 +382,10 @@ export default function OrganisasiMahasiswa() {
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedOrg, setSelectedOrg] = useState<OrgItem | null>(null);
 
   // ============================================================
-  // SCROLL DETECTION
+  // SCROLL DETECTION & LOCK BODY ON MODAL
   // ============================================================
   useEffect(() => {
     const handleScroll = () => {
@@ -209,6 +398,17 @@ export default function OrganisasiMahasiswa() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (selectedOrg) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedOrg]);
 
   // ============================================================
   // DROPDOWN & HELPER FUNCTIONS
@@ -238,10 +438,20 @@ export default function OrganisasiMahasiswa() {
     ...komunitasData,
   ];
 
+  const searchLower = searchQuery.toLowerCase().trim();
   const searchResults = searchQuery.trim()
-    ? allOrganizations.filter((item) =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase().trim()),
-      )
+    ? allOrganizations.filter((item) => {
+        const matchName = item.name.toLowerCase().includes(searchLower);
+        const matchCategory = item.category.toLowerCase().includes(searchLower);
+        const matchDesc = item.description
+          ? item.description.toLowerCase().includes(searchLower)
+          : false;
+        const matchAlias = item.alias
+          ? item.alias.some((a) => a.toLowerCase().includes(searchLower))
+          : false;
+
+        return matchName || matchCategory || matchDesc || matchAlias;
+      })
     : [];
 
   return (
@@ -575,16 +785,10 @@ export default function OrganisasiMahasiswa() {
         {!searchQuery.trim() && (
           <section className="px-5 pt-8 lg:px-8 lg:pt-12">
             <div className="mx-auto max-w-7xl">
-              <div className="relative overflow-hidden rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12 lg:p-14">
-                {/* ACCENT GLOW */}
-                <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-amber-400/20 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-amber-500/20 blur-3xl" />
-
+              <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-md transition-all duration-300 ease-out sm:p-12 lg:p-14">
                 <div className="relative z-10 mx-auto max-w-3xl text-center">
-               
-
                   <h1 className="text-3xl font-black tracking-tight text-amber-600 sm:text-4xl lg:text-5xl">
-                  Organisasi Mahasiswa Politeknik Negeri Sriwijayai
+                    Organisasi Mahasiswa Politeknik Negeri Sriwijaya
                   </h1>
 
                   <p className="mt-4 text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
@@ -876,7 +1080,7 @@ export default function OrganisasiMahasiswa() {
 
                   <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                     {searchResults.map((item) => (
-                      <OrgCard key={item.id} item={item} />
+                      <OrgCard key={item.id} item={item} onSelect={setSelectedOrg} />
                     ))}
                   </div>
                 </div>
@@ -926,7 +1130,7 @@ export default function OrganisasiMahasiswa() {
 
                 <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                   {mpmData.map((item) => (
-                    <OrgCard key={item.id} item={item} />
+                    <OrgCard key={item.id} item={item} onSelect={setSelectedOrg} />
                   ))}
                 </div>
               </div>
@@ -953,7 +1157,7 @@ export default function OrganisasiMahasiswa() {
 
                 <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                   {bemData.map((item) => (
-                    <OrgCard key={item.id} item={item} />
+                    <OrgCard key={item.id} item={item} onSelect={setSelectedOrg} />
                   ))}
                 </div>
               </div>
@@ -980,7 +1184,7 @@ export default function OrganisasiMahasiswa() {
 
                 <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                   {hmjData.map((item) => (
-                    <OrgCard key={item.id} item={item} />
+                    <OrgCard key={item.id} item={item} onSelect={setSelectedOrg} />
                   ))}
                 </div>
               </div>
@@ -1006,7 +1210,7 @@ export default function OrganisasiMahasiswa() {
 
                 <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {ukmData.map((item) => (
-                    <OrgCard key={item.id} item={item} />
+                    <OrgCard key={item.id} item={item} onSelect={setSelectedOrg} />
                   ))}
                 </div>
               </div>
@@ -1032,7 +1236,7 @@ export default function OrganisasiMahasiswa() {
 
                 <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
                   {komunitasData.map((item) => (
-                    <OrgCard key={item.id} item={item} />
+                    <OrgCard key={item.id} item={item} onSelect={setSelectedOrg} />
                   ))}
                 </div>
               </div>
@@ -1193,18 +1397,33 @@ export default function OrganisasiMahasiswa() {
           </div>
         </footer>
       </div>
+
+      {/* MODAL DETAIL ORGANISASI */}
+      <OrgDetailModal item={selectedOrg} onClose={() => setSelectedOrg(null)} />
     </main>
   );
 }
 
 // ============================================================
-// SUBKOMPONEN CARD ORGANISASI MAHASISWA (PERSIS GAYA KAJIAN)
+// SUBKOMPONEN CARD ORGANISASI MAHASISWA
 // ============================================================
-function OrgCard({ item }: { item: OrgItem }) {
+function OrgCard({
+  item,
+  onSelect,
+}: {
+  item: OrgItem;
+  onSelect: (item: OrgItem) => void;
+}) {
   const [imgError, setImgError] = useState(false);
+  const hasDetail = Boolean(item.description);
 
   return (
-    <article className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5">
+    <article
+      onClick={() => hasDetail && onSelect(item)}
+      className={`group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5 ${
+        hasDetail ? "cursor-pointer" : ""
+      }`}
+    >
       <div>
         {/* TOP BADGE */}
         <div className="flex items-center justify-between">
@@ -1237,18 +1456,122 @@ function OrgCard({ item }: { item: OrgItem }) {
         <h3 className="text-base font-black leading-snug text-slate-900 transition-colors duration-200 group-hover:text-amber-600">
           {item.name}
         </h3>
+
+        {/* DESKRIPSI SINGKAT */}
+        {item.description && (
+          <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-slate-500">
+            {item.description}
+          </p>
+        )}
       </div>
 
       {/* FOOTER CARD */}
       <div className="mt-6 border-t border-slate-100 pt-4">
-        <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-600">
-          Lihat Detail
-          <ArrowUpRight
-            size={14}
-            className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
-        </span>
+        {hasDetail ? (
+          <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-600">
+            Lihat Detail
+            <ArrowUpRight
+              size={14}
+              className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </span>
+        ) : (
+          <span className="inline-flex items-center gap-1 text-xs font-bold text-slate-400">
+            BEM POLSRI
+          </span>
+        )}
       </div>
     </article>
+  );
+}
+
+// ============================================================
+// MODAL DETAIL ORGANISASI MAHASISWA
+// ============================================================
+function OrgDetailModal({
+  item,
+  onClose,
+}: {
+  item: OrgItem | null;
+  onClose: () => void;
+}) {
+  const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  if (!item) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 bg-slate-950/60 backdrop-blur-sm transition-opacity duration-200"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl transition-all duration-200"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* CLOSE BUTTON */}
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Tutup detail modal"
+          className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-all hover:bg-amber-100 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
+        >
+          <X size={18} />
+        </button>
+
+        {/* LOGO ORGANISASI */}
+        <div className="mx-auto mb-5 flex h-32 w-32 items-center justify-center rounded-2xl bg-amber-50/60 p-4 shadow-inner">
+          {!imgError ? (
+            <img
+              src={item.image}
+              alt={item.name}
+              onError={() => setImgError(true)}
+              className="max-h-full max-w-full object-contain drop-shadow-md"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center font-black text-amber-600 text-xl">
+              {item.name.substring(0, 3).toUpperCase()}
+            </div>
+          )}
+        </div>
+
+        {/* KATEGORI BADGE */}
+        <div className="text-center">
+          <span className="inline-block rounded-full bg-amber-100 px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-700">
+            {item.category}
+          </span>
+        </div>
+
+        {/* NAMA ORGANISASI */}
+        <h3 className="mt-3 text-center text-xl font-black text-slate-900 sm:text-2xl">
+          {item.name}
+        </h3>
+
+        {/* DESKRIPSI LENGKAP */}
+        <div className="mt-4 max-h-[55vh] overflow-y-auto pr-1">
+          <p className="text-sm font-normal leading-relaxed text-slate-700 sm:text-base text-justify">
+            {item.description}
+          </p>
+        </div>
+
+        {/* FOOTER MODAL */}
+        <div className="mt-6 border-t border-slate-100 pt-4 flex justify-end">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-xl bg-amber-500 px-6 py-2.5 text-xs font-bold text-white shadow-md shadow-amber-500/20 transition-all hover:bg-amber-600 active:scale-95"
+          >
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

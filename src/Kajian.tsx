@@ -456,10 +456,7 @@ export default function Kajian() {
             <div className="absolute inset-x-0 bottom-0">
               <div className="mx-auto flex max-w-7xl flex-col items-start px-5 pb-8 lg:px-8 lg:pb-12">
                 {/* BADGE */}
-                <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-amber-100/90 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-amber-700 backdrop-blur-sm">
-                  <BookOpen size={14} className="text-amber-600" />
-                  Campus Echo
-                </span>
+             
 
                 {/* DESKRIPSI PROGRAM */}
                 <p className="max-w-3xl text-sm font-medium leading-relaxed text-white/90 sm:text-base">

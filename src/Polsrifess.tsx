@@ -464,10 +464,7 @@ export default function Polsrifess() {
               <div className="mx-auto max-w-7xl px-5 pb-8 lg:px-8 lg:pb-12">
                 <div className="max-w-3xl">
                   {/* BADGE */}
-                  <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-amber-100/90 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-amber-700 backdrop-blur-sm">
-                    <Sparkles size={13} />
-                    Ruang Aspirasi Anonim
-                  </span>
+              
 
                   {/* DESKRIPSI */}
                   <p className="max-w-2xl text-sm font-medium leading-relaxed text-white/90 sm:text-base">
