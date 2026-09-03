@@ -26,6 +26,7 @@ interface OrgItem {
   category: "HMJ" | "UKM" | "Komunitas" | "MPM" | "BEM";
   image: string;
   description?: string;
+  cabinet?: string;
   alias?: string[];
 }
 
@@ -53,9 +54,17 @@ const bemData: OrgItem[] = [
   {
     id: "bem-1",
     name: "BEM Politeknik Negeri Sriwijaya",
+    cabinet: "Kabinet Kilau Gemilang",
     category: "BEM",
     image: "/images/logo.png",
-    alias: ["BEM", "Badan Eksekutif Mahasiswa"],
+    description:
+      " Kabinet Kilau Gemilang adalah manifestasi dari organisasi yang ditempa dengan kuat (Kilau) untuk melahirkan sejarah prestasi yang abadi (Gemilang). ",
+    alias: [
+      "BEM",
+      "Badan Eksekutif Mahasiswa",
+      "Kabinet Kilau Gemilang",
+      "Kilau Gemilang",
+    ],
   },
 ];
 
@@ -864,8 +873,8 @@ export default function OrganisasiMahasiswa() {
                   <div>
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 p-2 mb-5 transition-transform duration-200 group-hover:scale-110 overflow-hidden">
                       <img
-                        src="/images/logo.png"
-                        alt="BEM Logo"
+                        src="/images/Komunitas/Logo BEM POLSRI.png"
+                        alt="Logo BEM POLSRI"
                         className="h-full w-full object-contain"
                       />
                     </div>
@@ -875,16 +884,17 @@ export default function OrganisasiMahasiswa() {
                     <p className="mt-1 text-xs font-bold text-amber-600 uppercase tracking-wider">
                       Badan Eksekutif Mahasiswa
                     </p>
+                    <p className="mt-0.5 text-xs font-black uppercase tracking-wide text-slate-800">
+                      Kabinet Kilau Gemilang
+                    </p>
                     <p className="mt-3 text-xs leading-relaxed text-slate-600">
-                      Lembaga eksekutif mahasiswa yang menjalankan program
-                      kerja, mengoordinasikan kegiatan mahasiswa, dan menjadi
-                      jembatan antarorganisasi mahasiswa.
+                      " Kabinet Kilau Gemilang adalah manifestasi dari organisasi yang ditempa dengan kuat (Kilau) untuk melahirkan sejarah prestasi yang abadi (Gemilang). "
                     </p>
                   </div>
                   <div className="mt-6 pt-4 border-t border-slate-100">
                     <button
                       type="button"
-                      onClick={() => scrollToSection("section-bem")}
+                      onClick={() => setSelectedOrg(bemData[0])}
                       className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 hover:text-amber-700 transition-colors"
                     >
                       Lihat Organisasi
@@ -1137,6 +1147,7 @@ export default function OrganisasiMahasiswa() {
             </section>
 
             {/* ======================================================== */}
+            {/* ======================================================== */}
             {/* SECTION BEM */}
             {/* ======================================================== */}
             <section
@@ -1148,10 +1159,11 @@ export default function OrganisasiMahasiswa() {
                   <h2 className="text-2xl font-black tracking-tight text-amber-600 sm:text-3xl">
                     BADAN EKSEKUTIF MAHASISWA
                   </h2>
+                  <p className="mt-1 text-sm font-black uppercase tracking-wider text-slate-800">
+                    KABINET KILAU GEMILANG
+                  </p>
                   <p className="mt-2 text-sm leading-7 text-slate-600">
-                    Lembaga eksekutif mahasiswa yang menjalankan program kerja,
-                    mengoordinasikan kegiatan mahasiswa, dan menjadi jembatan
-                    antarorganisasi mahasiswa.
+                    " Kabinet Kilau Gemilang adalah manifestasi dari organisasi yang ditempa dengan kuat (Kilau) untuk melahirkan sejarah prestasi yang abadi (Gemilang). "
                   </p>
                 </div>
 
@@ -1456,6 +1468,11 @@ function OrgCard({
         <h3 className="text-base font-black leading-snug text-slate-900 transition-colors duration-200 group-hover:text-amber-600">
           {item.name}
         </h3>
+        {item.cabinet && (
+          <p className="mt-0.5 text-xs font-bold uppercase tracking-wide text-amber-600">
+            {item.cabinet}
+          </p>
+        )}
 
         {/* DESKRIPSI SINGKAT */}
         {item.description && (
@@ -1507,6 +1524,8 @@ function OrgDetailModal({
 
   if (!item) return null;
 
+  const isBem = item.category === "BEM" || item.id === "bem-1";
+
   return (
     <div
       className="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 bg-slate-950/60 backdrop-blur-sm transition-opacity duration-200"
@@ -1551,14 +1570,28 @@ function OrgDetailModal({
 
         {/* NAMA ORGANISASI */}
         <h3 className="mt-3 text-center text-xl font-black text-slate-900 sm:text-2xl">
-          {item.name}
+          {isBem ? "BADAN EKSEKUTIF MAHASISWA" : item.name}
         </h3>
+
+        {isBem && (
+          <p className="mt-1 text-center text-sm font-extrabold uppercase tracking-wider text-amber-600">
+            KABINET KILAU GEMILANG
+          </p>
+        )}
 
         {/* DESKRIPSI LENGKAP */}
         <div className="mt-4 max-h-[55vh] overflow-y-auto pr-1">
-          <p className="text-sm font-normal leading-relaxed text-slate-700 sm:text-base text-justify">
-            {item.description}
-          </p>
+          {isBem ? (
+            <div className="rounded-2xl border border-amber-200/70 bg-amber-50/50 p-4 text-center">
+              <p className="text-sm font-medium leading-relaxed text-slate-700 sm:text-base">
+                " Kabinet Kilau Gemilang adalah manifestasi dari organisasi yang ditempa dengan kuat (Kilau) untuk melahirkan sejarah prestasi yang abadi (Gemilang). "
+              </p>
+            </div>
+          ) : (
+            <p className="text-sm font-normal leading-relaxed text-slate-700 sm:text-base text-justify">
+              {item.description}
+            </p>
+          )}
         </div>
 
         {/* FOOTER MODAL */}
