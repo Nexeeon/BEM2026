@@ -426,9 +426,7 @@ export default function Medinfo() {
         {/* PIMPINAN DEPARTEMEN */}
         <section className="mx-auto max-w-7xl px-5 py-12 lg:px-8 lg:py-20">
           <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-600 sm:text-sm">
-              LEADERSHIP TEAM
-            </p>
+            
             <h2 className="mt-2 font-serif text-3xl font-black uppercase tracking-tight text-amber-500 sm:text-4xl lg:text-5xl">
               PIMPINAN DEPARTEMEN
             </h2>
