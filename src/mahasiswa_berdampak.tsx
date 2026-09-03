@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ChevronDown,
@@ -15,6 +15,19 @@ type DropdownName = "academic" | "echo" | null;
 export default function MahasiswaBerdampak() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleDropdown = (name: Exclude<DropdownName, null>) => {
     setOpenDropdown(openDropdown === name ? null : name);
@@ -26,16 +39,16 @@ export default function MahasiswaBerdampak() {
   };
 
   return (
-    <main
-      className="relative flex min-h-screen flex-col overflow-x-hidden text-slate-900 scroll-smooth bg-[#fdfbf7] bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url('/images/bgweb.jpeg')` }}
-    >
-      {/* OVERLAY KREM TRANSPARAN IDENTIK DENGAN HALAMAN ABOUT */}
-      <div className="absolute inset-0 bg-[#fdfbf7]/60 pointer-events-none z-0" />
-
-      <div className="relative flex min-h-screen flex-1 flex-col z-10">
-        {/* NAVBAR FULL-WIDTH */}
-        <header className="relative z-[100] w-full bg-[#fdfbf7]/90 backdrop-blur-md border-b border-amber-900/10">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
+      <div className="min-h-screen bg-white/65">
+        {/* NAVBAR FULL-WIDTH — MASTER */}
+        <header
+          className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
+            scrolled
+              ? "border-b border-slate-200/70 bg-white/80 shadow-sm backdrop-blur-xl"
+              : "border-b border-white/20 bg-white/20 backdrop-blur-md"
+          }`}
+        >
           <div className="w-full">
             <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 lg:px-8">
               {/* BRANDING */}
@@ -60,29 +73,29 @@ export default function MahasiswaBerdampak() {
               <nav className="hidden items-center gap-1 lg:flex">
                 <Link
                   to="/"
-                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/50 hover:text-amber-700 active:scale-[0.98]"
+                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   onClick={closeMenus}
                 >
                   Home
                 </Link>
 
-                <a
-                  href="/about"
-                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/50 hover:text-amber-700 active:scale-[0.98]"
+                <Link
+                  to="/about"
+                  className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/55 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   onClick={closeMenus}
                 >
                   About
-                </a>
+                </Link>
 
                 {/* ACADEMIC INFORMATION */}
                 <div className="relative">
                   <button
                     type="button"
                     onClick={() => toggleDropdown("academic")}
-                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] ${
+                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
                       openDropdown === "academic"
-                        ? "bg-amber-100/60 text-amber-800"
-                        : "text-amber-700 hover:bg-amber-100/40 hover:text-amber-800"
+                        ? "bg-white/60 text-amber-700"
+                        : "text-amber-600 hover:bg-white/55 hover:text-amber-600"
                     }`}
                   >
                     Academic Information
@@ -95,10 +108,10 @@ export default function MahasiswaBerdampak() {
                   </button>
 
                   {openDropdown === "academic" && (
-                    <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-amber-900/10 bg-[#fdfbf7] p-1.5 shadow-xl">
+                    <div className="absolute left-0 top-full mt-2 w-60 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
                       <Link
                         to="/calendar"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/60 hover:text-amber-800"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Academic Calendar
@@ -106,7 +119,7 @@ export default function MahasiswaBerdampak() {
 
                       <Link
                         to="/scholarship-info"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/60 hover:text-amber-800"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Scholarship Info
@@ -114,19 +127,20 @@ export default function MahasiswaBerdampak() {
 
                       <a
                         href="/organisasi-mahasiswa"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/60 hover:text-amber-800"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Organisasi Mahasiswa
                       </a>
 
-                      <a
-                        href="/mahasiswa-berdampak"
-                        className="block rounded-lg bg-amber-100/80 px-3 py-2.5 text-xs font-semibold text-amber-800 outline-none transition-all duration-200 ease-out"
+                      {/* MAHASISWA BERDAMPAK (ACTIVE) */}
+                      <Link
+                        to="/mahasiswa-berdampak"
+                        className="block rounded-lg bg-amber-50 px-3 py-2.5 text-xs font-semibold text-amber-700 outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Mahasiswa Berdampak
-                      </a>
+                      </Link>
                     </div>
                   )}
                 </div>
@@ -136,10 +150,10 @@ export default function MahasiswaBerdampak() {
                   <button
                     type="button"
                     onClick={() => toggleDropdown("echo")}
-                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] ${
+                    className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70 ${
                       openDropdown === "echo"
-                        ? "bg-amber-100/60 text-amber-800"
-                        : "text-slate-600 hover:bg-amber-100/40 hover:text-amber-700"
+                        ? "bg-white/60 text-amber-700"
+                        : "text-slate-600 hover:bg-white/55 hover:text-amber-600"
                     }`}
                   >
                     Campus Echo
@@ -152,10 +166,10 @@ export default function MahasiswaBerdampak() {
                   </button>
 
                   {openDropdown === "echo" && (
-                    <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-amber-900/10 bg-[#fdfbf7] p-1.5 shadow-xl">
+                    <div className="absolute left-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 p-1.5 shadow-xl backdrop-blur-xl">
                       <Link
                         to="/kajian"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/60 hover:text-amber-800"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Kajian
@@ -163,7 +177,7 @@ export default function MahasiswaBerdampak() {
 
                       <Link
                         to="/bisik-kampus"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/60 hover:text-amber-800"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Bisik Kampus
@@ -171,7 +185,7 @@ export default function MahasiswaBerdampak() {
 
                       <Link
                         to="/polsrifess"
-                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/60 hover:text-amber-800"
+                        className="block rounded-lg px-3 py-2.5 text-xs font-semibold text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-50 hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                         onClick={closeMenus}
                       >
                         Polsrifess
@@ -182,7 +196,7 @@ export default function MahasiswaBerdampak() {
 
                 <Link
                   to="/contact"
-                  className="ml-1 rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-amber-100/50 hover:text-amber-700 active:scale-[0.98]"
+                  className="ml-1 rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 outline-none transition-all duration-200 ease-out hover:bg-white/50 hover:text-amber-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
                   onClick={closeMenus}
                 >
                   Contact Us
@@ -194,7 +208,7 @@ export default function MahasiswaBerdampak() {
                 type="button"
                 aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
                 aria-expanded={mobileOpen}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-amber-900/10 bg-amber-50 text-slate-700 outline-none transition-all duration-200 hover:bg-amber-100 lg:hidden"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/40 bg-white/40 text-slate-700 outline-none backdrop-blur-md transition-all duration-200 ease-out hover:border-amber-300 hover:bg-white/60 hover:text-amber-600 active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-amber-400/70 lg:hidden"
                 onClick={() => setMobileOpen(!mobileOpen)}
               >
                 {mobileOpen ? <X size={21} /> : <Menu size={21} />}
@@ -203,113 +217,113 @@ export default function MahasiswaBerdampak() {
 
             {/* MOBILE MENU CONTENT */}
             {mobileOpen && (
-              <div className="border-t border-amber-900/10 bg-[#fdfbf7] px-5 py-3 shadow-lg lg:hidden">
+              <div className="border-t border-slate-200/70 bg-white/95 px-5 py-3 shadow-lg backdrop-blur-xl lg:hidden">
                 <Link
                   to="/"
-                  className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 hover:bg-amber-100/50 hover:text-amber-700"
+                  className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                   onClick={closeMenus}
                 >
                   Home
                 </Link>
 
-                <a
-                  href="/about"
-                  className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 hover:bg-amber-100/50 hover:text-amber-700"
+                <Link
+                  to="/about"
+                  className="block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                   onClick={closeMenus}
                 >
                   About
-                </a>
+                </Link>
 
                 {/* MOBILE ACADEMIC */}
                 <button
                   type="button"
-                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-semibold ${
+                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
                     openDropdown === "academic"
-                      ? "bg-amber-100/60 text-amber-800"
-                      : "text-amber-700 hover:bg-amber-100/50"
+                      ? "bg-amber-50 text-amber-700"
+                      : "text-amber-600 hover:bg-slate-50 hover:text-amber-600"
                   }`}
                   onClick={() => toggleDropdown("academic")}
                 >
                   Academic Information
                   <ChevronDown
                     size={14}
-                    className={`transition-transform duration-200 ${
+                    className={`transition-transform duration-200 ease-out ${
                       openDropdown === "academic" ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
                 {openDropdown === "academic" && (
-                  <div className="mt-1 rounded-lg bg-amber-50/50 p-1">
+                  <div className="mt-1 rounded-lg bg-slate-50 p-1">
                     <Link
                       to="/calendar"
-                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 hover:bg-white hover:text-amber-800"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Academic Calendar
                     </Link>
                     <Link
                       to="/scholarship-info"
-                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 hover:bg-white hover:text-amber-800"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Scholarship Info
                     </Link>
                     <a
                       href="/organisasi-mahasiswa"
-                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-800"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Organisasi Mahasiswa
                     </a>
-                    <a
-                      href="/mahasiswa-berdampak"
-                      className="block rounded-md bg-white px-3 py-2.5 text-sm font-semibold text-amber-800"
+                    <Link
+                      to="/mahasiswa-berdampak"
+                      className="block rounded-md bg-amber-50 px-3 py-2.5 text-sm font-semibold text-amber-700 outline-none transition-all duration-200 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Mahasiswa Berdampak
-                    </a>
+                    </Link>
                   </div>
                 )}
 
                 {/* MOBILE CAMPUS ECHO */}
                 <button
                   type="button"
-                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium ${
+                  className={`mt-1 flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium outline-none transition-all duration-200 ease-out active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50 ${
                     openDropdown === "echo"
-                      ? "bg-amber-100/60 text-amber-800"
-                      : "text-slate-600 hover:bg-amber-100/50"
+                      ? "bg-amber-50 text-amber-700"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-amber-600"
                   }`}
                   onClick={() => toggleDropdown("echo")}
                 >
                   Campus Echo
                   <ChevronDown
                     size={14}
-                    className={`transition-transform duration-200 ${
+                    className={`transition-transform duration-200 ease-out ${
                       openDropdown === "echo" ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
                 {openDropdown === "echo" && (
-                  <div className="mt-1 rounded-lg bg-amber-50/50 p-1">
+                  <div className="mt-1 rounded-lg bg-slate-50 p-1">
                     <Link
                       to="/kajian"
-                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-800"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Kajian
                     </Link>
                     <Link
                       to="/bisik-kampus"
-                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 hover:bg-white hover:text-amber-800"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Bisik Kampus
                     </Link>
                     <Link
                       to="/polsrifess"
-                      className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-600 hover:bg-white hover:text-amber-800"
+                      className="block rounded-md px-3 py-2.5 text-sm text-slate-600 outline-none transition-all duration-200 hover:bg-white hover:text-amber-700 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                       onClick={closeMenus}
                     >
                       Polsrifess
@@ -319,7 +333,7 @@ export default function MahasiswaBerdampak() {
 
                 <Link
                   to="/contact"
-                  className="mt-1 block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 hover:bg-amber-100/50 hover:text-amber-700"
+                  className="mt-1 block rounded-lg px-3 py-3 text-sm font-medium text-slate-600 outline-none transition-all duration-200 hover:bg-slate-50 hover:text-amber-600 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-400/50"
                   onClick={closeMenus}
                 >
                   Contact Us
