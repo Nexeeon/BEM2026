@@ -37,6 +37,10 @@ export default function Navbar({ activePage: activePageProp }: NavbarProps) {
     else if (path === "/bisik-kampus") activePage = "bisik-kampus";
     else if (path === "/polsrifess") activePage = "polsrifess";
     else if (path === "/medinfo" || path === "/departemen/medinfo") activePage = "medinfo";
+    else if (path === "/kastrat" || path === "/departemen/kastrat") activePage = "kastrat";
+    else if (path === "/psdm" || path === "/departemen/psdm") activePage = "psdm";
+    else if (path === "/adkesma" || path === "/departemen/adkesma") activePage = "adkesma";
+    else if (path === "/humas" || path === "/departemen/humas") activePage = "humas";
     else if (path === "/contact") activePage = "contact";
   }
 

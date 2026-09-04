@@ -75,19 +75,19 @@ const departmentsData = [
     name: "Departemen Adkesma",
     desc: "Advokasi & Kesejahteraan Mahasiswa",
     image: "/images/adkesma/ADKESMA.png",
-    route: "",
+    route: "/adkesma",
   },
   {
     name: "Departemen Humas",
     desc: "Hubungan Masyarakat & Eksternal",
     image: "/images/humas/HUMAS.png",
-    route: "",
+    route: "/humas",
   },
   {
     name: "Departemen Kastrat",
     desc: "Kajian & Aksi Strategis",
     image: "/images/kastrat/KASTRAT.png",
-    route: "",
+    route: "/kastrat",
   },
   {
     name: "Departemen Medinfo",
@@ -99,7 +99,7 @@ const departmentsData = [
     name: "Departemen PSDM",
     desc: "Pengembangan Sumber Daya Mahasiswa",
     image: "/images/psdm/PSDM.png",
-    route: "",
+    route: "/psdm",
   },
 ];
 

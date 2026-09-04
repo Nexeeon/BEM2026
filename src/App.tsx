@@ -10,6 +10,10 @@ import ScholarshipInfo from "./scholarship-info";
 import MahasiswaBerdampak from "./mahasiswa_berdampak";
 import OrganisasiMahasiswa from "./Organisasi_Mahasiswa";
 import Medinfo from "./Medinfo";
+import Kastrat from "./Kastrat";
+import Psdm from "./Psdm";
+import Adkesma from "./Adkesma";
+import Humas from "./Humas";
 
 function App() {
   return (
@@ -38,6 +42,14 @@ function App() {
 
         {/* Halaman Departemen */}
         <Route path="/medinfo" element={<Medinfo />} />
+        <Route path="/kastrat" element={<Kastrat />} />
+        <Route path="/departemen/kastrat" element={<Kastrat />} />
+        <Route path="/psdm" element={<Psdm />} />
+        <Route path="/departemen/psdm" element={<Psdm />} />
+        <Route path="/adkesma" element={<Adkesma />} />
+        <Route path="/departemen/adkesma" element={<Adkesma />} />
+        <Route path="/humas" element={<Humas />} />
+        <Route path="/departemen/humas" element={<Humas />} />
       </Routes>
     </Router>
   );
