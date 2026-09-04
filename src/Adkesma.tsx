@@ -23,13 +23,13 @@ const pimpinanAdkesma: Anggota[] = [
     nama: "Muhamad Fadil Al Rahman",
     jabatan: "Ketua Departemen ADKESMA",
     foto: "/images/adkesma/Muhamad Fadil Al Rahman-Ketua Departemen ADKESMA.png",
-    instagram: "",
+    instagram: "padhl_",
   },
   {
     nama: "Meylani Putri",
     jabatan: "Sekretaris Departemen ADKESMA",
     foto: "/images/adkesma/Meylani Putri-Sekretaris Departemen ADKESMA.png",
-    instagram: "",
+    instagram: "meylnip_",
   },
 ];
 
@@ -45,37 +45,37 @@ const divisiList: Divisi[] = [
         nama: "Aidil Ramadhan",
         jabatan: "Kepala Divisi Kesejahteraan Mahasiswa",
         foto: "/images/adkesma/Kesejahteraan Mahasiswa/Aidil Ramadhan-Kepala Divisi Kesejahteraan Mahasiswa.png",
-        instagram: "",
+        instagram: "aidiiiil30",
       },
       {
         nama: "Eric Ramadhan Depati",
         jabatan: "Staf Ahli Divisi Kesejahteraan Mahasiswa",
         foto: "/images/adkesma/Kesejahteraan Mahasiswa/Eric Ramadhan Depati-Staf Ahli Divisi Kesejahteraan Mahasiswa.png",
-        instagram: "",
+        instagram: "erc_rmdhn",
       },
       {
         nama: "Fakhita Shafa Marwah",
         jabatan: "Staf Ahli Divisi Kesejahteraan Mahasiswa",
         foto: "/images/adkesma/Kesejahteraan Mahasiswa/Fakhita Shafa Marwah-Staf Ahli Divisi Kesejahteraan Mahasiswa.png",
-        instagram: "",
+        instagram: "fakhitashf",
       },
       {
         nama: "Muhammad Arka Aisy Hafiy",
         jabatan: "Staf Ahli Divisi Kesejahteraan Mahasiswa",
         foto: "/images/adkesma/Kesejahteraan Mahasiswa/Muhammad Arka Aisy Hafiy-Staf Ahli Divisi Kesejahteraan Mahasiswa.png",
-        instagram: "",
+        instagram: "arkaaisyy",
       },
       {
         nama: "Geby Rebecca",
         jabatan: "Staf Muda Kesejahteraan Mahasiswa",
         foto: "/images/adkesma/Kesejahteraan Mahasiswa/Geby Rebecca-Staf Muda Kesejahteraan Mahasiswa.png",
-        instagram: "",
+        instagram: "geby_rebecca",
       },
       {
         nama: "Siti Dinda Amarsha",
         jabatan: "Staf Muda Kesejahteraan Mahasiswa",
         foto: "/images/adkesma/Kesejahteraan Mahasiswa/Siti Dinda Amarsha-Staf Muda Kesejahteraan Mahasiswa.png",
-        instagram: "",
+        instagram: "sitidinndaamaarsha",
       },
     ],
   },
@@ -90,7 +90,7 @@ const divisiList: Divisi[] = [
         nama: "Carlita Maharani",
         jabatan: "Kepala Divisi Perlindungan Mahasiswa",
         foto: "/images/adkesma/Kesejahteraan Mahasiswa/Carlita Maharani -Kepala Divisi Perlindungan Mahasiswa.png",
-        instagram: "",
+        instagram: "carlitaamhrnii",
       },
       {
         nama: "Feby Patmala",
@@ -102,25 +102,31 @@ const divisiList: Divisi[] = [
         nama: "Muhammad Al-Hafidz AR",
         jabatan: "Staf Ahli Divisi Perlindungan Mahasiswa",
         foto: "/images/adkesma/Perlindungan Mahasiswa/Muhammad Al-Hafidz AR-Staf Ahli Divisi Perlindungan Mahasiswa.png",
-        instagram: "",
+        instagram: "hfdzzzar",
       },
       {
         nama: "Daffa Alianso",
         jabatan: "Staf Muda Perlindungan Mahasiswa",
         foto: "/images/adkesma/Perlindungan Mahasiswa/Daffa Alianso-Staf Muda Perlindungan Mahasiswa.png",
-        instagram: "",
+        instagram: "dafaall__",
       },
       {
         nama: "Muhammad Kivlan Ali",
         jabatan: "Staf Muda Perlindungan Mahasiswa",
         foto: "/images/adkesma/Perlindungan Mahasiswa/Muhammad Kivlan Ali-Staf Muda Perlindungan Mahasiswa.png",
-        instagram: "",
+        instagram: "kivlann.a",
       },
       {
         nama: "Pelisa Ramadhani",
         jabatan: "Staf Muda Perlindungan Mahasiswa",
         foto: "/images/adkesma/Perlindungan Mahasiswa/Pelisa Ramadhani-Staf Muda Perlindungan Mahasiswa.png",
-        instagram: "",
+        instagram: "isee.pelis",
+      },
+      {
+        nama: "Afiq Al Bukhari",
+        jabatan: "Staf Ahli Divisi Perlindungan Mahasiswa",
+        foto: "/images/Pejabat_Teras/Pelaksana Tugas Wakil Ketua Umum.png",
+        instagram: "afiqqqqquunn_",
       },
     ],
   },
@@ -154,7 +160,7 @@ const MemberCard = memo(({ member }: { member: Anggota }) => {
           <Instagram size={13} className="shrink-0 text-amber-500" />
           {member.instagram ? (
             <a
-              href={`https://instagram.com/${member.instagram.replace("@", "")}`}
+              href={`https://www.instagram.com/${member.instagram.replace("@", "").replace(/\/$/, "")}/`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[11px] font-medium text-amber-600 hover:text-amber-700 hover:underline transition-colors"

@@ -118,7 +118,7 @@ export default function Contact() {
                   <ContactCard
                     icon={<Phone size={19} />}
                     title="Kontak Humas"
-                    description="+62 822 89132699 (Indra)"
+                    description=" +62-813-7740-9724 (Fawas)"
                   />
 
                   {/* EMAIL */}

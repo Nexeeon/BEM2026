@@ -29,13 +29,13 @@ const pimpinanKastrat: Anggota[] = [
     nama: "Reza Sulistomo Marwah",
     jabatan: "Kepala Departemen Kajian dan Aksi Strategis",
     foto: "/images/kastrat/𝗞𝗲𝗽𝗮𝗹𝗮 𝗗𝗲𝗽𝗮𝗿𝘁𝗲𝗺𝗲𝗻 — 𝗥𝗲𝘇𝗮 𝗦𝘂𝗹𝗶𝘀𝘁𝗼𝗺𝗼 𝗠𝗮𝗿𝘄𝗮𝗵.png",
-    instagram: "",
+    instagram: "rezaasltm",
   },
   {
     nama: "Tasya Imanda",
     jabatan: "Sekretaris Departemen Kajian dan Aksi Strategis",
     foto: "/images/kastrat/𝗦𝗲𝗸𝗿𝗲𝘁𝗮𝗿𝗶𝘀 𝗗𝗲𝗽𝗮𝗿𝘁𝗲𝗺𝗲𝗻 — 𝗧𝗮𝘀𝘆𝗮 𝗜𝗺𝗮𝗻𝗱𝗮.png",
-    instagram: "",
+    instagram: "tsya.imnd",
   },
 ];
 
@@ -54,49 +54,55 @@ const divisiList: Divisi[] = [
         nama: "Kazia Dwi Frisma",
         jabatan: "Kepala Divisi Kajian Strategis",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗮𝗷𝗶𝗮𝗻 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝘀/Kazia Dwi Frisma-Kepala Divisi Kajian Strategis.png",
-        instagram: "",
+        instagram: "kziadfriska",
       },
       {
         nama: "Azizah Maharani",
         jabatan: "Staf Ahli Divisi Kajian Strategis",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗮𝗷𝗶𝗮𝗻 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝘀/Azizah Maharani-Staf Ahli Divisi Kajian Strategis.png",
-        instagram: "",
+        instagram: "azizahmhrni",
       },
       {
         nama: "Gatan Putra Ramadhan",
         jabatan: "Staf Ahli Divisi Kajian Strategis",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗮𝗷𝗶𝗮𝗻 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝘀/Gatan Putra Ramadhan-Staf Ahli Divisi Kajian Strategis.png",
-        instagram: "",
+        instagram: "gataneeek",
       },
       {
         nama: "Iasy Zaid Umar Abdillah",
         jabatan: "Staf Muda Kajian Strategis",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗮𝗷𝗶𝗮𝗻 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝘀/Iyasy Zaid Umar Abdillah-Staf Muda Kajian Strategis.png",
-        instagram: "",
+        instagram: "iyaszaid10",
       },
       {
         nama: "Rafly Juliandi",
         jabatan: "Staf Ahli Divisi Kajian Strategis",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗮𝗷𝗶𝗮𝗻 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝘀/Rafly Juliandi-Staf Ahli Divisi Kajian Strategis.png",
-        instagram: "",
+        instagram: "tsr_rafly",
       },
       {
         nama: "Ragil Alfira",
         jabatan: "Staf Muda Kajian Strategis",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗮𝗷𝗶𝗮𝗻 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝘀/Ragil Alfira-Staf Muda Kajian Strategis.png",
-        instagram: "",
+        instagram: "ragilalfira._",
       },
       {
         nama: "Rizki Darma Siringoringo",
         jabatan: "Staf Muda Kajian Strategis",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗮𝗷𝗶𝗮𝗻 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝘀/Rizki Darma Siringoringo-Staf Muda Kajian Strategis.png",
-        instagram: "",
+        instagram: "26_izkiii",
       },
       {
-        nama: "Viki Yudistira",
+        nama: "Vivi Putri Refmi",
         jabatan: "Staf Muda Kajian Strategis",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗮𝗷𝗶𝗮𝗻 𝗦𝘁𝗿𝗮𝘁𝗲𝗴𝗶𝘀/Vivi Putri Refmi-Staf Muda Kajian Strategis.png",
-        instagram: "",
+        instagram: "pipiiputri.r",
+      },
+      {
+        nama: "Helal Humandra",
+        jabatan: "Staf Ahli Divisi Kajian Strategis",
+        foto: "/images/Pejabat_Teras/Koordinator Bidang I.png",
+        instagram: "humandra10",
       },
     ],
   },
@@ -111,31 +117,37 @@ const divisiList: Divisi[] = [
         nama: "Jilbran Pramana Sukma",
         jabatan: "Kepala Divisi Aksi dan Propaganda",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗔𝗸𝘀𝗶 𝗱𝗮𝗻 𝗣𝗿𝗼𝗽𝗮𝗴𝗮𝗻𝗱𝗮/Jilbran Pramana Sukma-Kepala Divisi Aksi dan Propaganda.png",
-        instagram: "",
+        instagram: "jibranpramanaa",
       },
       {
         nama: "Bima Hasmar Pradana",
         jabatan: "Staf Muda Aksi dan Propaganda",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗔𝗸𝘀𝗶 𝗱𝗮𝗻 𝗣𝗿𝗼𝗽𝗮𝗴𝗮𝗻𝗱𝗮/Bima Hasmar Pradana-Staf Muda Aksi dan Propaganda.png",
-        instagram: "",
+        instagram: "bimahasmar",
       },
       {
         nama: "Iqbal Yoga Pranata",
         jabatan: "Staf Muda Aksi dan Propaganda",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗔𝗸𝘀𝗶 𝗱𝗮𝗻 𝗣𝗿𝗼𝗽𝗮𝗴𝗮𝗻𝗱𝗮/Iqbal Yoga Pranata.png",
-        instagram: "",
+        instagram: "iqballllyp",
       },
       {
         nama: "M. Hakim Aditya",
         jabatan: "Staf Muda Aksi dan Propaganda",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗔𝗸𝘀𝗶 𝗱𝗮𝗻 𝗣𝗿𝗼𝗽𝗮𝗴𝗮𝗻𝗱𝗮/M. Hakim Aditya-Staf Muda Aksi dan Propaganda.png",
-        instagram: "",
+        instagram: "hakimadityaa",
       },
       {
         nama: "M. Zaeni Dahlan",
         jabatan: "Staf Muda Aksi dan Propaganda",
         foto: "/images/kastrat/𝗗𝗶𝘃𝗶𝘀𝗶 𝗔𝗸𝘀𝗶 𝗱𝗮𝗻 𝗣𝗿𝗼𝗽𝗮𝗴𝗮𝗻𝗱𝗮/M. Zaeni Dahlan-Staf Muda Aksi dan Propaganda.png",
-        instagram: "",
+        instagram: "zaenidhlln_",
+      },
+      {
+        nama: "Afiq Al Bukhari",
+        jabatan: "Staf Ahli Divisi Aksi dan Propaganda",
+        foto: "/images/Pejabat_Teras/Pelaksana Tugas Wakil Ketua Umum.png",
+        instagram: "afiqqqqquunn_",
       },
     ],
   },
@@ -172,7 +184,7 @@ const MemberCard = memo(({ member }: { member: Anggota }) => {
           <Instagram size={13} className="shrink-0 text-amber-500" />
           {member.instagram ? (
             <a
-              href={`https://instagram.com/${member.instagram.replace("@", "")}`}
+              href={`https://www.instagram.com/${member.instagram.replace("@", "").replace(/\/$/, "")}/`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[11px] font-medium text-amber-600 hover:text-amber-700 hover:underline transition-colors"

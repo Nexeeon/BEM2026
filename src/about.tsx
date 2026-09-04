@@ -23,54 +23,66 @@ const pejabatTerasData = [
     nama: "Hartanti Adiningtyas",
     jabatan: "Sekretaris Umum",
     instagram: "@hartanti_tyas",
-    url: "https://instagram.com/hartanti_tyas",
+    url: "https://www.instagram.com/hartanti_tyas/",
     foto: "/images/Pejabat_Teras/Sekretaris Umum.png",
   },
   {
     nama: "Citra Maulidya",
     jabatan: "Wakil Sekretaris Umum",
     instagram: "@citramldyaa",
-    url: "https://instagram.com/citramldyaa",
+    url: "https://www.instagram.com/citramldyaa/",
     foto: "/images/Pejabat_Teras/Wakil Sekretaris Umum.png",
   },
   {
     nama: "Sulistiani Zahra",
     jabatan: "Bendahara Umum",
     instagram: "@sulistz",
-    url: "https://instagram.com/sulistz",
+    url: "https://www.instagram.com/sulistz/",
     foto: "/images/Pejabat_Teras/Bendahara Umum.png",
   },
   {
     nama: "Khezia Firma Dwi Aulia",
     jabatan: "Wakil Bendahara Umum",
     instagram: "@kheziafdaulia",
-    url: "https://instagram.com/kheziafdaulia",
+    url: "https://www.instagram.com/kheziafdaulia/",
     foto: "/images/Pejabat_Teras/Wakil Bendahara Umum.png",
   },
   {
     nama: "Afiq Al Bukhari",
     jabatan: "Pelaksana Tugas Wakil Ketua Umum",
     instagram: "@afiqqqqquunn_",
-    url: "https://instagram.com/afiqqqqquunn_",
+    url: "https://www.instagram.com/afiqqqqquunn_/",
     foto: "/images/Pejabat_Teras/Pelaksana Tugas Wakil Ketua Umum.png",
   },
   {
     nama: "Helal Humandra",
     jabatan: "Koordinator Bidang I",
     instagram: "@humandra10",
-    url: "https://instagram.com/humandra10",
+    url: "https://www.instagram.com/humandra10/",
     foto: "/images/Pejabat_Teras/Koordinator Bidang I.png",
   },
   {
     nama: "Agoes Putra Pratama",
     jabatan: "Koordinator Bidang II",
     instagram: "@agoesptrp",
-    url: "https://instagram.com/agoesptrp",
+    url: "https://www.instagram.com/agoesptrp/",
     foto: "/images/Pejabat_Teras/Koordinator Bidang II.png",
   },
 ];
 
 const departmentsData = [
+  {
+    name: "Departemen PSDM",
+    desc: "Pengembangan Sumber Daya Mahasiswa",
+    image: "/images/psdm/PSDM.png",
+    route: "/psdm",
+  },
+  {
+    name: "Departemen Kastrat",
+    desc: "Kajian & Aksi Strategis",
+    image: "/images/kastrat/KASTRAT.png",
+    route: "/kastrat",
+  },
   {
     name: "Departemen Adkesma",
     desc: "Advokasi & Kesejahteraan Mahasiswa",
@@ -84,22 +96,10 @@ const departmentsData = [
     route: "/humas",
   },
   {
-    name: "Departemen Kastrat",
-    desc: "Kajian & Aksi Strategis",
-    image: "/images/kastrat/KASTRAT.png",
-    route: "/kastrat",
-  },
-  {
     name: "Departemen Medinfo",
     desc: "Media, Data & Informasi",
     image: "/images/medinfo/MEDINFO.png",
     route: "/medinfo",
-  },
-  {
-    name: "Departemen PSDM",
-    desc: "Pengembangan Sumber Daya Mahasiswa",
-    image: "/images/psdm/PSDM.png",
-    route: "/psdm",
   },
 ];
 

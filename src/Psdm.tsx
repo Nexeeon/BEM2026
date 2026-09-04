@@ -23,13 +23,13 @@ const pimpinanPsdm: Anggota[] = [
     nama: "M. Faturrahman",
     jabatan: "Kepala Departemen Pengembangan Sumber Daya Manusia",
     foto: "/images/psdm/𝗞𝗲𝗽𝗮𝗹𝗮 𝗗𝗲𝗽𝗮𝗿𝘁𝗲𝗺𝗲𝗻 — 𝗠. 𝗙𝗮𝘁𝘂𝗿𝗿𝗮𝗵𝗺𝗮𝗻.png",
-    instagram: "",
+    instagram: "fatthurs",
   },
   {
     nama: "Julia Karen",
     jabatan: "Sekretaris Departemen Pengembangan Sumber Daya Manusia",
     foto: "/images/psdm/𝗦𝗲𝗸𝗿𝗲𝘁𝗮𝗿𝗶𝘀 𝗗𝗲𝗽𝗮𝗿𝘁𝗲𝗺𝗲𝗻 — 𝗝𝘂𝗹𝗶𝗮 𝗞𝗮𝗿𝗲𝗻.png",
-    instagram: "",
+    instagram: "jx_karennn",
   },
 ];
 
@@ -45,43 +45,43 @@ const divisiList: Divisi[] = [
         nama: "Putri Azul Azaliyah",
         jabatan: "Kepala Divisi Kewirausahaan",
         foto: "/images/psdm/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗲𝘄𝗶𝗿𝗮𝘂𝘀𝗮𝗵𝗮𝗮𝗻/𝗞𝗲𝗽𝗮𝗹𝗮 𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗲𝘄𝗶𝗿𝗮𝘂𝘀𝗮𝗵𝗮𝗮𝗻 — 𝗣𝘂𝘁𝗿𝗶 𝗔𝘇𝘂𝗹 𝗔𝘇𝗮𝗹𝗶𝘆𝗮𝗵.png",
-        instagram: "",
+        instagram: "azuluyy",
       },
       {
         nama: "Khairania Shafana Azzahra",
         jabatan: "Staf Ahli Divisi Dana dan Usaha",
         foto: "/images/psdm/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗲𝘄𝗶𝗿𝗮𝘂𝘀𝗮𝗵𝗮𝗮𝗻/Khairania Shafana Azzahra-Staf Ahli Divisi Dana dan Usaha.png",
-        instagram: "",
+        instagram: "sshaanaa_2",
       },
       {
         nama: "Achmad Hafizh Pratama",
         jabatan: "Staf Muda Dana dan Usaha",
         foto: "/images/psdm/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗲𝘄𝗶𝗿𝗮𝘂𝘀𝗮𝗵𝗮𝗮𝗻/Achmad Hafizh Pratama-Staf Muda Dana dan Usaha.png",
-        instagram: "",
+        instagram: "achmadhafizhpratama_",
       },
       {
         nama: "Amrina Vidya Utami",
         jabatan: "Staf Muda Dana dan Usaha",
         foto: "/images/psdm/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗲𝘄𝗶𝗿𝗮𝘂𝘀𝗮𝗵𝗮𝗮𝗻/Amrina Vidya Utami-Staf Muda Dana dan Usaha.png",
-        instagram: "",
+        instagram: "amrinavdyutmi",
       },
       {
         nama: "Dirly Nurman Apriliawan",
         jabatan: "Staf Muda Dana dan Usaha",
         foto: "/images/psdm/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗲𝘄𝗶𝗿𝗮𝘂𝘀𝗮𝗵𝗮𝗮𝗻/Dirly Nurman Apriliawan-Staf Muda Dana dan Usaha.png",
-        instagram: "",
+        instagram: "dirlyapriliawan",
       },
       {
         nama: "Intan Syarani",
         jabatan: "Staf Muda Dana dan Usaha",
         foto: "/images/psdm/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗲𝘄𝗶𝗿𝗮𝘂𝘀𝗮𝗵𝗮𝗮𝗻/Intan Syarani-Staf Muda Dana dan Usaha.png",
-        instagram: "",
+        instagram: "intnsyrni_",
       },
       {
         nama: "M. Hafiz Arrafi",
         jabatan: "Staf Muda Dana dan Usaha",
         foto: "/images/psdm/𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗲𝘄𝗶𝗿𝗮𝘂𝘀𝗮𝗵𝗮𝗮𝗻/M. Hafiz Arrafi-Staf Muda Dana dan Usaha.png",
-        instagram: "",
+        instagram: "hafizarrafi._",
       },
     ],
   },
@@ -96,61 +96,67 @@ const divisiList: Divisi[] = [
         nama: "M. Haikal Arjuna",
         jabatan: "Kepala Divisi Kompetensi dan Pelatihan",
         foto: "/images/psdm/𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻/𝗞𝗲𝗽𝗮𝗹𝗮 𝗗𝗶𝘃𝗶𝘀𝗶 𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻 — 𝗠. 𝗛𝗮𝗶𝗸𝗮𝗹 𝗔𝗿𝗷𝘂𝗻𝗮.png",
-        instagram: "",
+        instagram: "haikall_arjuna",
       },
       {
         nama: "Muhammad Rifqi Khairullah",
         jabatan: "Staf Ahli Divisi Pelatihan dan Kompetensi",
         foto: "/images/psdm/𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻/Muhammad Rifqi Khairullah-Staf Ahli Divisi Pelatihan dan Kompetensi.png",
-        instagram: "",
+        instagram: "rifqikhrula",
       },
       {
         nama: "Vidia Nur Fadila",
         jabatan: "Staf Ahli Divisi Pelatihan dan Kompetensi",
         foto: "/images/psdm/𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻/Vidia Nur Fadila-Staf Ahli Divisi Pelatihan dan Kompetensi.png",
-        instagram: "",
+        instagram: "vidianr_",
       },
       {
         nama: "Afif Abdillah Dinata",
         jabatan: "Staf Muda Pelatihan dan Kompetensi",
         foto: "/images/psdm/𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻/Afif Abdillah Dinata-Staf Muda Pelatihan dan Kompetensi.png",
-        instagram: "",
+        instagram: "fifbaeee",
       },
       {
         nama: "Jimli Asshidiqie",
         jabatan: "Staf Muda Pelatihan dan Kompetensi",
         foto: "/images/psdm/𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻/Jimli Asshidiqie-Staf Muda Pelatihan dan Kompetensi.png",
-        instagram: "",
+        instagram: "jimliasshidiqie_15",
       },
       {
         nama: "Nurul Kamilia",
         jabatan: "Staf Muda Pelatihan dan Kompetensi",
         foto: "/images/psdm/𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻/Nurul Kamilia-Staf Muda Pelatihan dan Kompetensi.png",
-        instagram: "",
+        instagram: "aaaammeelll",
       },
       {
         nama: "Rasya Fauzan Azimi",
         jabatan: "Staf Muda Pelatihan dan Kompetensi",
         foto: "/images/psdm/𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻/Rasya Fauzan Azimi-Staf Muda Pelatihan dan Kompetensi.png",
-        instagram: "",
+        instagram: "rsyznmii",
       },
       {
         nama: "Stevyan Mudafa",
         jabatan: "Staf Muda Pelatihan dan Kompetensi",
         foto: "/images/psdm/𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻/Stevyan Mudafa-Staf Muda Pelatihan dan Kompetensi.png",
-        instagram: "",
+        instagram: "teppiiann",
       },
       {
         nama: "Tiara Anatri",
         jabatan: "Staf Muda Pelatihan dan Kompetensi",
         foto: "/images/psdm/𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻/Tiara Anatri-Staf Muda Pelatihan dan Kompetensi.png",
-        instagram: "",
+        instagram: "tiaranatrii",
       },
       {
         nama: "Tiara Ramadhani",
         jabatan: "Staf Muda Pelatihan dan Kompetensi",
         foto: "/images/psdm/𝗞𝗼𝗺𝗽𝗲𝘁𝗲𝗻𝘀𝗶 𝗱𝗮𝗻 𝗣𝗲𝗹𝗮𝘁𝗶𝗵𝗮𝗻/Tiara Ramadhani-Staf Muda Pelatihan dan Kompetensi.png",
-        instagram: "",
+        instagram: "tiara_ramadhanii",
+      },
+      {
+        nama: "Afiq Al Bukhari",
+        jabatan: "Staf Ahli Divisi Pelatihan dan Kompetensi",
+        foto: "/images/Pejabat_Teras/Pelaksana Tugas Wakil Ketua Umum.png",
+        instagram: "afiqqqqquunn_",
       },
     ],
   },
@@ -184,7 +190,7 @@ const MemberCard = memo(({ member }: { member: Anggota }) => {
           <Instagram size={13} className="shrink-0 text-amber-500" />
           {member.instagram ? (
             <a
-              href={`https://instagram.com/${member.instagram.replace("@", "")}`}
+              href={`https://www.instagram.com/${member.instagram.replace("@", "").replace(/\/$/, "")}/`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[11px] font-medium text-amber-600 hover:text-amber-700 hover:underline transition-colors"
