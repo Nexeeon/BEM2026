@@ -12,11 +12,11 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
     setIsExiting(true);
   }, []);
 
-  // Safety fallback timeout (jika video tidak selesai atau gagal dimuat dalam 4.5 detik)
+  // Safety fallback timeout disesuaikan dengan durasi video (11 detik untuk mengantisipasi durasi ±10 detik)
   useEffect(() => {
     const timer = setTimeout(() => {
       handleFinish();
-    }, 4500);
+    }, 11000);
 
     return () => clearTimeout(timer);
   }, [handleFinish]);
@@ -80,7 +80,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
             autoPlay
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
             controls={false}
             onEnded={handleVideoEnd}
             onError={handleFinish}
