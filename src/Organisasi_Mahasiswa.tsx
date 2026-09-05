@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Navbar from "./Navbar";
 import {
   ArrowRight,
@@ -476,37 +477,159 @@ export default function OrganisasiMahasiswa() {
         <Navbar />
 
         {/* ======================================================== */}
-        {/* MENGENAL LEBIH DEKAT (HANYA MUNCUL SAAT SEARCH KOSONG) */}
+        {/* HERO — mirrors home.tsx BEM hero composition            */}
         {/* ======================================================== */}
         {!searchQuery.trim() && (
-          <section className="px-5 pt-8 lg:px-8 lg:pt-12">
-            <div className="mx-auto max-w-7xl">
-              <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-md transition-all duration-300 ease-out sm:p-12 lg:p-14">
-                <div className="relative z-10 mx-auto max-w-3xl text-center">
-                  <h1 className="text-3xl font-black tracking-tight text-amber-600 sm:text-4xl lg:text-5xl">
-                    Organisasi Mahasiswa Politeknik Negeri Sriwijaya
-                  </h1>
+          <section
+            id="organisasi-hero"
+            aria-label="Hero Organisai Mahasiswa"
+            className="relative mx-auto flex w-full max-w-7xl items-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(2rem,5vh,5rem)]"
+          >
+            <div className="grid w-full items-center gap-[clamp(2rem,3.5vw,4rem)] lg:grid-cols-12">
 
-                  <p className="mt-4 text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
-                    Organisasi Mahasiswa Politeknik Negeri Sriwijaya merupakan
-                    wadah mahasiswa untuk mengembangkan minat, bakat,
-                    kompetensi, kepemimpinan, kreativitas, serta kontribusi
-                    nyata di lingkungan kampus maupun masyarakat luas.
-                  </p>
+              {/* ══ LEFT: TEXT (5 cols) ══ */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.05, ease: "easeOut" }}
+                className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-5"
+              >
+                {/* Eyebrow */}
+                
+
+                {/* Heading — same class pattern as home.tsx */}
+                <h1
+                  className="font-serif font-semibold uppercase tracking-wide text-amber-500"
+                  style={{
+                    fontSize: "clamp(2.2rem, 4vw, 3.8rem)",
+                    lineHeight: 1.05,
+                  }}
+                >
+                  ORGANISASI MAHASISWA
+                  <br />
+                  <span className="text-amber-500">
+                    POLITEKNIK NEGERI SRIWIJAYA
+                  </span>
+                </h1>
+
+                {/* Description */}
+                <p
+                  className="mt-[clamp(1rem,1.8vw,1.6rem)] max-w-xl font-medium leading-relaxed text-slate-700"
+                  style={{ fontSize: "clamp(0.875rem, 1.1vw, 1.05rem)" }}
+                >
+                  Organisasi Mahasiswa Politeknik Negeri Sriwijaya merupakan
+                  wadah mahasiswa untuk mengembangkan minat, bakat, kompetensi,
+                  kepemimpinan, kreativitas, serta kontribusi nyata di
+                  lingkungan kampus maupun masyarakat luas.
+                </p>
+
+                {/* CTA */}
+                
+              </motion.div>
+
+              {/* ══ RIGHT: VISUAL (7 cols) ══ */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.75, delay: 0.15, ease: "easeOut" }}
+                className="relative flex w-full items-end justify-center lg:col-span-7 lg:justify-end"
+              >
+                <div className="relative flex w-full items-end justify-center">
+
+                  {/* ── Organic blue shape (behind everything) ── */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.9, delay: 0.08, ease: "easeOut" }}
+                    aria-hidden
+                    className="pointer-events-none absolute"
+                    style={{
+                      inset: 0,
+                      zIndex: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <svg
+                      viewBox="0 0 540 500"
+                      xmlns="http://www.w3.org/2000/svg"
+                      style={{
+                        position: "absolute",
+                        width: "clamp(300px, 48vw, 620px)",
+                        height: "clamp(300px, 48vw, 620px)",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-46%, -50%)",
+                      }}
+                      preserveAspectRatio="xMidYMid meet"
+                    >
+                      <path
+                        d="M280 25
+                           C370 15, 470 65, 505 155
+                           C540 245, 525 355, 470 425
+                           C415 495, 305 515, 205 490
+                           C105 465, 28 395, 18 295
+                           C8 195, 55 90, 130 50
+                           C180 24, 225 33, 280 25Z"
+                        fill="hsl(213, 65%, 85%)"
+                        opacity="0.52"
+                      />
+                    </svg>
+                  </motion.div>
+
+                  {/* ── Halftone dot texture (over shape, under image) ── */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute"
+                    style={{
+                      inset: 0,
+                      zIndex: 1,
+                      backgroundImage:
+                        "radial-gradient(circle, rgba(25,75,150,0.1) 1.2px, transparent 1.2px)",
+                      backgroundSize: "16px 16px",
+                      maskImage:
+                        "radial-gradient(ellipse 72% 68% at 52% 50%, black 30%, transparent 78%)",
+                      WebkitMaskImage:
+                        "radial-gradient(ellipse 72% 68% at 52% 50%, black 30%, transparent 78%)",
+                    }}
+                  />
+
+                  {/* ── Building photo with bottom fade ── */}
+                  <div
+                    className="relative z-10 w-full"
+                    style={{
+                      maxWidth: "clamp(280px, 44vw, 680px)",
+                      maskImage: "linear-gradient(to bottom, black 58%, transparent 100%)",
+                      WebkitMaskImage: "linear-gradient(to bottom, black 58%, transparent 100%)",
+                    }}
+                  >
+                    <img
+                      src="/images/organisasi-hero.png"
+                      alt="Organisasi Mahasiswa Politeknik Negeri Sriwijaya"
+                      loading="eager"
+                      draggable={false}
+                      className="block h-auto w-full object-contain"
+                    />
+                  </div>
+
                 </div>
-              </div>
+              </motion.div>
+
             </div>
           </section>
         )}
+
+
 
         {/* ======================================================== */}
         {/* JENIS-JENIS ORGANISASI MAHASISWA (HANYA KONDISI KOSONG) */}
         {/* ======================================================== */}
         {!searchQuery.trim() && (
-          <section className="px-5 py-12 lg:px-8 lg:py-16">
+          <section id="section-jenis" className="px-5 py-12 lg:px-8 lg:py-16 scroll-mt-24">
             <div className="mx-auto max-w-7xl">
               <div className="mx-auto max-w-3xl text-center mb-10">
-                <h2 className="text-2xl font-black tracking-tight text-amber-600 sm:text-3xl">
+                <h2 className="text-2xl font-black tracking-tight text-amber-500 sm:text-3xl">
                   JENIS-JENIS ORGANISASI MAHASISWA
                 </h2>
                 <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">

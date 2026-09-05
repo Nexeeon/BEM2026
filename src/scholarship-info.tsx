@@ -132,7 +132,7 @@ export default function ScholarshipInfo() {
               Academic Information
             </p>
 
-            <h1 className="font-serif text-4xl font-black tracking-tight text-[#d97706] sm:text-5xl lg:text-6xl">
+            <h1 className="font-serif text-4xl font-black tracking-tight text-amber-500 sm:text-5xl lg:text-6xl">
               Informasi Beasiswa
             </h1>
 
