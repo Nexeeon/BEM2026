@@ -92,7 +92,7 @@ export default function BisikKampus() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       <div className="min-h-screen bg-white/65">
         {/* ====================================================== */}
         {/* NAVBAR — MASTER */}
@@ -106,7 +106,7 @@ export default function BisikKampus() {
           <div className="relative w-full overflow-hidden bg-slate-100">
             {/* FOTO BISIK KAMPUS — TINGGI DIPERKECIL */}
             <img
-              src="/images/Program_kerja/bisik-kampus.png"
+              src="/images/Program_kerja/bisik-kampus.webp"
               alt="Foto Bisik Kampus"
               className="block h-[360px] w-full object-cover object-center sm:h-[440px] lg:h-[520px]"
             />
@@ -288,7 +288,7 @@ export default function BisikKampus() {
               <div>
                 <div className="flex items-center gap-3">
                   <img
-                    src="/images/logo.png"
+                    src="/images/logo.webp"
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />

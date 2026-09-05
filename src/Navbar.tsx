@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 
@@ -13,15 +13,53 @@ export default function Navbar({ activePage: activePageProp }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
+  const closeMenus = useCallback(() => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  }, []);
+
+  // Passive scroll listener dengan requestAnimationFrame untuk performa 60fps+
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Click outside & Escape key listener untuk Accessibility
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        closeMenus();
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeMenus();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [closeMenus]);
 
   // Auto-determine active page from pathname if prop is not provided
   let activePage = activePageProp;
@@ -59,13 +97,9 @@ export default function Navbar({ activePage: activePageProp }: NavbarProps) {
     setOpenDropdown(openDropdown === name ? null : name);
   };
 
-  const closeMenus = () => {
-    setMobileOpen(false);
-    setOpenDropdown(null);
-  };
-
   return (
     <header
+      ref={navRef}
       className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
         scrolled
           ? "border-b border-slate-200/70 bg-white/80 shadow-sm backdrop-blur-xl"
@@ -77,7 +111,7 @@ export default function Navbar({ activePage: activePageProp }: NavbarProps) {
           {/* BRANDING */}
           <Link to="/" className="flex shrink-0 items-center gap-3" onClick={closeMenus}>
             <img
-              src="/images/logo.png"
+              src="/images/logo.webp"
               alt="Logo Kabinet Kilau Gemilang"
               className="h-10 w-10 object-contain"
             />

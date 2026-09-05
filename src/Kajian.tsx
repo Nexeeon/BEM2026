@@ -100,7 +100,7 @@ export default function Kajian() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       {/* ======================================================== */}
       {/* OVERLAY BACKGROUND */}
       {/* ======================================================== */}
@@ -117,7 +117,7 @@ export default function Kajian() {
           <div className="relative w-full overflow-hidden bg-slate-100">
             {/* GAMBAR HERO — TINGGI DIPERKECIL */}
             <img
-              src="/images/Program_kerja/kajian.png"
+              src="/images/Program_kerja/kajian.webp"
               alt="Banner Kajian BEM POLSRI"
               className="block h-[340px] w-full object-cover object-center sm:h-[420px] lg:h-[500px]"
             />
@@ -324,7 +324,7 @@ export default function Kajian() {
               <div>
                 <div className="flex items-center gap-3">
                   <img
-                    src="/images/logo.png"
+                    src="/images/logo.webp"
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />

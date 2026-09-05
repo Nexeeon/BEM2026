@@ -12,7 +12,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3">
               <img
-                src="/images/logo.png"
+                src="/images/logo.webp"
                 alt="Logo BEM Polsri"
                 className="h-12 w-12 object-contain"
               />

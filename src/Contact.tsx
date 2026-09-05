@@ -56,7 +56,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900">
       <div className="min-h-screen bg-white/65">
         {/* ====================================================== */}
         {/* NAVBAR */}
@@ -97,7 +97,7 @@ export default function Contact() {
                   <div className="pointer-events-none absolute inset-8 rounded-full bg-amber-300/15 blur-3xl" />
 
                   <img
-                    src="/images/logo.png"
+                    src="/images/logo.webp"
                     alt="Logo BEM POLSRI"
                     className="relative z-10 w-52 object-contain drop-shadow-md transition-transform duration-500 ease-out hover:scale-[1.03] sm:w-60 lg:w-72"
                   />
@@ -213,7 +213,7 @@ export default function Contact() {
 
                   <div className="mt-5 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
                     <img
-                      src="/images/qrbem.png"
+                      src="/images/qrbem.webp"
                       alt="QR BEM POLSRI"
                       className="mx-auto aspect-square w-full max-w-[190px] object-contain rounded-lg"
                     />
@@ -242,7 +242,7 @@ export default function Contact() {
               <div>
                 <div className="flex items-center gap-3">
                   <img
-                    src="/images/logo.png"
+                    src="/images/logo.webp"
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />

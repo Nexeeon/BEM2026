@@ -157,7 +157,7 @@ export default function Polsrifess() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       <div className="min-h-screen bg-white/65">
         {/* NAVBAR — sama persis dengan Home, tidak diubah */}
         <Navbar />
@@ -169,7 +169,7 @@ export default function Polsrifess() {
           <Reveal className="relative block w-full overflow-hidden bg-slate-100">
             {/* GAMBAR HERO — TINGGI DIPERKECIL DARI FULL SCREEN */}
             <img
-              src="/images/Program_kerja/polsrifess.jpeg"
+              src="/images/Program_kerja/polsrifess.webp"
               alt="Tampilan Polsrifess"
               className="block h-[360px] w-full object-cover object-center sm:h-[440px] lg:h-[520px]"
             />
@@ -411,7 +411,7 @@ export default function Polsrifess() {
               <div>
                 <div className="flex items-center gap-3">
                   <img
-                    src="/images/logo.png"
+                    src="/images/logo.webp"
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />

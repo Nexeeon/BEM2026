@@ -24,49 +24,49 @@ const pejabatTerasData = [
     jabatan: "Sekretaris Umum",
     instagram: "@hartanti_tyas",
     url: "https://www.instagram.com/hartanti_tyas/",
-    foto: "/images/Pejabat_Teras/Sekretaris Umum.png",
+    foto: "/images/Pejabat_Teras/Sekretaris Umum.webp",
   },
   {
     nama: "Citra Maulidya",
     jabatan: "Wakil Sekretaris Umum",
     instagram: "@citramldyaa",
     url: "https://www.instagram.com/citramldyaa/",
-    foto: "/images/Pejabat_Teras/Wakil Sekretaris Umum.png",
+    foto: "/images/Pejabat_Teras/Wakil Sekretaris Umum.webp",
   },
   {
     nama: "Sulistiani Zahra",
     jabatan: "Bendahara Umum",
     instagram: "@sulistz",
     url: "https://www.instagram.com/sulistz/",
-    foto: "/images/Pejabat_Teras/Bendahara Umum.png",
+    foto: "/images/Pejabat_Teras/Bendahara Umum.webp",
   },
   {
     nama: "Khezia Firma Dwi Aulia",
     jabatan: "Wakil Bendahara Umum",
     instagram: "@kheziafdaulia",
     url: "https://www.instagram.com/kheziafdaulia/",
-    foto: "/images/Pejabat_Teras/Wakil Bendahara Umum.png",
+    foto: "/images/Pejabat_Teras/Wakil Bendahara Umum.webp",
   },
   {
     nama: "Afiq Al Bukhari",
     jabatan: "Pelaksana Tugas Wakil Ketua Umum",
     instagram: "@afiqqqqquunn_",
     url: "https://www.instagram.com/afiqqqqquunn_/",
-    foto: "/images/Pejabat_Teras/Pelaksana Tugas Wakil Ketua Umum.png",
+    foto: "/images/Pejabat_Teras/Pelaksana Tugas Wakil Ketua Umum.webp",
   },
   {
     nama: "Helal Humandra",
     jabatan: "Koordinator Bidang I",
     instagram: "@humandra10",
     url: "https://www.instagram.com/humandra10/",
-    foto: "/images/Pejabat_Teras/Koordinator Bidang I.png",
+    foto: "/images/Pejabat_Teras/Koordinator Bidang I.webp",
   },
   {
     nama: "Agoes Putra Pratama",
     jabatan: "Koordinator Bidang II",
     instagram: "@agoesptrp",
     url: "https://www.instagram.com/agoesptrp/",
-    foto: "/images/Pejabat_Teras/Koordinator Bidang II.png",
+    foto: "/images/Pejabat_Teras/Koordinator Bidang II.webp",
   },
 ];
 
@@ -74,31 +74,31 @@ const departmentsData = [
   {
     name: "Departemen PSDM",
     desc: "Pengembangan Sumber Daya Mahasiswa",
-    image: "/images/psdm/PSDM.png",
+    image: "/images/psdm/PSDM.webp",
     route: "/psdm",
   },
   {
     name: "Departemen Kastrat",
     desc: "Kajian & Aksi Strategis",
-    image: "/images/kastrat/KASTRAT.png",
+    image: "/images/kastrat/KASTRAT.webp",
     route: "/kastrat",
   },
   {
     name: "Departemen Adkesma",
     desc: "Advokasi & Kesejahteraan Mahasiswa",
-    image: "/images/adkesma/ADKESMA.png",
+    image: "/images/adkesma/ADKESMA.webp",
     route: "/adkesma",
   },
   {
     name: "Departemen Humas",
     desc: "Hubungan Masyarakat & Eksternal",
-    image: "/images/humas/HUMAS.png",
+    image: "/images/humas/HUMAS.webp",
     route: "/humas",
   },
   {
     name: "Departemen Medinfo",
     desc: "Media, Data & Informasi",
-    image: "/images/medinfo/MEDINFO.png",
+    image: "/images/medinfo/MEDINFO.webp",
     route: "/medinfo",
   },
 ];
@@ -183,7 +183,7 @@ export default function About() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900">
       <div className="min-h-screen bg-white/65">
         {/* NAVBAR */}
         <Navbar />
@@ -326,7 +326,7 @@ export default function About() {
             >
               <div className="relative flex h-40 w-40 items-center justify-center rounded-full border-4 border-amber-400 bg-white p-4 shadow-xl">
                 <img
-                  src="/images/logo.png"
+                  src="/images/logo.webp"
                   alt="Logo BEM Polsri"
                   className="h-24 w-24 object-contain"
                 />
@@ -421,8 +421,10 @@ export default function About() {
               <div className="lg:col-span-5 flex justify-center items-center">
                 <div className="relative overflow-hidden rounded-2xl border-2 border-amber-300/80 bg-slate-100 shadow-xl w-full h-[360px] sm:h-[420px]">
                   <img
-                    src="/images/Pejabat_Teras/Ketua Umum BEM.png"
+                    src="/images/Pejabat_Teras/Ketua Umum BEM.webp"
                     alt="Achmad Jemmy Ramadhan - Ketua Umum BEM Politeknik Sriwijaya"
+                    loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover object-top transition-all duration-300 hover:scale-105"
                   />
                 </div>
@@ -465,20 +467,21 @@ export default function About() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-2xl py-2">
+            <div className="overflow-hidden rounded-2xl py-2 select-none">
               <motion.div
-                className="flex cursor-grab active:cursor-grabbing"
+                className="flex cursor-grab active:cursor-grabbing touch-pan-y"
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.2}
+                dragElastic={0.15}
+                dragSnapToOrigin={true}
                 onDragEnd={handleDragEnd}
                 animate={{
                   x: `-${currentIndex * (100 / itemsPerPage)}%`,
                 }}
                 transition={{
                   type: "spring",
-                  stiffness: 200,
-                  damping: 25,
+                  stiffness: 250,
+                  damping: 28,
                 }}
               >
                 {pejabatTerasData.map((item, idx) => (
@@ -637,7 +640,7 @@ export default function About() {
               <div>
                 <div className="flex items-center gap-3">
                   <img
-                    src="/images/logo.png"
+                    src="/images/logo.webp"
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />

@@ -35,23 +35,23 @@ interface UpdateInfoItemData {
 const programs = [
   {
     title: "AKSI",
-    image: "/images/Program_kerja/aksi.jpeg",
+    image: "/images/Program_kerja/aksi.webp",
   },
   {
     title: "BISIK KAMPUS",
-    image: "/images/Program_kerja/bisik-kampus.png",
+    image: "/images/Program_kerja/bisik-kampus.webp",
   },
   {
     title: "INSPIRE PROJECT",
-    image: "/images/Program_kerja/Inpire Project.png",
+    image: "/images/Program_kerja/Inpire Project.webp",
   },
   {
     title: "KAJIAN",
-    image: "/images/Program_kerja/kajian.png",
+    image: "/images/Program_kerja/kajian.webp",
   },
   {
     title: "POLSRIESS",
-    image: "/images/Program_kerja/polsrifess.jpeg",
+    image: "/images/Program_kerja/polsrifess.webp",
   },
 ];
 
@@ -65,7 +65,7 @@ const updateInfos: UpdateInfoItemData[] = [
       "Kegiatan Ditjenbelmawa & Kemendikbudristek untuk memberi ruang mahasiswa mengembangkan potensi dan keahlian inovasi.",
     fullDescription:
       "Program Kreatifitas Mahasiswa (PKM) adalah kegiatan yang diselenggarkan oleh Ditjenbelmawa (Direktorat Jendral Pembelajaran dan Kemahasiswaan) Serta Kemendikbudristek dengan tujuan untuk memberi ruang kepada mahasiswa dalam mengembangkan potensi dan keahlian pada inovasi dan kreatifitas.",
-    image: "/images/Program_Kreatifitas_Mahasiswa.jpg",
+    image: "/images/Program_Kreatifitas_Mahasiswa.webp",
   },
   {
     number: "02",
@@ -75,7 +75,7 @@ const updateInfos: UpdateInfoItemData[] = [
       "Program memperkuat peran organisasi kemahasiswaan dalam pengembangan kapasitas, kepemimpinan, dan kontribusi nyata.",
     fullDescription:
       "PPK ORMAWA (Program Penguatan Kapasitas Organisasi Kemahasiswaan) Tahun 2025 merupakan program yang bertujuan untuk memperkuat peran organisasi kemahasiswaan dalam pengembangan kapasitas, kepemimpinan, serta kontribusi nyata terhadap masyarakat. Program ini menyeleksi proposal kegiatan dari berbagai organisasi mahasiswa. Sebanyak 10 proposal terbaik diumumkan sebagai bentuk apresiasi atas gagasan dan rencana kegiatan yang dinilai unggul dan berdampak.",
-    image: "/images/PPK_ORMAWA.jpg",
+    image: "/images/PPK_ORMAWA.webp",
   },
   {
     number: "03",
@@ -85,7 +85,7 @@ const updateInfos: UpdateInfoItemData[] = [
       "Program Polsri melalui UPKK untuk membekali mahasiswa dengan pengetahuan dan pengalaman berwirausaha nyata.",
     fullDescription:
       "Program Mahasiswa Wirausaha (PMW) Tahun 2025 adalah program yang diselenggarakan oleh Politeknik Negeri Sriwijaya melalui Unit Pengembangan Karir dan Kewirausahaan. Tujuannya adalah membekali mahasiswa dengan pengetahuan dan pengalaman berwirausaha secara nyata. Tahapan program meliputi seleksi proposal, pembekalan, pendampingan bisnis, program magang, monitoring dan evaluasi, hingga kompetisi dan expo rencana bisnis.",
-    image: "/images/Program_Mahasiswa_Wirausaha.jpg",
+    image: "/images/Program_Mahasiswa_Wirausaha.webp",
   },
 ];
 
@@ -438,7 +438,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       {/* LOADING SCREEN */}
       {showLoading && <LoadingScreen onFinish={handleFinishLoading} />}
 
@@ -485,7 +485,7 @@ export default function Home() {
                 />
 
                 <img
-                  src="/images/logo.png"
+                  src="/images/logo.webp"
                   alt="Gedung Politeknik Negeri Sriwijaya"
                   className="relative z-10 h-auto w-full object-contain filter drop-shadow-md transition-all duration-300"
                   style={{
@@ -558,7 +558,7 @@ export default function Home() {
                 <div className="relative w-full overflow-hidden rounded-3xl border border-amber-300/50 bg-white p-3 shadow-xl shadow-amber-900/5 backdrop-blur-md transition-all duration-300 hover:border-amber-400 hover:shadow-2xl sm:p-4">
                   <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100">
                     <img
-                      src="/images/foto_KabinetKilauGemilang.jpeg"
+                      src="/images/foto_KabinetKilauGemilang.webp"
                       alt="Foto Kabinet Kilau Gemilang - BEM POLSRI"
                       className="h-full w-full object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
                       loading="lazy"
@@ -983,7 +983,7 @@ export default function Home() {
               <div>
                 <div className="flex items-center gap-3">
                   <img
-                    src="/images/logo.png"
+                    src="/images/logo.webp"
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />

@@ -217,8 +217,8 @@ const DivisiSection = memo(({ divisi }: { divisi: Divisi }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeftState, setScrollLeftState] = useState(0);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
 
   // Efek Looping Carousel Otomatis
   useEffect(() => {
@@ -241,23 +241,32 @@ const DivisiSection = memo(({ divisi }: { divisi: Divisi }) => {
     return () => clearInterval(interval);
   }, [isHovered, isDragging, divisi.anggota.length]);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!sliderRef.current) return;
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!sliderRef.current || e.button !== 0) return;
     setIsDragging(true);
-    setStartX(e.pageX - sliderRef.current.offsetLeft);
-    setScrollLeftState(sliderRef.current.scrollLeft);
+    startXRef.current = e.clientX;
+    scrollLeftRef.current = sliderRef.current.scrollLeft;
+    try {
+      sliderRef.current.setPointerCapture(e.pointerId);
+    } catch {}
   };
 
-  const handleMouseLeaveOrUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDragging || !sliderRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    sliderRef.current.scrollLeft = scrollLeftState - walk;
+    const deltaX = e.clientX - startXRef.current;
+    sliderRef.current.scrollLeft = scrollLeftRef.current - deltaX;
+  };
+
+  const handlePointerUpOrCancel = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    if (sliderRef.current) {
+      try {
+        if (sliderRef.current.hasPointerCapture(e.pointerId)) {
+          sliderRef.current.releasePointerCapture(e.pointerId);
+        }
+      } catch {}
+    }
   };
 
   // Navigasi Tombol Kiri (Jika di awal dan ditekan, looping ke ujung kanan)
@@ -329,12 +338,12 @@ const DivisiSection = memo(({ divisi }: { divisi: Divisi }) => {
         >
           <div
             ref={sliderRef}
-            onMouseDown={handleMouseDown}
-            onMouseLeave={handleMouseLeaveOrUp}
-            onMouseUp={handleMouseLeaveOrUp}
-            onMouseMove={handleMouseMove}
-            className={`flex gap-6 overflow-x-auto pb-4 pt-1 px-1 scroll-smooth snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
-              isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUpOrCancel}
+            onPointerCancel={handlePointerUpOrCancel}
+            className={`flex gap-6 overflow-x-auto pb-4 pt-1 px-1 select-none touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+              isDragging ? "cursor-grabbing" : "cursor-grab"
             }`}
           >
             {divisi.anggota.map((member, idx) => (
@@ -382,7 +391,7 @@ DivisiSection.displayName = "DivisiSection";
 // ============================================================
 export default function Medinfo() {
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       <div className="min-h-screen bg-white/65">
         <Navbar activePage="medinfo" />
 
@@ -390,7 +399,7 @@ export default function Medinfo() {
         <section className="relative flex min-h-[calc(100vh-72px)] w-full items-center justify-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
           <div className="absolute inset-0 z-0 overflow-hidden">
             <img
-              src="/images/medinfo/fullMedinfo.jpeg"
+              src="/images/medinfo/fullMedinfo.webp"
               alt="Departemen Media dan Informasi BEM Polsri"
               className="h-full w-full object-cover object-center scale-105 transition-transform duration-1000"
               loading="eager"
@@ -402,7 +411,7 @@ export default function Medinfo() {
           <div className="relative z-20 mx-auto flex max-w-4xl flex-col items-center justify-center text-center animate-fadeIn">
             <div className="mb-4 sm:mb-6">
               <img
-                src="/images/medinfo/medinfologo.png"
+                src="/images/medinfo/medinfologo.webp"
                 alt="Logo Medinfo BEM Polsri"
                 className="h-28 w-auto object-contain filter drop-shadow-md sm:h-36 lg:h-44"
                 loading="eager"

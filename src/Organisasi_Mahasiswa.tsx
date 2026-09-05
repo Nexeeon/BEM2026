@@ -57,7 +57,7 @@ const bemData: OrgItem[] = [
     name: "BEM Politeknik Negeri Sriwijaya",
     cabinet: "Kabinet Kilau Gemilang",
     category: "BEM",
-    image: "/images/logo.png",
+    image: "/images/logo.webp",
     description:
       " Kabinet Kilau Gemilang adalah manifestasi dari organisasi yang ditempa dengan kuat (Kilau) untuk melahirkan sejarah prestasi yang abadi (Gemilang). ",
     alias: [
@@ -74,7 +74,7 @@ const hmjData: OrgItem[] = [
     id: "hmj-1",
     name: "Himpunan Mahasiswa Administrasi Bisnis",
     category: "HMJ",
-    image: "/images/HMJ/AB.png",
+    image: "/images/HMJ/AB.webp",
     description:
       "Himpunan ini adalah organisasi mahasiswa Jurusan Administrasi Bisnis. Kami fokus pada pengembangan soft skill dan wawasan bisnis mahasiswa melalui seminar, studi kasus, dan simulasi bisnis.",
     alias: [
@@ -89,7 +89,7 @@ const hmjData: OrgItem[] = [
     id: "hmj-2",
     name: "Himpunan Mahasiswa Akuntansi",
     category: "HMJ",
-    image: "/images/HMJ/akuntansi.png",
+    image: "/images/HMJ/akuntansi.webp",
     description:
       "Himpunan ini mewadahi mahasiswa Jurusan Akuntansi. Kami mengadakan pelatihan perpajakan, audit, dan kegiatan perlombaan.",
     alias: [
@@ -119,7 +119,7 @@ const hmjData: OrgItem[] = [
     id: "hmj-4",
     name: "Himpunan Mahasiswa Teknik Elektro",
     category: "HMJ",
-    image: "/images/HMJ/elektro.png",
+    image: "/images/HMJ/elektro.webp",
     description:
       "Tagline HMJ terbaik luar biasa, mengusung semangat keunggulan, inovasi, dan kerja sama untuk mencetak prestasi gemilang. HMJ Elektro adalah organisasi yang menampung kreativitas mahasiswa Jurusan Teknik Elektro.",
     alias: [
@@ -133,7 +133,7 @@ const hmjData: OrgItem[] = [
     id: "hmj-5",
     name: "Himpunan Mahasiswa Teknik Mesin",
     category: "HMJ",
-    image: "/images/HMJ/mesin.png",
+    image: "/images/HMJ/mesin.webp",
     description:
       "HMJ Teknik Mesin menjadi wadah bagi mahasiswa Jurusan Teknik Mesin untuk berkontribusi dan berinovasi. Kegiatan kami meliputi workshop, kunjungan industri, dan kompetisi.",
     alias: [
@@ -147,7 +147,7 @@ const hmjData: OrgItem[] = [
     id: "hmj-6",
     name: "Himpunan Mahasiswa Manajemen Informatika",
     category: "HMJ",
-    image: "/images/HMJ/mi.png",
+    image: "/images/HMJ/mi.webp",
     description:
       "Himpunan yang mewadahi mahasiswa Jurusan Manajemen Informatika. Kami berfokus pada pengembangan soft skill dan hard skill di bidang IT dan manajemen proyek.",
     alias: [
@@ -162,7 +162,7 @@ const hmjData: OrgItem[] = [
     id: "hmj-7",
     name: "Himpunan Mahasiswa Rekayasa Teknologi dan Bisnis Pertanian",
     category: "HMJ",
-    image: "/images/HMJ/RTBP.png",
+    image: "/images/HMJ/RTBP.webp",
     description:
       "Himpunan ini adalah himpunan mahasiswa yang mewadahi mahasiswa Jurusan Rekayasa Teknologi dan Bisnis Pertanian. Kami fokus pada pengembangan soft skill dan wawasan bisnis mahasiswa melalui seminar, studi kasus, dan simulasi teknologi pertanian.",
     alias: [
@@ -177,7 +177,7 @@ const hmjData: OrgItem[] = [
     id: "hmj-8",
     name: "Himpunan Mahasiswa Teknik Sipil",
     category: "HMJ",
-    image: "/images/HMJ/sipil.png",
+    image: "/images/HMJ/sipil.webp",
     description:
       "Organisasi mahasiswa yang mewadahi mahasiswa Jurusan Teknik Sipil. Kami berfokus pada pengembangan soft skill dan hard skill melalui program-program yang relevan dengan dunia konstruksi dan infrastruktur.",
     alias: [
@@ -192,7 +192,7 @@ const hmjData: OrgItem[] = [
     id: "hmj-9",
     name: "Himpunan Mahasiswa Teknik Kimia",
     category: "HMJ",
-    image: "/images/HMJ/Tekkim.png",
+    image: "/images/HMJ/Tekkim.webp",
     description:
       "HMJ Teknik Kimia berfokus pada pengembangan pengetahuan mahasiswa tentang industri kimia, penelitian, dan pengabdian masyarakat.",
     alias: [
@@ -207,7 +207,7 @@ const hmjData: OrgItem[] = [
     id: "hmj-10",
     name: "Himpunan Mahasiswa Teknik Komputer",
     category: "HMJ",
-    image: "/images/HMJ/tekom.png",
+    image: "/images/HMJ/tekom.webp",
     description:
       "Himpunan ini adalah organisasi yang mewadahi mahasiswa Jurusan Teknik Komputer. Kami mengadakan workshop coding, hackathon, dan berbagai kegiatan untuk meningkatkan kompetensi di bidang IT.",
     alias: [
@@ -465,7 +465,7 @@ export default function OrganisasiMahasiswa() {
     : [];
 
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
+    <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       {/* ======================================================== */}
       {/* OVERLAY BACKGROUND */}
       {/* ======================================================== */}
@@ -985,7 +985,7 @@ export default function OrganisasiMahasiswa() {
               <div>
                 <div className="flex items-center gap-3">
                   <img
-                    src="/images/logo.png"
+                    src="/images/logo.webp"
                     alt="Logo BEM Polsri"
                     className="h-12 w-12 object-contain"
                   />
@@ -1236,7 +1236,7 @@ function OrgDetailModal({
         <div className="mx-auto mb-5 flex h-32 w-32 items-center justify-center rounded-2xl bg-amber-50/60 p-4 shadow-inner">
           {!imgError ? (
             <img
-              src={isBem ? "/images/logo.png" : item.image}
+              src={isBem ? "/images/logo.webp" : item.image}
               alt={item.name}
               onError={() => setImgError(type => true)}
               className="max-h-full max-w-full object-contain drop-shadow-md"
