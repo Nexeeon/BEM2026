@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import LoadingScreen from "./LoadingScreen";
@@ -341,6 +341,296 @@ const academicCalendarData: CalendarMonthData[] = [
     ],
   },
 ];
+
+/* =====================================================
+   DOKUMENTASI SECTION — Horizontal Marquee
+   ===================================================== */
+const dokRow1 = [
+  { src: "/images/dokumentasi/dokumentasi_1.png",  alt: "Dokumentasi 1" },
+  { src: "/images/dokumentasi/dokumentasi_2.jpeg", alt: "Dokumentasi 2" },
+  { src: "/images/dokumentasi/dokumentasi_3.jpeg", alt: "Dokumentasi 3" },
+  { src: "/images/dokumentasi/dokumentasi_4.jpeg", alt: "Dokumentasi 4" },
+];
+const dokRow2 = [
+  { src: "/images/dokumentasi/dokumentasi_5.jpeg", alt: "Dokumentasi 5" },
+  { src: "/images/dokumentasi/dokumentasi_6.jpeg", alt: "Dokumentasi 6" },
+  { src: "/images/dokumentasi/Dokumentasi_7.jpeg", alt: "Dokumentasi 7" },
+  { src: "/images/dokumentasi/dokumentasi_8.jpeg", alt: "Dokumentasi 8" },
+];
+/* Semua foto dalam urutan asli (untuk lightbox prev/next) */
+const allDokPhotos = [...dokRow1, ...dokRow2];
+
+/* CSS keyframes disuntikkan sekali sebagai style global */
+const MARQUEE_STYLES = `
+  @keyframes dok-scroll-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @keyframes dok-scroll-right {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+  }
+  .dok-track-left {
+    display: flex;
+    width: max-content;
+    animation: dok-scroll-left 28s linear infinite;
+    will-change: transform;
+  }
+  .dok-track-right {
+    display: flex;
+    width: max-content;
+    animation: dok-scroll-right 28s linear infinite;
+    will-change: transform;
+  }
+  .dok-strip:hover .dok-track-left,
+  .dok-strip:hover .dok-track-right {
+    animation-play-state: paused;
+  }
+  .dok-photo-item {
+    flex-shrink: 0;
+    width: clamp(220px, 28vw, 380px);
+    height: clamp(150px, 19vw, 260px);
+    margin-right: 14px;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+  }
+  .dok-photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .dok-photo-item:hover img {
+    transform: scale(1.04);
+  }
+  .dok-photo-item .dok-photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15,23,42,0);
+    transition: background 0.35s ease;
+    border-radius: 14px;
+    pointer-events: none;
+  }
+  .dok-photo-item:hover .dok-photo-overlay {
+    background: rgba(15,23,42,0.14);
+  }
+  @media (max-width: 640px) {
+    .dok-photo-item {
+      width: clamp(160px, 58vw, 240px);
+      height: clamp(110px, 38vw, 170px);
+      margin-right: 10px;
+      border-radius: 10px;
+    }
+  }
+`;
+
+function DokumentasiSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
+  /* Inject CSS once */
+  useEffect(() => {
+    const id = "dok-marquee-styles";
+    if (!document.getElementById(id)) {
+      const tag = document.createElement("style");
+      tag.id = id;
+      tag.textContent = MARQUEE_STYLES;
+      document.head.appendChild(tag);
+    }
+    return () => {
+      const tag = document.getElementById(id);
+      if (tag) tag.remove();
+    };
+  }, []);
+
+  /* Intersection Observer — fade in heading once */
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  /* Keyboard nav */
+  const handleKey = useCallback(
+    (e: KeyboardEvent) => {
+      if (lightbox === null) return;
+      if (e.key === "Escape")      setLightbox(null);
+      if (e.key === "ArrowRight")  setLightbox((p) => (p! + 1) % allDokPhotos.length);
+      if (e.key === "ArrowLeft")   setLightbox((p) => (p! - 1 + allDokPhotos.length) % allDokPhotos.length);
+    },
+    [lightbox]
+  );
+  useEffect(() => {
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [handleKey]);
+
+  /* Lock body scroll when lightbox open */
+  useEffect(() => {
+    document.body.style.overflow = lightbox !== null ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [lightbox]);
+
+  /* Render one marquee row */
+  const renderTrack = (
+    photos: typeof dokRow1,
+    trackClass: string,
+    rowOffset: number   /* index offset into allDokPhotos for lightbox */
+  ) => {
+    /* duplicate for seamless loop */
+    const doubled = [...photos, ...photos];
+    return (
+      <div className="dok-strip" style={{ overflow: "hidden", marginBottom: "14px" }}>
+        <div className={trackClass}>
+          {doubled.map((photo, i) => {
+            const isOriginal = i < photos.length;
+            const globalIdx = rowOffset + (i % photos.length);
+            return (
+              <div
+                key={i}
+                className="dok-photo-item"
+                onClick={isOriginal ? () => setLightbox(globalIdx) : undefined}
+                role={isOriginal ? "button" : undefined}
+                tabIndex={isOriginal ? 0 : -1}
+                aria-label={isOriginal ? `Buka ${photo.alt}` : undefined}
+                onKeyDown={(e) => isOriginal && e.key === "Enter" && setLightbox(globalIdx)}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  loading="lazy"
+                  draggable={false}
+                />
+                <div className="dok-photo-overlay" />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <section
+      id="dokumentasi"
+      ref={sectionRef}
+      style={{ overflow: "hidden" }}
+      className="relative py-20 lg:py-28 bg-gradient-to-b from-white/85 via-amber-50/25 to-white/85 backdrop-blur-md"
+    >
+      {/* HEADING */}
+      <div
+        className="mx-auto max-w-7xl px-5 lg:px-8 mb-12 lg:mb-14"
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(24px)",
+          transition: "opacity 0.7s ease, transform 0.7s ease",
+        }}
+      >
+        <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-600 sm:text-sm">
+          DOKUMENTASI
+        </p>
+        <h2
+          className="mt-2 font-serif font-black uppercase tracking-tight text-slate-900 leading-none"
+          style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+        >
+          Momen{" "}
+          <span className="text-amber-500">Kabinet Kilau Gemilang</span>
+        </h2>
+        <p className="mt-4 max-w-lg text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
+          Kumpulan momen dan kegiatan BEM Politeknik Negeri Sriwijaya.
+        </p>
+      </div>
+
+      {/* GALLERY ROWS — full width, no horizontal scroll */}
+      <div
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s",
+        }}
+      >
+        {/* Row 1: bergerak ke kiri */}
+        {renderTrack(dokRow1, "dok-track-left", 0)}
+        {/* Row 2: bergerak ke kanan */}
+        {renderTrack(dokRow2, "dok-track-right", 4)}
+      </div>
+
+      {/* ══ LIGHTBOX ══ */}
+      {lightbox !== null && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-950/92 p-4 backdrop-blur-sm"
+          onClick={() => setLightbox(null)}
+        >
+          <div
+            className="relative flex max-h-[90vh] max-w-5xl w-full items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={allDokPhotos[lightbox].src}
+              alt={allDokPhotos[lightbox].alt}
+              className="max-h-[85vh] max-w-full rounded-2xl object-contain shadow-2xl"
+              draggable={false}
+            />
+
+            {/* Close */}
+            <button
+              type="button"
+              onClick={() => setLightbox(null)}
+              aria-label="Tutup"
+              className="absolute -top-3 -right-3 sm:top-2 sm:right-2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-amber-500"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+
+            {/* Prev */}
+            <button
+              type="button"
+              onClick={() => setLightbox((p) => (p! - 1 + allDokPhotos.length) % allDokPhotos.length)}
+              aria-label="Foto sebelumnya"
+              className="absolute left-2 sm:-left-16 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-amber-500 active:scale-95"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+
+            {/* Next */}
+            <button
+              type="button"
+              onClick={() => setLightbox((p) => (p! + 1) % allDokPhotos.length)}
+              aria-label="Foto berikutnya"
+              className="absolute right-2 sm:-right-16 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-amber-500 active:scale-95"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+
+            {/* Counter */}
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-bold tracking-widest text-white/40">
+              {lightbox + 1} / {allDokPhotos.length}
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+
 
 export default function Home() {
   const [showLoading, setShowLoading] = useState<boolean>(() => {
@@ -845,6 +1135,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* DOKUMENTASI SECTION */}
+        <DokumentasiSection />
 
         {/* UPDATE INFO */}
         <section
