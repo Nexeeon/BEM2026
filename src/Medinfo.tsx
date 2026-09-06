@@ -389,7 +389,7 @@ DivisiSection.displayName = "DivisiSection";
 // ============================================================
 // MAIN COMPONENT
 // ============================================================
-export default function Medinfo() {
+export function Medinfo() {
   return (
     <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       <div className="min-h-screen bg-white/65">
@@ -505,3 +505,6 @@ export default function Medinfo() {
     </main>
   );
 }
+
+export default Medinfo;
+

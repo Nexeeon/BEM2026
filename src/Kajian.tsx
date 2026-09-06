@@ -129,7 +129,7 @@ export default function Kajian() {
             <div className="absolute inset-x-0 bottom-0">
               <div className="mx-auto flex max-w-7xl flex-col items-start px-5 pb-8 lg:px-8 lg:pb-12">
                 {/* BADGE */}
-             
+
 
                 {/* DESKRIPSI PROGRAM */}
                 <p className="max-w-3xl text-sm font-medium leading-relaxed text-white/90 sm:text-base">
