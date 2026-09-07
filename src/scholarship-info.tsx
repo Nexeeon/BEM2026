@@ -1,20 +1,12 @@
-import { useState, useEffect, type ComponentType } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import {
-  ChevronDown,
   Instagram,
   Mail,
-  Menu,
-  X,
   Youtube,
-  Landmark,
-  Users,
-  GraduationCap,
-  Star,
   ArrowUpRight,
   CalendarClock,
-  type LucideIcon,
 } from "lucide-react";
 
 type DropdownName = "academic" | "echo" | null;
@@ -26,8 +18,7 @@ type Scholarship = {
   description: string;
   link: string;
   deadline?: string;
-  icon: LucideIcon;
-  panel: "amber" | "slate";
+  image: string;
 };
 
 const scholarships: Scholarship[] = [
@@ -38,8 +29,7 @@ const scholarships: Scholarship[] = [
     description:
       "Diselenggarakan oleh Bank Indonesia untuk mahasiswa aktif minimal semester 2 dengan IPK ≥ 3.00. Penerima akan tergabung dalam komunitas GenBI dan mendapatkan pembinaan kepemimpinan, pelatihan soft skill, serta kesempatan berjejaring dengan sesama penerima se-Indonesia. Program ini menjadi langkah awal untuk mencetak generasi muda yang unggul dan berdaya saing dalam pembangunan nasional.",
     link: "https://www.bi.go.id/id/default.aspx",
-    icon: Landmark,
-    panel: "amber",
+    image: "/images/beasiswa/Logo Bank Indonesia.jpg",
   },
   {
     id: "kse",
@@ -48,8 +38,7 @@ const scholarships: Scholarship[] = [
     description:
       "Diselenggarakan oleh Yayasan Karya Salemba Empat bagi mahasiswa semester ≥2 dari keluarga kurang mampu. Selain tunjangan hidup Rp750.000/bulan selama 1 tahun, penerima juga mendapat pelatihan soft skill, akses jaringan alumni nasional, dan pendampingan pengembangan karakter. KSE mendorong mahasiswa POLSRI untuk tumbuh menjadi individu yang aktif, mandiri, dan siap menghadapi tantangan masa depan.",
     link: "https://beasiswa.or.id/",
-    icon: Users,
-    panel: "slate",
+    image: "/images/beasiswa/logo-Karya-Salemba-Empat-KSE.jpg",
   },
   {
     id: "kip",
@@ -58,8 +47,7 @@ const scholarships: Scholarship[] = [
     description:
       "Program pemerintah bagi mahasiswa baru dari keluarga tidak mampu namun berprestasi, mencakup pembebasan biaya kuliah penuh dan bantuan biaya hidup hingga lulus. KIP-Kuliah membuka akses pendidikan tinggi tanpa hambatan finansial, sekaligus mendukung POLSRI mencetak lulusan yang unggul, berdaya saing, dan siap membangun bangsa.",
     link: "https://kip-kuliah.kemdiktisaintek.go.id/",
-    icon: GraduationCap,
-    panel: "amber",
+    image: "/images/beasiswa/KIP BELAKANG.jpeg",
   },
   {
     id: "smart",
@@ -69,8 +57,7 @@ const scholarships: Scholarship[] = [
       "Program pendayagunaan zakat YBM BRILiaN di bidang pendidikan bagi mahasiswa D3/D4/S1 berprestasi dari keluarga kurang mampu. Benefit yang didapat meliputi subsidi UKT 2 semester, jejaring nasional & internasional, mentoring, serta pengalaman pemberdayaan masyarakat untuk membentuk SDM yang unggul dan berkarakter.",
     link: "https://brilianscholarship.id/login",
     deadline: "Pendaftaran hingga 24 Oktober 2025",
-    icon: Star,
-    panel: "slate",
+    image: "/images/beasiswa/Smart Scholarship.jpg",
   },
 ];
 
@@ -90,15 +77,6 @@ export default function ScholarshipInfo() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const toggleDropdown = (name: Exclude<DropdownName, null>) => {
-    setOpenDropdown(openDropdown === name ? null : name);
-  };
-
-  const closeMenus = () => {
-    setMobileOpen(false);
-    setOpenDropdown(null);
-  };
 
   // Menutup menu ketika ukuran layar berubah ke desktop
   useEffect(() => {
@@ -150,9 +128,7 @@ export default function ScholarshipInfo() {
         <section className="relative px-5 pb-20 lg:px-8 lg:pb-28">
           <div className="mx-auto flex max-w-5xl flex-col gap-6">
             {scholarships.map((item, index) => {
-              const Icon = item.icon;
               const reversed = index % 2 === 1;
-              const isAmberPanel = item.panel === "amber";
 
               return (
                 <article
@@ -164,26 +140,12 @@ export default function ScholarshipInfo() {
                       reversed ? "md:flex-row-reverse" : "md:flex-row"
                     }`}
                   >
-                    {/* ICON PANEL */}
-                    <div
-                      className={`relative flex shrink-0 items-center justify-center overflow-hidden p-10 md:w-64 ${
-                        isAmberPanel
-                          ? "bg-gradient-to-br from-amber-600 to-amber-800"
-                          : "bg-gradient-to-br from-slate-900 to-slate-950"
-                      }`}
-                    >
-                      <div
-                        className="absolute inset-0 opacity-[0.15]"
-                        style={{
-                          backgroundImage:
-                            "radial-gradient(circle, #ffffff 1px, transparent 1px)",
-                          backgroundSize: "16px 16px",
-                        }}
-                      />
-
-                      <Icon
-                        size={56}
-                        className="relative z-10 text-white transition-transform duration-200 ease-out group-hover:scale-105"
+                    {/* IMAGE PANEL */}
+                    <div className="relative h-56 w-full shrink-0 overflow-hidden md:h-auto md:w-64">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
                       />
                     </div>
 
