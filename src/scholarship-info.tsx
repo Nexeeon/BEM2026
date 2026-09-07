@@ -140,12 +140,12 @@ export default function ScholarshipInfo() {
                       reversed ? "md:flex-row-reverse" : "md:flex-row"
                     }`}
                   >
-                    {/* IMAGE PANEL */}
-                    <div className="relative h-56 w-full shrink-0 overflow-hidden md:h-auto md:w-64">
+                    {/* VISUAL IMAGE PANEL */}
+                    <div className="relative flex h-60 w-full shrink-0 items-center justify-center p-4 md:h-auto md:w-64">
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+                        className="h-full w-full object-contain object-center transition-transform duration-300 ease-out group-hover:scale-105"
                       />
                     </div>
 
