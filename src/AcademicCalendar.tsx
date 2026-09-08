@@ -1244,7 +1244,7 @@ export default function AcademicCalendarPage() {
             </div>
 
             <div className="mt-14 border-t border-white/10 pt-6 text-xs text-slate-500">
-              <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
+              <p>© Departemen Media Informasi BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
             </div>
           </div>
         </footer>

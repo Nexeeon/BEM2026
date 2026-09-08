@@ -457,7 +457,7 @@ export default function Kajian() {
 
             {/* COPYRIGHT */}
             <div className="mt-14 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
-              <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
+              <p>© Departemen Media Informasi BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
             </div>
           </div>
         </footer>
