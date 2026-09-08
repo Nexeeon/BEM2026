@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Navbar from "./Navbar";
 import {
   ArrowRight,
@@ -417,16 +417,6 @@ const dokumenOrmawa: DocItem[] = [
 ];
 
 export default function OrganisasiMahasiswa() {
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: heroScrollProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroY = useTransform(heroScrollProgress, [0, 1], [0, -100]);
-  const heroOpacity = useTransform(heroScrollProgress, [0, 0.75, 1], [1, 0.4, 0]);
-  const heroScale = useTransform(heroScrollProgress, [0, 1], [1, 0.96]);
-
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -500,10 +490,8 @@ export default function OrganisasiMahasiswa() {
         {/* HERO */}
         {/* ======================================================== */}
         {!searchQuery.trim() && (
-          <motion.section
+          <section
             id="organisasi-hero"
-            ref={heroRef}
-            style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
             aria-label="Hero Organisasi Mahasiswa"
             className="relative mx-auto flex w-full max-w-7xl items-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(2rem,5vh,5rem)]"
           >
@@ -622,7 +610,7 @@ export default function OrganisasiMahasiswa() {
                 </div>
               </motion.div>
             </div>
-          </motion.section>
+          </section>
         )}
 
         {/* ======================================================== */}
@@ -875,8 +863,6 @@ export default function OrganisasiMahasiswa() {
         </section>
 
         {/* ======================================================== */}
-<<<<<<< HEAD
-=======
         {/* SECTION: PERATURAN DAN PEDOMAN ORMAWA POLSRI */}
         {/* (Menggantikan section CTA "BERSAMA, BERKOLABORASI, DAN BERDAMPAK") */}
         {/* Gaya grid 2 kolom, sengaja dibuat beda dari web lama */}
@@ -943,7 +929,6 @@ export default function OrganisasiMahasiswa() {
         </section>
 
         {/* ======================================================== */}
->>>>>>> 35d496b (Update halaman Organisasi Mahasiswa)
         {/* FOOTER */}
         {/* ======================================================== */}
         <footer className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8">
@@ -1052,7 +1037,7 @@ export default function OrganisasiMahasiswa() {
             </div>
 
             <div className="mt-14 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
-              <p>© Departemen Media Informasi BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
+              <p>© BEM Politeknik Negeri Sriwijaya. All rights reserved.</p>
             </div>
           </div>
         </footer>
