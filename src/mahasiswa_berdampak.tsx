@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ChevronDown,
   Instagram,
@@ -14,6 +15,15 @@ import {
 type DropdownName = "academic" | "echo" | null;
 
 export default function MahasiswaBerdampak() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(heroScrollProgress, [0, 1], [0, -80]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.75, 1], [1, 0.4, 0]);
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -46,11 +56,17 @@ export default function MahasiswaBerdampak() {
         <Navbar />
 
         {/* HERO SECTION */}
-        <section className="relative flex flex-1 flex-col items-center justify-center px-5 py-20 lg:py-28 overflow-hidden text-center">
-          <div className="relative z-10 mx-auto w-full max-w-4xl flex flex-col items-center">
-            {/* BADGE */}
-           
-
+        <motion.section
+          ref={heroRef}
+          style={{ opacity: heroOpacity, y: heroY }}
+          className="relative flex flex-1 flex-col items-center justify-center px-5 py-20 lg:py-28 overflow-hidden text-center"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="relative z-10 mx-auto w-full max-w-4xl flex flex-col items-center"
+          >
             {/* SUBTITLE */}
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-slate-600 mb-6">
               COME! WE ARE PREPARING SOMETHING SPECIAL FOR YOU!
@@ -96,8 +112,8 @@ export default function MahasiswaBerdampak() {
             <p className="mt-8 text-xs font-semibold tracking-wider uppercase text-slate-500">
               STAY WITH US FOR MORE UPDATES
             </p>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* FOOTER */}
         <footer

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, memo } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Palette, Globe, Instagram, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 // ============================================================
 // TYPE
@@ -390,13 +391,26 @@ DivisiSection.displayName = "DivisiSection";
 // MAIN COMPONENT
 // ============================================================
 export function Medinfo() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(heroScrollProgress, [0, 1], [0, -90]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.75, 1], [1, 0.4, 0]);
+
   return (
     <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
       <div className="min-h-screen bg-white/65">
         <Navbar activePage="medinfo" />
 
         {/* HERO SECTION */}
-        <section className="relative flex min-h-[calc(100vh-72px)] w-full items-center justify-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
+        <motion.section
+          ref={heroRef}
+          style={{ opacity: heroOpacity, y: heroY }}
+          className="relative flex min-h-[calc(100vh-72px)] w-full items-center justify-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8"
+        >
           <div className="absolute inset-0 z-0 overflow-hidden">
             <img
               src="/images/medinfo/fullMedinfo.webp"
@@ -408,7 +422,12 @@ export function Medinfo() {
             <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-36 bg-gradient-to-t from-white via-white/80 to-transparent" />
           </div>
 
-          <div className="relative z-20 mx-auto flex max-w-4xl flex-col items-center justify-center text-center animate-fadeIn">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="relative z-20 mx-auto flex max-w-4xl flex-col items-center justify-center text-center"
+          >
             <div className="mb-4 sm:mb-6">
               <img
                 src="/images/medinfo/medinfologo.webp"
@@ -429,11 +448,17 @@ export function Medinfo() {
             <p className="mt-5 max-w-2xl px-2 text-xs font-medium leading-relaxed text-slate-700 sm:px-4 sm:text-base lg:text-lg lg:leading-normal">
               Departemen Media dan Informasi (Medinfo) berfungsi sebagai garda terdepan penyebaran informasi publik serta pengelolaan platform digital kampus secara kreatif, interaktif, dan profesional.
             </p>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* PIMPINAN DEPARTEMEN */}
-        <section className="mx-auto max-w-7xl px-5 py-12 lg:px-8 lg:py-20">
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto max-w-7xl px-5 py-12 lg:px-8 lg:py-20"
+        >
           <div className="text-center">
             
             <h2 className="mt-2 font-serif text-3xl font-black uppercase tracking-tight text-amber-500 sm:text-4xl lg:text-5xl">
@@ -485,7 +510,7 @@ export function Medinfo() {
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* STRUKTUR BIDANG KEAHLIAN */}
         <section className="mx-auto max-w-7xl px-5 py-12 pb-28 lg:px-8 lg:py-20">

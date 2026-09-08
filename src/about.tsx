@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import { motion, PanInfo } from "framer-motion";
+import { motion, PanInfo, useScroll, useTransform } from "framer-motion";
 import { useSectionObserver } from "./hooks/useSectionObserver";
 import { useScrollListener } from "./hooks/useScrollListener";
 
@@ -112,6 +112,16 @@ export default function About() {
   useScrollListener();
   useSectionObserver(ABOUT_SECTION_IDS);
 
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(heroScrollProgress, [0, 1], [0, -120]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.75, 1], [1, 0.4, 0]);
+  const heroScale = useTransform(heroScrollProgress, [0, 1], [1, 0.95]);
+
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -197,7 +207,12 @@ export default function About() {
         <Navbar />
 
         {/* HERO VIDEO */}
-        <section id="hero" className="w-full px-4 pb-12 pt-6 md:px-8 lg:px-12">
+        <motion.section
+          id="hero"
+          ref={heroRef}
+          style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
+          className="w-full px-4 pb-12 pt-6 md:px-8 lg:px-12"
+        >
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -211,7 +226,7 @@ export default function About() {
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="metadata"
                 className="absolute inset-0 h-full w-full object-cover"
                 onError={() => setVideoError(true)}
               />
@@ -252,7 +267,7 @@ export default function About() {
               </motion.div>
             </div>
           </motion.div>
-        </section>
+        </motion.section>
 
         {/* SECTION VISI & MISI */}
         <section id="visi" className="mx-auto max-w-7xl px-5 py-16 lg:px-8">

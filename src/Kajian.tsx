@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight,
   BookOpen,
@@ -68,6 +69,16 @@ const latestKajianData = [
 ];
 
 export default function Kajian() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(heroScrollProgress, [0, 1], [0, -100]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.75, 1], [1, 0.4, 0]);
+  const heroScale = useTransform(heroScrollProgress, [0, 1], [1, 0.96]);
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -113,7 +124,11 @@ export default function Kajian() {
         {/* ======================================================== */}
         {/* HERO SECTION - KAJIAN (DIRINGKAS, TEKS OVERLAY DI GAMBAR) */}
         {/* ======================================================== */}
-        <section className="relative w-full">
+        <motion.section
+          ref={heroRef}
+          style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
+          className="relative w-full"
+        >
           <div className="relative w-full overflow-hidden bg-slate-100">
             {/* GAMBAR HERO — TINGGI DIPERKECIL */}
             <img
@@ -127,10 +142,12 @@ export default function Kajian() {
 
             {/* KONTEN DI ATAS GAMBAR */}
             <div className="absolute inset-x-0 bottom-0">
-              <div className="mx-auto flex max-w-7xl flex-col items-start px-5 pb-8 lg:px-8 lg:pb-12">
-                {/* BADGE */}
-
-
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+                className="mx-auto flex max-w-7xl flex-col items-start px-5 pb-8 lg:px-8 lg:pb-12"
+              >
                 {/* DESKRIPSI PROGRAM */}
                 <p className="max-w-3xl text-sm font-medium leading-relaxed text-white/90 sm:text-base">
                   Proses analisis isu-isu terkini baik internal kampus maupun
@@ -153,15 +170,21 @@ export default function Kajian() {
                     <ArrowRight size={18} />
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ======================================================== */}
         {/* MENGAPA KAJIAN? */}
         {/* ======================================================== */}
-        <section className="bg-white/85 px-5 py-16 backdrop-blur-md lg:px-8 lg:py-20">
+        <motion.section
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="bg-white/85 px-5 py-16 backdrop-blur-md lg:px-8 lg:py-20"
+        >
           <div className="mx-auto max-w-7xl">
             <div className="max-w-2xl">
               <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
@@ -176,8 +199,12 @@ export default function Kajian() {
 
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {whyKajianData.map((item, index) => (
-                <article
+                <motion.article
                   key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="group rounded-3xl border border-slate-200 bg-white/90 p-8 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition-all duration-200 group-hover:bg-amber-500 group-hover:text-white">
@@ -191,11 +218,11 @@ export default function Kajian() {
                   <p className="mt-3 text-sm leading-7 text-slate-600">
                     {item.description}
                   </p>
-                </article>
+                </motion.article>
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ======================================================== */}
         {/* KAJIAN TERBARU — SECTION BARU */}

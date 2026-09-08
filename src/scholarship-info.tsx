@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Instagram,
   Mail,
@@ -62,6 +63,15 @@ const scholarships: Scholarship[] = [
 ];
 
 export default function ScholarshipInfo() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(heroScrollProgress, [0, 1], [0, -80]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.75, 1], [1, 0.4, 0]);
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -104,8 +114,17 @@ export default function ScholarshipInfo() {
         {/* =========================================================
             HERO / INTRO SECTION
         ========================================================= */}
-        <section className="relative px-5 pb-10 pt-16 lg:px-8 lg:pb-14 lg:pt-24">
-          <div className="mx-auto max-w-4xl text-center">
+        <motion.section
+          ref={heroRef}
+          style={{ opacity: heroOpacity, y: heroY }}
+          className="relative px-5 pb-10 pt-16 lg:px-8 lg:pb-14 lg:pt-24"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="mx-auto max-w-4xl text-center"
+          >
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-600 sm:text-sm">
               Academic Information
             </p>
@@ -119,8 +138,8 @@ export default function ScholarshipInfo() {
               diakses mahasiswa Politeknik Negeri Sriwijaya, mulai dari
               program pemerintah hingga yayasan dan lembaga mitra kampus.
             </p>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* =========================================================
             SCHOLARSHIP LIST
@@ -131,8 +150,12 @@ export default function ScholarshipInfo() {
               const reversed = index % 2 === 1;
 
               return (
-                <article
+                <motion.article
                   key={item.id}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="group overflow-hidden rounded-2xl border border-amber-900/10 bg-white/70 shadow-sm backdrop-blur-sm transition-all duration-200 ease-out hover:border-amber-900/20 hover:shadow-md"
                 >
                   <div
@@ -185,7 +208,7 @@ export default function ScholarshipInfo() {
                       </a>
                     </div>
                   </div>
-                </article>
+                </motion.article>
               );
             })}
           </div>

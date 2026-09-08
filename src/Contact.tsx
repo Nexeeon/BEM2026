@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Home as HomeIcon,
   Phone,
@@ -19,6 +20,16 @@ import {
 type DropdownName = "academic" | "echo" | null;
 
 export default function Contact() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(heroScrollProgress, [0, 1], [0, -100]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.75, 1], [1, 0.4, 0]);
+  const heroScale = useTransform(heroScrollProgress, [0, 1], [1, 0.96]);
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] =
     useState<DropdownName>(null);
@@ -66,12 +77,19 @@ export default function Contact() {
         {/* ====================================================== */}
         {/* CONTACT CONTENT */}
         {/* ====================================================== */}
-        <section className="relative px-5 py-20 lg:px-8 lg:py-28">
+        <motion.section
+          ref={heroRef}
+          style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
+          className="relative px-5 py-20 lg:px-8 lg:py-28"
+        >
           <div className="mx-auto max-w-7xl">
             {/* HEADER */}
-            <div className="mx-auto max-w-3xl text-center">
-            
-
+            <motion.div
+              initial={{ opacity: 0, y: 35 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="mx-auto max-w-3xl text-center"
+            >
               <h1
                 className="mt-5 font-serif font-black uppercase tracking-wide text-amber-500"
                 style={{
@@ -87,12 +105,18 @@ export default function Contact() {
                 pertanyaan, maupun kerja sama— kalian bisa langsung hubungi kami
                 lewat kontak yang tersedia.
               </p>
-            </div>
+            </motion.div>
 
             {/* MAIN CONTACT AREA */}
             <div className="mt-16 grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
               {/* LOGO */}
-              <div className="flex justify-center lg:col-span-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.6 }}
+                className="flex justify-center lg:col-span-4"
+              >
                 <div className="relative flex aspect-square w-full max-w-sm items-center justify-center rounded-[2.5rem] border border-white/60 bg-white/45 p-10 shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
                   <div className="pointer-events-none absolute inset-8 rounded-full bg-amber-300/15 blur-3xl" />
 
@@ -102,7 +126,7 @@ export default function Contact() {
                     className="relative z-10 w-52 object-contain drop-shadow-md transition-transform duration-500 ease-out hover:scale-[1.03] sm:w-60 lg:w-72"
                   />
                 </div>
-              </div>
+              </motion.div>
 
               {/* CONTACT INFORMATION */}
               <div className="lg:col-span-5">
@@ -221,13 +245,12 @@ export default function Contact() {
 
                   <div className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-amber-600">
                     Lihat informasi resmi BEM POLSRI
-                    <ArrowRight size={14} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ====================================================== */}
         {/* FOOTER */}

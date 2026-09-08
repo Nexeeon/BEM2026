@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "./Navbar";
 import {
   ArrowRight,
@@ -296,7 +296,7 @@ const ukmData: OrgItem[] = [
     id: "ukm-6",
     name: "UKM Simphony",
     category: "UKM",
-    image: "/images/UKM/simpony.webp",
+    image: "/images/UKM/simphony.webp",
     description:
       "UKM Simphony adalah organisasi seni yang berfokus pada pengembangan bakat di bidang musik dan paduan suara. UKM ini rutin mengadakan konser dan pertunjukan musik di berbagai acara kampus.",
     alias: ["Simphony", "UKM Simphony", "Musik", "Paduan Suara", "Seni"],
@@ -386,6 +386,16 @@ const komunitasData: OrgItem[] = [
 ];
 
 export default function OrganisasiMahasiswa() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(heroScrollProgress, [0, 1], [0, -100]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.75, 1], [1, 0.4, 0]);
+  const heroScale = useTransform(heroScrollProgress, [0, 1], [1, 0.96]);
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -459,8 +469,10 @@ export default function OrganisasiMahasiswa() {
         {/* HERO */}
         {/* ======================================================== */}
         {!searchQuery.trim() && (
-          <section
+          <motion.section
             id="organisasi-hero"
+            ref={heroRef}
+            style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
             aria-label="Hero Organisasi Mahasiswa"
             className="relative mx-auto flex w-full max-w-7xl items-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(2rem,5vh,5rem)]"
           >
@@ -579,7 +591,7 @@ export default function OrganisasiMahasiswa() {
                 </div>
               </motion.div>
             </div>
-          </section>
+          </motion.section>
         )}
 
         {/* ======================================================== */}

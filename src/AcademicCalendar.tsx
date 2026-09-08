@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ChevronDown,
   ChevronLeft,
@@ -766,6 +767,15 @@ const genapFullList = [
 ];
 
 export default function AcademicCalendarPage() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(heroScrollProgress, [0, 1], [0, -90]);
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.75, 1], [1, 0.4, 0]);
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [currentMonthIdx, setCurrentMonthIdx] = useState(0);
@@ -838,7 +848,11 @@ export default function AcademicCalendarPage() {
         {/* CONTENT */}
         {/* ====================================================== */}
 
-        <section className="relative px-5 py-10 lg:px-8 lg:py-14">
+        <motion.section
+          ref={heroRef}
+          style={{ opacity: heroOpacity, y: heroY }}
+          className="relative px-5 py-10 lg:px-8 lg:py-14"
+        >
           <div className="mx-auto max-w-7xl">
             {/* TITLE HEADER */}
             <div className="mx-auto max-w-3xl text-center">
@@ -1150,7 +1164,7 @@ export default function AcademicCalendarPage() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ====================================================== */}
         {/* FOOTER */}
