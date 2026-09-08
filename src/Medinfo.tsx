@@ -525,6 +525,64 @@ export function Medinfo() {
           ))}
         </section>
 
+        {/* PROGRAM KERJA MEDINFO */}
+        <section className="mx-auto max-w-7xl px-5 py-12 pb-28 lg:px-8 lg:py-20">
+          <div className="text-center" data-aos="fade-up">
+            <p className="text-xs font-black uppercase tracking-[0.35em] text-slate-500 sm:text-sm">
+              AGENDA KERJA
+            </p>
+            <h2 className="mt-2 font-serif text-3xl font-black uppercase tracking-tight text-amber-500 sm:text-4xl lg:text-5xl">
+              PROGRAM KERJA
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-xs font-medium leading-relaxed text-slate-600 sm:text-sm">
+              Karya kreatif dan publikasi strategis MEDINFO sebagai wajah digital BEM POLSRI yang informatif dan beridentitas kuat.
+            </p>
+            <div className="mx-auto mt-5 flex items-center justify-center gap-3">
+              <div className="h-[2px] w-12 rounded-full bg-amber-400" />
+              <div className="h-[2px] w-12 rounded-full bg-amber-100" />
+            </div>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {[
+              { no: "01", nama: "Publikasi Resmi di Akun BEM POLSRI", sub: "Pelantikan, Struktural, dan publikasi resmi lainnya", collab: null },
+              { no: "02", nama: "Konten Hari Besar Nasional & Kampus", sub: null, collab: null },
+              { no: "03", nama: "Foto dan Video Struktural", sub: null, collab: null },
+              { no: "04", nama: "Memori Kolektif", sub: null, collab: "Collab · Kastrat" },
+              { no: "05", nama: "Monthly Calendar Feed", sub: null, collab: null },
+              { no: "06", nama: "KENAL", sub: "Konten Edukasi dan Informasi Seputar POLSRI", collab: "Collab · Humas" },
+              { no: "07", nama: "Desain Atribut Organisasi", sub: null, collab: null },
+              { no: "08", nama: "BEM Inspires", sub: null, collab: null },
+            ].map((proker, idx) => (
+              <div
+                key={idx}
+                data-aos="fade-up"
+                data-aos-delay={idx * 60}
+                className="group flex flex-col rounded-2xl border border-amber-200/70 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-amber-300 hover:shadow-lg will-change-transform"
+              >
+                <span className="mb-3 inline-block font-serif text-3xl font-black leading-none text-amber-200 transition-colors duration-300 group-hover:text-amber-300">
+                  {proker.no}
+                </span>
+                <h3 className="font-serif text-base font-black leading-snug tracking-tight text-slate-900 sm:text-lg">
+                  {proker.nama}
+                </h3>
+                {proker.sub && (
+                  <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-amber-600 sm:text-xs">
+                    {proker.sub}
+                  </p>
+                )}
+                {proker.collab && (
+                  <span className="mt-auto pt-4">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[10px] font-semibold text-amber-700">
+                      🤝 {proker.collab}
+                    </span>
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
         <Footer />
       </div>
     </main>
