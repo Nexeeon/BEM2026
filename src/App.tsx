@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Lazy loading komponen halaman untuk mempercepat initial bundle load
 const Home = lazy(() => import("./home"));
@@ -34,7 +35,8 @@ function PageFallback() {
 function App() {
   return (
     <Router>
-      <Suspense fallback={<PageFallback />}>
+      <ScrollToTop />
+      <Suspense fallback={null}>
         <Routes>
           {/* Halaman Utama */}
           <Route path="/" element={<Home />} />

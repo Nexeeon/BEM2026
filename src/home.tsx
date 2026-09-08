@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import LoadingScreen from "./LoadingScreen";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useSectionObserver } from "./hooks/useSectionObserver";
+import { useScrollListener } from "./hooks/useScrollListener";
+
 import {
   ArrowUpRight,
   CalendarDays,
@@ -30,6 +33,16 @@ interface UpdateInfoItemData {
   fullDescription: string;
   image: string;
 }
+
+const HOME_SECTION_IDS = [
+  "hero",
+  "visi-misi",
+  "calendar",
+  "program-kerja",
+  "dokumentasi",
+  "update-info",
+];
+
 
 /* DATA PROGRAM KERJA */
 const programs = [
@@ -633,9 +646,20 @@ function DokumentasiSection() {
 
 
 export default function Home() {
-  const [showLoading, setShowLoading] = useState<boolean>(() => {
-    return sessionStorage.getItem("homeIntroPlayed") !== "true";
+  useScrollListener();
+  useSectionObserver(HOME_SECTION_IDS);
+
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
   });
+
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.4, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, -140]);
+  const logoY = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const glowScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
@@ -699,11 +723,6 @@ export default function Home() {
     touchEndX.current = 0;
   };
 
-  const handleFinishLoading = () => {
-    sessionStorage.setItem("homeIntroPlayed", "true");
-    setShowLoading(false);
-  };
-
   const toggleDropdown = (name: Exclude<DropdownName, null>) => {
     setOpenDropdown(openDropdown === name ? null : name);
   };
@@ -729,28 +748,33 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-x-clip bg-[url('/images/bgweb.webp')] bg-cover bg-fixed bg-center bg-no-repeat pt-[72px] text-slate-900 scroll-smooth">
-      {/* LOADING SCREEN */}
-      {showLoading && <LoadingScreen onFinish={handleFinishLoading} />}
-
       <div className="min-h-screen bg-white/65">
         {/* NAVBAR */}
         <Navbar />
 
         {/* HERO */}
-        <section
-          id="home"
+        <motion.section
+          id="hero"
+          ref={heroRef}
+          style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
           className="relative mx-auto flex min-h-[calc(100vh-72px)] w-full max-w-7xl items-center justify-center px-[clamp(1.25rem,4vw,3.5rem)] py-[clamp(1.5rem,3.5vh,4rem)]"
         >
           <div className="grid w-full items-center gap-[clamp(1.5rem,3.5vw,4rem)] lg:grid-cols-12">
             <div className="relative z-10 flex flex-col items-start justify-center text-left lg:col-span-6">
-              <h1
+              <motion.h1
+                initial={{ opacity: 0, y: 35 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
                 className="font-serif font-black uppercase tracking-wide text-amber-500 leading-[1.12]"
                 style={{ fontSize: "clamp(2.2rem, 4.5vw, 4rem)" }}
               >
                 BEM POLITEKNIK NEGERI SRIWIJAYA
-              </h1>
+              </motion.h1>
 
-              <p
+              <motion.p
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
                 className="mt-[clamp(1rem,1.8vw,1.75rem)] max-w-xl font-medium leading-relaxed text-slate-700"
                 style={{ fontSize: "clamp(0.875rem, 1.1vw, 1.05rem)" }}
               >
@@ -759,22 +783,29 @@ export default function Home() {
                 berkomitmen untuk menjadi wadah yang aktif, responsif, dan
                 konstruktif melalui berbagai program kerja, pengabdian, serta
                 pelayanan yang berdampak bagi mahasiswa dan masyarakat.
-              </p>
+              </motion.p>
 
               <div className="mt-[clamp(1.25rem,2.2vw,2.25rem)]" />
             </div>
 
             <div className="relative flex w-full items-center justify-center lg:col-span-6 lg:justify-end">
-              <div className="relative flex w-full items-center justify-center">
-                <div
+              <motion.div
+                style={{ y: logoY }}
+                className="relative flex w-full items-center justify-center"
+              >
+                <motion.div
                   className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-amber-200/30 blur-2xl"
                   style={{
+                    scale: glowScale,
                     width: "clamp(260px, 38vw, 540px)",
                     height: "clamp(260px, 38vw, 540px)",
                   }}
                 />
 
-                <img
+                <motion.img
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
                   src="/images/logo.webp"
                   alt="Gedung Politeknik Negeri Sriwijaya"
                   className="relative z-10 h-auto w-full object-contain filter drop-shadow-md transition-all duration-300"
@@ -783,14 +814,18 @@ export default function Home() {
                     maxHeight: "clamp(320px, 58vh, 600px)",
                   }}
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* VISI & MISI SECTION */}
-        <section
-          id="visi"
+        <motion.section
+          id="visi-misi"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="relative bg-gradient-to-b from-white/90 via-amber-50/30 to-white/90 px-5 py-20 backdrop-blur-md lg:px-8 lg:py-28"
         >
           <div className="mx-auto max-w-7xl">
@@ -799,9 +834,12 @@ export default function Home() {
               {/* BAGIAN KIRI: VISI & MISI */}
               <div className="flex flex-col justify-between lg:col-span-7">
                 {/* VISI */}
-                <div>
-               
-
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: 0.05 }}
+                >
                   <h2 className="mt-4 font-serif text-4xl font-black uppercase tracking-tight text-amber-500 sm:text-5xl lg:text-6xl">
                     VISI
                   </h2>
@@ -814,7 +852,7 @@ export default function Home() {
                     </span>{" "}
                     bagi Mahasiswa/i dan Institusi Politeknik Negeri Sriwijaya.
                   </p>
-                </div>
+                </motion.div>
 
                 <hr className="my-10 border-slate-200/80 lg:my-12" />
 
@@ -825,9 +863,13 @@ export default function Home() {
                   </h3>
 
                   <div className="mt-8 space-y-6 sm:space-y-7">
-                    {missions.map((mission) => (
-                      <div
+                    {missions.map((mission, idx) => (
+                      <motion.div
                         key={mission.number}
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, amount: 0.2 }}
+                        transition={{ duration: 0.5, delay: idx * 0.08 }}
                         className="group flex items-start gap-4 rounded-2xl border border-slate-100 bg-white/70 p-4 transition-all duration-300 hover:border-amber-300/80 hover:bg-white hover:shadow-md sm:gap-6 sm:p-5"
                       >
                         <span className="font-serif text-2xl font-black text-amber-500/90 transition-transform duration-300 group-hover:scale-110 sm:text-3xl">
@@ -837,14 +879,20 @@ export default function Home() {
                         <p className="text-sm font-medium leading-relaxed text-slate-700 sm:text-base">
                           {mission.text}
                         </p>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
               </div>
 
               {/* BAGIAN KANAN: FOTO UTAMA & CARD */}
-              <div className="flex flex-col items-center justify-center lg:col-span-5 lg:sticky lg:top-28">
+              <motion.div
+                initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.15 }}
+                className="flex flex-col items-center justify-center lg:col-span-5 lg:sticky lg:top-28"
+              >
                 <div className="relative w-full overflow-hidden rounded-3xl border border-amber-300/50 bg-white p-3 shadow-xl shadow-amber-900/5 backdrop-blur-md transition-all duration-300 hover:border-amber-400 hover:shadow-2xl sm:p-4">
                   <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100">
                     <img
@@ -864,25 +912,42 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* AGENDA & KALENDER */}
-        <section
-          id="agenda"
+        <motion.section
+          id="calendar"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-28"
         >
-          <SectionIntro
-            eyebrow="Catat Tanggalnya"
-            title="Kalender Kegiatan & Akademik"
-            text="Ikuti berbagai agenda penting dan kegiatan akademis resmi Politeknik Negeri Sriwijaya Tahun Akademik 2026/2027."
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
+            <SectionIntro
+              eyebrow="Catat Tanggalnya"
+              title="Kalender Kegiatan & Akademik"
+              text="Ikuti berbagai agenda penting dan kegiatan akademis resmi Politeknik Negeri Sriwijaya Tahun Akademik 2026/2027."
+            />
+          </motion.div>
 
           <div className="mt-10 grid gap-6 lg:grid-cols-[.85fr_1.15fr]">
             {/* KALENDER */}
-            <div className="rounded-3xl bg-white/90 p-5 shadow-lg shadow-slate-900/5 backdrop-blur-md sm:p-8">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="rounded-3xl bg-white/90 p-5 shadow-lg shadow-slate-900/5 backdrop-blur-md sm:p-8"
+            >
               <div className="flex items-center justify-between">
                 <button
                   type="button"
@@ -962,10 +1027,16 @@ export default function Home() {
                   Hari Biasa
                 </span>
               </div>
-            </div>
+            </motion.div>
 
             {/* AGENDA */}
-            <div className="flex flex-col justify-between rounded-3xl bg-slate-900/95 p-5 text-white shadow-lg shadow-slate-900/10 backdrop-blur-md sm:p-8">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col justify-between rounded-3xl bg-slate-900/95 p-5 text-white shadow-lg shadow-slate-900/10 backdrop-blur-md sm:p-8"
+            >
               <div>
                 <div className="flex items-center justify-between">
                   <div>
@@ -1020,19 +1091,29 @@ export default function Home() {
               <div className="mt-6 border-t border-white/10 pt-4 text-xs text-slate-400">
                 * Jadwal dapat berubah sewaktu-waktu sesuai kebijakan kampus.
               </div>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ================================================== */}
         {/* SECTION PROGRAM KAMI */}
         {/* ================================================== */}
-        <section
-          id="program-kami"
+        <motion.section
+          id="program-kerja"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="relative py-20 lg:py-28 overflow-hidden"
         >
           {/* HEADING & PENJELASAN */}
-          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="mx-auto max-w-7xl px-5 lg:px-8"
+          >
             <div className="text-center">
               <p className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 sm:text-sm">
                 LIST OF
@@ -1053,10 +1134,16 @@ export default function Home() {
                 kepemimpinan, mendorong kolaborasi, dan memberikan dampak nyata.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* CAROUSEL AREA (FULL WIDTH EDGE-TO-EDGE) */}
-          <div className="relative mt-12 sm:mt-16 w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="relative mt-12 sm:mt-16 w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]"
+          >
             {/* Tombol Navigasi Kanan Atas */}
             <div className="absolute right-6 top-6 z-30 flex items-center gap-3">
               <button
@@ -1133,19 +1220,29 @@ export default function Home() {
                 />
               ))}
             </div>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* DOKUMENTASI SECTION */}
         <DokumentasiSection />
 
         {/* UPDATE INFO */}
-        <section
+        <motion.section
           id="update-info"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="relative mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28"
         >
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-5"
+            >
               <div className="lg:sticky lg:top-28">
                 <p className="text-xs font-black uppercase tracking-[0.25em] text-amber-600">
                   LIST OF
@@ -1168,12 +1265,16 @@ export default function Home() {
                   SCROLL UNTUK MELIHAT ARTIKEL
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             <div className="space-y-16 lg:col-span-7 lg:space-y-24">
-              {updateInfos.map((item) => (
-                <article
+              {updateInfos.map((item, index) => (
+                <motion.article
                   key={item.number}
+                  initial={{ opacity: 0, y: 45 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.15 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="group relative border-b border-slate-200/80 pb-12 transition-all duration-300 hover:opacity-100"
                 >
                   <div className="flex items-baseline justify-between">
@@ -1211,7 +1312,7 @@ export default function Home() {
                     LIHAT DETAIL INFORMASI
                     <ArrowUpRight size={16} className="text-amber-500" />
                   </button>
-                </article>
+                </motion.article>
               ))}
             </div>
           </div>
@@ -1264,7 +1365,7 @@ export default function Home() {
               </div>
             </div>
           )}
-        </section>
+        </motion.section>
 
         {/* FOOTER */}
         <footer

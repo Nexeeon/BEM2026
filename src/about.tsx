@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { motion, PanInfo } from "framer-motion";
+import { useSectionObserver } from "./hooks/useSectionObserver";
+import { useScrollListener } from "./hooks/useScrollListener";
+
 import {
   ChevronDown,
   ChevronLeft,
@@ -103,7 +106,12 @@ const departmentsData = [
   },
 ];
 
+const ABOUT_SECTION_IDS = ["hero", "visi", "ketua-umum", "pejabat-teras-bem", "departemen"];
+
 export default function About() {
+  useScrollListener();
+  useSectionObserver(ABOUT_SECTION_IDS);
+
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownName>(null);
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -189,7 +197,7 @@ export default function About() {
         <Navbar />
 
         {/* HERO VIDEO */}
-        <section className="w-full px-4 pb-12 pt-6 md:px-8 lg:px-12">
+        <section id="hero" className="w-full px-4 pb-12 pt-6 md:px-8 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
