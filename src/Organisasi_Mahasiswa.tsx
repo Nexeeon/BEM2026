@@ -296,7 +296,7 @@ const ukmData: OrgItem[] = [
     id: "ukm-6",
     name: "UKM Simphony",
     category: "UKM",
-    image: "/images/UKM/simphony.webp",
+    image: "/images/UKM/simpony.webp",
     description:
       "UKM Simphony adalah organisasi seni yang berfokus pada pengembangan bakat di bidang musik dan paduan suara. UKM ini rutin mengadakan konser dan pertunjukan musik di berbagai acara kampus.",
     alias: ["Simphony", "UKM Simphony", "Musik", "Paduan Suara", "Seni"],
@@ -840,38 +840,6 @@ export default function OrganisasiMahasiswa() {
                 </button>
               </div>
             )}
-          </div>
-        </section>
-
-        {/* ======================================================== */}
-        {/* CTA / PENUTUP */}
-        {/* ======================================================== */}
-        <section className="px-5 py-16 lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="rounded-3xl border border-amber-300/40 bg-white/90 p-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out hover:shadow-2xl sm:p-12">
-              <UsersRound
-                size={48}
-                className="mx-auto mb-4 text-amber-500"
-                strokeWidth={2}
-              />
-
-              <h2 className="text-3xl font-black tracking-tight text-amber-600 sm:text-4xl">
-                BERSAMA, BERKOLABORASI, DAN BERDAMPAK
-              </h2>
-
-              <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">
-                Temukan tempat bereksplorasi dan maksimalkan potensi terbaikmu
-                selama perkuliahan di Politeknik Negeri Sriwijaya.
-              </p>
-
-              <Link
-                to="/contact"
-                className="mt-8 inline-flex items-center gap-3 rounded-full bg-amber-500 px-10 py-4 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
-              >
-                HUBUNGI KAMI
-                <ArrowRight size={18} />
-              </Link>
-            </div>
           </div>
         </section>
 
