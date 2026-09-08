@@ -871,10 +871,6 @@ export default function OrganisasiMahasiswa() {
         <section className="px-5 py-16 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-5xl">
             <div className="text-center">
-              <span className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-amber-600">
-                <ScrollText size={14} />
-                Dasar Hukum
-              </span>
               <h2 className="mt-4 text-2xl font-black tracking-tight text-amber-600 sm:text-3xl lg:text-4xl">
                 PERATURAN DAN PEDOMAN ORMAWA POLSRI
               </h2>
