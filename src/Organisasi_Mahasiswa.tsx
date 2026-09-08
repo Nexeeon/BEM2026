@@ -15,6 +15,9 @@ import {
   UsersRound,
   RotateCcw,
   X,
+  FileText,
+  ScrollText,
+  Download,
 } from "lucide-react";
 
 type DropdownName = "academic" | "echo" | null;
@@ -27,6 +30,14 @@ interface OrgItem {
   description?: string;
   cabinet?: string;
   alias?: string[];
+}
+
+interface DocItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  file: string;
 }
 
 // ============================================================
@@ -385,6 +396,26 @@ const komunitasData: OrgItem[] = [
   },
 ];
 
+// ============================================================
+// DATA PERATURAN DAN PEDOMAN ORMAWA POLSRI
+// ============================================================
+const dokumenOrmawa: DocItem[] = [
+  {
+    id: "doc-1",
+    title: "PERDIR ORMAWA POLSRI",
+    subtitle: "Peraturan Direktur",
+    desc: "Peraturan Direktur (Perdir) Politeknik Negeri Sriwijaya seputar penyelenggaraan organisasi mahasiswa. Dokumen dapat diunduh dan dibaca kapan saja.",
+    file: "/PDF/perdir.pdf",
+  },
+  {
+    id: "doc-2",
+    title: "PEDOMAN ORMAWA POLSRI 2026",
+    subtitle: "Pedoman Pelaksanaan",
+    desc: "Panduan resmi pelaksanaan kegiatan Ormawa di lingkungan Politeknik Negeri Sriwijaya. Tersedia dalam format PDF untuk dipelajari.",
+    file: "/PDF/PEDOMAN%20PELAKSANAAN%20KEG%20ORMAWA-2026.pdf",
+  },
+];
+
 export default function OrganisasiMahasiswa() {
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress: heroScrollProgress } = useScroll({
@@ -441,20 +472,20 @@ export default function OrganisasiMahasiswa() {
   const searchLower = searchQuery.toLowerCase().trim();
   const searchResults = searchQuery.trim()
     ? allOrganizations.filter((item) => {
-        const matchName = item.name.toLowerCase().includes(searchLower);
-        const matchCategory = item.category.toLowerCase().includes(searchLower);
-        const matchCabinet = item.cabinet
-          ? item.cabinet.toLowerCase().includes(searchLower)
-          : false;
-        const matchDesc = item.description
-          ? item.description.toLowerCase().includes(searchLower)
-          : false;
-        const matchAlias = item.alias
-          ? item.alias.some((a) => a.toLowerCase().includes(searchLower))
-          : false;
+      const matchName = item.name.toLowerCase().includes(searchLower);
+      const matchCategory = item.category.toLowerCase().includes(searchLower);
+      const matchCabinet = item.cabinet
+        ? item.cabinet.toLowerCase().includes(searchLower)
+        : false;
+      const matchDesc = item.description
+        ? item.description.toLowerCase().includes(searchLower)
+        : false;
+      const matchAlias = item.alias
+        ? item.alias.some((a) => a.toLowerCase().includes(searchLower))
+        : false;
 
-        return matchName || matchCategory || matchCabinet || matchDesc || matchAlias;
-      })
+      return matchName || matchCategory || matchCabinet || matchDesc || matchAlias;
+    })
     : allOrganizations;
 
   return (
@@ -844,6 +875,75 @@ export default function OrganisasiMahasiswa() {
         </section>
 
         {/* ======================================================== */}
+<<<<<<< HEAD
+=======
+        {/* SECTION: PERATURAN DAN PEDOMAN ORMAWA POLSRI */}
+        {/* (Menggantikan section CTA "BERSAMA, BERKOLABORASI, DAN BERDAMPAK") */}
+        {/* Gaya grid 2 kolom, sengaja dibuat beda dari web lama */}
+        {/* (web lama: 2 card sejajar + tombol solid di tengah-bawah) */}
+        {/* ======================================================== */}
+        <section className="px-5 py-16 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-5xl">
+            <div className="text-center">
+              <span className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-amber-600">
+                <ScrollText size={14} />
+                Dasar Hukum
+              </span>
+              <h2 className="mt-4 text-2xl font-black tracking-tight text-amber-600 sm:text-3xl lg:text-4xl">
+                PERATURAN DAN PEDOMAN ORMAWA POLSRI
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-xs leading-relaxed text-slate-600 sm:text-sm">
+                Landasan resmi penyelenggaraan organisasi mahasiswa di
+                Politeknik Negeri Sriwijaya, tersedia untuk diunduh dan
+                dipelajari kapan saja.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+              {dokumenOrmawa.map((doc) => (
+                <a
+                  key={doc.id}
+                  href={doc.file}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white/90 p-7 shadow-sm backdrop-blur-md transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
+                >
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full bg-amber-50 transition-transform duration-300 group-hover:scale-110"
+                  />
+
+                  <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500 text-white shadow-md shadow-amber-500/30">
+                    <FileText size={26} />
+                  </div>
+
+                  <p className="relative mt-5 text-[11px] font-bold uppercase tracking-widest text-amber-600">
+                    {doc.subtitle}
+                  </p>
+                  <h3 className="relative mt-1 text-lg font-black leading-snug tracking-tight text-slate-900 sm:text-xl">
+                    {doc.title}
+                  </h3>
+                  <p className="relative mt-3 flex-1 text-xs leading-relaxed text-slate-600 sm:text-[13px]">
+                    {doc.desc}
+                  </p>
+
+                  <div className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                    <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+                      Format PDF
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-white px-4 py-2 text-[11px] font-bold text-amber-600 transition-all duration-200 group-hover:bg-amber-500 group-hover:text-white">
+                      <Download size={13} />
+                      Unduh
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+>>>>>>> 35d496b (Update halaman Organisasi Mahasiswa)
         {/* FOOTER */}
         {/* ======================================================== */}
         <footer className="bg-slate-950 px-5 pb-8 pt-16 text-white lg:px-8">
@@ -979,9 +1079,8 @@ function OrgCard({
   return (
     <article
       onClick={() => hasDetail && onSelect(item)}
-      className={`group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5 ${
-        hasDetail ? "cursor-pointer" : ""
-      }`}
+      className={`group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5 ${hasDetail ? "cursor-pointer" : ""
+        }`}
     >
       <div>
         <div className="flex items-center justify-between">
