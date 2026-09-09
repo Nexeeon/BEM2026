@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight,
+  ArrowUpRight,
   BookOpen,
   ChevronDown,
   Compass,
@@ -45,26 +46,29 @@ const whyKajianData = [
 ];
 
 // ============================================================
-// DATA CARD "KAJIAN TERBARU" — ganti sesuai data asli kamu
+// DATA CARD "KAJIAN TERBARU"
 // ============================================================
 const latestKajianData = [
   {
-    title: "Dampak Kenaikan UKT terhadap Aksesibilitas Pendidikan Vokasi",
-    category: "Akademik",
+    title: "Sumsel Resah",
+    category: "SOSIAL",
+    date: "September 2026",
+    cta: "Baca Kajian",
+    link: "https://drive.google.com/file/d/144cj2wzBn_mZ_q2wiZWWSSpP7LFQtsHu/view",
+  },
+  {
+    title: "Kajian Pelecehan Seksual Verbal di Kampus",
+    category: "KAMPUS",
+    date: "September 2026",
+    cta: "Baca Kajian",
+    link: "https://drive.google.com/file/d/1FmvbmADl2wqFN1ZZkPbiFmpqrnLF3g8V/view?usp=drive_link",
+  },
+  {
+    title: "17 Agustus 1945 Bukan Sekadar Tanggal",
+    category: "SEJARAH",
     date: "Agustus 2026",
-    link: "https://kajian-gules.vercel.app/",
-  },
-  {
-    title: "Polemik Regulasi Organisasi Mahasiswa di Lingkungan Kampus",
-    category: "Kebijakan Kampus",
-    date: "Juli 2026",
-    link: "https://kajian-gules.vercel.app/",
-  },
-  {
-    title: "Menilik Isu Ketenagakerjaan Lulusan Vokasi di Era Digital",
-    category: "Sosial",
-    date: "Juni 2026",
-    link: "https://kajian-gules.vercel.app/",
+    cta: "Lihat Kajian",
+    link: "https://www.instagram.com/p/DcH9SZoCTl5/?utm_source=ig_web_button_share_sheet&stkn=MzRlODBiNWFlZA==",
   },
 ];
 
@@ -225,86 +229,116 @@ export default function Kajian() {
         </motion.section>
 
         {/* ======================================================== */}
-        {/* KAJIAN TERBARU — SECTION BARU */}
+        {/* KAJIAN TERBARU — EDITORIAL REDESIGN */}
         {/* ======================================================== */}
-        <section className="px-5 py-16 lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-              <div className="max-w-2xl">
-                <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+        <section
+          style={{
+            backgroundImage: "url('/images/bgkajian.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+            backgroundRepeat: "no-repeat",
+          }}
+          className="relative px-5 py-16 lg:px-8 lg:py-24"
+        >
+          {/* Overlay tipis agar card tetap terbaca */}
+          <div className="pointer-events-none absolute inset-0 bg-[#FFF8E7]/80 backdrop-blur-[2px]" />
+
+          <div className="relative mx-auto max-w-7xl">
+            {/* ── HEADING ROW ── */}
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2
+                  className="text-3xl font-black tracking-tight text-[#111827] sm:text-4xl lg:text-5xl"
+                  style={{ letterSpacing: "-0.02em" }}
+                >
                   KAJIAN TERBARU
                 </h2>
-
-                <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
-                  Beberapa publikasi terbaru dari Departemen KASTRAT. Klik untuk
-                  membaca kajian lengkap dalam format PDF.
+                <p className="mt-3 max-w-xl text-sm leading-7 text-[#111827]/60">
+                  Beberapa publikasi terbaru dari BEM POLSRI. Klik untuk membaca kajian secara lengkap.
                 </p>
               </div>
 
+              {/* LIHAT SEMUA — desktop */}
               <a
                 href="https://kajian-gules.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden shrink-0 items-center gap-2 rounded-full border border-amber-300 bg-white px-5 py-2.5 text-xs font-bold text-amber-700 outline-none transition-all duration-200 ease-out hover:bg-amber-50 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/50 sm:inline-flex"
+                className="hidden shrink-0 items-center gap-1.5 rounded-full border border-[#B8860B]/40 bg-white/80 px-5 py-2.5 text-[11px] font-bold uppercase tracking-widest text-[#B8860B] outline-none transition-all duration-200 ease-out hover:border-[#B8860B] hover:bg-[#FFF8E7] active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-[#FFD700]/60 sm:inline-flex"
               >
-                Lihat Semua
-                <ArrowRight size={14} />
+                LIHAT SEMUA
+                <ArrowUpRight size={13} strokeWidth={2.5} />
               </a>
             </div>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {/* ── CARD GRID ── */}
+            <div className="mt-10 grid gap-5 sm:grid-cols-1 lg:grid-cols-3">
               {latestKajianData.map((item, index) => (
-                <a
+                <motion.a
                   key={index}
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col justify-between rounded-3xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-900/5"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: index * 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
+                  whileHover={{ y: -5 }}
+                  className="group flex flex-col justify-between rounded-[22px] border border-[#111827]/10 bg-[#FFF8E7] p-6 shadow-sm transition-[border-color,box-shadow] duration-200 ease-out hover:border-[#B8860B]/40 hover:shadow-md hover:shadow-[#B8860B]/10 sm:p-7"
                 >
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-700">
-                        <Tag size={11} />
-                        {item.category}
+                  {/* ── TOP ROW: badge + icon ── */}
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#B8860B]/25 bg-[#FFD700]/15 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-[#B8860B]">
+                      <Tag size={10} strokeWidth={2.5} />
+                      {item.category}
+                    </span>
+
+                    <FileText
+                      size={17}
+                      strokeWidth={1.75}
+                      className="text-[#111827]/20 transition-colors duration-200 group-hover:text-[#B8860B]/60"
+                    />
+                  </div>
+
+                  {/* ── TITLE ── */}
+                  <h3
+                    className="mt-5 text-[15px] font-bold leading-snug text-[#111827] transition-colors duration-200 group-hover:text-[#B8860B]"
+                    style={{ wordBreak: "break-word" }}
+                  >
+                    {item.title}
+                  </h3>
+
+                  {/* ── DIVIDER + FOOTER ── */}
+                  <div className="mt-6">
+                    <hr className="border-[#111827]/10" />
+                    <div className="mt-4 flex items-center justify-between">
+                      <span className="text-[11px] font-medium text-[#111827]/40">
+                        {item.date}
                       </span>
 
-                      <FileText
-                        size={18}
-                        className="text-slate-300 transition-all duration-200 group-hover:text-amber-500"
-                      />
+                      <span className="inline-flex items-center gap-1 text-[11px] font-black tracking-wide text-[#B8860B]">
+                        {item.cta}
+                        <ArrowUpRight
+                          size={12}
+                          strokeWidth={2.5}
+                          className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
+                      </span>
                     </div>
-
-                    <h3 className="mt-4 text-base font-bold leading-snug text-slate-900 group-hover:text-amber-700">
-                      {item.title}
-                    </h3>
                   </div>
-
-                  <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-                    <span className="text-xs font-medium text-slate-400">
-                      {item.date}
-                    </span>
-
-                    <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-600">
-                      Baca PDF
-                      <ArrowRight
-                        size={13}
-                        className="transition-transform duration-200 group-hover:translate-x-0.5"
-                      />
-                    </span>
-                  </div>
-                </a>
+                </motion.a>
               ))}
             </div>
 
-            {/* TOMBOL LIHAT SEMUA — MOBILE */}
+            {/* LIHAT SEMUA — mobile */}
             <a
               href="https://kajian-gules.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 flex items-center justify-center gap-2 rounded-full border border-amber-300 bg-white px-5 py-3 text-xs font-bold text-amber-700 outline-none transition-all duration-200 ease-out hover:bg-amber-50 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/50 sm:hidden"
+              className="mt-8 flex items-center justify-center gap-1.5 rounded-full border border-[#B8860B]/40 bg-white/80 px-5 py-3 text-[11px] font-bold uppercase tracking-widest text-[#B8860B] outline-none transition-all duration-200 ease-out hover:border-[#B8860B] hover:bg-[#FFF8E7] active:scale-[0.97] focus-visible:ring-2 focus-visible:ring-[#FFD700]/60 sm:hidden"
             >
-              Lihat Semua Kajian
-              <ArrowRight size={14} />
+              LIHAT SEMUA
+              <ArrowUpRight size={13} strokeWidth={2.5} />
             </a>
           </div>
         </section>
