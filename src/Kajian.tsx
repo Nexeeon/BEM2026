@@ -52,19 +52,19 @@ const latestKajianData = [
     title: "Dampak Kenaikan UKT terhadap Aksesibilitas Pendidikan Vokasi",
     category: "Akademik",
     date: "Agustus 2026",
-    link: "https://zaap.bio/kajianbempolsri25",
+    link: "https://kajian-gules.vercel.app/",
   },
   {
     title: "Polemik Regulasi Organisasi Mahasiswa di Lingkungan Kampus",
     category: "Kebijakan Kampus",
     date: "Juli 2026",
-    link: "https://zaap.bio/kajianbempolsri25",
+    link: "https://kajian-gules.vercel.app/",
   },
   {
     title: "Menilik Isu Ketenagakerjaan Lulusan Vokasi di Era Digital",
     category: "Sosial",
     date: "Juni 2026",
-    link: "https://zaap.bio/kajianbempolsri25",
+    link: "https://kajian-gules.vercel.app/",
   },
 ];
 
@@ -160,7 +160,7 @@ export default function Kajian() {
                 {/* TOMBOL AKSI */}
                 <div className="mt-5 sm:mt-6">
                   <a
-                    href="https://zaap.bio/kajianbempolsri25"
+                    href="https://kajian-gules.vercel.app/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
@@ -242,7 +242,7 @@ export default function Kajian() {
               </div>
 
               <a
-                href="https://zaap.bio/kajianbempolsri25"
+                href="https://kajian-gules.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden shrink-0 items-center gap-2 rounded-full border border-amber-300 bg-white px-5 py-2.5 text-xs font-bold text-amber-700 outline-none transition-all duration-200 ease-out hover:bg-amber-50 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/50 sm:inline-flex"
@@ -298,7 +298,7 @@ export default function Kajian() {
 
             {/* TOMBOL LIHAT SEMUA — MOBILE */}
             <a
-              href="https://zaap.bio/kajianbempolsri25"
+              href="https://kajian-gules.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 flex items-center justify-center gap-2 rounded-full border border-amber-300 bg-white px-5 py-3 text-xs font-bold text-amber-700 outline-none transition-all duration-200 ease-out hover:bg-amber-50 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/50 sm:hidden"
@@ -328,7 +328,7 @@ export default function Kajian() {
               </p>
 
               <a
-                href="https://zaap.bio/kajianbempolsri25"
+                href="https://kajian-gules.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-8 inline-flex items-center gap-3 rounded-full bg-amber-500 px-10 py-4 text-sm font-bold text-white shadow-lg shadow-amber-500/30 outline-none transition-all duration-200 ease-out hover:bg-amber-600 hover:shadow-amber-500/40 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-amber-400/70"
