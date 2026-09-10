@@ -1,6 +1,7 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import LoadingScreen from "./LoadingScreen";
 
 // Lazy loading komponen halaman untuk mempercepat initial bundle load
 const Home = lazy(() => import("./home"));
@@ -33,45 +34,59 @@ function PageFallback() {
 }
 
 function App() {
+  const [isLoading, setIsLoading] = useState<boolean>(() => {
+    // Cek apakah loading sudah pernah dimainkan pada sesi browser ini
+    const hasLoaded = sessionStorage.getItem("bem_polsri_loaded");
+    return !hasLoaded;
+  });
+
+  const handleLoadingFinish = () => {
+    setIsLoading(false);
+    sessionStorage.setItem("bem_polsri_loaded", "true");
+  };
+
   return (
-    <Router>
-      <ScrollToTop />
-      <Suspense fallback={null}>
-        <Routes>
-          {/* Halaman Utama */}
-          <Route path="/" element={<Home />} />
+    <>
+      {isLoading && <LoadingScreen onFinish={handleLoadingFinish} />}
+      <Router>
+        <ScrollToTop />
+        <Suspense fallback={null}>
+          <Routes>
+            {/* Halaman Utama */}
+            <Route path="/" element={<Home />} />
 
-          {/* Halaman About Us */}
-          <Route path="/about" element={<About />} />
+            {/* Halaman About Us */}
+            <Route path="/about" element={<About />} />
 
-          {/* Halaman Contact Us */}
-          <Route path="/contact" element={<Contact />} />
+            {/* Halaman Contact Us */}
+            <Route path="/contact" element={<Contact />} />
 
-          {/* Campus Echo */}
-          <Route path="/kajian" element={<Kajian />} />
-          <Route path="/bisik-kampus" element={<BisikKampus />} />
-          <Route path="/polsrifess" element={<Polsrifess />} />
+            {/* Campus Echo */}
+            <Route path="/kajian" element={<Kajian />} />
+            <Route path="/bisik-kampus" element={<BisikKampus />} />
+            <Route path="/polsrifess" element={<Polsrifess />} />
 
-          {/* Academic Information */}
-          <Route path="/calendar" element={<AcademicCalendar />} />
-          <Route path="/academic-calendar" element={<AcademicCalendar />} />
-          <Route path="/scholarship-info" element={<ScholarshipInfo />} />
-          <Route path="/organisasi-mahasiswa" element={<OrganisasiMahasiswa />} />
-          <Route path="/mahasiswa-berdampak" element={<MahasiswaBerdampak />} />
+            {/* Academic Information */}
+            <Route path="/calendar" element={<AcademicCalendar />} />
+            <Route path="/academic-calendar" element={<AcademicCalendar />} />
+            <Route path="/scholarship-info" element={<ScholarshipInfo />} />
+            <Route path="/organisasi-mahasiswa" element={<OrganisasiMahasiswa />} />
+            <Route path="/mahasiswa-berdampak" element={<MahasiswaBerdampak />} />
 
-          {/* Halaman Departemen */}
-          <Route path="/medinfo" element={<Medinfo />} />
-          <Route path="/kastrat" element={<Kastrat />} />
-          <Route path="/departemen/kastrat" element={<Kastrat />} />
-          <Route path="/psdm" element={<Psdm />} />
-          <Route path="/departemen/psdm" element={<Psdm />} />
-          <Route path="/adkesma" element={<Adkesma />} />
-          <Route path="/departemen/adkesma" element={<Adkesma />} />
-          <Route path="/humas" element={<Humas />} />
-          <Route path="/departemen/humas" element={<Humas />} />
-        </Routes>
-      </Suspense>
-    </Router>
+            {/* Halaman Departemen */}
+            <Route path="/medinfo" element={<Medinfo />} />
+            <Route path="/kastrat" element={<Kastrat />} />
+            <Route path="/departemen/kastrat" element={<Kastrat />} />
+            <Route path="/psdm" element={<Psdm />} />
+            <Route path="/departemen/psdm" element={<Psdm />} />
+            <Route path="/adkesma" element={<Adkesma />} />
+            <Route path="/departemen/adkesma" element={<Adkesma />} />
+            <Route path="/humas" element={<Humas />} />
+            <Route path="/departemen/humas" element={<Humas />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </>
   );
 }
 
