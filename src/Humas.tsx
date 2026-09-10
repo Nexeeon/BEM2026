@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import DepartmentSection from "./components/DepartmentSection";
 import { Globe, Users, Instagram, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Anggota {
@@ -523,6 +524,9 @@ export default function Humas() {
             ))}
           </div>
         </section>
+
+        {/* DEPARTEMEN */}
+        <DepartmentSection />
 
         <Footer />
       </div>

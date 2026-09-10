@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import DepartmentSection from "./components/DepartmentSection";
 import { TrendingUp, Award, Instagram, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Anggota {
@@ -534,6 +535,9 @@ export default function Psdm() {
             ))}
           </div>
         </section>
+
+        {/* DEPARTEMEN */}
+        <DepartmentSection />
 
         <Footer />
       </div>

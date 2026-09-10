@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import DepartmentSection from "./components/DepartmentSection";
 import { BookOpen, Megaphone, Instagram, ChevronLeft, ChevronRight } from "lucide-react";
 
 // ============================================================
@@ -535,6 +536,9 @@ export default function Kastrat() {
             ))}
           </div>
         </section>
+
+        {/* DEPARTEMEN */}
+        <DepartmentSection />
 
         {/* 4. FOOTER */}
         <Footer />

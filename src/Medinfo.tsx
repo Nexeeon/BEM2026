@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import DepartmentSection from "./components/DepartmentSection";
 import { Palette, Globe, Instagram, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -582,6 +583,9 @@ export function Medinfo() {
             ))}
           </div>
         </section>
+
+        {/* DEPARTEMEN */}
+        <DepartmentSection />
 
         <Footer />
       </div>

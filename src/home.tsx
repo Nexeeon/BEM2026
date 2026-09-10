@@ -359,16 +359,16 @@ const academicCalendarData: CalendarMonthData[] = [
    DOKUMENTASI SECTION — Horizontal Marquee
    ===================================================== */
 const dokRow1 = [
-  { src: "/images/dokumentasi/dokumentasi_1.png",  alt: "Dokumentasi 1" },
-  { src: "/images/dokumentasi/dokumentasi_2.jpeg", alt: "Dokumentasi 2" },
-  { src: "/images/dokumentasi/dokumentasi_3.jpeg", alt: "Dokumentasi 3" },
-  { src: "/images/dokumentasi/dokumentasi_4.jpeg", alt: "Dokumentasi 4" },
+  { src: "/images/dokumentasi/dokumentasi_1.webp",  alt: "Dokumentasi 1" },
+  { src: "/images/dokumentasi/dokumentasi_2.webp", alt: "Dokumentasi 2" },
+  { src: "/images/dokumentasi/dokumentasi_3.webp", alt: "Dokumentasi 3" },
+  { src: "/images/dokumentasi/dokumentasi_4.webp", alt: "Dokumentasi 4" },
 ];
 const dokRow2 = [
-  { src: "/images/dokumentasi/dokumentasi_5.jpeg", alt: "Dokumentasi 5" },
-  { src: "/images/dokumentasi/dokumentasi_6.jpeg", alt: "Dokumentasi 6" },
-  { src: "/images/dokumentasi/Dokumentasi_7.jpeg", alt: "Dokumentasi 7" },
-  { src: "/images/dokumentasi/dokumentasi_8.jpeg", alt: "Dokumentasi 8" },
+  { src: "/images/dokumentasi/dokumentasi_5.webp", alt: "Dokumentasi 5" },
+  { src: "/images/dokumentasi/dokumentasi_6.webp", alt: "Dokumentasi 6" },
+  { src: "/images/dokumentasi/Dokumentasi_7.webp", alt: "Dokumentasi 7" },
+  { src: "/images/dokumentasi/dokumentasi_8.webp", alt: "Dokumentasi 8" },
 ];
 /* Semua foto dalam urutan asli (untuk lightbox prev/next) */
 const allDokPhotos = [...dokRow1, ...dokRow2];
